@@ -22,16 +22,22 @@ class LabeledIconButton extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Card(
+          Container(
             child: Container(
               child: Icon(
                 iconData,
                 color: iconColor,
               ),
               decoration: BoxDecoration(
-                  gradient: filled ? LinearGradient(colors: [iconColor, iconColor.withOpacity(0.8)]) : null,
-                  borderRadius: const BorderRadius.all(Radius.circular(100))),
+                gradient: filled
+                    ? LinearGradient(
+                        colors: [iconColor, iconColor.withOpacity(0.8)])
+                    : null,
+                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                border: Border.all(color: iconColor),
+              ),
             ),
+            decoration: BoxDecoration(border: Border.all()),
           ),
           Text(label)
         ],

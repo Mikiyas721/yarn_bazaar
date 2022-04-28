@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class InlineElevatedButton extends StatelessWidget {
+class OutlinedElevatedButton extends StatelessWidget {
   final String label;
   final bool isElevated;
   final void Function(bool isElevated) onClick;
 
-  const InlineElevatedButton({
+  const OutlinedElevatedButton({
     Key? key,
     required this.label,
     required this.isElevated,

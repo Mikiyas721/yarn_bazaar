@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import '../view_model.dart';
+import '../../common/view_model.dart';
 
 class EmptyErrorLoadingView<T extends Object> extends StatelessWidget {
   final EmptyErrorLoadingViewModel<T> model;
@@ -33,8 +33,6 @@ class EmptyErrorLoadingView<T extends Object> extends StatelessWidget {
     );
   }
 }
-
-
 
 class SimpleListView<T> extends StatelessWidget {
   final SimpleListViewModel<T> model;
@@ -79,6 +77,60 @@ class SimpleListView<T> extends StatelessWidget {
           separatorBuilder: (BuildContext context, int index) {
             return separatorBuilder?.call(context, index) ?? Container();
           },
+        );
+      },
+    );
+  }
+}
+
+class MyExpansionPanelList<T> extends StatelessWidget {
+  final SimpleListViewModel<T> model;
+  final ExpansionPanel Function(BuildContext, T) itemBuilder;
+  final Widget errorView;
+  final Widget loadingView;
+  final Widget emptyView;
+  final Duration animationDuration;
+  final EdgeInsets expandedHeaderPadding;
+  final double elevation;
+  final Color? dividerColor;
+  final Function(int, bool)? expansionCallback;
+
+  const MyExpansionPanelList(
+      {Key? key,
+      required this.model,
+      required this.itemBuilder,
+      required this.errorView,
+      required this.loadingView,
+      required this.emptyView,
+      this.animationDuration = const Duration(milliseconds: 200),
+      this.expandedHeaderPadding = const EdgeInsets.symmetric(
+        vertical: 64.0 - 48.0,
+      ),
+      this.elevation = 2,
+      this.dividerColor,
+      this.expansionCallback})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return EmptyErrorLoadingView<List<T>>(
+      model: model,
+      emptyView: emptyView,
+      errorView: errorView,
+      loadingView: loadingView,
+      builder: (context, data) {
+        var children = <ExpansionPanel>[];
+        for (int i=0;i<model.data!.length;i++) {
+          children.add(itemBuilder(context, model.data![i]));
+        }
+        return ExpansionPanelList(
+          key: key,
+          children: children,
+          animationDuration: animationDuration,
+          expandedHeaderPadding: expandedHeaderPadding,
+          elevation: elevation,
+          dividerColor: dividerColor,
+          expansionCallback: expansionCallback,
         );
       },
     );

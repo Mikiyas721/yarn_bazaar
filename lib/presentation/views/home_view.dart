@@ -1,39 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/widgets/labeled_icon_button.dart';
-import 'package:yarn_bazaar/presentation/widgets/search_field.dart';
 
-class HomeViewAppBar extends StatelessWidget {
-  final VoidCallback onNotification;
-
-  const HomeViewAppBar({
-    Key? key,
-    required this.onNotification,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AppBar(
-          title: SearchField(onDiscardText: () {}),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.notifications_none_outlined),
-              onPressed: onNotification,
-            )
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class HomeViewBody extends StatelessWidget {
+class HomeView extends StatelessWidget {
   final VoidCallback onPostYarnRequirement;
   final VoidCallback onCategories;
   final VoidCallback onWatchList;
 
-  const HomeViewBody({
+  const HomeView({
     Key? key,
     required this.onPostYarnRequirement,
     required this.onCategories,

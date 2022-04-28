@@ -1,14 +1,16 @@
 import 'package:yarn_bazaar/common/view_model.dart';
 
-class DrawerViewModel extends ViewModel {
+class SellerProfileViewModel extends ViewModel {
   final String imageUrl;
   final String username;
   final String workPlace;
+  final double profileCompletedInPercent;
 
-  DrawerViewModel({
+  SellerProfileViewModel({
     required this.imageUrl,
     required this.username,
     required this.workPlace,
+    required this.profileCompletedInPercent,
   });
 
   @override
@@ -16,14 +18,16 @@ class DrawerViewModel extends ViewModel {
         imageUrl,
         username,
         workPlace,
+        profileCompletedInPercent,
       ];
 
   //TODO remove after other layers have been setup
-  factory DrawerViewModel.defaults() {
-    return DrawerViewModel(
+  factory SellerProfileViewModel.defaults() {
+    return SellerProfileViewModel(
       imageUrl: 'assets/images/avatar.png',
       username: 'Uday Sachdeva',
       workPlace: 'Sunshine enterprise',
+      profileCompletedInPercent: 30
     );
   }
 }

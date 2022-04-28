@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
-import 'package:yarn_bazaar/presentation/widgets/inline_elevated_button.dart';
-import 'package:yarn_bazaar/presentation/widgets/textfield_with_title.dart';
+import 'package:yarn_bazaar/presentation/widgets/outlined_elevated_button.dart';
+import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 import 'package:yarn_bazaar/common/extensions.dart';
 
 class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
@@ -42,7 +42,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
         children: [
           Row(
             children: [
-              InlineElevatedButton(
+              OutlinedElevatedButton(
                 label: 'Price Inquiry',
                 isElevated: yarnRequirementViewModel.intention ==
                     YarnRequirementIntention.priceInquiry,
@@ -50,7 +50,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   if (!isElevated) onInquiryOrPurchase(0);
                 },
               ),
-              InlineElevatedButton(
+              OutlinedElevatedButton(
                 label: 'Purchase',
                 isElevated: yarnRequirementViewModel.intention ==
                     YarnRequirementIntention.purchase,
