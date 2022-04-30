@@ -19,38 +19,50 @@ class LabeledIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              child: Center(
-                child: Icon(
-                  iconData,
-                  color: filled ? Colors.white : iconColor,
-                  size: 34,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 85),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 78),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Center(
+                    child: Icon(
+                      iconData,
+                      color: filled ? Colors.white : iconColor,
+                      size: 34,
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    gradient: filled
+                        ? LinearGradient(
+                            colors: [iconColor, iconColor.withOpacity(0.8)])
+                        : null,
+                    borderRadius: const BorderRadius.all(Radius.circular(100)),
+                    border: Border.all(color: iconColor),
+                  ),
                 ),
-              ),
-              decoration: BoxDecoration(
-                gradient: filled
-                    ? LinearGradient(
-                        colors: [iconColor, iconColor.withOpacity(0.8)])
-                    : null,
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
-                border: Border.all(color: iconColor),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                  width: 0.2,
+                  color: Colors.black26,
+                )),
               ),
             ),
-            decoration: BoxDecoration(
-                border: Border.all(
-              width: 0.2,
-              color: Colors.black26,
-            )),
-          ),
-          const SizedBox(height: 5,),
-          Text(label)
-        ],
+            const SizedBox(
+              height: 5,
+            ),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 12),
+            )
+          ],
+        ),
       ),
       onTap: onTap,
     );

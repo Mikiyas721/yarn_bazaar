@@ -19,11 +19,13 @@ class OutlinedElevatedButton extends StatelessWidget {
             onPressed: () {
               onClick(isElevated);
             },
-            child: Text(label))
+            child: Text(label),
+          )
         : OutlinedButton(
             onPressed: () {
               onClick(isElevated);
             },
-            child: Text(label));
+            child: Text(label),
+          );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/composed_yarn_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/composed_yarn_view.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class ComposedYarnPage extends StatelessWidget {
@@ -8,8 +9,8 @@ class ComposedYarnPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final argument =
-        ModalRoute.of(context)?.settings.arguments as ComposedYarnViewModel;
+    /*final argument =
+        ModalRoute.of(context)?.settings.arguments as ComposedYarnViewModel;*/
 
     return Scaffold(
       appBar: AppBar(
@@ -18,17 +19,23 @@ class ComposedYarnPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: ComposedYarnView(composedYarnViewModel: argument),
+          Padding(
+            padding:
+                const EdgeInsets.only(right: 15, left: 15, bottom: 55),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ComposedYarnView(
+                composedYarnViewModel: ComposedYarnViewModel.defaults(),
+              ),
+            ),
           ),
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
-            child: ElevatedButton(
-              child: const Text('POST YARN REQUIREMENT'),
-              onPressed: () {},
+            child: MyActionButton(
+              label: 'POST YARN REQUIREMENT',
+              onSubmit: () {},
             ),
           )
         ],

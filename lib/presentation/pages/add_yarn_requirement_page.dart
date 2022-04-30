@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/add_yarn_requirement_view.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class AddYarnRequirementPage extends StatelessWidget {
@@ -21,30 +22,35 @@ class AddYarnRequirementPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: AddYarnRequirementView(
-              yarnRequirementViewModel: YarnRequirementViewModel.defaults(),
-              onInquiryOrPurchase: (int buttonIndex) {},
-              onQualityDetail: (String quality) {},
-              onSelectColorTap: () {},
-              onQuantityChanged: (String quality) {},
-              onDeliveryAreaChanged: (String quality) {},
-              onDeliveryPeriod: () {},
-              onPaymentTermsChanged: (String quality) {},
-              onInquiryClosesWithIn: () {},
-              onSendRequirementTo: () {},
-              onAdditionalCommentsChanged: (String quality) {},
-              onWantToTestReport: (int radioIndex) {},
+          Padding(
+            padding: const EdgeInsets.only(right: 15,left: 15, bottom: 55),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: AddYarnRequirementView(
+                yarnRequirementViewModel: YarnRequirementViewModel.defaults(),
+                onInquiryOrPurchase: (int buttonIndex) {},
+                onQualityDetail: (String quality) {},
+                onSelectColorTap: () {},
+                onQuantityChanged: (String quality) {},
+                onDeliveryAreaChanged: (String quality) {},
+                onDeliveryPeriod: () {},
+                onPaymentTermsChanged: (String quality) {},
+                onInquiryClosesWithIn: () {},
+                onSendRequirementTo: () {},
+                onAdditionalCommentsChanged: (String quality) {},
+                onWantToTestReport: (int radioIndex) {},
+              ),
             ),
           ),
           Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              child: ElevatedButton(
-                child: const Text('PREVIEW'),
-                onPressed: () {},
+              child: MyActionButton(
+                label:'PREVIEW',
+                onSubmit: () {
+                  Navigator.pushNamed(context, '/composedYarnPage');
+                },
               ))
         ],
       ),

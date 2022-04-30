@@ -1,4 +1,6 @@
 import 'package:yarn_bazaar/presentation/models/view_model.dart';
+import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
+import 'package:yarn_bazaar/presentation/extensions.dart';
 
 class ComposedYarnViewModel extends ViewModel {
   final String? intention;
@@ -41,4 +43,21 @@ class ComposedYarnViewModel extends ViewModel {
         sendRequirementTo,
         additionalComment,
       ];
+
+  //TODO remove after controller
+  factory ComposedYarnViewModel.defaults() {
+    return ComposedYarnViewModel(
+      intention: YarnRequirementIntention.priceInquiry.getString(),
+      yarnQuality: '14s Cotton Weaving',
+      qualityDetails: 'qualityDetails',
+      color: 'Griege',
+      quantityInKgs: '100',
+      deliveryArea: 'deliveryArea',
+      deliveryPeriod: 'deliveryPeriod',
+      paymentTerms: 'paymentTerms',
+      inquiryClosesWithin: 'inquiryClosesWithin',
+      sendRequirementTo: 'sendRequirementTo',
+      additionalComment: 'additionalComment',
+    );
+  }
 }

@@ -17,27 +17,29 @@ class PriceListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyExpansionPanelList<PriceViewModel>(
-        model: pricesViewModel,
-        itemBuilder: (BuildContext context, PriceViewModel priceViewModel) {
-          return PriceView._(
-            priceViewModel: priceViewModel,
-            onWatchlist: () {},
-            onCompare: () {},
-            onDetail: () {},
-            onShare: () {},
-          );
-        },
-        errorView: Center(
-            child: EmptyErrorView.defaultError(
-          onRetry: onReload,
-        )),
-        loadingView: const Center(child: MyLoadingView()),
-        emptyView: Center(
-          child: EmptyErrorView.defaultEmpty(
-            onReload: onReload,
-          ),
-        ));
+    return SingleChildScrollView(
+      child: MyExpansionPanelList<PriceViewModel>(
+          model: pricesViewModel,
+          itemBuilder: (BuildContext context, PriceViewModel priceViewModel) {
+            return PriceView._(
+              priceViewModel: priceViewModel,
+              onWatchlist: () {},
+              onCompare: () {},
+              onDetail: () {},
+              onShare: () {},
+            );
+          },
+          errorView: Center(
+              child: EmptyErrorView.defaultError(
+            onRetry: onReload,
+          )),
+          loadingView: const Center(child: MyLoadingView()),
+          emptyView: Center(
+            child: EmptyErrorView.defaultEmpty(
+              onReload: onReload,
+            ),
+          )),
+    );
   }
 }
 

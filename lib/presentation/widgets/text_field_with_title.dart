@@ -9,8 +9,10 @@ class TextFieldWithTitle extends StatelessWidget {
   final String? errorMessage;
   final bool? fieldIsOptional;
   final bool readOnly;
+  final bool enabled;
   final Widget? suffixIcon;
   final VoidCallback? onTap;
+  final TextInputType keyboardType;
   final Function(String text)? onChanged;
   final Function(String text)? onSubmitted;
 
@@ -23,7 +25,9 @@ class TextFieldWithTitle extends StatelessWidget {
     this.errorMessage,
     this.fieldIsOptional,
     this.readOnly = false,
+    this.enabled = true,
     this.onTap,
+    this.keyboardType = TextInputType.text,
     this.suffixIcon,
     this.onChanged,
     this.onSubmitted,
@@ -31,35 +35,42 @@ class TextFieldWithTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        RichText(
-            text: TextSpan(children: [
-          TextSpan(text: title),
-          fieldIsOptional != null
-              ? fieldIsOptional!
-                  ? TextSpan(
-                      text: ' (optional)',
-                      style: TextStyle(color: context.primaryColor))
-                  : const TextSpan(
-                      text: '*', style: TextStyle(color: Colors.red))
-              : const TextSpan(text: '')
-        ])),
-        TextField(
-          controller: TextEditingController(text: textFieldValue),
-          decoration: InputDecoration(
-            label: labelText == null ? null : Text(labelText!),
-            hintText: hintText,
-            errorText: errorMessage,
-            suffixIcon: suffixIcon,
-          ),
-          onTap: onTap,
-          onChanged: onChanged,
-          onSubmitted: onSubmitted,
-          readOnly: readOnly,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 15),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(children: [
+            Text(
+              title,
+              style: TextStyle(color: context.primaryColor),
+            ),
+            fieldIsOptional != null
+                ? fieldIsOptional!
+                    ? Text(
+                        ' (optional)',
+                        style: TextStyle(color: context.primaryColor),
+                      )
+                    : const Text('*', style: TextStyle(color: Colors.red))
+                : const Text('')
+          ]),
+          TextField(
+            controller: TextEditingController(text: textFieldValue),
+            keyboardType: keyboardType,
+            decoration: InputDecoration(
+                label: labelText == null ? null : Text(labelText!),
+                hintText: hintText,
+                errorText: errorMessage,
+                suffixIcon: suffixIcon,
+                hintStyle: const TextStyle(fontSize: 12, color: Colors.grey)),
+            enabled: onTap == null ? enabled : false,
+            onTap: onTap,
+            onChanged: onChanged,
+            onSubmitted: onSubmitted,
+            readOnly: readOnly,
+          )
+        ],
+      ),
     );
   }
 }

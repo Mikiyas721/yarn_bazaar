@@ -17,28 +17,30 @@ class DirectoriesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyExpansionPanelList<DirectoryViewModel>(
-        model: directoriesViewModel,
-        itemBuilder:
-            (BuildContext context, DirectoryViewModel directoryViewModel) {
-          return DirectoryView._(
-            directoryViewModel: directoryViewModel,
-            onWatchlist: () {},
-            onCompare: () {},
-            onDetail: () {},
-            onShare: () {},
-          );
-        },
-        errorView: Center(
-            child: EmptyErrorView.defaultError(
-          onRetry: onReload,
-        )),
-        loadingView: const Center(child: MyLoadingView()),
-        emptyView: Center(
-          child: EmptyErrorView.defaultEmpty(
-            onReload: onReload,
-          ),
-        ));
+    return SingleChildScrollView(
+      child: MyExpansionPanelList<DirectoryViewModel>(
+          model: directoriesViewModel,
+          itemBuilder:
+              (BuildContext context, DirectoryViewModel directoryViewModel) {
+            return DirectoryView._(
+              directoryViewModel: directoryViewModel,
+              onWatchlist: () {},
+              onCompare: () {},
+              onDetail: () {},
+              onShare: () {},
+            );
+          },
+          errorView: Center(
+              child: EmptyErrorView.defaultError(
+            onRetry: onReload,
+          )),
+          loadingView: const Center(child: MyLoadingView()),
+          emptyView: Center(
+            child: EmptyErrorView.defaultEmpty(
+              onReload: onReload,
+            ),
+          )),
+    );
   }
 }
 

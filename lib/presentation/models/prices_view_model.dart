@@ -4,7 +4,7 @@ class PricesViewModel extends SimpleListViewModel<PriceViewModel> {
   PricesViewModel({
     required List<PriceViewModel> priceList,
     required bool isLoading,
-    required String error,
+    required String? error,
   }) : super(
           data: priceList,
           error: error,
@@ -13,9 +13,9 @@ class PricesViewModel extends SimpleListViewModel<PriceViewModel> {
 
   factory PricesViewModel.defaults() {
     return PricesViewModel(
-      priceList: const [],
+      priceList: [PriceViewModel.defaults(), PriceViewModel.defaults()],
       isLoading: false,
-      error: '',
+      error: null,
     );
   }
 }
@@ -55,4 +55,18 @@ class PriceViewModel extends ViewModel {
         sellerType,
         deliveryPeriod,
       ];
+
+  factory PriceViewModel.defaults() {
+    return PriceViewModel(
+      yarnQuality: '30s Cotton',
+      quantityInKgs: 'quantityInKgs',
+      companyName: 'companyName',
+      companyType: 'companyType',
+      deliveryArea: 'deliveryArea',
+      lastUpdated: 'lastUpdated',
+      qualityDetails: 'qualityDetails',
+      sellerType: 'sellerType',
+      deliveryPeriod: 'deliveryPeriod',
+    );
+  }
 }

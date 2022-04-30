@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/presentation/models/bottom_navigation_bar_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/buyer_profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/seller_profile_view_model.dart';
+import 'package:yarn_bazaar/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:yarn_bazaar/presentation/views/buyer_profile_view.dart';
 import 'package:yarn_bazaar/presentation/views/drawer_view.dart';
 import 'package:yarn_bazaar/presentation/views/seller_profile_view.dart';
@@ -48,7 +50,7 @@ class ProfilePageState extends State<ProfilePage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Icons.edit_outlined),
             color: Colors.white,
           ),
         ],
@@ -62,6 +64,10 @@ class ProfilePageState extends State<ProfilePage> {
               sellerProfileViewModel: SellerProfileViewModel.defaults(),
               color: tabColors[1],
             ),
+      bottomNavigationBar: BottomNavigationBarView(
+        bottomNavigationBarViewModel:
+            BottomNavigationBarViewModel(selectedItemIndex: 4),
+      ),
     );
   }
 }

@@ -5,7 +5,7 @@ class DirectoriesViewModel extends SimpleListViewModel<DirectoryViewModel> {
   DirectoriesViewModel({
     required List<DirectoryViewModel> directoryList,
     required bool isLoading,
-    required String error,
+    required String? error,
   }) : super(
           data: directoryList,
           error: error,
@@ -14,9 +14,12 @@ class DirectoriesViewModel extends SimpleListViewModel<DirectoryViewModel> {
 
   factory DirectoriesViewModel.defaults() {
     return DirectoriesViewModel(
-      directoryList: const [],
+      directoryList: [
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults()
+      ],
       isLoading: false,
-      error: '',
+      error: null,
     );
   }
 }

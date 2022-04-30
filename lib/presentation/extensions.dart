@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'models/yarn_requirement_view_model.dart';
+
 extension SpacingExtension on num {
   EdgeInsets get hPadding => EdgeInsets.symmetric(horizontal: toDouble());
 
@@ -21,6 +23,18 @@ extension BuildContextExtension on BuildContext{
   TextStyle? get headline5=> Theme.of(this).textTheme.headline5;
   TextStyle? get headline6=> Theme.of(this).textTheme.headline6;
   TextStyle? get caption=> Theme.of(this).textTheme.caption;
-
 }
+
+extension YarnRequirementIntentionExtension on YarnRequirementIntention {
+  String getString() {
+    if (this == YarnRequirementIntention.priceInquiry) {
+      return "Price Inquiry";
+    } else if (this == YarnRequirementIntention.purchase) {
+      return "Purchase";
+    } else {
+      return "None";
+    }
+  }
+}
+
 

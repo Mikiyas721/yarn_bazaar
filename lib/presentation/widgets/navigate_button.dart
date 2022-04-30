@@ -18,7 +18,13 @@ class NavigateButton extends StatelessWidget {
         color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text(label), const Icon(Icons.arrow_forward_ios_outlined)],
+          children: [
+            Text(label),
+            const Icon(
+              Icons.arrow_forward_ios_outlined,
+              color: Colors.grey,
+            )
+          ],
         ),
       ),
       onTap: onTap,

@@ -45,11 +45,14 @@ class HomePage extends StatelessWidget {
                   child: OutlinedButton.icon(
                       icon: const Icon(Icons.email_outlined),
                       label: const Text('Post Yarn Requirement'),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/addYarnRequirementPage');
+                      },
                       style: OutlinedButton.styleFrom(
-                          minimumSize: Size.infinite,
-                          side: BorderSide(
-                              width: 0.7, color: context.primaryColor))),
+                        minimumSize: Size.infinite,
+                        side:
+                            BorderSide(width: 0.7, color: context.primaryColor),
+                      )),
                 ),
               ),
               Row(

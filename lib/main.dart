@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColorDark: const Color(0xFFFF5110),
           primaryColor: const Color(0xFFFF9F10),
-          secondaryHeaderColor: const Color(0xFF2E80EC),
+          secondaryHeaderColor: const Color(0xFF3EA0CC),
           appBarTheme: const AppBarTheme(
             elevation: 0,
             backgroundColor: Colors.white38,

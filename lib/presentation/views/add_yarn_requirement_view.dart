@@ -40,154 +40,176 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
     return SingleChildScrollView(
       child: Column(
         children: [
+          10.vSpace,
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              OutlinedElevatedButton(
-                label: 'Price Inquiry',
-                isElevated: yarnRequirementViewModel.intention ==
-                    YarnRequirementIntention.priceInquiry,
-                onClick: (bool isElevated) {
-                  if (!isElevated) onInquiryOrPurchase(0);
-                },
+              Expanded(
+                flex: 1,
+                child: OutlinedElevatedButton(
+                  label: 'Price Inquiry',
+                  isElevated: yarnRequirementViewModel.intention ==
+                      YarnRequirementIntention.priceInquiry,
+                  onClick: (bool isElevated) {
+                    if (!isElevated) onInquiryOrPurchase(0);
+                  },
+                ),
               ),
-              OutlinedElevatedButton(
-                label: 'Purchase',
-                isElevated: yarnRequirementViewModel.intention ==
-                    YarnRequirementIntention.purchase,
-                onClick: (bool isElevated) {
-                  if (!isElevated) onInquiryOrPurchase(1);
-                },
+              10.hSpace,
+              Expanded(
+                flex: 1,
+                child: OutlinedElevatedButton(
+                  label: 'Purchase',
+                  isElevated: yarnRequirementViewModel.intention ==
+                      YarnRequirementIntention.purchase,
+                  onClick: (bool isElevated) {
+                    if (!isElevated) onInquiryOrPurchase(1);
+                  },
+                ),
               )
             ],
           ),
           Card(
-            child: Column(
-              children: [
-                TextFieldWithTitle(
-                  title: 'Quality Details',
-                  textFieldValue: yarnRequirementViewModel.qualityDetails,
-                  errorMessage: yarnRequirementViewModel.qualityDetailsError,
-                  fieldIsOptional: true,
-                  hintText: 'Enter tech specs. ex - combed, 2600 CSP etc',
-                  onChanged: onQualityDetail,
-                ),
-                TextFieldWithTitle(
-                  title: 'Colour',
-                  textFieldValue: yarnRequirementViewModel.color,
-                  fieldIsOptional: false,
-                  readOnly: true,
-                  hintText: 'Select Colour',
-                  onTap: onSelectColorTap,
-                  suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
-                ),
-                TextFieldWithTitle(
-                  title: 'Quantity (in kgs)',
-                  textFieldValue: yarnRequirementViewModel.quantityInKgs,
-                  errorMessage: yarnRequirementViewModel.quantityInKgsError,
-                  fieldIsOptional: false,
-                  hintText: 'Enter quantity ex - 1000 kgs',
-                  onChanged: onQuantityChanged,
-                ),
-                TextFieldWithTitle(
-                  title: 'Delivery Area',
-                  textFieldValue: yarnRequirementViewModel.deliveryArea,
-                  errorMessage: yarnRequirementViewModel.deliveryAreaError,
-                  fieldIsOptional: false,
-                  hintText: 'Enter ship to area. ex - Sonale, bhiwandi',
-                  onChanged: onDeliveryAreaChanged,
-                ),
-                TextFieldWithTitle(
-                  title: 'Delivery Period',
-                  textFieldValue: yarnRequirementViewModel.deliveryPeriod,
-                  fieldIsOptional: false,
-                  readOnly: true,
-                  hintText: 'ex - ready or within 1 week',
-                  onTap: onDeliveryPeriod,
-                  suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
-                ),
-                TextFieldWithTitle(
-                  title: 'Payment Terms',
-                  textFieldValue: yarnRequirementViewModel.paymentTerms,
-                  errorMessage: yarnRequirementViewModel.paymentTermsError,
-                  fieldIsOptional: false,
-                  hintText: 'ex - within 15 days',
-                  onChanged: onPaymentTermsChanged,
-                ),
-                TextFieldWithTitle(
-                  title: 'Inquiry Closes Within',
-                  textFieldValue: getTimeString(
-                      yarnRequirementViewModel.inquiryClosesWithin),
-                  fieldIsOptional: false,
-                  readOnly: true,
-                  hintText: '03:00:00',
-                  onTap: onInquiryClosesWithIn,
-                  suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
-                ),
-                TextFieldWithTitle(
-                  title: 'Send Requirement to',
-                  textFieldValue: yarnRequirementViewModel.sendRequirementTo,
-                  fieldIsOptional: false,
-                  readOnly: true,
-                  hintText: 'All Sellers',
-                  onTap: onSendRequirementTo,
-                  suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
-                ),
-                TextFieldWithTitle(
-                  title: 'Additional Comments',
-                  textFieldValue: yarnRequirementViewModel.additionalComment,
-                  errorMessage: yarnRequirementViewModel.additionalCommentError,
-                  fieldIsOptional: true,
-                  hintText: 'ex - I want lowest price',
-                  onChanged: onAdditionalCommentsChanged,
-                ),
-                RichText(
-                    text: const TextSpan(children: [
-                      TextSpan(text: 'I Want Test Report'),
-                      TextSpan(text: '*', style: TextStyle(color: Colors.red)),
-                    ])),
-                Row(
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Radio(
-                            value: yarnRequirementViewModel.wantToTestReport,
-                            groupValue:
-                            yarnRequirementViewModel.wantToTestReport,
-                            onChanged: (bool? isSelected) {
-                              onWantToTestReport(0);
-                            }),
-                        Text(
-                          'Yes',
-                          style: TextStyle(
-                              color: yarnRequirementViewModel.wantToTestReport
-                                  ? Colors.black
-                                  : context.primaryColor),
-                        )
-                      ],
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  TextFieldWithTitle(
+                    title: 'Quality Details',
+                    textFieldValue: yarnRequirementViewModel.qualityDetails,
+                    errorMessage: yarnRequirementViewModel.qualityDetailsError,
+                    fieldIsOptional: true,
+                    hintText: 'Enter tech specs. ex - combed, 2600 CSP etc',
+                    onChanged: onQualityDetail,
+                  ),
+                  TextFieldWithTitle(
+                    title: 'Colour',
+                    textFieldValue: yarnRequirementViewModel.color,
+                    fieldIsOptional: false,
+                    readOnly: true,
+                    hintText: 'Select Colour',
+                    onTap: onSelectColorTap,
+                    suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                  ),
+                  TextFieldWithTitle(
+                    title: 'Quantity (in kgs)',
+                    textFieldValue: yarnRequirementViewModel.quantityInKgs,
+                    errorMessage: yarnRequirementViewModel.quantityInKgsError,
+                    fieldIsOptional: false,
+                    hintText: 'Enter quantity ex - 1000 kgs',
+                    onChanged: onQuantityChanged,
+                    keyboardType: TextInputType.number,
+                  ),
+                  TextFieldWithTitle(
+                    title: 'Delivery Area',
+                    textFieldValue: yarnRequirementViewModel.deliveryArea,
+                    errorMessage: yarnRequirementViewModel.deliveryAreaError,
+                    fieldIsOptional: false,
+                    hintText: 'Enter ship to area. ex - Sonale, bhiwandi',
+                    onChanged: onDeliveryAreaChanged,
+                  ),
+                  TextFieldWithTitle(
+                    title: 'Delivery Period',
+                    textFieldValue: yarnRequirementViewModel.deliveryPeriod,
+                    fieldIsOptional: false,
+                    readOnly: true,
+                    hintText: 'ex - ready or within 1 week',
+                    onTap: onDeliveryPeriod,
+                    suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                  ),
+                  TextFieldWithTitle(
+                    title: 'Payment Terms',
+                    textFieldValue: yarnRequirementViewModel.paymentTerms,
+                    errorMessage: yarnRequirementViewModel.paymentTermsError,
+                    fieldIsOptional: false,
+                    hintText: 'ex - within 15 days',
+                    onChanged: onPaymentTermsChanged,
+                  ),
+                  TextFieldWithTitle(
+                    title: 'Inquiry Closes Within',
+                    textFieldValue: getTimeString(
+                        yarnRequirementViewModel.inquiryClosesWithin),
+                    fieldIsOptional: false,
+                    readOnly: true,
+                    hintText: '03:00:00',
+                    onTap: onInquiryClosesWithIn,
+                    suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                  ),
+                  TextFieldWithTitle(
+                    title: 'Send Requirement to',
+                    textFieldValue: yarnRequirementViewModel.sendRequirementTo,
+                    fieldIsOptional: false,
+                    readOnly: true,
+                    hintText: 'All Sellers',
+                    onTap: onSendRequirementTo,
+                    suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                  ),
+                  TextFieldWithTitle(
+                    title: 'Additional Comments',
+                    textFieldValue: yarnRequirementViewModel.additionalComment,
+                    errorMessage:
+                        yarnRequirementViewModel.additionalCommentError,
+                    fieldIsOptional: true,
+                    hintText: 'ex - I want lowest price',
+                    onChanged: onAdditionalCommentsChanged,
+                  ),
+                  15.vSpace,
+                  Row(children: [
+                    Text(
+                      'I Want Test Report',
+                      style: TextStyle(color: context.primaryColor),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Radio(
-                            value: !yarnRequirementViewModel.wantToTestReport,
-                            groupValue:
-                            yarnRequirementViewModel.wantToTestReport,
-                            onChanged: (bool? isSelected) {
-                              onWantToTestReport(1);
-                            }),
-                        Text(
-                          'No',
-                          style: TextStyle(
-                              color: yarnRequirementViewModel.wantToTestReport
-                                  ? Colors.black
-                                  : context.primaryColor),
-                        )
-                      ],
-                    )
-                  ],
-                )
-              ],
+                    const Text(
+                      '*',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ]),
+                  Row(
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Radio(
+                              activeColor: context.primaryColor,
+                              value: yarnRequirementViewModel.wantToTestReport,
+                              groupValue:
+                                  yarnRequirementViewModel.wantToTestReport,
+                              onChanged: (bool? isSelected) {
+                                onWantToTestReport(0);
+                              }),
+                          Text(
+                            'Yes',
+                            style: TextStyle(
+                                color: yarnRequirementViewModel.wantToTestReport
+                                    ? Colors.black
+                                    : context.primaryColor),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Radio(
+                              activeColor: context.primaryColor,
+                              value: !yarnRequirementViewModel.wantToTestReport,
+                              groupValue:
+                                  yarnRequirementViewModel.wantToTestReport,
+                              onChanged: (bool? isSelected) {
+                                onWantToTestReport(1);
+                              }),
+                          Text(
+                            'No',
+                            style: TextStyle(
+                                color: yarnRequirementViewModel.wantToTestReport
+                                    ? Colors.black
+                                    : context.primaryColor),
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           )
         ],
