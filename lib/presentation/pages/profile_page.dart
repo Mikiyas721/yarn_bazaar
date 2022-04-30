@@ -6,6 +6,7 @@ import 'package:yarn_bazaar/presentation/views/buyer_profile_view.dart';
 import 'package:yarn_bazaar/presentation/views/drawer_view.dart';
 import 'package:yarn_bazaar/presentation/views/seller_profile_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/profile_selection_button.dart';
+import 'package:yarn_bazaar/presentation/extensions.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    const tabColors = [Colors.blue, Colors.green];
+    final tabColors = [context.primaryColor, context.secondaryHeaderColor];
     return Scaffold(
       drawer: DrawerView(
         drawerViewModel: DrawerViewModel.defaults(),
@@ -29,7 +30,6 @@ class ProfilePageState extends State<ProfilePage> {
       ),
       appBar: AppBar(
         backgroundColor: tabColors[selectedProfileIndex],
-        elevation: 0,
         title: ProfileSelectionButton(
           firstTabIsSelected: selectedProfileIndex == 0,
           tabColors: tabColors,
@@ -49,6 +49,7 @@ class ProfilePageState extends State<ProfilePage> {
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.edit),
+            color: Colors.white,
           ),
         ],
       ),

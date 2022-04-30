@@ -3,7 +3,7 @@ import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/outlined_elevated_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
-import 'package:yarn_bazaar/common/extensions.dart';
+import 'package:yarn_bazaar/presentation/extensions.dart';
 
 class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
   final YarnRequirementViewModel yarnRequirementViewModel;
@@ -68,7 +68,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   textFieldValue: yarnRequirementViewModel.qualityDetails,
                   errorMessage: yarnRequirementViewModel.qualityDetailsError,
                   fieldIsOptional: true,
-                  label: 'Enter tech specs. ex - combed, 2600 CSP etc',
+                  hintText: 'Enter tech specs. ex - combed, 2600 CSP etc',
                   onChanged: onQualityDetail,
                 ),
                 TextFieldWithTitle(
@@ -76,7 +76,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   textFieldValue: yarnRequirementViewModel.color,
                   fieldIsOptional: false,
                   readOnly: true,
-                  label: 'Select Colour',
+                  hintText: 'Select Colour',
                   onTap: onSelectColorTap,
                   suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
                 ),
@@ -85,7 +85,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   textFieldValue: yarnRequirementViewModel.quantityInKgs,
                   errorMessage: yarnRequirementViewModel.quantityInKgsError,
                   fieldIsOptional: false,
-                  label: 'Enter quantity ex - 1000 kgs',
+                  hintText: 'Enter quantity ex - 1000 kgs',
                   onChanged: onQuantityChanged,
                 ),
                 TextFieldWithTitle(
@@ -93,7 +93,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   textFieldValue: yarnRequirementViewModel.deliveryArea,
                   errorMessage: yarnRequirementViewModel.deliveryAreaError,
                   fieldIsOptional: false,
-                  label: 'Enter ship to area. ex - Sonale, bhiwandi',
+                  hintText: 'Enter ship to area. ex - Sonale, bhiwandi',
                   onChanged: onDeliveryAreaChanged,
                 ),
                 TextFieldWithTitle(
@@ -101,7 +101,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   textFieldValue: yarnRequirementViewModel.deliveryPeriod,
                   fieldIsOptional: false,
                   readOnly: true,
-                  label: 'ex - ready or within 1 week',
+                  hintText: 'ex - ready or within 1 week',
                   onTap: onDeliveryPeriod,
                   suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
                 ),
@@ -110,7 +110,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   textFieldValue: yarnRequirementViewModel.paymentTerms,
                   errorMessage: yarnRequirementViewModel.paymentTermsError,
                   fieldIsOptional: false,
-                  label: 'ex - within 15 days',
+                  hintText: 'ex - within 15 days',
                   onChanged: onPaymentTermsChanged,
                 ),
                 TextFieldWithTitle(
@@ -119,7 +119,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                       yarnRequirementViewModel.inquiryClosesWithin),
                   fieldIsOptional: false,
                   readOnly: true,
-                  label: '03:00:00',
+                  hintText: '03:00:00',
                   onTap: onInquiryClosesWithIn,
                   suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
                 ),
@@ -128,7 +128,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   textFieldValue: yarnRequirementViewModel.sendRequirementTo,
                   fieldIsOptional: false,
                   readOnly: true,
-                  label: 'All Sellers',
+                  hintText: 'All Sellers',
                   onTap: onSendRequirementTo,
                   suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
                 ),
@@ -137,7 +137,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   textFieldValue: yarnRequirementViewModel.additionalComment,
                   errorMessage: yarnRequirementViewModel.additionalCommentError,
                   fieldIsOptional: true,
-                  label: 'ex - I want lowest price',
+                  hintText: 'ex - I want lowest price',
                   onChanged: onAdditionalCommentsChanged,
                 ),
                 RichText(

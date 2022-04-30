@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/directory_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
-import 'package:yarn_bazaar/presentation/widgets/labeled_icon_button.dart';
-import 'package:yarn_bazaar/common/extensions.dart';
+import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class DirectoryDetailPage extends StatelessWidget {
   const DirectoryDetailPage({Key? key}) : super(key: key);
@@ -14,11 +13,7 @@ class DirectoryDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: MediaQuery.of(context).size.height * 0.26,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios)),
+        leading: const PopButton(),
         actions: [
           IconButton(
             icon: const Icon(Icons.favorite_border),

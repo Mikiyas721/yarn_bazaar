@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/common/extensions.dart';
+import 'package:yarn_bazaar/presentation/extensions.dart';
 
 class TextFieldWithTitle extends StatelessWidget {
   final String title;
   final String? textFieldValue;
-  final String? label;
-  final String? hint;
+  final String? labelText;
+  final String? hintText;
   final String? errorMessage;
   final bool? fieldIsOptional;
   final bool readOnly;
@@ -18,8 +18,8 @@ class TextFieldWithTitle extends StatelessWidget {
     Key? key,
     required this.title,
     required this.textFieldValue,
-    this.label,
-    this.hint,
+    this.hintText,
+    this.labelText,
     this.errorMessage,
     this.fieldIsOptional,
     this.readOnly = false,
@@ -49,8 +49,8 @@ class TextFieldWithTitle extends StatelessWidget {
         TextField(
           controller: TextEditingController(text: textFieldValue),
           decoration: InputDecoration(
-            label: label == null ? null : Text(label!),
-            hintText: hint,
+            label: labelText == null ? null : Text(labelText!),
+            hintText: hintText,
             errorText: errorMessage,
             suffixIcon: suffixIcon,
           ),

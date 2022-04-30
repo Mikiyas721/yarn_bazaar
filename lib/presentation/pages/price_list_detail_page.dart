@@ -4,7 +4,8 @@ import 'package:yarn_bazaar/presentation/models/prices_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/seller_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
 import 'package:yarn_bazaar/presentation/widgets/labeled_icon_button.dart';
-import 'package:yarn_bazaar/common/extensions.dart';
+import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class PriceListDetailPage extends StatelessWidget {
   const PriceListDetailPage({Key? key}) : super(key: key);
@@ -16,11 +17,7 @@ class PriceListDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: MediaQuery.of(context).size.height * 0.26,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios)),
+        leading: const PopButton(),
         actions: [
           IconButton(
             icon: const Icon(Icons.favorite_border),

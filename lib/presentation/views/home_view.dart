@@ -17,12 +17,13 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
 
-    return Column(
+    return ListView(
       children: [
         OutlinedButton.icon(
           icon: const Icon(Icons.email_outlined),
           label: const Text('Post Yarn Requirement'),
           onPressed: onPostYarnRequirement,
+          style: OutlinedButton.styleFrom(minimumSize: Size.infinite),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

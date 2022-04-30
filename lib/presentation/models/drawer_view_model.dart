@@ -1,4 +1,4 @@
-import 'package:yarn_bazaar/common/view_model.dart';
+import 'package:yarn_bazaar/presentation/models/view_model.dart';
 
 class DrawerViewModel extends ViewModel {
   final String imageUrl;

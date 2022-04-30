@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class InputSelectionPage extends StatelessWidget {
   const InputSelectionPage({Key? key}) : super(key: key);
@@ -8,11 +9,7 @@ class InputSelectionPage extends StatelessWidget {
     final Object? arguments = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
+        leading: const PopButton(),
         title: Text((arguments as Map)["title"]),
       ),
       body: ListView.separated(

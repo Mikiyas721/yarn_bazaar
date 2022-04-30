@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/sign_in_view_model.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 
 class SignInView extends StatelessWidget {
   final SignInViewModel signInViewModel;
@@ -23,32 +24,50 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        RichText(
-            text: const TextSpan(children: [
-          TextSpan(text: 'Mobile Number or Email'),
-          TextSpan(text: '*', style: TextStyle(color: Colors.red)),
-        ])),
         Row(
-          children: [
-            TextField(
-                readOnly: true, controller: TextEditingController(text: '+91')),
-            TextField(
-              decoration: InputDecoration(
-                  errorText: signInViewModel.phoneNumberOrEmailError,
-                  labelText: 'Mobile Number or Email'),
-              onChanged: onPhoneNumberOrEmail,
-            )
+          children: const [
+            Text('Mobile Number or Email'),
+            Text('*', style: TextStyle(color: Colors.red))
           ],
         ),
-        RichText(
-            text: const TextSpan(children: [
-          TextSpan(text: 'Password'),
-          TextSpan(text: '*', style: TextStyle(color: Colors.red)),
-        ])),
+        Row(
+          children: [
+            Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    readOnly: true,
+                    enabled: false,
+                    controller: TextEditingController(text: '+91'),
+                  ),
+                )),
+            Expanded(
+                flex: 9,
+                child: TextField(
+                  decoration: InputDecoration(
+                      errorText: signInViewModel.phoneNumberOrEmailError,
+                      hintText: 'Mobile Number or Email'),
+                  controller: TextEditingController(
+                      text: signInViewModel.phoneNumberOrEmail),
+                  onChanged: onPhoneNumberOrEmail,
+                ))
+          ],
+        ),
+        const SizedBox(
+          height: 25,
+        ),
+        Row(
+          children: const [
+            Text('Password'),
+            Text('*', style: TextStyle(color: Colors.red))
+          ],
+        ),
         TextField(
           decoration: InputDecoration(
               errorText: signInViewModel.passwordError,
-              labelText: 'Password',
+              hintText: 'Password',
               suffixIcon: TextButton(
                   onPressed: () {
                     onShowHidePassword(!signInViewModel.isShowingPassword);
@@ -68,7 +87,14 @@ class SignInView extends StatelessWidget {
                 child: const Text('Forgot password?'))
           ],
         ),
-        ElevatedButton(onPressed: onLogin, child: const Text('LOGIN'))
+        Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: MyActionButton(
+            onSubmit: onLogin,
+            label: 'LOGIN',
+            isLoading: signInViewModel.isVerifyingCredentials,
+          ),
+        )
       ],
     );
   }

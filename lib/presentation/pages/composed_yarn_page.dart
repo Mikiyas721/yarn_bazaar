@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/composed_yarn_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/composed_yarn_view.dart';
+import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class ComposedYarnPage extends StatelessWidget {
   const ComposedYarnPage({Key? key}) : super(key: key);
@@ -12,11 +13,7 @@ class ComposedYarnPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
+        leading: const PopButton(),
         title: const Text('Post Yarn Requirement'),
       ),
       body: Stack(

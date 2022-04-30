@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'my_image_view.dart';
-import '../../common/extensions.dart';
+import '../extensions.dart';
 
 class EmptyErrorView extends StatelessWidget {
   final dynamic image;
@@ -42,7 +42,7 @@ class EmptyErrorView extends StatelessWidget {
     required VoidCallback onRetry,
   }) {
     return EmptyErrorView(
-      image: image ??'assets/images/error.png',
+      image: image ?? 'assets/images/error.png',
       title: title ?? 'Error',
       description: description ?? 'An error occurred while loading',
       actionLabel: actionLabel ?? 'Retry',
@@ -70,24 +70,24 @@ class EmptyErrorView extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        if(description!=null)
-        12.vSpace,
-        if(description!=null)
-        Text(
-          description!,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.grey.shade600,
+        if (description != null) 12.vSpace,
+        if (description != null)
+          Text(
+            description!,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.grey.shade600,
+            ),
           ),
-        ),
         24.vSpace,
         if (actionLabel != null)
           OutlinedButton(
-            onPressed: onReload,
-            child: Text(
-              actionLabel!,
-            ),
-          ),
+              onPressed: onReload,
+              child: Text(
+                actionLabel!,
+              ),
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(width: 0.7, color: context.primaryColor))),
       ],
     );
   }

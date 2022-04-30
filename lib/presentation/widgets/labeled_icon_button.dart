@@ -23,10 +23,15 @@ class LabeledIconButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
+            padding: const EdgeInsets.all(10),
             child: Container(
-              child: Icon(
-                iconData,
-                color: iconColor,
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                child: Icon(
+                  iconData,
+                  color: filled ? Colors.white : iconColor,
+                  size: 34,
+                ),
               ),
               decoration: BoxDecoration(
                 gradient: filled
@@ -37,8 +42,13 @@ class LabeledIconButton extends StatelessWidget {
                 border: Border.all(color: iconColor),
               ),
             ),
-            decoration: BoxDecoration(border: Border.all()),
+            decoration: BoxDecoration(
+                border: Border.all(
+              width: 0.2,
+              color: Colors.black26,
+            )),
           ),
+          const SizedBox(height: 5,),
           Text(label)
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/add_yarn_requirement_view.dart';
+import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class AddYarnRequirementPage extends StatelessWidget {
   const AddYarnRequirementPage({Key? key}) : super(key: key);
@@ -9,12 +10,7 @@ class AddYarnRequirementPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        leading: const PopButton(),
         title: const Text('Post Yarn Requirement'),
         actions: [
           IconButton(

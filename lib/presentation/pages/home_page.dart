@@ -3,8 +3,9 @@ import 'package:yarn_bazaar/presentation/models/bottom_navigation_bar_view_model
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:yarn_bazaar/presentation/views/drawer_view.dart';
-import 'package:yarn_bazaar/presentation/views/home_view.dart';
+import 'package:yarn_bazaar/presentation/widgets/labeled_icon_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/search_field.dart';
+import 'package:yarn_bazaar/presentation/extensions.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +20,12 @@ class HomePage extends StatelessWidget {
         onDrawerItemClicked: (int itemIndex) {},
       ),
       appBar: AppBar(
-        title: SearchField(onDiscardText: () {}),
+        centerTitle: false,
+        title: SearchField(
+          onDiscardText: () {},
+          onTap: () {},
+          onChanged: (String input) {},
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_none_outlined),
@@ -27,15 +33,55 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: HomeView(
-        onPostYarnRequirement: () {},
-        onCategories: () {},
-        onWatchList: () {},
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: SizedBox(
+                  height: 45,
+                  child: OutlinedButton.icon(
+                      icon: const Icon(Icons.email_outlined),
+                      label: const Text('Post Yarn Requirement'),
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                          minimumSize: Size.infinite,
+                          side: BorderSide(
+                              width: 0.7, color: context.primaryColor))),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LabeledIconButton(
+                    iconData: Icons.category_outlined,
+                    label: 'Categories',
+                    iconColor: context.primaryColor,
+                    filled: true,
+                    onTap: () {},
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  LabeledIconButton(
+                    iconData: Icons.favorite_border_outlined,
+                    label: 'Watchlist',
+                    iconColor: context.primaryColor,
+                    filled: true,
+                    onTap: () {},
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBarView(
-          bottomNavigationBarViewModel:
-              BottomNavigationBarViewModel(selectedItemIndex: 0),
-          onItemSelected: (int selectedItem) {}),
+        bottomNavigationBarViewModel:
+            BottomNavigationBarViewModel(selectedItemIndex: 0),
+      ),
     );
   }
 }

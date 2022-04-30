@@ -3,9 +3,10 @@ import 'package:yarn_bazaar/presentation/models/bottom_navigation_bar_view_model
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:yarn_bazaar/presentation/views/drawer_view.dart';
+import 'package:yarn_bazaar/presentation/extensions.dart';
 
-class DirectoryPage extends StatelessWidget {
-  const DirectoryPage({Key? key}) : super(key: key);
+class WatchlistPage extends StatelessWidget {
+  const WatchlistPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,12 @@ class DirectoryPage extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Image.asset('assets/images/avatar.png', height: 60),
                   ),
-                  const Align(
-                    alignment: Alignment.center,
-                    child: Text('Watchlist'),
+                  const Padding(
+                    padding: EdgeInsets.only(top:25),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text('Watchlist'),
+                    ),
                   )
                 ],
               ),
@@ -43,17 +47,19 @@ class DirectoryPage extends StatelessWidget {
                   onPressed: () {},
                 )
               ],
-              bottom: const TabBar(
+              bottom: TabBar(
                 tabs: tabs,
+                labelPadding: const EdgeInsets.only(bottom: 10),
+                indicatorColor: context.primaryColor,
               )),
           body: TabBarView(
             children:
-                List.filled(tabs.length, const Text('No Watchlist found')),
+                List.filled(tabs.length, const Center(child: Text('No Watchlist found'))),
           ),
           bottomNavigationBar: BottomNavigationBarView(
-              bottomNavigationBarViewModel:
-                  BottomNavigationBarViewModel(selectedItemIndex: 3),
-              onItemSelected: (int selectedItem) {}),
+            bottomNavigationBarViewModel:
+                BottomNavigationBarViewModel(selectedItemIndex: 3),
+          ),
         ));
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/buyer_profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/labeled_icon_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/navigate_button.dart';
+import 'package:yarn_bazaar/presentation/extensions.dart';
 
 class BuyerProfileView extends StatelessWidget {
   final BuyerProfileViewModel buyerProfileViewModel;
@@ -32,8 +33,17 @@ class BuyerProfileView extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundImage: AssetImage(buyerProfileViewModel.imageUrl),
+                radius: 28,
               ),
-              Text(buyerProfileViewModel.username),
+              10.vSpace,
+              Text(
+                buyerProfileViewModel.username,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18
+                ),
+              ),
               Text(buyerProfileViewModel.workPlace),
               const Text('Profile Completed'),
               SizedBox(

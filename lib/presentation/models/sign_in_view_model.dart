@@ -1,10 +1,10 @@
-import 'package:yarn_bazaar/common/view_model.dart';
+import 'package:yarn_bazaar/presentation/models/view_model.dart';
 
 class SignInViewModel extends ViewModel {
   final String phoneNumberOrEmail;
-  final String phoneNumberOrEmailError;
+  final String? phoneNumberOrEmailError;
   final String password;
-  final String passwordError;
+  final String? passwordError;
   final bool isShowingPassword;
   final bool hasSubmittedCredentials;
   final bool isVerifyingCredentials;
@@ -33,12 +33,13 @@ class SignInViewModel extends ViewModel {
   //TODO remove after other layers have been setup
   factory SignInViewModel.defaults() {
     return SignInViewModel(
-        phoneNumberOrEmail: '',
-        phoneNumberOrEmailError: '',
-        password: '',
-        passwordError: '',
-        isShowingPassword: false,
-        hasSubmittedCredentials: false,
-        isVerifyingCredentials: false);
+      phoneNumberOrEmail: '',
+      phoneNumberOrEmailError: null,
+      password: '',
+      passwordError: null,
+      isShowingPassword: false,
+      hasSubmittedCredentials: false,
+      isVerifyingCredentials: false,
+    );
   }
 }

@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import '../../common/view_model.dart';
+import '../models/view_model.dart';
 
 class EmptyErrorLoadingView<T extends Object> extends StatelessWidget {
   final EmptyErrorLoadingViewModel<T> model;
