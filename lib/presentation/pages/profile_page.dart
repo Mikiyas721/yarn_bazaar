@@ -31,6 +31,7 @@ class ProfilePageState extends State<ProfilePage> {
         onDrawerItemClicked: (int itemIndex) {},
       ),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: tabColors[selectedProfileIndex],
         title: ProfileSelectionButton(
           firstTabIsSelected: selectedProfileIndex == 0,

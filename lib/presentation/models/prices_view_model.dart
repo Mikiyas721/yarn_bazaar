@@ -13,7 +13,20 @@ class PricesViewModel extends SimpleListViewModel<PriceViewModel> {
 
   factory PricesViewModel.defaults() {
     return PricesViewModel(
-      priceList: [PriceViewModel.defaults(), PriceViewModel.defaults()],
+      priceList: [
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+        PriceViewModel.defaults(),
+      ],
       isLoading: false,
       error: null,
     );
@@ -59,14 +72,14 @@ class PriceViewModel extends ViewModel {
   factory PriceViewModel.defaults() {
     return PriceViewModel(
       yarnQuality: '30s Cotton',
-      quantityInKgs: 'quantityInKgs',
-      companyName: 'companyName',
-      companyType: 'companyType',
-      deliveryArea: 'deliveryArea',
-      lastUpdated: 'lastUpdated',
-      qualityDetails: 'qualityDetails',
-      sellerType: 'sellerType',
-      deliveryPeriod: 'deliveryPeriod',
+      quantityInKgs: '0',
+      companyName: 'ASHIWAD COTSPIN LLP',
+      companyType: 'Ex-Mill',
+      deliveryArea: 'Madurai, India',
+      lastUpdated: '09 Feb 2022',
+      qualityDetails: 'Hosiery, Ring Frame, Combed',
+      sellerType: 'Trader',
+      deliveryPeriod: '1 week',
     );
   }
 }

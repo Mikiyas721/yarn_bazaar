@@ -16,7 +16,15 @@ class DirectoriesViewModel extends SimpleListViewModel<DirectoryViewModel> {
     return DirectoriesViewModel(
       directoryList: [
         DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults()
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults(),
+        DirectoryViewModel.defaults(),
       ],
       isLoading: false,
       error: null,

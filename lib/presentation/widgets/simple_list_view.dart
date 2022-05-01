@@ -85,7 +85,7 @@ class SimpleListView<T> extends StatelessWidget {
 
 class MyExpansionPanelList<T> extends StatelessWidget {
   final SimpleListViewModel<T> model;
-  final ExpansionPanel Function(BuildContext, T) itemBuilder;
+  final ExpansionPanel Function(BuildContext, T, int index) itemBuilder;
   final Widget errorView;
   final Widget loadingView;
   final Widget emptyView;
@@ -121,7 +121,7 @@ class MyExpansionPanelList<T> extends StatelessWidget {
       builder: (context, data) {
         var children = <ExpansionPanel>[];
         for (int i=0;i<model.data!.length;i++) {
-          children.add(itemBuilder(context, model.data![i]));
+          children.add(itemBuilder(context, model.data![i], i));
         }
         return ExpansionPanelList(
           key: key,

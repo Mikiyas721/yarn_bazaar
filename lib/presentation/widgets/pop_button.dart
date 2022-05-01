@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class PopButton extends StatelessWidget {
-  const PopButton({Key? key}) : super(key: key);
+  final Color? iconColor;
+
+  const PopButton({
+    Key? key,
+    this.iconColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +14,10 @@ class PopButton extends StatelessWidget {
       onPressed: () {
         Navigator.pop(context);
       },
-      icon: const Icon(Icons.arrow_back_ios),
+      icon: Icon(
+        Icons.arrow_back_ios,
+        color: iconColor,
+      ),
     );
   }
 }

@@ -38,30 +38,43 @@ class PriceListPage extends StatelessWidget {
             onDrawerItemClicked: (int itemIndex) {},
           ),
           appBar: AppBar(
-              title: SearchField(
-                onDiscardText: () {},
-                onTap: () {},
-                onChanged: (String input) {},
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.notifications_none_outlined),
-                  onPressed: () {},
-                )
-              ],
-              bottom: TabBar(
-                isScrollable: true,
-                labelPadding: const EdgeInsets.only(bottom: 10, right: 20, left: 20),
-                tabs: tabs,
-                indicatorColor: context.primaryColor,
-              )),
+            title: SearchField(
+              onDiscardText: () {},
+              onTap: () {},
+              onChanged: (String input) {},
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.notifications_none_outlined),
+                onPressed: () {},
+              )
+            ],
+            bottom: TabBar(
+              isScrollable: true,
+              labelPadding:
+                  const EdgeInsets.only(bottom: 10, right: 20, left: 20),
+              tabs: tabs,
+              indicatorColor: context.primaryColor,
+            ),
+          ),
           body: TabBarView(
             children: List.filled(
                 tabs.length,
                 RefreshIndicator(
-                  child: PriceListView(
-                    pricesViewModel: PricesViewModel.defaults(),
-                    onReload: () {},
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, top: 15),
+                    child: PriceListView(
+                      pricesViewModel: PricesViewModel.defaults(),
+                      onReload: () {},
+                      onWatchlist: (PriceViewModel viewModel) {},
+                      onCompare: (PriceViewModel viewModel) {},
+                      onDetail: (PriceViewModel viewModel) {
+                        Navigator.pushNamed(context, '/priceListDetailPage',
+                            arguments: viewModel);
+                      },
+                      onShare: (PriceViewModel viewModel) {},
+                    ),
                   ),
                   onRefresh: () async {},
                 )),

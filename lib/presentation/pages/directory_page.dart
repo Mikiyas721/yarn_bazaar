@@ -49,15 +49,23 @@ class DirectoryPage extends StatelessWidget {
             children: List.filled(
                 tabs.length,
                 RefreshIndicator(
-                    child: DirectoriesView(
-                      directoriesViewModel: DirectoriesViewModel.defaults(),
-                      onReload: () {},
-                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15, right: 15, top: 15),
+                        child: DirectoriesView(
+                          directoriesViewModel: DirectoriesViewModel.defaults(),
+                          onReload: () {},
+                          onWatchlist: (DirectoryViewModel viewModel){},
+                          onDetail: (DirectoryViewModel viewModel){
+                            Navigator.pushNamed(context, '/directoryDetailPage', arguments: viewModel);
+                          },
+                          onShare: (DirectoryViewModel viewModel){},
+                        )),
                     onRefresh: () async {})),
           ),
           bottomNavigationBar: BottomNavigationBarView(
             bottomNavigationBarViewModel:
-                BottomNavigationBarViewModel(selectedItemIndex: 2),
+            BottomNavigationBarViewModel(selectedItemIndex: 2),
           ),
         ));
   }
