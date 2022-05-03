@@ -3,6 +3,7 @@ import 'package:yarn_bazaar/presentation/extensions.dart';
 
 class TextFieldWithTitle extends StatelessWidget {
   final String title;
+  final bool usesPrimaryColor;
   final String? textFieldValue;
   final String? labelText;
   final String? hintText;
@@ -19,7 +20,8 @@ class TextFieldWithTitle extends StatelessWidget {
   const TextFieldWithTitle({
     Key? key,
     required this.title,
-    required this.textFieldValue,
+    this.usesPrimaryColor = false,
+    this.textFieldValue,
     this.hintText,
     this.labelText,
     this.errorMessage,
@@ -43,7 +45,9 @@ class TextFieldWithTitle extends StatelessWidget {
           Row(children: [
             Text(
               title,
-              style: TextStyle(color: context.primaryColor),
+              style: TextStyle(
+                color: usesPrimaryColor ? context.primaryColor : null,
+              ),
             ),
             fieldIsOptional != null
                 ? fieldIsOptional!

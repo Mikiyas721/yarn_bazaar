@@ -5,6 +5,11 @@ import 'package:yarn_bazaar/presentation/pages/categories_page.dart';
 import 'package:yarn_bazaar/presentation/pages/composed_yarn_page.dart';
 import 'package:yarn_bazaar/presentation/pages/directory_detail_page.dart';
 import 'package:yarn_bazaar/presentation/pages/directory_page.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_bank_details_page.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_basic_profile_page.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_business_details_page.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_password_page.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_profile_page.dart';
 import 'package:yarn_bazaar/presentation/pages/home_page.dart';
 import 'package:yarn_bazaar/presentation/pages/input_selection_page.dart';
 import 'package:yarn_bazaar/presentation/pages/price_list_detail_page.dart';
@@ -35,14 +40,14 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
             iconTheme: IconThemeData(color: Colors.grey),
             centerTitle: true,
-            titleTextStyle: TextStyle(color: Colors.black),),
+            titleTextStyle: TextStyle(color: Colors.black),
+          ),
           colorScheme: Theme.of(context)
-          .colorScheme
-          .copyWith(primary: const Color(0xFFFF9F10))
-      ),
+              .colorScheme
+              .copyWith(primary: const Color(0xFFFF9F10))),
       initialRoute: '/homePage',
       routes: routes,
-      onGenerateRoute: (RouteSettings settings){
+      onGenerateRoute: (RouteSettings settings) {
         return null;
       },
     );
@@ -51,11 +56,16 @@ class MyApp extends StatelessWidget {
 
 final routes = {
   '/': (BuildContext context) => const SplashPage(),
-  '/addYarnRequirementPage': (BuildContext context) =>  const AddYarnRequirementPage(),
+  '/addYarnRequirementPage': (BuildContext context) => const AddYarnRequirementPage(),
   '/authPage': (BuildContext context) => const AuthPage(),
   '/categoriesPage': (BuildContext context) => const CategoriesPage(),
   '/composedYarnPage': (BuildContext context) => const ComposedYarnPage(),
   '/directoryDetailPage': (BuildContext context) => const DirectoryDetailPage(),
+  '/editBankDetailsPage': (BuildContext context) => const EditBankDetailsPage(),
+  '/editBasicProfilePage': (BuildContext context) => const EditBasicProfilePage(),
+  '/editBusinessDetailsPage': (BuildContext context) => const EditBusinessDetailPage(),
+  '/editPasswordPage': (BuildContext context) => const EditPasswordPage(),
+  '/editProfilePage': (BuildContext context) => const EditProfilePage(),
   '/directoryPage': (BuildContext context) => const DirectoryPage(),
   '/homePage': (BuildContext context) => const HomePage(),
   '/inputSelectionPage': (BuildContext context) => const InputSelectionPage(),

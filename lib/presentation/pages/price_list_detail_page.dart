@@ -32,9 +32,7 @@ class PriceListDetailPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const PopButton(
-                        iconColor: Colors.grey,
-                      ),
+                      const PopButton(),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

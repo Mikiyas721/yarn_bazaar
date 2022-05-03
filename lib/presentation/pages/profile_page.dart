@@ -50,7 +50,9 @@ class ProfilePageState extends State<ProfilePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/editProfilePage');
+            },
             icon: const Icon(Icons.edit_outlined),
             color: Colors.white,
           ),

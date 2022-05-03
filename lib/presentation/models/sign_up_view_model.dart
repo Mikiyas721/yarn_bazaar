@@ -9,6 +9,18 @@ class SignUpViewModel extends ViewModel {
   final bool hasGeneratedOTP;
   final String oTP;
   final String? oTPError;
+  final String? userType;
+  final String? otherUserType;
+  final String? otherUserTypeError;
+  final List<bool> yarnCategorySelected;
+  final String firstName;
+  final String? firstNameError;
+  final String lastName;
+  final String? lastNameError;
+  final String companyName;
+  final String? companyNameError;
+  final String password;
+  final String? passwordError;
 
   SignUpViewModel({
     required this.activeStepIndex,
@@ -19,6 +31,18 @@ class SignUpViewModel extends ViewModel {
     required this.hasGeneratedOTP,
     required this.oTP,
     required this.oTPError,
+    required this.userType,
+    required this.otherUserType,
+    required this.otherUserTypeError,
+    required this.yarnCategorySelected,
+    required this.firstName,
+    required this.firstNameError,
+    required this.lastName,
+    required this.lastNameError,
+    required this.companyName,
+    required this.companyNameError,
+    required this.password,
+    required this.passwordError,
   });
 
   @override
@@ -28,19 +52,46 @@ class SignUpViewModel extends ViewModel {
         phoneNumberError,
         hasAgreedToTerms,
         isGeneratingOTP,
+        hasGeneratedOTP,
+        oTP,
+        oTPError,
+        userType,
+        otherUserType,
+        otherUserTypeError,
+        yarnCategorySelected,
+        firstName,
+        firstNameError,
+        lastName,
+        lastNameError,
+        companyName,
+        companyNameError,
+        password,
+        passwordError,
       ];
 
   //TODO remove once controller is setup
   factory SignUpViewModel.defaults() {
     return SignUpViewModel(
-      activeStepIndex: 0,
+      activeStepIndex: 3,
       phoneNumber: '',
       phoneNumberError: null,
       hasAgreedToTerms: true,
       isGeneratingOTP: false,
       hasGeneratedOTP: false,
       oTP: '',
-      oTPError:null
+      oTPError: null,
+      userType: null,
+      otherUserType: null,
+      otherUserTypeError: null,
+      yarnCategorySelected: List.filled(16, false),
+      firstName: '',
+      firstNameError: null,
+      lastName: '',
+      lastNameError: null,
+      companyName: '',
+      companyNameError: null,
+      password: '',
+      passwordError: null,
     );
   }
 }

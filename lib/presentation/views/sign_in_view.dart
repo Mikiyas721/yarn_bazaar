@@ -64,7 +64,9 @@ class SignInView extends StatelessWidget {
             Text('*', style: TextStyle(color: Colors.red))
           ],
         ),
+        //TODO use TextFieldWithTitle widget
         TextField(
+          obscureText: signInViewModel.isShowingPassword,
           decoration: InputDecoration(
               errorText: signInViewModel.passwordError,
               hintText: 'Password',

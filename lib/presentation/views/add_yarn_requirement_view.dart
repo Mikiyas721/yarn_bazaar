@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
-import 'package:yarn_bazaar/presentation/widgets/outlined_elevated_button.dart';
+import 'package:yarn_bazaar/presentation/widgets/choice_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 import 'package:yarn_bazaar/presentation/extensions.dart';
 
@@ -46,9 +46,11 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
             children: [
               Expanded(
                 flex: 1,
-                child: OutlinedElevatedButton(
+                child: ChoiceButton(
                   label: 'Price Inquiry',
-                  isElevated: yarnRequirementViewModel.intention ==
+                  hasMaxWidth: false,
+                  elevates: true,
+                  isSelected: yarnRequirementViewModel.intention ==
                       YarnRequirementIntention.priceInquiry,
                   onClick: (bool isElevated) {
                     if (!isElevated) onInquiryOrPurchase(0);
@@ -58,9 +60,11 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
               10.hSpace,
               Expanded(
                 flex: 1,
-                child: OutlinedElevatedButton(
+                child: ChoiceButton(
                   label: 'Purchase',
-                  isElevated: yarnRequirementViewModel.intention ==
+                  hasMaxWidth: false,
+                  elevates: true,
+                  isSelected: yarnRequirementViewModel.intention ==
                       YarnRequirementIntention.purchase,
                   onClick: (bool isElevated) {
                     if (!isElevated) onInquiryOrPurchase(1);
