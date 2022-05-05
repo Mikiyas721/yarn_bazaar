@@ -21,11 +21,11 @@ import 'package:yarn_bazaar/presentation/pages/splash_page.dart';
 import 'package:yarn_bazaar/presentation/pages/watchlist_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const YarnBazaar());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class YarnBazaar extends StatelessWidget {
+  const YarnBazaar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

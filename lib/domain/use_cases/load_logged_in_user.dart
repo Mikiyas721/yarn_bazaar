@@ -1,0 +1,15 @@
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import 'package:yarn_bazaar/domain/entities/user.dart';
+import 'package:yarn_bazaar/domain/ports/user_repo.dart';
+
+@lazySingleton
+class LoadLoggedInUser {
+  final IUserRepo _iUserRepo;
+
+  const LoadLoggedInUser(this._iUserRepo);
+
+  Future<Option<User>> execute() async {
+    return _iUserRepo.getCurrentLoggedInUser();
+  }
+}
