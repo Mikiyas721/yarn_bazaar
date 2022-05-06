@@ -18,6 +18,7 @@ class YarnRequirementViewModel extends ViewModel {
   final String? additionalComment;
   final String? additionalCommentError;
   final bool wantToTestReport;
+  final bool isAdding;
 
   YarnRequirementViewModel({
     required this.intention,
@@ -37,6 +38,7 @@ class YarnRequirementViewModel extends ViewModel {
     required this.additionalComment,
     required this.additionalCommentError,
     required this.wantToTestReport,
+    required this.isAdding,
   });
 
   @override
@@ -58,6 +60,7 @@ class YarnRequirementViewModel extends ViewModel {
         additionalComment,
         additionalCommentError,
         wantToTestReport,
+        isAdding,
       ];
 
   //TODO remove after other layers have been setup
@@ -80,6 +83,7 @@ class YarnRequirementViewModel extends ViewModel {
       additionalComment: null,
       additionalCommentError: null,
       wantToTestReport: false,
+      isAdding: false
     );
   }
 }

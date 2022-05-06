@@ -21,6 +21,7 @@ class SignUpViewModel extends ViewModel {
   final String? companyNameError;
   final String password;
   final String? passwordError;
+  final bool isAddingUser;
 
   SignUpViewModel({
     required this.activeStepIndex,
@@ -43,6 +44,7 @@ class SignUpViewModel extends ViewModel {
     required this.companyNameError,
     required this.password,
     required this.passwordError,
+    required this.isAddingUser,
   });
 
   @override
@@ -67,6 +69,7 @@ class SignUpViewModel extends ViewModel {
         companyNameError,
         password,
         passwordError,
+        isAddingUser,
       ];
 
   //TODO remove once controller is setup
@@ -92,6 +95,7 @@ class SignUpViewModel extends ViewModel {
       companyNameError: null,
       password: '',
       passwordError: null,
+      isAddingUser: false,
     );
   }
 }

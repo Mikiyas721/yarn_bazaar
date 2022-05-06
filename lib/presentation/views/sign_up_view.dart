@@ -97,6 +97,7 @@ class SignUpView extends StatelessWidget {
         } else if (controlsDetails.currentStep == 3) {
           return MyActionButton(
             label: 'Submit',
+            isLoading: signUpViewModel.isAddingUser,
             onSubmit: onFourthStepComplete,
           );
         } else {
