@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:yarn_bazaar/domain/entities/entity.dart';
+import 'package:yarn_bazaar/common/entity.dart';
 import 'package:yarn_bazaar/domain/value_objects/gst_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/pan_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/tan_number.dart';
@@ -34,7 +34,7 @@ class BusinessDetails extends Entity {
     this.updatedAt,
   }) : super(id);
 
-  Option<BusinessDetails> create(
+  static Option<BusinessDetails> create({
     String? id,
     String? companyName,
     String? accountType,
@@ -48,7 +48,7 @@ class BusinessDetails extends Entity {
     String? panCardUrl,
     DateTime? createdAt,
     DateTime? updatedAt,
-  ) {
+  }) {
     if ([
       id,
       companyName,

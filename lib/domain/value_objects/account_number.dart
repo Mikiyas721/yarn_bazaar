@@ -18,19 +18,21 @@ class LongAccountNumberFailure extends AccountNumberFailure {
   String get message => 'Account Number is too short';
 }
 
+const accountNumberRegExp = r'^[0-9]{9,18}&';
+
 
 class AccountNumber {
-  final int? value;
+  final String? value;
 
   const AccountNumber._(this.value);
 
   static Either<AccountNumberFailure, AccountNumber> create(String? accountNumber) {
     if (accountNumber != null) {
-      final parsedAccountNumber = int.tryParse(accountNumber);
+      final parsedAccountNumber = RegExp(accountNumberRegExp).firstMatch(accountNumber);
       if (parsedAccountNumber==null) return left(InvalidAccountNumberFailure());
       if (accountNumber.length<9) return left(ShortAccountNumberFailure());
       if (accountNumber.length>18) return left(LongAccountNumberFailure());
-      return right(AccountNumber._(parsedAccountNumber));
+      return right(AccountNumber._(accountNumber));
     }
     return right(const AccountNumber._(null));
   }

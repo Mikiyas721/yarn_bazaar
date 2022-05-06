@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/domain/entities/bank_details.dart';
-import 'package:yarn_bazaar/domain/ports/bank_detail_repo.dart';
+import 'package:yarn_bazaar/domain/ports/bank_details_repo.dart';
 
 @injectable
 class UpdateUserBankDetails {
-  final IBankDetailRepo _iBankDetails;
+  final IBankDetailsRepo _iBankDetails;
 
   UpdateUserBankDetails(this._iBankDetails);
 

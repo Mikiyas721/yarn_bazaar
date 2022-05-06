@@ -1,4 +1,4 @@
-import 'package:yarn_bazaar/presentation/models/view_model.dart';
+import 'package:yarn_bazaar/common/view_model.dart';
 import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
 import 'package:yarn_bazaar/presentation/extensions.dart';
 

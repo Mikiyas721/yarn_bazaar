@@ -3,11 +3,13 @@ import 'package:yarn_bazaar/domain/value_objects/delivery_area.dart';
 import 'package:yarn_bazaar/domain/value_objects/payment_terms.dart';
 import 'package:yarn_bazaar/domain/value_objects/quantity.dart';
 
-import 'entity.dart';
+import '../../common/entity.dart';
 
 class Yarn extends Entity {
   final String intention;
-  final String yarnQuality;
+  final String count;
+  final String yarnType;
+  final String purpose;
   final String? qualityDetails;
   final String colour;
   final Quantity quantityInKgs;
@@ -24,7 +26,9 @@ class Yarn extends Entity {
   Yarn._({
     String? id,
     required this.intention,
-    required this.yarnQuality,
+    required this.count,
+    required this.yarnType,
+    required this.purpose,
     this.qualityDetails,
     required this.colour,
     required this.quantityInKgs,
@@ -42,7 +46,9 @@ class Yarn extends Entity {
   static Option<Yarn> create({
     String? id,
     String? intention,
-    String? yarnQuality,
+    String? count,
+    String? yarnType,
+    String? purpose,
     String? qualityDetails,
     String? colour,
     String? quantityInKgs,
@@ -59,7 +65,9 @@ class Yarn extends Entity {
     if ([
       id,
       intention,
-      yarnQuality,
+      count,
+      yarnType,
+      purpose,
       qualityDetails,
       colour,
       quantityInKgs,
@@ -85,7 +93,9 @@ class Yarn extends Entity {
     return some(Yarn._(
       id: id,
       intention: intention!,
-      yarnQuality: yarnQuality!,
+      count:count!,
+      yarnType:yarnType!,
+      purpose:purpose!,
       colour: colour!,
       quantityInKgs: quantityObject
           .getOrElse(() => throw Exception('Yarn Quantity Error')),
@@ -105,7 +115,9 @@ class Yarn extends Entity {
 
   static Option<Yarn> createFromInput({
     String? intention,
-    String? yarnQuality,
+    String? count,
+    String? yarnType,
+    String? purpose,
     String? qualityDetails,
     String? colour,
     String? quantityInKgs,
@@ -118,7 +130,9 @@ class Yarn extends Entity {
   }) {
     if ([
       intention,
-      qualityDetails,
+      count,
+      yarnType,
+      purpose,
       colour,
       quantityInKgs,
       deliveryArea,
@@ -138,7 +152,9 @@ class Yarn extends Entity {
 
     return some(Yarn._(
       intention: intention!,
-      yarnQuality: yarnQuality!,
+      count:count!,
+      yarnType:yarnType!,
+      purpose:purpose!,
       colour: colour!,
       quantityInKgs: quantityObject
           .getOrElse(() => throw Exception('Yarn Quantity Error')),

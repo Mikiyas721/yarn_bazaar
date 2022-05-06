@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 import 'package:yarn_bazaar/domain/entities/business_details.dart';
-import 'package:yarn_bazaar/domain/entities/entity.dart';
+import 'package:yarn_bazaar/common/entity.dart';
 import 'package:yarn_bazaar/domain/value_objects/email.dart';
 import 'package:yarn_bazaar/domain/value_objects/name.dart';
 import 'package:yarn_bazaar/domain/value_objects/password.dart';
@@ -20,8 +20,8 @@ class User extends Entity {
   final Password password;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final String? businessDetailsId;
-  final String? bankDetailsId;
+  final String businessDetailsId;
+  final String bankDetailsId;
   final BusinessDetails? businessDetails;
   final BankDetails? bankDetails;
 
@@ -38,8 +38,8 @@ class User extends Entity {
     required this.password,
     this.createdAt,
     this.updatedAt,
-    this.businessDetailsId,
-    this.bankDetailsId,
+    required this.businessDetailsId,
+    required this.bankDetailsId,
     this.businessDetails,
     this.bankDetails,
   }) : super(id);
@@ -112,8 +112,8 @@ class User extends Entity {
           passwordObject.getOrElse(() => throw Exception('Password Error')),
       createdAt: createdAt,
       updatedAt: updatedAt,
-      businessDetailsId: businessDetailsId,
-      bankDetailsId: bankDetailsId,
+      businessDetailsId: businessDetailsId!,
+      bankDetailsId: bankDetailsId!,
       businessDetails: businessDetails,
       bankDetails: bankDetails,
     ));
@@ -129,13 +129,17 @@ class User extends Entity {
     String? email,
     String? website,
     String? password,
+    String? businessDetailsId,
+    String? bankDetailsId,
     BusinessDetails? businessDetails,
     BankDetails? bankDetails,
   }) {
     if ([
       firstName,
       phoneNumber,
-      password
+      password,
+      businessDetailsId,
+      bankDetailsId,
     ].any((element) => element == null)) return none();
 
     final firstNameObject = Name.create(firstName!);
@@ -155,9 +159,9 @@ class User extends Entity {
     return some(User._(
       imageUrl: imageUrl,
       firstName:
-      firstNameObject.getOrElse(() => throw Exception('First name Error')),
+          firstNameObject.getOrElse(() => throw Exception('First name Error')),
       lastName:
-      firstNameObject.getOrElse(() => throw Exception('Last name Error')),
+          firstNameObject.getOrElse(() => throw Exception('Last name Error')),
       phoneNumber: phoneNumberObject
           .getOrElse(() => throw Exception('Phone number Error')),
       country: country,
@@ -165,7 +169,9 @@ class User extends Entity {
       email: emailObject.getOrElse(() => throw Exception('Email Error')),
       website: websiteObject.getOrElse(() => throw Exception('Website Error')),
       password:
-      passwordObject.getOrElse(() => throw Exception('Password Error')),
+          passwordObject.getOrElse(() => throw Exception('Password Error')),
+      businessDetailsId: businessDetailsId!,
+      bankDetailsId: bankDetailsId!,
       businessDetails: businessDetails,
       bankDetails: bankDetails,
     ));

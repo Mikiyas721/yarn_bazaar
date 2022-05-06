@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:yarn_bazaar/domain/entities/entity.dart';
+import 'package:yarn_bazaar/common/entity.dart';
 import 'package:yarn_bazaar/domain/value_objects/account_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/ifsc_code.dart';
 
 class BankDetails extends Entity {
   final String? accountName;
   final AccountNumber accountNumber;
-  final IFSCCode ifscCode;
+  final IFSCCode iFSCCode;
   final String? bankName;
   final String? bankBranch;
   final String? bankState;
@@ -20,7 +20,7 @@ class BankDetails extends Entity {
     String? id,
     this.accountName,
     required this.accountNumber,
-    required this.ifscCode,
+    required this.iFSCCode,
     this.bankName,
     this.bankBranch,
     this.bankState,
@@ -35,7 +35,7 @@ class BankDetails extends Entity {
     String? id,
     String? accountName,
     String? accountNumber,
-    String? ifscCode,
+    String? iFSCCode,
     String? bankName,
     String? bankBranch,
     String? bankState,
@@ -49,7 +49,7 @@ class BankDetails extends Entity {
       id,
       accountName,
       accountNumber,
-      ifscCode,
+      iFSCCode,
       bankName,
       bankBranch,
       bankState,
@@ -61,7 +61,7 @@ class BankDetails extends Entity {
     ].any((element) => element == null)) return none();
 
     final accountNumberObject = AccountNumber.create(accountNumber);
-    final ifscCodeObject = IFSCCode.create(ifscCode);
+    final ifscCodeObject = IFSCCode.create(iFSCCode);
 
     if (accountNumberObject.isLeft() || ifscCodeObject.isLeft()) return none();
 
@@ -70,7 +70,7 @@ class BankDetails extends Entity {
       accountName: accountName,
       accountNumber: accountNumberObject
           .getOrElse(() => throw Exception('Account number error')),
-      ifscCode:
+      iFSCCode:
           ifscCodeObject.getOrElse(() => throw Exception('IFSC code error')),
       bankName: bankName,
       bankBranch: bankBranch,
@@ -86,7 +86,7 @@ class BankDetails extends Entity {
   static Option<BankDetails> createFromInput({
     String? accountName,
     String? accountNumber,
-    String? ifscCode,
+    String? iFSCCode,
     String? bankName,
     String? bankBranch,
     String? bankState,
@@ -95,7 +95,7 @@ class BankDetails extends Entity {
     String? cancelledChequeUrl,
   }) {
     final accountNumberObject = AccountNumber.create(accountNumber);
-    final ifscCodeObject = IFSCCode.create(ifscCode);
+    final ifscCodeObject = IFSCCode.create(iFSCCode);
 
     if (accountNumberObject.isLeft() || ifscCodeObject.isLeft()) return none();
 
@@ -103,7 +103,7 @@ class BankDetails extends Entity {
       accountName: accountName,
       accountNumber: accountNumberObject
           .getOrElse(() => throw Exception('Account number error')),
-      ifscCode:
+      iFSCCode:
           ifscCodeObject.getOrElse(() => throw Exception('IFSC code error')),
       bankName: bankName,
       bankBranch: bankBranch,
