@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
-import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
+import 'package:yarn_bazaar/domain/value_objects/yarn_requirement_intention.dart';
+import 'package:yarn_bazaar/presentation/models/add_yarn_requirement_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/choice_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
-  final YarnRequirementViewModel yarnRequirementViewModel;
+  final AddYarnRequirementViewModel yarnRequirementViewModel;
   final Function(int buttonIndex) onInquiryOrPurchase;
   final Function(String qualityDetail) onQualityDetail;
   final VoidCallback onSelectColorTap;
@@ -51,7 +52,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   hasMaxWidth: false,
                   elevates: true,
                   isSelected: yarnRequirementViewModel.intention ==
-                      YarnRequirementIntention.priceInquiry,
+                      YarnRequirementIntention.PriceInquiry,
                   onClick: (bool isElevated) {
                     if (!isElevated) onInquiryOrPurchase(0);
                   },
@@ -64,8 +65,8 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   label: 'Purchase',
                   hasMaxWidth: false,
                   elevates: true,
-                  isSelected: yarnRequirementViewModel.intention ==
-                      YarnRequirementIntention.purchase,
+                  isSelected:
+                      yarnRequirementViewModel.intention == YarnRequirementIntention.Purchase,
                   onClick: (bool isElevated) {
                     if (!isElevated) onInquiryOrPurchase(1);
                   },
@@ -131,8 +132,8 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Inquiry Closes Within',
-                    textFieldValue: getTimeString(
-                        yarnRequirementViewModel.inquiryClosesWithin),
+                    textFieldValue:
+                        getTimeString(yarnRequirementViewModel.inquiryClosesWithin),
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: '03:00:00',
@@ -151,8 +152,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   TextFieldWithTitle(
                     title: 'Additional Comments',
                     textFieldValue: yarnRequirementViewModel.additionalComment,
-                    errorMessage:
-                        yarnRequirementViewModel.additionalCommentError,
+                    errorMessage: yarnRequirementViewModel.additionalCommentError,
                     fieldIsOptional: true,
                     hintText: 'ex - I want lowest price',
                     onChanged: onAdditionalCommentsChanged,
@@ -176,8 +176,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                           Radio(
                               activeColor: context.primaryColor,
                               value: yarnRequirementViewModel.wantToTestReport,
-                              groupValue:
-                                  yarnRequirementViewModel.wantToTestReport,
+                              groupValue: yarnRequirementViewModel.wantToTestReport,
                               onChanged: (bool? isSelected) {
                                 onWantToTestReport(0);
                               }),
@@ -196,8 +195,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                           Radio(
                               activeColor: context.primaryColor,
                               value: !yarnRequirementViewModel.wantToTestReport,
-                              groupValue:
-                                  yarnRequirementViewModel.wantToTestReport,
+                              groupValue: yarnRequirementViewModel.wantToTestReport,
                               onChanged: (bool? isSelected) {
                                 onWantToTestReport(1);
                               }),

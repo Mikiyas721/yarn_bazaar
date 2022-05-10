@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
-import 'package:yarn_bazaar/presentation/models/buyer_profile_view_model.dart';
+import 'package:yarn_bazaar/presentation/controllers/edit_profile_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
+import 'package:yarn_bazaar/presentation/models/edit_basic_profile_view_model.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
+import 'package:yarn_bazaar/presentation/models/edit_profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/edit_profile_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
@@ -22,20 +25,16 @@ class EditProfilePage extends StatelessWidget {
             ),
           ),
         ),
-        body: EditProfileView(
-          buyerProfileViewModel: BuyerProfileViewModel.defaults(),
-          onBasicProfile: () {
-            Navigator.pushNamed(context, '/editBasicProfilePage');
-          },
-          onBusinessDetails: () {
-            Navigator.pushNamed(context, '/editBusinessDetailsPage');
-          },
-          onBankDetails: () {
-            Navigator.pushNamed(context, '/editBankDetailsPage');
-          },
-          onChangePassword: () {
-            Navigator.pushNamed(context, '/editPasswordPage');
-          },
-        ));
+        body: ViewModelBuilder.withController<EditProfileViewModel, EditProfileController>(
+            create: () => EditProfileController(context),
+            builder: (context, controller, viewModel) {
+              return EditProfileView(
+                buyerProfileViewModel: viewModel!,
+                onBasicProfile: controller.onBasicProfile,
+                onBusinessDetails: controller.onBusinessDetails,
+                onBankDetails: controller.onBankDetails,
+                onChangePassword: controller.onChangePassword,
+              );
+            }));
   }
 }

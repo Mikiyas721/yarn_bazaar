@@ -9,11 +9,4 @@ class BottomNavigationBarViewModel extends ViewModel {
 
   @override
   List<Object?> get props => [selectedItemIndex];
-
-  //TODO remove after other layers have been setup
-  factory BottomNavigationBarViewModel.defaults() {
-    return BottomNavigationBarViewModel(
-      selectedItemIndex: 0,
-    );
-  }
 }

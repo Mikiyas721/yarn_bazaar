@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/models/directory_view_model.dart';
+import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class SellerView extends StatelessWidget {
-  final DirectoryViewModel directoryViewModel;
+  final UserViewModel directoryViewModel;
   final VoidCallback onWatchlist;
   final VoidCallback onShare;
   final VoidCallback onDetail;

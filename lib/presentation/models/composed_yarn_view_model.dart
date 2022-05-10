@@ -1,6 +1,6 @@
 import 'package:yarn_bazaar/common/view_model.dart';
-import 'package:yarn_bazaar/presentation/models/yarn_requirement_view_model.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/domain/value_objects/yarn_requirement_intention.dart';
+import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 class ComposedYarnViewModel extends ViewModel {
   final String? intention;
@@ -47,7 +47,7 @@ class ComposedYarnViewModel extends ViewModel {
   //TODO remove after controller
   factory ComposedYarnViewModel.defaults() {
     return ComposedYarnViewModel(
-      intention: YarnRequirementIntention.priceInquiry.getString(),
+      intention: YarnRequirementIntention.None.getString(),
       yarnQuality: '14s Cotton Weaving',
       qualityDetails: 'qualityDetails',
       color: 'Griege',

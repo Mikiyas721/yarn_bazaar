@@ -93,19 +93,21 @@ class BusinessDetails extends Entity {
     ));
   }
 
-  Option<BusinessDetails> createFromInput(
-      String? companyName,
-      String? accountType,
-      List<String>? categories,
-      String? address,
-      String? completeAddress,
-      String? gstNo,
-      String? tanNo,
-      String? gstDocumentUrl,
-      String? panNo,
-      String? panCardUrl,
-      ) {
+  static Option<BusinessDetails> createFromInput({
+    String? id,
+    String? companyName,
+    String? accountType,
+    List<String>? categories,
+    String? address,
+    String? completeAddress,
+    String? gstNo,
+    String? tanNo,
+    String? gstDocumentUrl,
+    String? panNo,
+    String? panCardUrl,
+  }) {
     if ([
+      id,
       companyName,
       accountType,
       categories,

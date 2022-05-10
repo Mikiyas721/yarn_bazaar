@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/presentation/controllers/bottom_navigation_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/drawer_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
 import 'package:yarn_bazaar/presentation/models/bottom_navigation_bar_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:yarn_bazaar/presentation/views/drawer_view.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class WatchlistPage extends StatelessWidget {
   const WatchlistPage({Key? key}) : super(key: key);
@@ -19,12 +22,16 @@ class WatchlistPage extends StatelessWidget {
     return DefaultTabController(
         length: tabs.length,
         child: Scaffold(
-          drawer: DrawerView(
-            drawerViewModel: DrawerViewModel.defaults(),
-            onEditAccount: () {},
-            onLogout: () {},
-            onDrawerItemClicked: (int itemIndex) {},
-          ),
+          drawer: ViewModelBuilder.withController<DrawerViewModel, MyDrawerController>(
+              create: () => MyDrawerController(context),
+              builder: (context, controller, viewModel) {
+                return DrawerView(
+                  drawerViewModel: viewModel!,
+                  onEditAccount: controller.onEditAccount,
+                  onLogout: controller.onLogout,
+                  onDrawerItemClicked: controller.onDrawerItemClicked,
+                );
+              }),
           appBar: AppBar(
               title: Stack(
                 children: [
@@ -56,10 +63,17 @@ class WatchlistPage extends StatelessWidget {
             children:
                 List.filled(tabs.length, const Center(child: Text('No Watchlist found'))),
           ),
-          bottomNavigationBar: BottomNavigationBarView(
-            bottomNavigationBarViewModel:
-                BottomNavigationBarViewModel(selectedItemIndex: 3),
+          bottomNavigationBar: ViewModelBuilder.withController<BottomNavigationBarViewModel,
+              BottomNavigationController>(
+              create: () => BottomNavigationController(context),
+              onInit: (controller)=> controller.switchTo(3),
+              builder: (context, controller, viewModel) {
+                return BottomNavigationBarView(
+                  bottomNavigationBarViewModel: viewModel!,
+                  onItemSelected: controller.onNavigate,
+                );
+              }),
           ),
-        ));
+        );
   }
 }

@@ -3,7 +3,7 @@ part of 'add_yarn_requirement_bloc.dart';
 @freezed
 abstract class AddYarnRequirementState extends BlocState with _$AddYarnRequirementState {
   const factory AddYarnRequirementState({
-    required String intention,
+    required YarnRequirementIntention intention,
     required String yarnQuality,
     String? qualityDetails,
     required String color,
@@ -16,11 +16,10 @@ abstract class AddYarnRequirementState extends BlocState with _$AddYarnRequireme
     String? additionalComment,
     required bool wantToTestReport,
     required bool hasSubmitted,
-    required bool isAdding,
   }) = _AddYarnRequirementState;
 
   factory AddYarnRequirementState.initial() => AddYarnRequirementState(
-        intention: '',
+        intention: YarnRequirementIntention.None,
         yarnQuality: '',
         color: '',
         quantityInKgs: Quantity.create(''),
@@ -31,6 +30,5 @@ abstract class AddYarnRequirementState extends BlocState with _$AddYarnRequireme
         sendRequirementTo: '',
         wantToTestReport: false,
         hasSubmitted: false,
-        isAdding: false,
       );
 }

@@ -1,6 +1,7 @@
 import 'package:yarn_bazaar/common/view_model.dart';
+import 'package:yarn_bazaar/domain/value_objects/yarn_requirement_intention.dart';
 
-class YarnRequirementViewModel extends ViewModel {
+class AddYarnRequirementViewModel extends ViewModel {
   final YarnRequirementIntention intention;
   final String? yarnQuality;
   final String? qualityDetails;
@@ -18,9 +19,8 @@ class YarnRequirementViewModel extends ViewModel {
   final String? additionalComment;
   final String? additionalCommentError;
   final bool wantToTestReport;
-  final bool isAdding;
 
-  YarnRequirementViewModel({
+  AddYarnRequirementViewModel({
     required this.intention,
     required this.yarnQuality,
     required this.qualityDetails,
@@ -38,7 +38,6 @@ class YarnRequirementViewModel extends ViewModel {
     required this.additionalComment,
     required this.additionalCommentError,
     required this.wantToTestReport,
-    required this.isAdding,
   });
 
   @override
@@ -60,36 +59,5 @@ class YarnRequirementViewModel extends ViewModel {
         additionalComment,
         additionalCommentError,
         wantToTestReport,
-        isAdding,
       ];
-
-  //TODO remove after other layers have been setup
-  factory YarnRequirementViewModel.defaults() {
-    return YarnRequirementViewModel(
-      intention: YarnRequirementIntention.none,
-      yarnQuality: null,
-      qualityDetails: null,
-      qualityDetailsError: null,
-      color: null,
-      quantityInKgs: null,
-      quantityInKgsError: null,
-      deliveryArea: null,
-      deliveryAreaError: null,
-      deliveryPeriod: null,
-      paymentTerms: null,
-      paymentTermsError: null,
-      inquiryClosesWithin: null,
-      sendRequirementTo: null,
-      additionalComment: null,
-      additionalCommentError: null,
-      wantToTestReport: false,
-      isAdding: false
-    );
-  }
-}
-
-enum YarnRequirementIntention {
-  priceInquiry,
-  purchase,
-  none,
 }

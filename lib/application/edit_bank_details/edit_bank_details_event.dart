@@ -2,14 +2,27 @@ part of 'edit_bank_details_bloc.dart';
 
 abstract class EditBankDetailsEvent extends BlocEvent<EditBankDetailsState> {}
 
+class EditBankDetailsStartedLoadingPreviousEvent extends EditBankDetailsEvent {
+  @override
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
+    yield currentState.copyWith(isLoadingSaved: true);
+  }
+}
+
+class EditBankDetailsStoppedLoadingPreviousEvent extends EditBankDetailsEvent {
+  @override
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
+    yield currentState.copyWith(isLoadingSaved: false);
+  }
+}
+
 class EditBankDetailsAccountNameChangedEvent extends EditBankDetailsEvent {
   final String accountName;
 
   EditBankDetailsAccountNameChangedEvent(this.accountName);
 
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
     yield currentState.copyWith(accountName: accountName);
   }
 }
@@ -20,10 +33,8 @@ class EditBankDetailsAccountNumberChangedEvent extends EditBankDetailsEvent {
   EditBankDetailsAccountNumberChangedEvent(this.accountNumber);
 
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(
-        accountNumber: AccountNumber.create(accountNumber));
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
+    yield currentState.copyWith(accountNumber: AccountNumber.create(accountNumber));
   }
 }
 
@@ -33,8 +44,7 @@ class EditBankDetailsIFSCCodeChangedEvent extends EditBankDetailsEvent {
   EditBankDetailsIFSCCodeChangedEvent(this.iFSCCode);
 
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
     yield currentState.copyWith(iFSCCode: IFSCCode.create(iFSCCode));
   }
 }
@@ -45,8 +55,7 @@ class EditBankDetailsBankNameChangedEvent extends EditBankDetailsEvent {
   EditBankDetailsBankNameChangedEvent(this.bankName);
 
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
     yield currentState.copyWith(bankName: bankName);
   }
 }
@@ -57,8 +66,7 @@ class EditBankDetailsBankBranchChangedEvent extends EditBankDetailsEvent {
   EditBankDetailsBankBranchChangedEvent(this.bankBranch);
 
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
     yield currentState.copyWith(bankBranch: bankBranch);
   }
 }
@@ -69,8 +77,7 @@ class EditBankDetailsBankStateChangedEvent extends EditBankDetailsEvent {
   EditBankDetailsBankStateChangedEvent(this.bankState);
 
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
     yield currentState.copyWith(bankState: bankState);
   }
 }
@@ -81,28 +88,28 @@ class EditBankDetailsBankCityChangedEvent extends EditBankDetailsEvent {
   EditBankDetailsBankCityChangedEvent(this.bankCity);
 
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
     yield currentState.copyWith(bankCity: bankCity);
   }
 }
 
 class EditBankDetailsSubmittedEvent extends EditBankDetailsEvent {
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
     yield currentState.copyWith(hasSubmitted: true);
   }
 }
 
-class EditBankDetailsIsSavingChangedEvent extends EditBankDetailsEvent {
-  final bool isSaving;
-
-  EditBankDetailsIsSavingChangedEvent(this.isSaving);
-
+class EditBankDetailsStartedSavingEvent extends EditBankDetailsEvent {
   @override
-  Stream<EditBankDetailsState> handle(
-      EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(isSaving: isSaving);
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
+    yield currentState.copyWith(isSaving: true);
+  }
+}
+
+class EditBankDetailsStoppedSavingEvent extends EditBankDetailsEvent {
+  @override
+  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
+    yield currentState.copyWith(isSaving: false);
   }
 }

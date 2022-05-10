@@ -5,9 +5,10 @@ import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/bloc/bloc_helpers.dart';
 import 'package:yarn_bazaar/domain/value_objects/company_name.dart';
 import 'package:yarn_bazaar/domain/value_objects/name.dart';
-import 'package:yarn_bazaar/domain/value_objects/other_user.dart';
+import 'package:yarn_bazaar/domain/value_objects/other_user_type.dart';
 import 'package:yarn_bazaar/domain/value_objects/password.dart';
 import 'package:yarn_bazaar/domain/value_objects/phone_number.dart';
+import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
 import 'package:yarn_bazaar/domain/value_objects/verification_code.dart';
 
 part 'sign_up_event.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class DrawerView extends StatelessWidget {
   final DrawerViewModel drawerViewModel;

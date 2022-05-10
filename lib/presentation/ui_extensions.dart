@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'models/yarn_requirement_view_model.dart';
+import 'models/add_yarn_requirement_view_model.dart';
 
 extension SpacingExtension on num {
   EdgeInsets get hPadding => EdgeInsets.symmetric(horizontal: toDouble());
@@ -13,6 +13,7 @@ extension SpacingExtension on num {
 
   Widget get vSpace => SizedBox(height: toDouble());
 }
+
 extension BuildContextExtension on BuildContext{
   Color get primaryColor=> Theme.of(this).primaryColor;
   Color get secondaryHeaderColor=> Theme.of(this).secondaryHeaderColor;
@@ -25,16 +26,5 @@ extension BuildContextExtension on BuildContext{
   TextStyle? get caption=> Theme.of(this).textTheme.caption;
 }
 
-extension YarnRequirementIntentionExtension on YarnRequirementIntention {
-  String getString() {
-    if (this == YarnRequirementIntention.priceInquiry) {
-      return "Price Inquiry";
-    } else if (this == YarnRequirementIntention.purchase) {
-      return "Purchase";
-    } else {
-      return "None";
-    }
-  }
-}
 
 

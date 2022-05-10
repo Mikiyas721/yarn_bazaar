@@ -66,25 +66,26 @@ class _$FetchViscoseYarnsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchViscoseYarnsStateCopyWith<$Res>
+abstract class _$$_FetchViscoseYarnsStateCopyWith<$Res>
     implements $FetchViscoseYarnsStateCopyWith<$Res> {
-  factory _$FetchViscoseYarnsStateCopyWith(_FetchViscoseYarnsState value,
-          $Res Function(_FetchViscoseYarnsState) then) =
-      __$FetchViscoseYarnsStateCopyWithImpl<$Res>;
+  factory _$$_FetchViscoseYarnsStateCopyWith(_$_FetchViscoseYarnsState value,
+          $Res Function(_$_FetchViscoseYarnsState) then) =
+      __$$_FetchViscoseYarnsStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
 }
 
 /// @nodoc
-class __$FetchViscoseYarnsStateCopyWithImpl<$Res>
+class __$$_FetchViscoseYarnsStateCopyWithImpl<$Res>
     extends _$FetchViscoseYarnsStateCopyWithImpl<$Res>
-    implements _$FetchViscoseYarnsStateCopyWith<$Res> {
-  __$FetchViscoseYarnsStateCopyWithImpl(_FetchViscoseYarnsState _value,
-      $Res Function(_FetchViscoseYarnsState) _then)
-      : super(_value, (v) => _then(v as _FetchViscoseYarnsState));
+    implements _$$_FetchViscoseYarnsStateCopyWith<$Res> {
+  __$$_FetchViscoseYarnsStateCopyWithImpl(_$_FetchViscoseYarnsState _value,
+      $Res Function(_$_FetchViscoseYarnsState) _then)
+      : super(_value, (v) => _then(v as _$_FetchViscoseYarnsState));
 
   @override
-  _FetchViscoseYarnsState get _value => super._value as _FetchViscoseYarnsState;
+  _$_FetchViscoseYarnsState get _value =>
+      super._value as _$_FetchViscoseYarnsState;
 
   @override
   $Res call({
@@ -92,9 +93,9 @@ class __$FetchViscoseYarnsStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? error = freezed,
   }) {
-    return _then(_FetchViscoseYarnsState(
+    return _then(_$_FetchViscoseYarnsState(
       yarns: yarns == freezed
-          ? _value.yarns
+          ? _value._yarns
           : yarns // ignore: cast_nullable_to_non_nullable
               as List<Yarn>,
       isLoading: isLoading == freezed
@@ -139,8 +140,8 @@ class _$_FetchViscoseYarnsState implements _FetchViscoseYarnsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FetchViscoseYarnsState &&
-            const DeepCollectionEquality().equals(other.yarns, yarns) &&
+            other is _$_FetchViscoseYarnsState &&
+            const DeepCollectionEquality().equals(other._yarns, _yarns) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
@@ -148,14 +149,14 @@ class _$_FetchViscoseYarnsState implements _FetchViscoseYarnsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(yarns),
+      const DeepCollectionEquality().hash(_yarns),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
-  _$FetchViscoseYarnsStateCopyWith<_FetchViscoseYarnsState> get copyWith =>
-      __$FetchViscoseYarnsStateCopyWithImpl<_FetchViscoseYarnsState>(
+  _$$_FetchViscoseYarnsStateCopyWith<_$_FetchViscoseYarnsState> get copyWith =>
+      __$$_FetchViscoseYarnsStateCopyWithImpl<_$_FetchViscoseYarnsState>(
           this, _$identity);
 }
 
@@ -173,6 +174,6 @@ abstract class _FetchViscoseYarnsState implements FetchViscoseYarnsState {
   Option<Failure> get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FetchViscoseYarnsStateCopyWith<_FetchViscoseYarnsState> get copyWith =>
+  _$$_FetchViscoseYarnsStateCopyWith<_$_FetchViscoseYarnsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

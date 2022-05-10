@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddYarnRequirementState {
-  String get intention => throw _privateConstructorUsedError;
+  YarnRequirementIntention get intention => throw _privateConstructorUsedError;
   String get yarnQuality => throw _privateConstructorUsedError;
   String? get qualityDetails => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
@@ -32,7 +32,6 @@ mixin _$AddYarnRequirementState {
   String? get additionalComment => throw _privateConstructorUsedError;
   bool get wantToTestReport => throw _privateConstructorUsedError;
   bool get hasSubmitted => throw _privateConstructorUsedError;
-  bool get isAdding => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddYarnRequirementStateCopyWith<AddYarnRequirementState> get copyWith =>
@@ -45,7 +44,7 @@ abstract class $AddYarnRequirementStateCopyWith<$Res> {
           $Res Function(AddYarnRequirementState) then) =
       _$AddYarnRequirementStateCopyWithImpl<$Res>;
   $Res call(
-      {String intention,
+      {YarnRequirementIntention intention,
       String yarnQuality,
       String? qualityDetails,
       String color,
@@ -57,8 +56,7 @@ abstract class $AddYarnRequirementStateCopyWith<$Res> {
       String sendRequirementTo,
       String? additionalComment,
       bool wantToTestReport,
-      bool hasSubmitted,
-      bool isAdding});
+      bool hasSubmitted});
 }
 
 /// @nodoc
@@ -85,13 +83,12 @@ class _$AddYarnRequirementStateCopyWithImpl<$Res>
     Object? additionalComment = freezed,
     Object? wantToTestReport = freezed,
     Object? hasSubmitted = freezed,
-    Object? isAdding = freezed,
   }) {
     return _then(_value.copyWith(
       intention: intention == freezed
           ? _value.intention
           : intention // ignore: cast_nullable_to_non_nullable
-              as String,
+              as YarnRequirementIntention,
       yarnQuality: yarnQuality == freezed
           ? _value.yarnQuality
           : yarnQuality // ignore: cast_nullable_to_non_nullable
@@ -140,23 +137,19 @@ class _$AddYarnRequirementStateCopyWithImpl<$Res>
           ? _value.hasSubmitted
           : hasSubmitted // ignore: cast_nullable_to_non_nullable
               as bool,
-      isAdding: isAdding == freezed
-          ? _value.isAdding
-          : isAdding // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$AddYarnRequirementStateCopyWith<$Res>
+abstract class _$$_AddYarnRequirementStateCopyWith<$Res>
     implements $AddYarnRequirementStateCopyWith<$Res> {
-  factory _$AddYarnRequirementStateCopyWith(_AddYarnRequirementState value,
-          $Res Function(_AddYarnRequirementState) then) =
-      __$AddYarnRequirementStateCopyWithImpl<$Res>;
+  factory _$$_AddYarnRequirementStateCopyWith(_$_AddYarnRequirementState value,
+          $Res Function(_$_AddYarnRequirementState) then) =
+      __$$_AddYarnRequirementStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String intention,
+      {YarnRequirementIntention intention,
       String yarnQuality,
       String? qualityDetails,
       String color,
@@ -168,21 +161,20 @@ abstract class _$AddYarnRequirementStateCopyWith<$Res>
       String sendRequirementTo,
       String? additionalComment,
       bool wantToTestReport,
-      bool hasSubmitted,
-      bool isAdding});
+      bool hasSubmitted});
 }
 
 /// @nodoc
-class __$AddYarnRequirementStateCopyWithImpl<$Res>
+class __$$_AddYarnRequirementStateCopyWithImpl<$Res>
     extends _$AddYarnRequirementStateCopyWithImpl<$Res>
-    implements _$AddYarnRequirementStateCopyWith<$Res> {
-  __$AddYarnRequirementStateCopyWithImpl(_AddYarnRequirementState _value,
-      $Res Function(_AddYarnRequirementState) _then)
-      : super(_value, (v) => _then(v as _AddYarnRequirementState));
+    implements _$$_AddYarnRequirementStateCopyWith<$Res> {
+  __$$_AddYarnRequirementStateCopyWithImpl(_$_AddYarnRequirementState _value,
+      $Res Function(_$_AddYarnRequirementState) _then)
+      : super(_value, (v) => _then(v as _$_AddYarnRequirementState));
 
   @override
-  _AddYarnRequirementState get _value =>
-      super._value as _AddYarnRequirementState;
+  _$_AddYarnRequirementState get _value =>
+      super._value as _$_AddYarnRequirementState;
 
   @override
   $Res call({
@@ -199,13 +191,12 @@ class __$AddYarnRequirementStateCopyWithImpl<$Res>
     Object? additionalComment = freezed,
     Object? wantToTestReport = freezed,
     Object? hasSubmitted = freezed,
-    Object? isAdding = freezed,
   }) {
-    return _then(_AddYarnRequirementState(
+    return _then(_$_AddYarnRequirementState(
       intention: intention == freezed
           ? _value.intention
           : intention // ignore: cast_nullable_to_non_nullable
-              as String,
+              as YarnRequirementIntention,
       yarnQuality: yarnQuality == freezed
           ? _value.yarnQuality
           : yarnQuality // ignore: cast_nullable_to_non_nullable
@@ -253,10 +244,6 @@ class __$AddYarnRequirementStateCopyWithImpl<$Res>
       hasSubmitted: hasSubmitted == freezed
           ? _value.hasSubmitted
           : hasSubmitted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isAdding: isAdding == freezed
-          ? _value.isAdding
-          : isAdding // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -278,11 +265,10 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
       required this.sendRequirementTo,
       this.additionalComment,
       required this.wantToTestReport,
-      required this.hasSubmitted,
-      required this.isAdding});
+      required this.hasSubmitted});
 
   @override
-  final String intention;
+  final YarnRequirementIntention intention;
   @override
   final String yarnQuality;
   @override
@@ -307,19 +293,17 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
   final bool wantToTestReport;
   @override
   final bool hasSubmitted;
-  @override
-  final bool isAdding;
 
   @override
   String toString() {
-    return 'AddYarnRequirementState(intention: $intention, yarnQuality: $yarnQuality, qualityDetails: $qualityDetails, color: $color, quantityInKgs: $quantityInKgs, deliveryArea: $deliveryArea, deliveryPeriod: $deliveryPeriod, paymentTerms: $paymentTerms, inquiryClosesWithin: $inquiryClosesWithin, sendRequirementTo: $sendRequirementTo, additionalComment: $additionalComment, wantToTestReport: $wantToTestReport, hasSubmitted: $hasSubmitted, isAdding: $isAdding)';
+    return 'AddYarnRequirementState(intention: $intention, yarnQuality: $yarnQuality, qualityDetails: $qualityDetails, color: $color, quantityInKgs: $quantityInKgs, deliveryArea: $deliveryArea, deliveryPeriod: $deliveryPeriod, paymentTerms: $paymentTerms, inquiryClosesWithin: $inquiryClosesWithin, sendRequirementTo: $sendRequirementTo, additionalComment: $additionalComment, wantToTestReport: $wantToTestReport, hasSubmitted: $hasSubmitted)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AddYarnRequirementState &&
+            other is _$_AddYarnRequirementState &&
             const DeepCollectionEquality().equals(other.intention, intention) &&
             const DeepCollectionEquality()
                 .equals(other.yarnQuality, yarnQuality) &&
@@ -343,8 +327,7 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
             const DeepCollectionEquality()
                 .equals(other.wantToTestReport, wantToTestReport) &&
             const DeepCollectionEquality()
-                .equals(other.hasSubmitted, hasSubmitted) &&
-            const DeepCollectionEquality().equals(other.isAdding, isAdding));
+                .equals(other.hasSubmitted, hasSubmitted));
   }
 
   @override
@@ -362,19 +345,19 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
       const DeepCollectionEquality().hash(sendRequirementTo),
       const DeepCollectionEquality().hash(additionalComment),
       const DeepCollectionEquality().hash(wantToTestReport),
-      const DeepCollectionEquality().hash(hasSubmitted),
-      const DeepCollectionEquality().hash(isAdding));
+      const DeepCollectionEquality().hash(hasSubmitted));
 
   @JsonKey(ignore: true)
   @override
-  _$AddYarnRequirementStateCopyWith<_AddYarnRequirementState> get copyWith =>
-      __$AddYarnRequirementStateCopyWithImpl<_AddYarnRequirementState>(
-          this, _$identity);
+  _$$_AddYarnRequirementStateCopyWith<_$_AddYarnRequirementState>
+      get copyWith =>
+          __$$_AddYarnRequirementStateCopyWithImpl<_$_AddYarnRequirementState>(
+              this, _$identity);
 }
 
 abstract class _AddYarnRequirementState implements AddYarnRequirementState {
   const factory _AddYarnRequirementState(
-      {required final String intention,
+      {required final YarnRequirementIntention intention,
       required final String yarnQuality,
       final String? qualityDetails,
       required final String color,
@@ -386,11 +369,10 @@ abstract class _AddYarnRequirementState implements AddYarnRequirementState {
       required final String sendRequirementTo,
       final String? additionalComment,
       required final bool wantToTestReport,
-      required final bool hasSubmitted,
-      required final bool isAdding}) = _$_AddYarnRequirementState;
+      required final bool hasSubmitted}) = _$_AddYarnRequirementState;
 
   @override
-  String get intention => throw _privateConstructorUsedError;
+  YarnRequirementIntention get intention => throw _privateConstructorUsedError;
   @override
   String get yarnQuality => throw _privateConstructorUsedError;
   @override
@@ -419,9 +401,7 @@ abstract class _AddYarnRequirementState implements AddYarnRequirementState {
   @override
   bool get hasSubmitted => throw _privateConstructorUsedError;
   @override
-  bool get isAdding => throw _privateConstructorUsedError;
-  @override
   @JsonKey(ignore: true)
-  _$AddYarnRequirementStateCopyWith<_AddYarnRequirementState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_AddYarnRequirementStateCopyWith<_$_AddYarnRequirementState>
+      get copyWith => throw _privateConstructorUsedError;
 }

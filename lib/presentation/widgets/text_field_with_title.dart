@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class TextFieldWithTitle extends StatelessWidget {
   final String title;

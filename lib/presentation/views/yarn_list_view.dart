@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/widgets/empty_error_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_loading_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/simple_list_view.dart';
-import 'package:yarn_bazaar/presentation/models/prices_view_model.dart';
+import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
-class PriceListView extends StatelessWidget {
-  final PricesViewModel pricesViewModel;
+class YarnListView extends StatelessWidget {
+  final YarnsViewModel pricesViewModel;
   final VoidCallback onReload;
-  final Function (PriceViewModel priceViewModel) onWatchlist;
-  final Function (PriceViewModel priceViewModel) onCompare;
-  final Function (PriceViewModel priceViewModel) onDetail;
-  final Function (PriceViewModel priceViewModel) onShare;
+  final Function (YarnViewModel priceViewModel) onWatchlist;
+  final Function (YarnViewModel priceViewModel) onCompare;
+  final Function (YarnViewModel priceViewModel) onDetail;
+  final Function (YarnViewModel priceViewModel) onShare;
 
-  const PriceListView({
+  const YarnListView({
     Key? key,
     required this.pricesViewModel,
     required this.onReload,
@@ -27,11 +27,11 @@ class PriceListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: MyExpansionPanelList<PriceViewModel>(
+      child: MyExpansionPanelList<YarnViewModel>(
           model: pricesViewModel,
           itemBuilder:
-              (BuildContext context, PriceViewModel priceViewModel, int index) {
-            return PriceView._(
+              (BuildContext context, YarnViewModel priceViewModel, int index) {
+            return YarnView._(
               priceViewModel: priceViewModel,
               onWatchlist: (){onWatchlist(priceViewModel);},
               onCompare: (){onCompare(priceViewModel);},
@@ -54,15 +54,15 @@ class PriceListView extends StatelessWidget {
   }
 }
 
-class PriceView extends ExpansionPanel {
-  final PriceViewModel priceViewModel;
+class YarnView extends ExpansionPanel {
+  final YarnViewModel priceViewModel;
   final VoidCallback onWatchlist;
   final VoidCallback onCompare;
   final VoidCallback onShare;
   final VoidCallback onDetail;
   final bool expanded;
 
-  PriceView._({
+  YarnView._({
     required this.priceViewModel,
     required this.onWatchlist,
     required this.onCompare,

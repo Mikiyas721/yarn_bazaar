@@ -1,12 +1,14 @@
 import 'package:yarn_bazaar/common/view_model.dart';
 
-class BuyerProfileViewModel extends ViewModel {
+class ProfileViewModel extends ViewModel {
+  final int selectedProfileIndex;
   final String imageUrl;
   final String username;
   final String workPlace;
   final double profileCompletedInPercent;
 
-  BuyerProfileViewModel({
+  ProfileViewModel({
+    required this.selectedProfileIndex,
     required this.imageUrl,
     required this.username,
     required this.workPlace,
@@ -15,19 +17,10 @@ class BuyerProfileViewModel extends ViewModel {
 
   @override
   List<Object?> get props => [
+    selectedProfileIndex,
     imageUrl,
     username,
     workPlace,
     profileCompletedInPercent,
   ];
-
-  //TODO remove after other layers have been setup
-  factory BuyerProfileViewModel.defaults() {
-    return BuyerProfileViewModel(
-        imageUrl: 'assets/images/avatar.png',
-        username: 'Uday Sachdeva',
-        workPlace: 'Sunshine enterprise',
-        profileCompletedInPercent: 30
-    );
-  }
 }

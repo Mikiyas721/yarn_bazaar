@@ -1,22 +1,24 @@
 import 'package:yarn_bazaar/common/view_model.dart';
 
 class EditBasicProfileViewModel extends ViewModel {
-  final String firstName;
+  final bool isLoadingSaved;
+  final String? firstName;
   final String? firstNameError;
-  final String lastName;
+  final String? lastName;
   final String? lastNameError;
-  final String inBusinessSince;
+  final String? inBusinessSince;
   final String? inBusinessSinceError;
-  final String primaryNumber;
-  final String country;
-  final String city;
-  final String email;
+  final String? primaryNumber;
+  final String? country;
+  final String? city;
+  final String? email;
   final String? emailError;
-  final String website;
+  final String? website;
   final String? websiteError;
   final bool isSaving;
 
   EditBasicProfileViewModel({
+    required this.isLoadingSaved,
     required this.firstName,
     this.firstNameError,
     required this.lastName,
@@ -35,6 +37,7 @@ class EditBasicProfileViewModel extends ViewModel {
 
   @override
   List<Object?> get props => [
+        isLoadingSaved,
         firstName,
         firstNameError,
         lastName,
@@ -51,17 +54,4 @@ class EditBasicProfileViewModel extends ViewModel {
         isSaving,
       ];
 
-  //TODO remove when controller setup
-  factory EditBasicProfileViewModel.defaults() {
-    return EditBasicProfileViewModel(
-        firstName: '',
-        lastName: '',
-        inBusinessSince: '',
-        primaryNumber: '+91 9914601110',
-        country: '',
-        city: '',
-        email: '',
-        website: '',
-        isSaving: false);
-  }
 }

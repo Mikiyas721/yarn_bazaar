@@ -53,13 +53,16 @@ class EditPasswordHasSubmittedEvent extends EditPasswordEvent {
   }
 }
 
-class EditPasswordIsSavingChangedEvent extends EditPasswordEvent {
-  final bool isSaving;
-
-  EditPasswordIsSavingChangedEvent(this.isSaving);
-
+class EditPasswordStartedSavingEvent extends EditPasswordEvent {
   @override
   Stream<EditPasswordState> handle(EditPasswordState currentState) async* {
-    yield currentState.copyWith(isSaving: isSaving);
+    yield currentState.copyWith(isSaving: true);
+  }
+}
+
+class EditPasswordStoppedSavingEvent extends EditPasswordEvent {
+  @override
+  Stream<EditPasswordState> handle(EditPasswordState currentState) async* {
+    yield currentState.copyWith(isSaving: false);
   }
 }

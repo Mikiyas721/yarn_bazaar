@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../extensions.dart';
+import '../ui_extensions.dart';
 
 class MyLoadingView extends StatelessWidget {
   final Color? color;

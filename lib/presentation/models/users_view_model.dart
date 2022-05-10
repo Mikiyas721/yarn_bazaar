@@ -1,45 +1,26 @@
 import 'package:yarn_bazaar/common/mixins/formatter_mixin.dart';
 import 'package:yarn_bazaar/common/view_model.dart';
 
-class DirectoriesViewModel extends SimpleListViewModel<DirectoryViewModel> {
-  DirectoriesViewModel({
-    required List<DirectoryViewModel> directoryList,
+class UsersViewModel extends SimpleListViewModel<UserViewModel> {
+  UsersViewModel({
+    required List<UserViewModel> users,
     required bool isLoading,
     required String? error,
   }) : super(
-          data: directoryList,
+          data: users,
           error: error,
           isLoading: isLoading,
         );
-
-  factory DirectoriesViewModel.defaults() {
-    return DirectoriesViewModel(
-      directoryList: [
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-        DirectoryViewModel.defaults(),
-      ],
-      isLoading: false,
-      error: null,
-    );
-  }
 }
 
-class DirectoryViewModel extends ViewModel with FormatterMixin {
+class UserViewModel extends ViewModel with FormatterMixin {
   final String companyName;
   final String location;
   final int numberOfYarnProducts;
   final String lastUpdated;
   final String sellerType;
 
-  DirectoryViewModel({
+  UserViewModel({
     required this.companyName,
     required this.location,
     required this.numberOfYarnProducts,
@@ -61,8 +42,8 @@ class DirectoryViewModel extends ViewModel with FormatterMixin {
   }
 
   //TODO remove after controllers have been setup
-  factory DirectoryViewModel.defaults() {
-    return DirectoryViewModel(
+  factory UserViewModel.defaults() {
+    return UserViewModel(
       companyName: 'Sarjan cotex PVT Ltd',
       location: 'Surat, India',
       numberOfYarnProducts: 2,

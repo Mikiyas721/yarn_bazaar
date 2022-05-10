@@ -91,11 +91,11 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SignInStateCopyWith<$Res>
+abstract class _$$_SignInStateCopyWith<$Res>
     implements $SignInStateCopyWith<$Res> {
-  factory _$SignInStateCopyWith(
-          _SignInState value, $Res Function(_SignInState) then) =
-      __$SignInStateCopyWithImpl<$Res>;
+  factory _$$_SignInStateCopyWith(
+          _$_SignInState value, $Res Function(_$_SignInState) then) =
+      __$$_SignInStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
@@ -107,14 +107,14 @@ abstract class _$SignInStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
-    implements _$SignInStateCopyWith<$Res> {
-  __$SignInStateCopyWithImpl(
-      _SignInState _value, $Res Function(_SignInState) _then)
-      : super(_value, (v) => _then(v as _SignInState));
+class __$$_SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
+    implements _$$_SignInStateCopyWith<$Res> {
+  __$$_SignInStateCopyWithImpl(
+      _$_SignInState _value, $Res Function(_$_SignInState) _then)
+      : super(_value, (v) => _then(v as _$_SignInState));
 
   @override
-  _SignInState get _value => super._value as _SignInState;
+  _$_SignInState get _value => super._value as _$_SignInState;
 
   @override
   $Res call({
@@ -125,7 +125,7 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
     Object? hasSubmittedCredentials = freezed,
     Object? isVerifyingCredentials = freezed,
   }) {
-    return _then(_SignInState(
+    return _then(_$_SignInState(
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -187,7 +187,7 @@ class _$_SignInState implements _SignInState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SignInState &&
+            other is _$_SignInState &&
             const DeepCollectionEquality()
                 .equals(other.phoneNumber, phoneNumber) &&
             const DeepCollectionEquality().equals(other.password, password) &&
@@ -213,8 +213,8 @@ class _$_SignInState implements _SignInState {
 
   @JsonKey(ignore: true)
   @override
-  _$SignInStateCopyWith<_SignInState> get copyWith =>
-      __$SignInStateCopyWithImpl<_SignInState>(this, _$identity);
+  _$$_SignInStateCopyWith<_$_SignInState> get copyWith =>
+      __$$_SignInStateCopyWithImpl<_$_SignInState>(this, _$identity);
 }
 
 abstract class _SignInState implements SignInState {
@@ -242,6 +242,6 @@ abstract class _SignInState implements SignInState {
   bool get isVerifyingCredentials => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SignInStateCopyWith<_SignInState> get copyWith =>
+  _$$_SignInStateCopyWith<_$_SignInState> get copyWith =>
       throw _privateConstructorUsedError;
 }

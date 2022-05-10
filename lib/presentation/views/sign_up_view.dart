@@ -3,7 +3,7 @@ import 'package:yarn_bazaar/presentation/models/sign_up_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/choice_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
-import '../extensions.dart';
+import '../ui_extensions.dart';
 
 class SignUpView extends StatelessWidget {
   final SignUpViewModel signUpViewModel;
@@ -20,11 +20,13 @@ class SignUpView extends StatelessWidget {
   final Function(String input) onOTP;
   final Function(int buttonIndex) onUserType;
   final Function(String otherUserType) onOtherUserType;
-  final Function(int categoryIndex) onYarnCategory;
+  final Function(int categoryIndex, bool isElevated) onYarnCategory;
   final Function(String firstName) onFirstName;
   final Function(String lastName) onLastName;
   final Function(String companyName) onCompanyName;
   final Function(String password) onPassword;
+
+  final List<String> categories;
 
   const SignUpView({
     Key? key,
@@ -47,6 +49,7 @@ class SignUpView extends StatelessWidget {
     required this.onLastName,
     required this.onCompanyName,
     required this.onPassword,
+    required this.categories
   }) : super(key: key);
 
   @override
@@ -262,7 +265,7 @@ class SignUpView extends StatelessWidget {
               20.vSpace,
               ChoiceButton(
                 label: 'Yarn Manufacturer',
-                isSelected: signUpViewModel.userType == 'Yarn Manufacturer',
+                isSelected: signUpViewModel.userTypeIndex == 0,
                 onClick: (bool isElevated) {
                   if (!isElevated) onUserType(0);
                 },
@@ -270,7 +273,7 @@ class SignUpView extends StatelessWidget {
               10.vSpace,
               ChoiceButton(
                 label: 'Yarn Trader',
-                isSelected: signUpViewModel.userType == 'Yarn Trader',
+                isSelected: signUpViewModel.userTypeIndex == 1,
                 onClick: (bool isElevated) {
                   if (!isElevated) onUserType(1);
                 },
@@ -278,7 +281,7 @@ class SignUpView extends StatelessWidget {
               10.vSpace,
               ChoiceButton(
                 label: 'Yarn Broker',
-                isSelected: signUpViewModel.userType == 'Yarn Broker',
+                isSelected: signUpViewModel.userTypeIndex == 2,
                 onClick: (bool isElevated) {
                   if (!isElevated) onUserType(2);
                 },
@@ -286,7 +289,7 @@ class SignUpView extends StatelessWidget {
               10.vSpace,
               ChoiceButton(
                 label: 'Fabric Manufacturer',
-                isSelected: signUpViewModel.userType == 'Fabric Manufacturer',
+                isSelected: signUpViewModel.userTypeIndex == 3,
                 onClick: (bool isElevated) {
                   if (!isElevated) onUserType(3);
                 },
@@ -294,12 +297,12 @@ class SignUpView extends StatelessWidget {
               10.vSpace,
               ChoiceButton(
                 label: 'Other',
-                isSelected: signUpViewModel.userType == 'Other',
+                isSelected: signUpViewModel.userTypeIndex == 4,
                 onClick: (bool isElevated) {
                   if (!isElevated) onUserType(4);
                 },
               ),
-              signUpViewModel.userType == 'Other'
+              signUpViewModel.userTypeIndex == 4
                   ? TextField(
                       onChanged: onOtherUserType,
                     )
@@ -329,7 +332,7 @@ class SignUpView extends StatelessWidget {
                   label: categories[index],
                   isSelected: signUpViewModel.yarnCategorySelected[index],
                   onClick: (bool isElevated) {
-                    if (!isElevated) onYarnCategory(index);
+                    onYarnCategory(index, isElevated);
                   },
                 );
               },
@@ -381,18 +384,3 @@ class SignUpView extends StatelessWidget {
     );
   }
 }
-
-final categories = [
-  'Cotton',
-  'Texturise',
-  'PSF',
-  'PC',
-  'PV',
-  'Viscose',
-  'CP',
-  'Linen',
-  'Modal',
-  'Rayon',
-  'Fancy',
-  'Worsted Wool',
-];

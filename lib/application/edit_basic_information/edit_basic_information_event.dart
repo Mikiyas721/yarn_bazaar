@@ -2,6 +2,20 @@ part of 'edit_basic_information_bloc.dart';
 
 abstract class EditBasicInformationEvent extends BlocEvent<EditBasicInformationState> {}
 
+class EditBasicInformationStartedLoadingSavedEvent extends EditBasicInformationEvent {
+  @override
+  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
+    yield currentState.copyWith(isLoadingSaved: true);
+  }
+}
+
+class EditBasicInformationStoppedLoadingSavedEvent extends EditBasicInformationEvent {
+  @override
+  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
+    yield currentState.copyWith(isLoadingSaved: false);
+  }
+}
+
 class EditBasicInformationFirstNameChangedEvent extends EditBasicInformationEvent {
   final String name;
 
@@ -97,13 +111,16 @@ class EditBasicInformationSubmittedEvent extends EditBasicInformationEvent {
   }
 }
 
-class EditBasicInformationIsSavingChangedEvent extends EditBasicInformationEvent {
-  final bool isSaving;
-
-  EditBasicInformationIsSavingChangedEvent(this.isSaving);
-
+class EditBasicInformationStartedSavingEvent extends EditBasicInformationEvent {
   @override
   Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(isSaving: isSaving);
+    yield currentState.copyWith(isSaving: true);
+  }
+}
+
+class EditBasicInformationStoppedSavingEvent extends EditBasicInformationEvent {
+  @override
+  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
+    yield currentState.copyWith(isSaving: false);
   }
 }

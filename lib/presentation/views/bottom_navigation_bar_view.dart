@@ -29,25 +29,8 @@ class BottomNavigationBarView extends StatelessWidget {
       selectedItemColor: Theme.of(context).primaryColor,
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
-      onTap: onItemSelected ??
-          (int index) {
-            onNavigate(context, index);
-          },
+      onTap: onItemSelected
     );
   }
 
-  //TODO move to controller
-  onNavigate(BuildContext context, int index) {
-    if (index == 0) {
-      Navigator.pushReplacementNamed(context, '/homePage');
-    } else if (index == 1) {
-      Navigator.pushReplacementNamed(context, '/priceListPage');
-    } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, '/directoryPage');
-    } else if (index == 3) {
-      Navigator.pushReplacementNamed(context, '/watchlistPage');
-    } else if (index == 4) {
-      Navigator.pushReplacementNamed(context, '/profilePage');
-    }
-  }
 }

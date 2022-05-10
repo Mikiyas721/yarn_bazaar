@@ -160,4 +160,8 @@ mixin DateTimeMixin {
       return hour - 12;
     }
   }
+
+  Future delay(int seconds)async{
+    return await Future.delayed(Duration(seconds: seconds));
+  }
 }

@@ -45,7 +45,7 @@ class YarnBazaar extends StatelessWidget {
           colorScheme: Theme.of(context)
               .colorScheme
               .copyWith(primary: const Color(0xFFFF9F10))),
-      initialRoute: '/homePage',
+      initialRoute: '/',
       routes: routes,
       onGenerateRoute: (RouteSettings settings) {
         return null;

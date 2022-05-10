@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'my_image_view.dart';
-import '../extensions.dart';
+import '../ui_extensions.dart';
 
 class EmptyErrorView extends StatelessWidget {
   final dynamic image;

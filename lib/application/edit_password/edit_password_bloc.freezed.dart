@@ -92,11 +92,11 @@ class _$EditPasswordStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$EditPasswordStateCopyWith<$Res>
+abstract class _$$_EditPasswordStateCopyWith<$Res>
     implements $EditPasswordStateCopyWith<$Res> {
-  factory _$EditPasswordStateCopyWith(
-          _EditPasswordState value, $Res Function(_EditPasswordState) then) =
-      __$EditPasswordStateCopyWithImpl<$Res>;
+  factory _$$_EditPasswordStateCopyWith(_$_EditPasswordState value,
+          $Res Function(_$_EditPasswordState) then) =
+      __$$_EditPasswordStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Either<PasswordFailure, Password> oldPassword,
@@ -108,15 +108,15 @@ abstract class _$EditPasswordStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$EditPasswordStateCopyWithImpl<$Res>
+class __$$_EditPasswordStateCopyWithImpl<$Res>
     extends _$EditPasswordStateCopyWithImpl<$Res>
-    implements _$EditPasswordStateCopyWith<$Res> {
-  __$EditPasswordStateCopyWithImpl(
-      _EditPasswordState _value, $Res Function(_EditPasswordState) _then)
-      : super(_value, (v) => _then(v as _EditPasswordState));
+    implements _$$_EditPasswordStateCopyWith<$Res> {
+  __$$_EditPasswordStateCopyWithImpl(
+      _$_EditPasswordState _value, $Res Function(_$_EditPasswordState) _then)
+      : super(_value, (v) => _then(v as _$_EditPasswordState));
 
   @override
-  _EditPasswordState get _value => super._value as _EditPasswordState;
+  _$_EditPasswordState get _value => super._value as _$_EditPasswordState;
 
   @override
   $Res call({
@@ -127,7 +127,7 @@ class __$EditPasswordStateCopyWithImpl<$Res>
     Object? hasSubmitted = freezed,
     Object? isSaving = freezed,
   }) {
-    return _then(_EditPasswordState(
+    return _then(_$_EditPasswordState(
       oldPassword: oldPassword == freezed
           ? _value.oldPassword
           : oldPassword // ignore: cast_nullable_to_non_nullable
@@ -189,7 +189,7 @@ class _$_EditPasswordState implements _EditPasswordState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _EditPasswordState &&
+            other is _$_EditPasswordState &&
             const DeepCollectionEquality()
                 .equals(other.oldPassword, oldPassword) &&
             const DeepCollectionEquality()
@@ -215,8 +215,9 @@ class _$_EditPasswordState implements _EditPasswordState {
 
   @JsonKey(ignore: true)
   @override
-  _$EditPasswordStateCopyWith<_EditPasswordState> get copyWith =>
-      __$EditPasswordStateCopyWithImpl<_EditPasswordState>(this, _$identity);
+  _$$_EditPasswordStateCopyWith<_$_EditPasswordState> get copyWith =>
+      __$$_EditPasswordStateCopyWithImpl<_$_EditPasswordState>(
+          this, _$identity);
 }
 
 abstract class _EditPasswordState implements EditPasswordState {
@@ -244,6 +245,6 @@ abstract class _EditPasswordState implements EditPasswordState {
   bool get isSaving => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EditPasswordStateCopyWith<_EditPasswordState> get copyWith =>
+  _$$_EditPasswordStateCopyWith<_$_EditPasswordState> get copyWith =>
       throw _privateConstructorUsedError;
 }

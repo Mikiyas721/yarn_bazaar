@@ -66,25 +66,25 @@ class _$FetchAllUsersStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchAllUsersStateCopyWith<$Res>
+abstract class _$$_FetchAllUsersStateCopyWith<$Res>
     implements $FetchAllUsersStateCopyWith<$Res> {
-  factory _$FetchAllUsersStateCopyWith(
-          _FetchAllUsersState value, $Res Function(_FetchAllUsersState) then) =
-      __$FetchAllUsersStateCopyWithImpl<$Res>;
+  factory _$$_FetchAllUsersStateCopyWith(_$_FetchAllUsersState value,
+          $Res Function(_$_FetchAllUsersState) then) =
+      __$$_FetchAllUsersStateCopyWithImpl<$Res>;
   @override
   $Res call({List<User> users, bool isLoading, Option<Failure> error});
 }
 
 /// @nodoc
-class __$FetchAllUsersStateCopyWithImpl<$Res>
+class __$$_FetchAllUsersStateCopyWithImpl<$Res>
     extends _$FetchAllUsersStateCopyWithImpl<$Res>
-    implements _$FetchAllUsersStateCopyWith<$Res> {
-  __$FetchAllUsersStateCopyWithImpl(
-      _FetchAllUsersState _value, $Res Function(_FetchAllUsersState) _then)
-      : super(_value, (v) => _then(v as _FetchAllUsersState));
+    implements _$$_FetchAllUsersStateCopyWith<$Res> {
+  __$$_FetchAllUsersStateCopyWithImpl(
+      _$_FetchAllUsersState _value, $Res Function(_$_FetchAllUsersState) _then)
+      : super(_value, (v) => _then(v as _$_FetchAllUsersState));
 
   @override
-  _FetchAllUsersState get _value => super._value as _FetchAllUsersState;
+  _$_FetchAllUsersState get _value => super._value as _$_FetchAllUsersState;
 
   @override
   $Res call({
@@ -92,9 +92,9 @@ class __$FetchAllUsersStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? error = freezed,
   }) {
-    return _then(_FetchAllUsersState(
+    return _then(_$_FetchAllUsersState(
       users: users == freezed
-          ? _value.users
+          ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
               as List<User>,
       isLoading: isLoading == freezed
@@ -139,8 +139,8 @@ class _$_FetchAllUsersState implements _FetchAllUsersState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FetchAllUsersState &&
-            const DeepCollectionEquality().equals(other.users, users) &&
+            other is _$_FetchAllUsersState &&
+            const DeepCollectionEquality().equals(other._users, _users) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
@@ -148,14 +148,15 @@ class _$_FetchAllUsersState implements _FetchAllUsersState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(users),
+      const DeepCollectionEquality().hash(_users),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
-  _$FetchAllUsersStateCopyWith<_FetchAllUsersState> get copyWith =>
-      __$FetchAllUsersStateCopyWithImpl<_FetchAllUsersState>(this, _$identity);
+  _$$_FetchAllUsersStateCopyWith<_$_FetchAllUsersState> get copyWith =>
+      __$$_FetchAllUsersStateCopyWithImpl<_$_FetchAllUsersState>(
+          this, _$identity);
 }
 
 abstract class _FetchAllUsersState implements FetchAllUsersState {
@@ -172,6 +173,6 @@ abstract class _FetchAllUsersState implements FetchAllUsersState {
   Option<Failure> get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FetchAllUsersStateCopyWith<_FetchAllUsersState> get copyWith =>
+  _$$_FetchAllUsersStateCopyWith<_$_FetchAllUsersState> get copyWith =>
       throw _privateConstructorUsedError;
 }

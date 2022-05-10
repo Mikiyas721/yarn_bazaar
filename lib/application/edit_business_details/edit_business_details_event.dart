@@ -2,6 +2,20 @@ part of 'edit_business_details_bloc.dart';
 
 abstract class EditBusinessDetailsEvent extends BlocEvent<EditBusinessDetailsState> {}
 
+class EditBusinessDetailsStartedLoadingSavedEvent extends EditBusinessDetailsEvent {
+  @override
+  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
+    yield currentState.copyWith(isLoadingSaved: true);
+  }
+}
+
+class EditBusinessDetailsStoppedLoadingSavedEvent extends EditBusinessDetailsEvent {
+  @override
+  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
+    yield currentState.copyWith(isLoadingSaved: false);
+  }
+}
+
 class EditBusinessDetailsCompanyNameChangedEvent extends EditBusinessDetailsEvent {
   final String companyName;
 
@@ -86,13 +100,16 @@ class EditBusinessDetailsSubmittedEvent extends EditBusinessDetailsEvent {
   }
 }
 
-class EditBusinessDetailsIsSavingChangedEvent extends EditBusinessDetailsEvent {
-  final bool isSaving;
-
-  EditBusinessDetailsIsSavingChangedEvent(this.isSaving);
-
+class EditBusinessDetailsStartedSavingEvent extends EditBusinessDetailsEvent {
   @override
   Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(isSaving: isSaving);
+    yield currentState.copyWith(isSaving: true);
+  }
+}
+
+class EditBusinessDetailsStoppedSavingEvent extends EditBusinessDetailsEvent {
+  @override
+  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
+    yield currentState.copyWith(isSaving: false);
   }
 }

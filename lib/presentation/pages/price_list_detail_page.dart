@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/models/directory_view_model.dart';
-import 'package:yarn_bazaar/presentation/models/prices_view_model.dart';
+import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
+import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/seller_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
 import 'package:yarn_bazaar/presentation/widgets/labeled_icon_button.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class PriceListDetailPage extends StatelessWidget {
   const PriceListDetailPage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class PriceListDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final priceViewModel =
-        ModalRoute.of(context)?.settings.arguments as PriceViewModel;
+        ModalRoute.of(context)?.settings.arguments as YarnViewModel;
     final size = MediaQuery.of(context).size;
     return DefaultTabController(
       length: 3,
@@ -176,7 +176,7 @@ class PriceListDetailPage extends StatelessWidget {
             ]),
           ),
           SellerView(
-            directoryViewModel: DirectoryViewModel.defaults(),
+            directoryViewModel: UserViewModel.defaults(),
             onWatchlist: () {},
             onShare: () {},
             onDetail: () {},

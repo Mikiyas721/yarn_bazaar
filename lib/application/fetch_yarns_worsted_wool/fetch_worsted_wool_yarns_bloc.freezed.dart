@@ -66,27 +66,28 @@ class _$FetchWorstedWoolYarnsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchWorstedWoolYarnsStateCopyWith<$Res>
+abstract class _$$_FetchWorstedWoolYarnsStateCopyWith<$Res>
     implements $FetchWorstedWoolYarnsStateCopyWith<$Res> {
-  factory _$FetchWorstedWoolYarnsStateCopyWith(
-          _FetchWorstedWoolYarnsState value,
-          $Res Function(_FetchWorstedWoolYarnsState) then) =
-      __$FetchWorstedWoolYarnsStateCopyWithImpl<$Res>;
+  factory _$$_FetchWorstedWoolYarnsStateCopyWith(
+          _$_FetchWorstedWoolYarnsState value,
+          $Res Function(_$_FetchWorstedWoolYarnsState) then) =
+      __$$_FetchWorstedWoolYarnsStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
 }
 
 /// @nodoc
-class __$FetchWorstedWoolYarnsStateCopyWithImpl<$Res>
+class __$$_FetchWorstedWoolYarnsStateCopyWithImpl<$Res>
     extends _$FetchWorstedWoolYarnsStateCopyWithImpl<$Res>
-    implements _$FetchWorstedWoolYarnsStateCopyWith<$Res> {
-  __$FetchWorstedWoolYarnsStateCopyWithImpl(_FetchWorstedWoolYarnsState _value,
-      $Res Function(_FetchWorstedWoolYarnsState) _then)
-      : super(_value, (v) => _then(v as _FetchWorstedWoolYarnsState));
+    implements _$$_FetchWorstedWoolYarnsStateCopyWith<$Res> {
+  __$$_FetchWorstedWoolYarnsStateCopyWithImpl(
+      _$_FetchWorstedWoolYarnsState _value,
+      $Res Function(_$_FetchWorstedWoolYarnsState) _then)
+      : super(_value, (v) => _then(v as _$_FetchWorstedWoolYarnsState));
 
   @override
-  _FetchWorstedWoolYarnsState get _value =>
-      super._value as _FetchWorstedWoolYarnsState;
+  _$_FetchWorstedWoolYarnsState get _value =>
+      super._value as _$_FetchWorstedWoolYarnsState;
 
   @override
   $Res call({
@@ -94,9 +95,9 @@ class __$FetchWorstedWoolYarnsStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? error = freezed,
   }) {
-    return _then(_FetchWorstedWoolYarnsState(
+    return _then(_$_FetchWorstedWoolYarnsState(
       yarns: yarns == freezed
-          ? _value.yarns
+          ? _value._yarns
           : yarns // ignore: cast_nullable_to_non_nullable
               as List<Yarn>,
       isLoading: isLoading == freezed
@@ -141,8 +142,8 @@ class _$_FetchWorstedWoolYarnsState implements _FetchWorstedWoolYarnsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FetchWorstedWoolYarnsState &&
-            const DeepCollectionEquality().equals(other.yarns, yarns) &&
+            other is _$_FetchWorstedWoolYarnsState &&
+            const DeepCollectionEquality().equals(other._yarns, _yarns) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
@@ -150,15 +151,15 @@ class _$_FetchWorstedWoolYarnsState implements _FetchWorstedWoolYarnsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(yarns),
+      const DeepCollectionEquality().hash(_yarns),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
-  _$FetchWorstedWoolYarnsStateCopyWith<_FetchWorstedWoolYarnsState>
-      get copyWith => __$FetchWorstedWoolYarnsStateCopyWithImpl<
-          _FetchWorstedWoolYarnsState>(this, _$identity);
+  _$$_FetchWorstedWoolYarnsStateCopyWith<_$_FetchWorstedWoolYarnsState>
+      get copyWith => __$$_FetchWorstedWoolYarnsStateCopyWithImpl<
+          _$_FetchWorstedWoolYarnsState>(this, _$identity);
 }
 
 abstract class _FetchWorstedWoolYarnsState
@@ -176,6 +177,6 @@ abstract class _FetchWorstedWoolYarnsState
   Option<Failure> get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FetchWorstedWoolYarnsStateCopyWith<_FetchWorstedWoolYarnsState>
+  _$$_FetchWorstedWoolYarnsStateCopyWith<_$_FetchWorstedWoolYarnsState>
       get copyWith => throw _privateConstructorUsedError;
 }

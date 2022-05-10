@@ -84,6 +84,7 @@ class BankDetails extends Entity {
   }
 
   static Option<BankDetails> createFromInput({
+    required String id,
     String? accountName,
     String? accountNumber,
     String? iFSCCode,

@@ -1,23 +1,25 @@
 import 'package:yarn_bazaar/common/view_model.dart';
 
 class EditBankDetailViewModel extends ViewModel {
-  final String accountName;
+  final bool isLoadingSaved;
+  final String? accountName;
   final String? accountNameError;
-  final String accountNumber;
+  final String? accountNumber;
   final String? accountNumberError;
-  final String ifscCode;
+  final String? ifscCode;
   final String? ifscCodeError;
-  final String bankName;
+  final String? bankName;
   final String? bankNameError;
-  final String bankBranch;
+  final String? bankBranch;
   final String? bankBranchError;
-  final String bankState;
+  final String? bankState;
   final String? bankStateError;
-  final String bankCity;
+  final String? bankCity;
   final String? bankCityError;
   final bool isSaving;
 
   EditBankDetailViewModel({
+    required this.isLoadingSaved,
     required this.accountName,
     this.accountNameError,
     required this.accountNumber,
@@ -37,6 +39,7 @@ class EditBankDetailViewModel extends ViewModel {
 
   @override
   List<Object?> get props => [
+        isLoadingSaved,
         accountName,
         accountNameError,
         accountNumber,
@@ -53,17 +56,4 @@ class EditBankDetailViewModel extends ViewModel {
         bankCityError,
         isSaving,
       ];
-
-  factory EditBankDetailViewModel.defaults() {
-    return EditBankDetailViewModel(
-      accountName: '',
-      accountNumber: '',
-      ifscCode: '',
-      bankName: '',
-      bankBranch: '',
-      bankState: '',
-      bankCity: '',
-      isSaving: false,
-    );
-  }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class ChoiceButton extends StatelessWidget {
   final String label;
@@ -23,7 +23,7 @@ class ChoiceButton extends StatelessWidget {
         ? isSelected
             ? ElevatedButton(
                 onPressed: () {
-                  onClick(isSelected);
+                  onClick(!isSelected);
                 },
                 child: Text(label),
                 style: ElevatedButton.styleFrom(
@@ -32,7 +32,7 @@ class ChoiceButton extends StatelessWidget {
               )
             : OutlinedButton(
                 onPressed: () {
-                  onClick(isSelected);
+                  onClick(!isSelected);
                 },
                 child: Text(label),
                 style: OutlinedButton.styleFrom(
@@ -41,7 +41,7 @@ class ChoiceButton extends StatelessWidget {
               )
         : OutlinedButton(
             onPressed: () {
-              onClick(isSelected);
+              onClick(!isSelected);
             },
             child: isSelected
                 ? Row(

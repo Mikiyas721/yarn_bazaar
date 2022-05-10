@@ -77,25 +77,24 @@ class SignUpUserEnteredOTPChangedEvent extends SignUpEvent {
 }
 
 class SignUpUserTypeChangedEvent extends SignUpEvent {
-  final String userTypeChanged;
+  final UserType userType;
 
-  SignUpUserTypeChangedEvent(this.userTypeChanged);
+  SignUpUserTypeChangedEvent(this.userType);
 
   @override
   Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(userType: UserType.create(userTypeChanged));
+    yield currentState.copyWith(userType: userType);
   }
 }
 
 class SignUpOtherUserTypeChangedEvent extends SignUpEvent {
-  final String otherUserTypeChanged;
+  final String otherUserType;
 
-  SignUpOtherUserTypeChangedEvent(this.otherUserTypeChanged);
+  SignUpOtherUserTypeChangedEvent(this.otherUserType);
 
   @override
   Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(
-        otherUserType: UserType.create(otherUserTypeChanged));
+    yield currentState.copyWith(otherUserType: OtherUserType.create(otherUserType));
   }
 }
 
@@ -107,7 +106,7 @@ class SignUpSubmittedUserTypeEvent extends SignUpEvent {
 }
 
 class SignUpSelectedCategoryChangedEvent extends SignUpEvent {
-  final List<String> selectedCategory;
+  final List<bool> selectedCategory;
 
   SignUpSelectedCategoryChangedEvent(this.selectedCategory);
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/edit_business_detail_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 
 class EditBusinessDetailView extends StatelessWidget {

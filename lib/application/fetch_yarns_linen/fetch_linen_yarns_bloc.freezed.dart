@@ -66,25 +66,25 @@ class _$FetchLinenYarnsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchLinenYarnsStateCopyWith<$Res>
+abstract class _$$_FetchLinenYarnsStateCopyWith<$Res>
     implements $FetchLinenYarnsStateCopyWith<$Res> {
-  factory _$FetchLinenYarnsStateCopyWith(_FetchLinenYarnsState value,
-          $Res Function(_FetchLinenYarnsState) then) =
-      __$FetchLinenYarnsStateCopyWithImpl<$Res>;
+  factory _$$_FetchLinenYarnsStateCopyWith(_$_FetchLinenYarnsState value,
+          $Res Function(_$_FetchLinenYarnsState) then) =
+      __$$_FetchLinenYarnsStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
 }
 
 /// @nodoc
-class __$FetchLinenYarnsStateCopyWithImpl<$Res>
+class __$$_FetchLinenYarnsStateCopyWithImpl<$Res>
     extends _$FetchLinenYarnsStateCopyWithImpl<$Res>
-    implements _$FetchLinenYarnsStateCopyWith<$Res> {
-  __$FetchLinenYarnsStateCopyWithImpl(
-      _FetchLinenYarnsState _value, $Res Function(_FetchLinenYarnsState) _then)
-      : super(_value, (v) => _then(v as _FetchLinenYarnsState));
+    implements _$$_FetchLinenYarnsStateCopyWith<$Res> {
+  __$$_FetchLinenYarnsStateCopyWithImpl(_$_FetchLinenYarnsState _value,
+      $Res Function(_$_FetchLinenYarnsState) _then)
+      : super(_value, (v) => _then(v as _$_FetchLinenYarnsState));
 
   @override
-  _FetchLinenYarnsState get _value => super._value as _FetchLinenYarnsState;
+  _$_FetchLinenYarnsState get _value => super._value as _$_FetchLinenYarnsState;
 
   @override
   $Res call({
@@ -92,9 +92,9 @@ class __$FetchLinenYarnsStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? error = freezed,
   }) {
-    return _then(_FetchLinenYarnsState(
+    return _then(_$_FetchLinenYarnsState(
       yarns: yarns == freezed
-          ? _value.yarns
+          ? _value._yarns
           : yarns // ignore: cast_nullable_to_non_nullable
               as List<Yarn>,
       isLoading: isLoading == freezed
@@ -139,8 +139,8 @@ class _$_FetchLinenYarnsState implements _FetchLinenYarnsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FetchLinenYarnsState &&
-            const DeepCollectionEquality().equals(other.yarns, yarns) &&
+            other is _$_FetchLinenYarnsState &&
+            const DeepCollectionEquality().equals(other._yarns, _yarns) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
@@ -148,14 +148,14 @@ class _$_FetchLinenYarnsState implements _FetchLinenYarnsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(yarns),
+      const DeepCollectionEquality().hash(_yarns),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
-  _$FetchLinenYarnsStateCopyWith<_FetchLinenYarnsState> get copyWith =>
-      __$FetchLinenYarnsStateCopyWithImpl<_FetchLinenYarnsState>(
+  _$$_FetchLinenYarnsStateCopyWith<_$_FetchLinenYarnsState> get copyWith =>
+      __$$_FetchLinenYarnsStateCopyWithImpl<_$_FetchLinenYarnsState>(
           this, _$identity);
 }
 
@@ -173,6 +173,6 @@ abstract class _FetchLinenYarnsState implements FetchLinenYarnsState {
   Option<Failure> get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FetchLinenYarnsStateCopyWith<_FetchLinenYarnsState> get copyWith =>
+  _$$_FetchLinenYarnsStateCopyWith<_$_FetchLinenYarnsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

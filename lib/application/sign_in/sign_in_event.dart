@@ -53,13 +53,16 @@ class SignInSubmittedCredentialsEvent extends SignInEvent {
   }
 }
 
-class SignInIsVerifyingCredentialsChangedEvent extends SignInEvent {
-  final bool isVerifying;
-
-  SignInIsVerifyingCredentialsChangedEvent(this.isVerifying);
-
+class SignInVerifyingCredentialsStartedEvent extends SignInEvent {
   @override
   Stream<SignInState> handle(SignInState currentState) async* {
-    yield currentState.copyWith(isVerifyingCredentials: isVerifying);
+    yield currentState.copyWith(isVerifyingCredentials: true);
+  }
+}
+
+class SignInVerifyingCredentialsStoppedEvent extends SignInEvent {
+  @override
+  Stream<SignInState> handle(SignInState currentState) async* {
+    yield currentState.copyWith(isVerifyingCredentials: false);
   }
 }

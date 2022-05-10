@@ -1,22 +1,24 @@
 import 'package:yarn_bazaar/common/view_model.dart';
 
 class EditBusinessDetailViewModel extends ViewModel {
-  final String companyName;
+  final bool isLoadingSaved;
+  final String? companyName;
   final String? companyNameError;
-  final String accountType;
-  final String address;
+  final String? accountType;
+  final String? address;
   final String? addressError;
-  final String completeAddress;
+  final String? completeAddress;
   final String? completeAddressError;
-  final String gstNo;
+  final String? gstNo;
   final String? gstNoError;
-  final String tanNo;
+  final String? tanNo;
   final String? tanNoError;
-  final String panNo;
+  final String? panNo;
   final String? panNoError;
   final bool isSaving;
 
   EditBusinessDetailViewModel({
+    required this.isLoadingSaved,
     required this.companyName,
     this.companyNameError,
     required this.accountType,
@@ -35,6 +37,7 @@ class EditBusinessDetailViewModel extends ViewModel {
 
   @override
   List<Object?> get props => [
+        isLoadingSaved,
         companyName,
         companyNameError,
         accountType,
@@ -50,18 +53,4 @@ class EditBusinessDetailViewModel extends ViewModel {
         panNoError,
         isSaving,
       ];
-
-  //TODO remove after controller
-  factory EditBusinessDetailViewModel.defaults() {
-    return EditBusinessDetailViewModel(
-      companyName: '',
-      accountType: '',
-      address: '',
-      completeAddress: '',
-      gstNo: '',
-      tanNo: '',
-      panNo: '',
-      isSaving: false
-    );
-  }
 }

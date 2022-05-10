@@ -1,9 +1,9 @@
 part of 'edit_basic_information_bloc.dart';
 
 @freezed
-abstract class EditBasicInformationState extends BlocState
-    with _$EditBasicInformationState {
+abstract class EditBasicInformationState extends BlocState with _$EditBasicInformationState {
   const factory EditBasicInformationState({
+    required bool isLoadingSaved,
     required Either<NameFailure, Name> firstName,
     required Either<NameFailure, Name> lastName,
     required Either<YearFailure, Year> inBusinessSince,
@@ -17,6 +17,7 @@ abstract class EditBasicInformationState extends BlocState
   }) = _EditBasicInformationState;
 
   factory EditBasicInformationState.initial() => EditBasicInformationState(
+        isLoadingSaved: true,
         firstName: Name.create(''),
         lastName: Name.create(''),
         inBusinessSince: Year.create(''),

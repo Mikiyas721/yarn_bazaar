@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/composed_yarn_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class ComposedYarnView extends StatelessWidget {
   final ComposedYarnViewModel composedYarnViewModel;

@@ -4,7 +4,7 @@ import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 
 class SignInView extends StatelessWidget {
   final SignInViewModel signInViewModel;
-  final void Function(String phoneNumberOrEmail) onPhoneNumberOrEmail;
+  final void Function(String phoneNumber) onPhoneNumber;
   final void Function(String onPassword) onPassword;
   final void Function(bool show) onShowHidePassword;
   final VoidCallback onForgotPassword;
@@ -13,7 +13,7 @@ class SignInView extends StatelessWidget {
   const SignInView({
     Key? key,
     required this.signInViewModel,
-    required this.onPhoneNumberOrEmail,
+    required this.onPhoneNumber,
     required this.onPassword,
     required this.onShowHidePassword,
     required this.onForgotPassword,
@@ -47,11 +47,11 @@ class SignInView extends StatelessWidget {
                 flex: 9,
                 child: TextField(
                   decoration: InputDecoration(
-                      errorText: signInViewModel.phoneNumberOrEmailError,
+                      errorText: signInViewModel.phoneNumberError,
                       hintText: 'Mobile Number or Email'),
                   controller: TextEditingController(
-                      text: signInViewModel.phoneNumberOrEmail),
-                  onChanged: onPhoneNumberOrEmail,
+                      text: signInViewModel.phoneNumber),
+                  onChanged: onPhoneNumber,
                 ))
           ],
         ),

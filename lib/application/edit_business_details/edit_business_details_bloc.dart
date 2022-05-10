@@ -13,7 +13,7 @@ part 'edit_business_details_state.dart';
 
 part 'edit_business_details_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class EditBusinessDetailsBloc extends Bloc<EditBusinessDetailsEvent, EditBusinessDetailsState> {
   EditBusinessDetailsBloc() : super(EditBusinessDetailsState.initial()) {
     on<EditBusinessDetailsEvent>((event, emit) {

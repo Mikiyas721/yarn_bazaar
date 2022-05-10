@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "761765534937",
+    "project_id": "yarn-bazaar-5420b",
+    "storage_bucket": "yarn-bazaar-5420b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761765534937:android:d1c80fd6ad6fa2381272c8",
+        "android_client_info": {
+          "package_name": "com.coolapps.yarn_bazzar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761765534937-nuftd9359l8mkupnuhqnur0tuus0n7se.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coolapps.yarn_bazzar",
+            "certificate_hash": "23c8ba193b343ec8e9608ab1b1efa59305be676f"
+          }
+        },
+        {
+          "client_id": "761765534937-dgrp9hfjgq7ljhh14uv7ciast0imt8km.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6v0JhIHDrbfL3XTvs7l08lNOhYvjGF_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761765534937-dgrp9hfjgq7ljhh14uv7ciast0imt8km.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

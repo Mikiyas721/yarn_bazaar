@@ -4,5 +4,5 @@ import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 
 abstract class IBankDetailsRepo{
   Future<Either<Failure, BankDetails>> fetchUserBankDetails(String userId);
-  Future<Either<Failure, BankDetails>> updateUserBankDetails(String userId, BankDetails newBankDetails);
+  Future<Either<Failure, BankDetails>> updateUserBankDetails(BankDetails newBankDetails);
 }

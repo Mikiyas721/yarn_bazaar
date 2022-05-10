@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EditBasicInformationState {
+  bool get isLoadingSaved => throw _privateConstructorUsedError;
   Either<NameFailure, Name> get firstName => throw _privateConstructorUsedError;
   Either<NameFailure, Name> get lastName => throw _privateConstructorUsedError;
   Either<YearFailure, Year> get inBusinessSince =>
@@ -41,7 +42,8 @@ abstract class $EditBasicInformationStateCopyWith<$Res> {
           $Res Function(EditBasicInformationState) then) =
       _$EditBasicInformationStateCopyWithImpl<$Res>;
   $Res call(
-      {Either<NameFailure, Name> firstName,
+      {bool isLoadingSaved,
+      Either<NameFailure, Name> firstName,
       Either<NameFailure, Name> lastName,
       Either<YearFailure, Year> inBusinessSince,
       Either<PhoneNumberFailure, PhoneNumber> primaryNumber,
@@ -64,6 +66,7 @@ class _$EditBasicInformationStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? isLoadingSaved = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? inBusinessSince = freezed,
@@ -76,6 +79,10 @@ class _$EditBasicInformationStateCopyWithImpl<$Res>
     Object? isSaving = freezed,
   }) {
     return _then(_value.copyWith(
+      isLoadingSaved: isLoadingSaved == freezed
+          ? _value.isLoadingSaved
+          : isLoadingSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -121,14 +128,16 @@ class _$EditBasicInformationStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$EditBasicInformationStateCopyWith<$Res>
+abstract class _$$_EditBasicInformationStateCopyWith<$Res>
     implements $EditBasicInformationStateCopyWith<$Res> {
-  factory _$EditBasicInformationStateCopyWith(_EditBasicInformationState value,
-          $Res Function(_EditBasicInformationState) then) =
-      __$EditBasicInformationStateCopyWithImpl<$Res>;
+  factory _$$_EditBasicInformationStateCopyWith(
+          _$_EditBasicInformationState value,
+          $Res Function(_$_EditBasicInformationState) then) =
+      __$$_EditBasicInformationStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Either<NameFailure, Name> firstName,
+      {bool isLoadingSaved,
+      Either<NameFailure, Name> firstName,
       Either<NameFailure, Name> lastName,
       Either<YearFailure, Year> inBusinessSince,
       Either<PhoneNumberFailure, PhoneNumber> primaryNumber,
@@ -141,19 +150,21 @@ abstract class _$EditBasicInformationStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$EditBasicInformationStateCopyWithImpl<$Res>
+class __$$_EditBasicInformationStateCopyWithImpl<$Res>
     extends _$EditBasicInformationStateCopyWithImpl<$Res>
-    implements _$EditBasicInformationStateCopyWith<$Res> {
-  __$EditBasicInformationStateCopyWithImpl(_EditBasicInformationState _value,
-      $Res Function(_EditBasicInformationState) _then)
-      : super(_value, (v) => _then(v as _EditBasicInformationState));
+    implements _$$_EditBasicInformationStateCopyWith<$Res> {
+  __$$_EditBasicInformationStateCopyWithImpl(
+      _$_EditBasicInformationState _value,
+      $Res Function(_$_EditBasicInformationState) _then)
+      : super(_value, (v) => _then(v as _$_EditBasicInformationState));
 
   @override
-  _EditBasicInformationState get _value =>
-      super._value as _EditBasicInformationState;
+  _$_EditBasicInformationState get _value =>
+      super._value as _$_EditBasicInformationState;
 
   @override
   $Res call({
+    Object? isLoadingSaved = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? inBusinessSince = freezed,
@@ -165,7 +176,11 @@ class __$EditBasicInformationStateCopyWithImpl<$Res>
     Object? hasSubmitted = freezed,
     Object? isSaving = freezed,
   }) {
-    return _then(_EditBasicInformationState(
+    return _then(_$_EditBasicInformationState(
+      isLoadingSaved: isLoadingSaved == freezed
+          ? _value.isLoadingSaved
+          : isLoadingSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -214,7 +229,8 @@ class __$EditBasicInformationStateCopyWithImpl<$Res>
 
 class _$_EditBasicInformationState implements _EditBasicInformationState {
   const _$_EditBasicInformationState(
-      {required this.firstName,
+      {required this.isLoadingSaved,
+      required this.firstName,
       required this.lastName,
       required this.inBusinessSince,
       required this.primaryNumber,
@@ -225,6 +241,8 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
       required this.hasSubmitted,
       required this.isSaving});
 
+  @override
+  final bool isLoadingSaved;
   @override
   final Either<NameFailure, Name> firstName;
   @override
@@ -248,14 +266,16 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
 
   @override
   String toString() {
-    return 'EditBasicInformationState(firstName: $firstName, lastName: $lastName, inBusinessSince: $inBusinessSince, primaryNumber: $primaryNumber, country: $country, city: $city, email: $email, website: $website, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
+    return 'EditBasicInformationState(isLoadingSaved: $isLoadingSaved, firstName: $firstName, lastName: $lastName, inBusinessSince: $inBusinessSince, primaryNumber: $primaryNumber, country: $country, city: $city, email: $email, website: $website, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _EditBasicInformationState &&
+            other is _$_EditBasicInformationState &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadingSaved, isLoadingSaved) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality()
@@ -274,6 +294,7 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(isLoadingSaved),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(inBusinessSince),
@@ -287,15 +308,15 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
 
   @JsonKey(ignore: true)
   @override
-  _$EditBasicInformationStateCopyWith<_EditBasicInformationState>
-      get copyWith =>
-          __$EditBasicInformationStateCopyWithImpl<_EditBasicInformationState>(
-              this, _$identity);
+  _$$_EditBasicInformationStateCopyWith<_$_EditBasicInformationState>
+      get copyWith => __$$_EditBasicInformationStateCopyWithImpl<
+          _$_EditBasicInformationState>(this, _$identity);
 }
 
 abstract class _EditBasicInformationState implements EditBasicInformationState {
   const factory _EditBasicInformationState(
-      {required final Either<NameFailure, Name> firstName,
+      {required final bool isLoadingSaved,
+      required final Either<NameFailure, Name> firstName,
       required final Either<NameFailure, Name> lastName,
       required final Either<YearFailure, Year> inBusinessSince,
       required final Either<PhoneNumberFailure, PhoneNumber> primaryNumber,
@@ -306,6 +327,8 @@ abstract class _EditBasicInformationState implements EditBasicInformationState {
       required final bool hasSubmitted,
       required final bool isSaving}) = _$_EditBasicInformationState;
 
+  @override
+  bool get isLoadingSaved => throw _privateConstructorUsedError;
   @override
   Either<NameFailure, Name> get firstName => throw _privateConstructorUsedError;
   @override
@@ -331,6 +354,6 @@ abstract class _EditBasicInformationState implements EditBasicInformationState {
   bool get isSaving => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EditBasicInformationStateCopyWith<_EditBasicInformationState>
+  _$$_EditBasicInformationStateCopyWith<_$_EditBasicInformationState>
       get copyWith => throw _privateConstructorUsedError;
 }

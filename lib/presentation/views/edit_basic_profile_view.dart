@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:yarn_bazaar/presentation/models/edit_basic_profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class EditBasicProfileView extends StatelessWidget {
   final EditBasicProfileViewModel editBasicProfileViewModel;

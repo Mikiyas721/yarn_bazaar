@@ -27,32 +27,32 @@ class SharedPreferencesCacheDataSource implements CacheDataSource {
   }
 
   @override
-  Future saveBool(String key, bool value) {
+  Future<bool> saveBool(String key, bool value) {
     return pref.setBool(key, value);
   }
 
   @override
-  Future saveDouble(String key, double value) {
+  Future<bool> saveDouble(String key, double value) {
     return pref.setDouble(key, value);
   }
 
   @override
-  Future saveInt(String key, int value) {
+  Future<bool> saveInt(String key, int value) {
     return pref.setInt(key, value);
   }
 
   @override
-  Future saveList(String key, List value) {
+  Future<bool> saveList(String key, List value) {
     return pref.setString(key, jsonEncode(value));
   }
 
   @override
-  Future saveMap(String key, Map value) {
+  Future<bool> saveMap(String key, Map value) {
     return pref.setString(key, jsonEncode(value));
   }
 
   @override
-  Future saveString(String key, String value) {
+  Future<bool> saveString(String key, String value) {
     return pref.setString(key, value);
   }
 

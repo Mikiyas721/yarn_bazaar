@@ -66,25 +66,25 @@ class _$FetchPcYarnsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchPcYarnsStateCopyWith<$Res>
+abstract class _$$_FetchPcYarnsStateCopyWith<$Res>
     implements $FetchPcYarnsStateCopyWith<$Res> {
-  factory _$FetchPcYarnsStateCopyWith(
-          _FetchPcYarnsState value, $Res Function(_FetchPcYarnsState) then) =
-      __$FetchPcYarnsStateCopyWithImpl<$Res>;
+  factory _$$_FetchPcYarnsStateCopyWith(_$_FetchPcYarnsState value,
+          $Res Function(_$_FetchPcYarnsState) then) =
+      __$$_FetchPcYarnsStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
 }
 
 /// @nodoc
-class __$FetchPcYarnsStateCopyWithImpl<$Res>
+class __$$_FetchPcYarnsStateCopyWithImpl<$Res>
     extends _$FetchPcYarnsStateCopyWithImpl<$Res>
-    implements _$FetchPcYarnsStateCopyWith<$Res> {
-  __$FetchPcYarnsStateCopyWithImpl(
-      _FetchPcYarnsState _value, $Res Function(_FetchPcYarnsState) _then)
-      : super(_value, (v) => _then(v as _FetchPcYarnsState));
+    implements _$$_FetchPcYarnsStateCopyWith<$Res> {
+  __$$_FetchPcYarnsStateCopyWithImpl(
+      _$_FetchPcYarnsState _value, $Res Function(_$_FetchPcYarnsState) _then)
+      : super(_value, (v) => _then(v as _$_FetchPcYarnsState));
 
   @override
-  _FetchPcYarnsState get _value => super._value as _FetchPcYarnsState;
+  _$_FetchPcYarnsState get _value => super._value as _$_FetchPcYarnsState;
 
   @override
   $Res call({
@@ -92,9 +92,9 @@ class __$FetchPcYarnsStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? error = freezed,
   }) {
-    return _then(_FetchPcYarnsState(
+    return _then(_$_FetchPcYarnsState(
       yarns: yarns == freezed
-          ? _value.yarns
+          ? _value._yarns
           : yarns // ignore: cast_nullable_to_non_nullable
               as List<Yarn>,
       isLoading: isLoading == freezed
@@ -139,8 +139,8 @@ class _$_FetchPcYarnsState implements _FetchPcYarnsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FetchPcYarnsState &&
-            const DeepCollectionEquality().equals(other.yarns, yarns) &&
+            other is _$_FetchPcYarnsState &&
+            const DeepCollectionEquality().equals(other._yarns, _yarns) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
@@ -148,14 +148,15 @@ class _$_FetchPcYarnsState implements _FetchPcYarnsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(yarns),
+      const DeepCollectionEquality().hash(_yarns),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
-  _$FetchPcYarnsStateCopyWith<_FetchPcYarnsState> get copyWith =>
-      __$FetchPcYarnsStateCopyWithImpl<_FetchPcYarnsState>(this, _$identity);
+  _$$_FetchPcYarnsStateCopyWith<_$_FetchPcYarnsState> get copyWith =>
+      __$$_FetchPcYarnsStateCopyWithImpl<_$_FetchPcYarnsState>(
+          this, _$identity);
 }
 
 abstract class _FetchPcYarnsState implements FetchPcYarnsState {
@@ -172,6 +173,6 @@ abstract class _FetchPcYarnsState implements FetchPcYarnsState {
   Option<Failure> get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FetchPcYarnsStateCopyWith<_FetchPcYarnsState> get copyWith =>
+  _$$_FetchPcYarnsStateCopyWith<_$_FetchPcYarnsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

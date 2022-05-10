@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/widgets/empty_error_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_loading_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/simple_list_view.dart';
-import 'package:yarn_bazaar/presentation/models/directory_view_model.dart';
+import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class DirectoriesView extends StatelessWidget {
-  final DirectoriesViewModel directoriesViewModel;
+  final UsersViewModel directoriesViewModel;
   final VoidCallback onReload;
-  final Function(DirectoryViewModel directoryViewModel) onWatchlist;
-  final Function(DirectoryViewModel directoryViewModel) onDetail;
-  final Function(DirectoryViewModel directoryViewModel) onShare;
+  final Function(UserViewModel directoryViewModel) onWatchlist;
+  final Function(UserViewModel directoryViewModel) onDetail;
+  final Function(UserViewModel directoryViewModel) onShare;
 
   const DirectoriesView({
     Key? key,
@@ -25,10 +25,10 @@ class DirectoriesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: MyExpansionPanelList<DirectoryViewModel>(
+      child: MyExpansionPanelList<UserViewModel>(
           model: directoriesViewModel,
           itemBuilder: (BuildContext context,
-              DirectoryViewModel directoryViewModel, int index) {
+              UserViewModel directoryViewModel, int index) {
             return DirectoryView._(
               directoryViewModel: directoryViewModel,
               onWatchlist: () {
@@ -58,7 +58,7 @@ class DirectoriesView extends StatelessWidget {
 }
 
 class DirectoryView extends ExpansionPanel {
-  final DirectoryViewModel directoryViewModel;
+  final UserViewModel directoryViewModel;
   final VoidCallback onWatchlist;
   final VoidCallback onShare;
   final VoidCallback onDetail;

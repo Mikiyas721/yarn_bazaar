@@ -66,26 +66,27 @@ class _$FetchTexturizeYarnsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchTexturizeYarnsStateCopyWith<$Res>
+abstract class _$$_FetchTexturizeYarnsStateCopyWith<$Res>
     implements $FetchTexturizeYarnsStateCopyWith<$Res> {
-  factory _$FetchTexturizeYarnsStateCopyWith(_FetchTexturizeYarnsState value,
-          $Res Function(_FetchTexturizeYarnsState) then) =
-      __$FetchTexturizeYarnsStateCopyWithImpl<$Res>;
+  factory _$$_FetchTexturizeYarnsStateCopyWith(
+          _$_FetchTexturizeYarnsState value,
+          $Res Function(_$_FetchTexturizeYarnsState) then) =
+      __$$_FetchTexturizeYarnsStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
 }
 
 /// @nodoc
-class __$FetchTexturizeYarnsStateCopyWithImpl<$Res>
+class __$$_FetchTexturizeYarnsStateCopyWithImpl<$Res>
     extends _$FetchTexturizeYarnsStateCopyWithImpl<$Res>
-    implements _$FetchTexturizeYarnsStateCopyWith<$Res> {
-  __$FetchTexturizeYarnsStateCopyWithImpl(_FetchTexturizeYarnsState _value,
-      $Res Function(_FetchTexturizeYarnsState) _then)
-      : super(_value, (v) => _then(v as _FetchTexturizeYarnsState));
+    implements _$$_FetchTexturizeYarnsStateCopyWith<$Res> {
+  __$$_FetchTexturizeYarnsStateCopyWithImpl(_$_FetchTexturizeYarnsState _value,
+      $Res Function(_$_FetchTexturizeYarnsState) _then)
+      : super(_value, (v) => _then(v as _$_FetchTexturizeYarnsState));
 
   @override
-  _FetchTexturizeYarnsState get _value =>
-      super._value as _FetchTexturizeYarnsState;
+  _$_FetchTexturizeYarnsState get _value =>
+      super._value as _$_FetchTexturizeYarnsState;
 
   @override
   $Res call({
@@ -93,9 +94,9 @@ class __$FetchTexturizeYarnsStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? error = freezed,
   }) {
-    return _then(_FetchTexturizeYarnsState(
+    return _then(_$_FetchTexturizeYarnsState(
       yarns: yarns == freezed
-          ? _value.yarns
+          ? _value._yarns
           : yarns // ignore: cast_nullable_to_non_nullable
               as List<Yarn>,
       isLoading: isLoading == freezed
@@ -140,8 +141,8 @@ class _$_FetchTexturizeYarnsState implements _FetchTexturizeYarnsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FetchTexturizeYarnsState &&
-            const DeepCollectionEquality().equals(other.yarns, yarns) &&
+            other is _$_FetchTexturizeYarnsState &&
+            const DeepCollectionEquality().equals(other._yarns, _yarns) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
@@ -149,15 +150,15 @@ class _$_FetchTexturizeYarnsState implements _FetchTexturizeYarnsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(yarns),
+      const DeepCollectionEquality().hash(_yarns),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
-  _$FetchTexturizeYarnsStateCopyWith<_FetchTexturizeYarnsState> get copyWith =>
-      __$FetchTexturizeYarnsStateCopyWithImpl<_FetchTexturizeYarnsState>(
-          this, _$identity);
+  _$$_FetchTexturizeYarnsStateCopyWith<_$_FetchTexturizeYarnsState>
+      get copyWith => __$$_FetchTexturizeYarnsStateCopyWithImpl<
+          _$_FetchTexturizeYarnsState>(this, _$identity);
 }
 
 abstract class _FetchTexturizeYarnsState implements FetchTexturizeYarnsState {
@@ -174,6 +175,6 @@ abstract class _FetchTexturizeYarnsState implements FetchTexturizeYarnsState {
   Option<Failure> get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FetchTexturizeYarnsStateCopyWith<_FetchTexturizeYarnsState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_FetchTexturizeYarnsStateCopyWith<_$_FetchTexturizeYarnsState>
+      get copyWith => throw _privateConstructorUsedError;
 }

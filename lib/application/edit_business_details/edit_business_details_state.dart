@@ -3,6 +3,7 @@ part of 'edit_business_details_bloc.dart';
 @freezed
 abstract class EditBusinessDetailsState extends BlocState with _$EditBusinessDetailsState {
   const factory EditBusinessDetailsState({
+    required bool isLoadingSaved,
     required Either<CompanyNameFailure, CompanyName> companyName,
     required String accountType,
     String? address,
@@ -15,6 +16,7 @@ abstract class EditBusinessDetailsState extends BlocState with _$EditBusinessDet
   }) = _EditBusinessDetailsState;
 
   factory EditBusinessDetailsState.initial() => EditBusinessDetailsState(
+        isLoadingSaved: true,
         companyName: CompanyName.create(''),
         accountType: '',
         gstNo: GSTNumber.create(''),

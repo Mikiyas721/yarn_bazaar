@@ -11,14 +11,13 @@ import 'package:yarn_bazaar/infrastructure/dtos/business_details_dto.dart';
 class BusinessDetailsRepoImpl extends IBusinessDetailsRepo {
   final BusinessDetailsCrudDatasource _businessDetailsCrudDatasource;
 
-  final businessDetailsDtoMappingSimpleFailure = const SimpleFailure(
-      'Unable to map business details json from API to Domain');
+  final businessDetailsDtoMappingSimpleFailure =
+      const SimpleFailure('Unable to map business details json from API to Domain');
 
   BusinessDetailsRepoImpl(this._businessDetailsCrudDatasource);
 
   @override
-  Future<Either<Failure, BusinessDetails>> fetchUserBusinessDetails(
-      String userId) async {
+  Future<Either<Failure, BusinessDetails>> fetchUserBusinessDetails(String userId) async {
     final result = await _businessDetailsCrudDatasource.find(options: {
       "filter": {
         "where": {"userId": userId}
@@ -26,15 +25,20 @@ class BusinessDetailsRepoImpl extends IBusinessDetailsRepo {
     });
     return result.fold(
       (l) => left(l),
-      (r) => right(
-          IdDto.toDomainList<BusinessDetails, BusinessDetailsDto>(r).first),
+      (r) => right(IdDto.toDomainList<BusinessDetails, BusinessDetailsDto>(r).first),
     );
   }
 
   @override
   Future<Either<Failure, BusinessDetails>> updateUserBusinessDetails(
-      String userId, BusinessDetails newBankDetails) {
-    // TODO: implement updateUserBusinessDetails
-    throw UnimplementedError();
+      BusinessDetails newBusinessDetails) async {
+    final result = await _businessDetailsCrudDatasource
+        .update(BusinessDetailsDto.fromDomain(newBusinessDetails));
+    return result.fold(
+      (l) => left(l),
+      (r) => r
+          .toDomain()
+          .fold(() => left(businessDetailsDtoMappingSimpleFailure), (a) => right(a)),
+    );
   }
 }

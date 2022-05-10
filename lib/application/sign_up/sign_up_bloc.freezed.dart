@@ -19,18 +19,19 @@ mixin _$SignUpState {
   int get activeStepIndex => throw _privateConstructorUsedError;
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber =>
       throw _privateConstructorUsedError;
+  bool get hasSubmittedPhoneNumber => throw _privateConstructorUsedError;
   bool get hasAgreedToTerms => throw _privateConstructorUsedError;
   bool get isGeneratingOTP => throw _privateConstructorUsedError;
   bool get hasGeneratedOTP => throw _privateConstructorUsedError;
   String? get generatedOTP => throw _privateConstructorUsedError;
   Either<VerificationCodeFailure, VerificationCode> get userEnteredOTP =>
       throw _privateConstructorUsedError;
-  Either<UserTypeFailure, UserType> get userType =>
-      throw _privateConstructorUsedError;
-  Either<UserTypeFailure, UserType> get otherUserType =>
+  bool get hasSubmittedOTP => throw _privateConstructorUsedError;
+  UserType get userType => throw _privateConstructorUsedError;
+  Either<OtherUserTypeFailure, OtherUserType> get otherUserType =>
       throw _privateConstructorUsedError;
   bool get hasSubmittedUserType => throw _privateConstructorUsedError;
-  List<String> get yarnCategorySelected => throw _privateConstructorUsedError;
+  List<bool> get yarnCategorySelected => throw _privateConstructorUsedError;
   Either<NameFailure, Name> get firstName => throw _privateConstructorUsedError;
   Either<NameFailure, Name> get lastName => throw _privateConstructorUsedError;
   Either<CompanyNameFailure, CompanyName> get companyName =>
@@ -53,15 +54,17 @@ abstract class $SignUpStateCopyWith<$Res> {
   $Res call(
       {int activeStepIndex,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool hasSubmittedPhoneNumber,
       bool hasAgreedToTerms,
       bool isGeneratingOTP,
       bool hasGeneratedOTP,
       String? generatedOTP,
       Either<VerificationCodeFailure, VerificationCode> userEnteredOTP,
-      Either<UserTypeFailure, UserType> userType,
-      Either<UserTypeFailure, UserType> otherUserType,
+      bool hasSubmittedOTP,
+      UserType userType,
+      Either<OtherUserTypeFailure, OtherUserType> otherUserType,
       bool hasSubmittedUserType,
-      List<String> yarnCategorySelected,
+      List<bool> yarnCategorySelected,
       Either<NameFailure, Name> firstName,
       Either<NameFailure, Name> lastName,
       Either<CompanyNameFailure, CompanyName> companyName,
@@ -82,11 +85,13 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
   $Res call({
     Object? activeStepIndex = freezed,
     Object? phoneNumber = freezed,
+    Object? hasSubmittedPhoneNumber = freezed,
     Object? hasAgreedToTerms = freezed,
     Object? isGeneratingOTP = freezed,
     Object? hasGeneratedOTP = freezed,
     Object? generatedOTP = freezed,
     Object? userEnteredOTP = freezed,
+    Object? hasSubmittedOTP = freezed,
     Object? userType = freezed,
     Object? otherUserType = freezed,
     Object? hasSubmittedUserType = freezed,
@@ -107,6 +112,10 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as Either<PhoneNumberFailure, PhoneNumber>,
+      hasSubmittedPhoneNumber: hasSubmittedPhoneNumber == freezed
+          ? _value.hasSubmittedPhoneNumber
+          : hasSubmittedPhoneNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasAgreedToTerms: hasAgreedToTerms == freezed
           ? _value.hasAgreedToTerms
           : hasAgreedToTerms // ignore: cast_nullable_to_non_nullable
@@ -127,14 +136,18 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
           ? _value.userEnteredOTP
           : userEnteredOTP // ignore: cast_nullable_to_non_nullable
               as Either<VerificationCodeFailure, VerificationCode>,
+      hasSubmittedOTP: hasSubmittedOTP == freezed
+          ? _value.hasSubmittedOTP
+          : hasSubmittedOTP // ignore: cast_nullable_to_non_nullable
+              as bool,
       userType: userType == freezed
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
-              as Either<UserTypeFailure, UserType>,
+              as UserType,
       otherUserType: otherUserType == freezed
           ? _value.otherUserType
           : otherUserType // ignore: cast_nullable_to_non_nullable
-              as Either<UserTypeFailure, UserType>,
+              as Either<OtherUserTypeFailure, OtherUserType>,
       hasSubmittedUserType: hasSubmittedUserType == freezed
           ? _value.hasSubmittedUserType
           : hasSubmittedUserType // ignore: cast_nullable_to_non_nullable
@@ -142,7 +155,7 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
       yarnCategorySelected: yarnCategorySelected == freezed
           ? _value.yarnCategorySelected
           : yarnCategorySelected // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<bool>,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -172,24 +185,26 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SignUpStateCopyWith<$Res>
+abstract class _$$_SignUpStateCopyWith<$Res>
     implements $SignUpStateCopyWith<$Res> {
-  factory _$SignUpStateCopyWith(
-          _SignUpState value, $Res Function(_SignUpState) then) =
-      __$SignUpStateCopyWithImpl<$Res>;
+  factory _$$_SignUpStateCopyWith(
+          _$_SignUpState value, $Res Function(_$_SignUpState) then) =
+      __$$_SignUpStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {int activeStepIndex,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool hasSubmittedPhoneNumber,
       bool hasAgreedToTerms,
       bool isGeneratingOTP,
       bool hasGeneratedOTP,
       String? generatedOTP,
       Either<VerificationCodeFailure, VerificationCode> userEnteredOTP,
-      Either<UserTypeFailure, UserType> userType,
-      Either<UserTypeFailure, UserType> otherUserType,
+      bool hasSubmittedOTP,
+      UserType userType,
+      Either<OtherUserTypeFailure, OtherUserType> otherUserType,
       bool hasSubmittedUserType,
-      List<String> yarnCategorySelected,
+      List<bool> yarnCategorySelected,
       Either<NameFailure, Name> firstName,
       Either<NameFailure, Name> lastName,
       Either<CompanyNameFailure, CompanyName> companyName,
@@ -199,24 +214,26 @@ abstract class _$SignUpStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
-    implements _$SignUpStateCopyWith<$Res> {
-  __$SignUpStateCopyWithImpl(
-      _SignUpState _value, $Res Function(_SignUpState) _then)
-      : super(_value, (v) => _then(v as _SignUpState));
+class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
+    implements _$$_SignUpStateCopyWith<$Res> {
+  __$$_SignUpStateCopyWithImpl(
+      _$_SignUpState _value, $Res Function(_$_SignUpState) _then)
+      : super(_value, (v) => _then(v as _$_SignUpState));
 
   @override
-  _SignUpState get _value => super._value as _SignUpState;
+  _$_SignUpState get _value => super._value as _$_SignUpState;
 
   @override
   $Res call({
     Object? activeStepIndex = freezed,
     Object? phoneNumber = freezed,
+    Object? hasSubmittedPhoneNumber = freezed,
     Object? hasAgreedToTerms = freezed,
     Object? isGeneratingOTP = freezed,
     Object? hasGeneratedOTP = freezed,
     Object? generatedOTP = freezed,
     Object? userEnteredOTP = freezed,
+    Object? hasSubmittedOTP = freezed,
     Object? userType = freezed,
     Object? otherUserType = freezed,
     Object? hasSubmittedUserType = freezed,
@@ -228,7 +245,7 @@ class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
     Object? hasSubmittedUserInformation = freezed,
     Object? isAddingUser = freezed,
   }) {
-    return _then(_SignUpState(
+    return _then(_$_SignUpState(
       activeStepIndex: activeStepIndex == freezed
           ? _value.activeStepIndex
           : activeStepIndex // ignore: cast_nullable_to_non_nullable
@@ -237,6 +254,10 @@ class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as Either<PhoneNumberFailure, PhoneNumber>,
+      hasSubmittedPhoneNumber: hasSubmittedPhoneNumber == freezed
+          ? _value.hasSubmittedPhoneNumber
+          : hasSubmittedPhoneNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasAgreedToTerms: hasAgreedToTerms == freezed
           ? _value.hasAgreedToTerms
           : hasAgreedToTerms // ignore: cast_nullable_to_non_nullable
@@ -257,22 +278,26 @@ class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
           ? _value.userEnteredOTP
           : userEnteredOTP // ignore: cast_nullable_to_non_nullable
               as Either<VerificationCodeFailure, VerificationCode>,
+      hasSubmittedOTP: hasSubmittedOTP == freezed
+          ? _value.hasSubmittedOTP
+          : hasSubmittedOTP // ignore: cast_nullable_to_non_nullable
+              as bool,
       userType: userType == freezed
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
-              as Either<UserTypeFailure, UserType>,
+              as UserType,
       otherUserType: otherUserType == freezed
           ? _value.otherUserType
           : otherUserType // ignore: cast_nullable_to_non_nullable
-              as Either<UserTypeFailure, UserType>,
+              as Either<OtherUserTypeFailure, OtherUserType>,
       hasSubmittedUserType: hasSubmittedUserType == freezed
           ? _value.hasSubmittedUserType
           : hasSubmittedUserType // ignore: cast_nullable_to_non_nullable
               as bool,
       yarnCategorySelected: yarnCategorySelected == freezed
-          ? _value.yarnCategorySelected
+          ? _value._yarnCategorySelected
           : yarnCategorySelected // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<bool>,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -307,15 +332,17 @@ class _$_SignUpState implements _SignUpState {
   const _$_SignUpState(
       {required this.activeStepIndex,
       required this.phoneNumber,
+      required this.hasSubmittedPhoneNumber,
       required this.hasAgreedToTerms,
       required this.isGeneratingOTP,
       required this.hasGeneratedOTP,
       this.generatedOTP,
       required this.userEnteredOTP,
+      required this.hasSubmittedOTP,
       required this.userType,
       required this.otherUserType,
       required this.hasSubmittedUserType,
-      required final List<String> yarnCategorySelected,
+      required final List<bool> yarnCategorySelected,
       required this.firstName,
       required this.lastName,
       required this.companyName,
@@ -329,6 +356,8 @@ class _$_SignUpState implements _SignUpState {
   @override
   final Either<PhoneNumberFailure, PhoneNumber> phoneNumber;
   @override
+  final bool hasSubmittedPhoneNumber;
+  @override
   final bool hasAgreedToTerms;
   @override
   final bool isGeneratingOTP;
@@ -339,14 +368,16 @@ class _$_SignUpState implements _SignUpState {
   @override
   final Either<VerificationCodeFailure, VerificationCode> userEnteredOTP;
   @override
-  final Either<UserTypeFailure, UserType> userType;
+  final bool hasSubmittedOTP;
   @override
-  final Either<UserTypeFailure, UserType> otherUserType;
+  final UserType userType;
+  @override
+  final Either<OtherUserTypeFailure, OtherUserType> otherUserType;
   @override
   final bool hasSubmittedUserType;
-  final List<String> _yarnCategorySelected;
+  final List<bool> _yarnCategorySelected;
   @override
-  List<String> get yarnCategorySelected {
+  List<bool> get yarnCategorySelected {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_yarnCategorySelected);
   }
@@ -366,18 +397,20 @@ class _$_SignUpState implements _SignUpState {
 
   @override
   String toString() {
-    return 'SignUpState(activeStepIndex: $activeStepIndex, phoneNumber: $phoneNumber, hasAgreedToTerms: $hasAgreedToTerms, isGeneratingOTP: $isGeneratingOTP, hasGeneratedOTP: $hasGeneratedOTP, generatedOTP: $generatedOTP, userEnteredOTP: $userEnteredOTP, userType: $userType, otherUserType: $otherUserType, hasSubmittedUserType: $hasSubmittedUserType, yarnCategorySelected: $yarnCategorySelected, firstName: $firstName, lastName: $lastName, companyName: $companyName, password: $password, hasSubmittedUserInformation: $hasSubmittedUserInformation, isAddingUser: $isAddingUser)';
+    return 'SignUpState(activeStepIndex: $activeStepIndex, phoneNumber: $phoneNumber, hasSubmittedPhoneNumber: $hasSubmittedPhoneNumber, hasAgreedToTerms: $hasAgreedToTerms, isGeneratingOTP: $isGeneratingOTP, hasGeneratedOTP: $hasGeneratedOTP, generatedOTP: $generatedOTP, userEnteredOTP: $userEnteredOTP, hasSubmittedOTP: $hasSubmittedOTP, userType: $userType, otherUserType: $otherUserType, hasSubmittedUserType: $hasSubmittedUserType, yarnCategorySelected: $yarnCategorySelected, firstName: $firstName, lastName: $lastName, companyName: $companyName, password: $password, hasSubmittedUserInformation: $hasSubmittedUserInformation, isAddingUser: $isAddingUser)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SignUpState &&
+            other is _$_SignUpState &&
             const DeepCollectionEquality()
                 .equals(other.activeStepIndex, activeStepIndex) &&
             const DeepCollectionEquality()
                 .equals(other.phoneNumber, phoneNumber) &&
+            const DeepCollectionEquality().equals(
+                other.hasSubmittedPhoneNumber, hasSubmittedPhoneNumber) &&
             const DeepCollectionEquality()
                 .equals(other.hasAgreedToTerms, hasAgreedToTerms) &&
             const DeepCollectionEquality()
@@ -388,13 +421,15 @@ class _$_SignUpState implements _SignUpState {
                 .equals(other.generatedOTP, generatedOTP) &&
             const DeepCollectionEquality()
                 .equals(other.userEnteredOTP, userEnteredOTP) &&
+            const DeepCollectionEquality()
+                .equals(other.hasSubmittedOTP, hasSubmittedOTP) &&
             const DeepCollectionEquality().equals(other.userType, userType) &&
             const DeepCollectionEquality()
                 .equals(other.otherUserType, otherUserType) &&
             const DeepCollectionEquality()
                 .equals(other.hasSubmittedUserType, hasSubmittedUserType) &&
             const DeepCollectionEquality()
-                .equals(other.yarnCategorySelected, yarnCategorySelected) &&
+                .equals(other._yarnCategorySelected, _yarnCategorySelected) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality()
@@ -408,46 +443,51 @@ class _$_SignUpState implements _SignUpState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(activeStepIndex),
-      const DeepCollectionEquality().hash(phoneNumber),
-      const DeepCollectionEquality().hash(hasAgreedToTerms),
-      const DeepCollectionEquality().hash(isGeneratingOTP),
-      const DeepCollectionEquality().hash(hasGeneratedOTP),
-      const DeepCollectionEquality().hash(generatedOTP),
-      const DeepCollectionEquality().hash(userEnteredOTP),
-      const DeepCollectionEquality().hash(userType),
-      const DeepCollectionEquality().hash(otherUserType),
-      const DeepCollectionEquality().hash(hasSubmittedUserType),
-      const DeepCollectionEquality().hash(yarnCategorySelected),
-      const DeepCollectionEquality().hash(firstName),
-      const DeepCollectionEquality().hash(lastName),
-      const DeepCollectionEquality().hash(companyName),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(hasSubmittedUserInformation),
-      const DeepCollectionEquality().hash(isAddingUser));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(activeStepIndex),
+        const DeepCollectionEquality().hash(phoneNumber),
+        const DeepCollectionEquality().hash(hasSubmittedPhoneNumber),
+        const DeepCollectionEquality().hash(hasAgreedToTerms),
+        const DeepCollectionEquality().hash(isGeneratingOTP),
+        const DeepCollectionEquality().hash(hasGeneratedOTP),
+        const DeepCollectionEquality().hash(generatedOTP),
+        const DeepCollectionEquality().hash(userEnteredOTP),
+        const DeepCollectionEquality().hash(hasSubmittedOTP),
+        const DeepCollectionEquality().hash(userType),
+        const DeepCollectionEquality().hash(otherUserType),
+        const DeepCollectionEquality().hash(hasSubmittedUserType),
+        const DeepCollectionEquality().hash(_yarnCategorySelected),
+        const DeepCollectionEquality().hash(firstName),
+        const DeepCollectionEquality().hash(lastName),
+        const DeepCollectionEquality().hash(companyName),
+        const DeepCollectionEquality().hash(password),
+        const DeepCollectionEquality().hash(hasSubmittedUserInformation),
+        const DeepCollectionEquality().hash(isAddingUser)
+      ]);
 
   @JsonKey(ignore: true)
   @override
-  _$SignUpStateCopyWith<_SignUpState> get copyWith =>
-      __$SignUpStateCopyWithImpl<_SignUpState>(this, _$identity);
+  _$$_SignUpStateCopyWith<_$_SignUpState> get copyWith =>
+      __$$_SignUpStateCopyWithImpl<_$_SignUpState>(this, _$identity);
 }
 
 abstract class _SignUpState implements SignUpState {
   const factory _SignUpState(
       {required final int activeStepIndex,
       required final Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      required final bool hasSubmittedPhoneNumber,
       required final bool hasAgreedToTerms,
       required final bool isGeneratingOTP,
       required final bool hasGeneratedOTP,
       final String? generatedOTP,
       required final Either<VerificationCodeFailure, VerificationCode>
           userEnteredOTP,
-      required final Either<UserTypeFailure, UserType> userType,
-      required final Either<UserTypeFailure, UserType> otherUserType,
+      required final bool hasSubmittedOTP,
+      required final UserType userType,
+      required final Either<OtherUserTypeFailure, OtherUserType> otherUserType,
       required final bool hasSubmittedUserType,
-      required final List<String> yarnCategorySelected,
+      required final List<bool> yarnCategorySelected,
       required final Either<NameFailure, Name> firstName,
       required final Either<NameFailure, Name> lastName,
       required final Either<CompanyNameFailure, CompanyName> companyName,
@@ -461,6 +501,8 @@ abstract class _SignUpState implements SignUpState {
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber =>
       throw _privateConstructorUsedError;
   @override
+  bool get hasSubmittedPhoneNumber => throw _privateConstructorUsedError;
+  @override
   bool get hasAgreedToTerms => throw _privateConstructorUsedError;
   @override
   bool get isGeneratingOTP => throw _privateConstructorUsedError;
@@ -472,15 +514,16 @@ abstract class _SignUpState implements SignUpState {
   Either<VerificationCodeFailure, VerificationCode> get userEnteredOTP =>
       throw _privateConstructorUsedError;
   @override
-  Either<UserTypeFailure, UserType> get userType =>
-      throw _privateConstructorUsedError;
+  bool get hasSubmittedOTP => throw _privateConstructorUsedError;
   @override
-  Either<UserTypeFailure, UserType> get otherUserType =>
+  UserType get userType => throw _privateConstructorUsedError;
+  @override
+  Either<OtherUserTypeFailure, OtherUserType> get otherUserType =>
       throw _privateConstructorUsedError;
   @override
   bool get hasSubmittedUserType => throw _privateConstructorUsedError;
   @override
-  List<String> get yarnCategorySelected => throw _privateConstructorUsedError;
+  List<bool> get yarnCategorySelected => throw _privateConstructorUsedError;
   @override
   Either<NameFailure, Name> get firstName => throw _privateConstructorUsedError;
   @override
@@ -497,6 +540,6 @@ abstract class _SignUpState implements SignUpState {
   bool get isAddingUser => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SignUpStateCopyWith<_SignUpState> get copyWith =>
+  _$$_SignUpStateCopyWith<_$_SignUpState> get copyWith =>
       throw _privateConstructorUsedError;
 }

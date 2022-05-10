@@ -2,10 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/id_dto.dart';
+import 'package:yarn_bazaar/domain/entities/app_user.dart';
+import 'package:yarn_bazaar/domain/entities/credentials.dart';
 import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/ports/user_repo.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/user_cache_datasource.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/user_datasource.dart';
+import 'package:yarn_bazaar/infrastructure/dtos/app_user_dto.dart';
 import 'package:yarn_bazaar/infrastructure/dtos/user_dto.dart';
 
 @LazySingleton(as: IUserRepo)
@@ -77,17 +80,17 @@ class UserRepoImpl extends IUserRepo {
   }
 
   @override
-  Future<Option<User>> getCurrentLoggedInUser() {
+  Future<Option<AppUser>> getCurrentLoggedInUser() {
     return _userCacheDataSource.getMap(_userCacheDataSource.userCacheKey).then(
         (value) => value.flatMap(
-            (a) => UserDto.fromJson(a as Map<String, dynamic>).toDomain()));
+            (a) => AppUserDto.fromJson(a as Map<String, dynamic>).toDomain()));
   }
 
   @override
-  Future saveLoggedInUser(User user) {
+  Future<bool> cacheLoggedInUser(AppUser user) {
     return _userCacheDataSource.saveMap(
       _userCacheDataSource.userCacheKey,
-      UserDto.fromDomain(user).toJson(),
+      AppUserDto.fromDomain(user).toJson(),
     );
   }
 
@@ -101,5 +104,10 @@ class UserRepoImpl extends IUserRepo {
             (a) => right(a),
           ),
     );
+  }
+
+  @override
+  Future<Either<Failure, AppUser>> loginUser(Credentials credentials) {
+    throw UnimplementedError();
   }
 }

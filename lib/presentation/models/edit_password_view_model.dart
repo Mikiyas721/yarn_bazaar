@@ -1,10 +1,10 @@
 import 'package:yarn_bazaar/common/view_model.dart';
 
 class EditPasswordViewModel extends ViewModel {
-  final String oldPassword;
+  final String? oldPassword;
   final String? oldPasswordError;
   final bool isShowingOldPassword;
-  final String newPassword;
+  final String? newPassword;
   final String? newPasswordError;
   final bool isShowingNewPassword;
   final bool isSaving;
@@ -30,14 +30,4 @@ class EditPasswordViewModel extends ViewModel {
         isSaving,
       ];
 
-  //TODO remove when controller setup
-  factory EditPasswordViewModel.defaults() {
-    return EditPasswordViewModel(
-      oldPassword: '',
-      isShowingOldPassword: false,
-      newPassword: '',
-      isShowingNewPassword: false,
-      isSaving: false,
-    );
-  }
 }

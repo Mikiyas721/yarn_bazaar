@@ -120,6 +120,7 @@ class User extends Entity {
   }
 
   static Option<User> createFromInput({
+    String? id,
     String? imageUrl,
     String? firstName,
     String? lastName,

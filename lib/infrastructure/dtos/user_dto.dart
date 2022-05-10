@@ -73,7 +73,7 @@ class UserDto extends IdDto implements TimeStampedDto {
     return UserDto(
       id: user.id,
       imageUrl: user.imageUrl,
-      firstName: user.firstName.value,
+      firstName: user.firstName.value!,
       lastName: user.lastName?.value,
       phoneNumber: user.phoneNumber.value,
       country: user.country,

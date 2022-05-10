@@ -6,6 +6,7 @@ import 'package:yarn_bazaar/common/bloc/bloc_helpers.dart';
 import 'package:yarn_bazaar/domain/value_objects/delivery_area.dart';
 import 'package:yarn_bazaar/domain/value_objects/payment_terms.dart';
 import 'package:yarn_bazaar/domain/value_objects/quantity.dart';
+import 'package:yarn_bazaar/domain/value_objects/yarn_requirement_intention.dart';
 
 part 'add_yarn_requirement_event.dart';
 part 'add_yarn_requirement_state.dart';

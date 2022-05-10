@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/presentation/controllers/all_yarns_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/bottom_navigation_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/drawer_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
 import 'package:yarn_bazaar/presentation/models/bottom_navigation_bar_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
-import 'package:yarn_bazaar/presentation/models/prices_view_model.dart';
+import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:yarn_bazaar/presentation/views/drawer_view.dart';
-import 'package:yarn_bazaar/presentation/views/price_list_view.dart';
+import 'package:yarn_bazaar/presentation/views/yarn_list_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/search_field.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class PriceListPage extends StatelessWidget {
   const PriceListPage({Key? key}) : super(key: key);
@@ -31,12 +35,16 @@ class PriceListPage extends StatelessWidget {
     return DefaultTabController(
         length: tabs.length,
         child: Scaffold(
-          drawer: DrawerView(
-            drawerViewModel: DrawerViewModel.defaults(),
-            onEditAccount: () {},
-            onLogout: () {},
-            onDrawerItemClicked: (int itemIndex) {},
-          ),
+          drawer: ViewModelBuilder.withController<DrawerViewModel, MyDrawerController>(
+              create: () => MyDrawerController(context),
+              builder: (context, controller, viewModel) {
+                return DrawerView(
+                  drawerViewModel: viewModel!,
+                  onEditAccount: controller.onEditAccount,
+                  onLogout: controller.onLogout,
+                  onDrawerItemClicked: controller.onDrawerItemClicked,
+                );
+              }),
           appBar: AppBar(
             title: SearchField(
               onDiscardText: () {},
@@ -51,38 +59,42 @@ class PriceListPage extends StatelessWidget {
             ],
             bottom: TabBar(
               isScrollable: true,
-              labelPadding:
-                  const EdgeInsets.only(bottom: 10, right: 20, left: 20),
+              labelPadding: const EdgeInsets.only(bottom: 10, right: 20, left: 20),
               tabs: tabs,
               indicatorColor: context.primaryColor,
             ),
           ),
-          body: TabBarView(
-            children: List.filled(
-                tabs.length,
-                RefreshIndicator(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, right: 15, top: 15),
-                    child: PriceListView(
-                      pricesViewModel: PricesViewModel.defaults(),
-                      onReload: () {},
-                      onWatchlist: (PriceViewModel viewModel) {},
-                      onCompare: (PriceViewModel viewModel) {},
-                      onDetail: (PriceViewModel viewModel) {
-                        Navigator.pushNamed(context, '/priceListDetailPage',
-                            arguments: viewModel);
-                      },
-                      onShare: (PriceViewModel viewModel) {},
+          body: TabBarView(children: [
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
                     ),
-                  ),
-                  onRefresh: () async {},
-                )),
-          ),
-          bottomNavigationBar: BottomNavigationBarView(
-            bottomNavigationBarViewModel:
-                BottomNavigationBarViewModel(selectedItemIndex: 1),
-          ),
+                    onRefresh: controller.onRefresh,
+                  );
+                })
+            //TODO 11 more tabs remain
+          ]),
+          bottomNavigationBar: ViewModelBuilder.withController<BottomNavigationBarViewModel,
+              BottomNavigationController>(
+              create: () => BottomNavigationController(context),
+              onInit: (controller)=> controller.switchTo(1),
+              builder: (context, controller, viewModel) {
+                return BottomNavigationBarView(
+                  bottomNavigationBarViewModel: viewModel!,
+                  onItemSelected: controller.onNavigate,
+                );
+              }),
         ));
   }
 }

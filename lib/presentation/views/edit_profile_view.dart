@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/models/buyer_profile_view_model.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/models/edit_profile_view_model.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/presentation/widgets/navigate_button.dart';
 
 class EditProfileView extends StatelessWidget {
-  final BuyerProfileViewModel buyerProfileViewModel;
+  final EditProfileViewModel buyerProfileViewModel;
   final VoidCallback onBasicProfile;
   final VoidCallback onBusinessDetails;
   final VoidCallback onBankDetails;

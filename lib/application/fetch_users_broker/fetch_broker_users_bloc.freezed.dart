@@ -66,25 +66,26 @@ class _$FetchBrokerUsersStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchBrokerUsersStateCopyWith<$Res>
+abstract class _$$_FetchBrokerUsersStateCopyWith<$Res>
     implements $FetchBrokerUsersStateCopyWith<$Res> {
-  factory _$FetchBrokerUsersStateCopyWith(_FetchBrokerUsersState value,
-          $Res Function(_FetchBrokerUsersState) then) =
-      __$FetchBrokerUsersStateCopyWithImpl<$Res>;
+  factory _$$_FetchBrokerUsersStateCopyWith(_$_FetchBrokerUsersState value,
+          $Res Function(_$_FetchBrokerUsersState) then) =
+      __$$_FetchBrokerUsersStateCopyWithImpl<$Res>;
   @override
   $Res call({List<User> users, bool isLoading, Option<Failure> error});
 }
 
 /// @nodoc
-class __$FetchBrokerUsersStateCopyWithImpl<$Res>
+class __$$_FetchBrokerUsersStateCopyWithImpl<$Res>
     extends _$FetchBrokerUsersStateCopyWithImpl<$Res>
-    implements _$FetchBrokerUsersStateCopyWith<$Res> {
-  __$FetchBrokerUsersStateCopyWithImpl(_FetchBrokerUsersState _value,
-      $Res Function(_FetchBrokerUsersState) _then)
-      : super(_value, (v) => _then(v as _FetchBrokerUsersState));
+    implements _$$_FetchBrokerUsersStateCopyWith<$Res> {
+  __$$_FetchBrokerUsersStateCopyWithImpl(_$_FetchBrokerUsersState _value,
+      $Res Function(_$_FetchBrokerUsersState) _then)
+      : super(_value, (v) => _then(v as _$_FetchBrokerUsersState));
 
   @override
-  _FetchBrokerUsersState get _value => super._value as _FetchBrokerUsersState;
+  _$_FetchBrokerUsersState get _value =>
+      super._value as _$_FetchBrokerUsersState;
 
   @override
   $Res call({
@@ -92,9 +93,9 @@ class __$FetchBrokerUsersStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? error = freezed,
   }) {
-    return _then(_FetchBrokerUsersState(
+    return _then(_$_FetchBrokerUsersState(
       users: users == freezed
-          ? _value.users
+          ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
               as List<User>,
       isLoading: isLoading == freezed
@@ -139,8 +140,8 @@ class _$_FetchBrokerUsersState implements _FetchBrokerUsersState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FetchBrokerUsersState &&
-            const DeepCollectionEquality().equals(other.users, users) &&
+            other is _$_FetchBrokerUsersState &&
+            const DeepCollectionEquality().equals(other._users, _users) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
@@ -148,14 +149,14 @@ class _$_FetchBrokerUsersState implements _FetchBrokerUsersState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(users),
+      const DeepCollectionEquality().hash(_users),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
-  _$FetchBrokerUsersStateCopyWith<_FetchBrokerUsersState> get copyWith =>
-      __$FetchBrokerUsersStateCopyWithImpl<_FetchBrokerUsersState>(
+  _$$_FetchBrokerUsersStateCopyWith<_$_FetchBrokerUsersState> get copyWith =>
+      __$$_FetchBrokerUsersStateCopyWithImpl<_$_FetchBrokerUsersState>(
           this, _$identity);
 }
 
@@ -173,6 +174,6 @@ abstract class _FetchBrokerUsersState implements FetchBrokerUsersState {
   Option<Failure> get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FetchBrokerUsersStateCopyWith<_FetchBrokerUsersState> get copyWith =>
+  _$$_FetchBrokerUsersStateCopyWith<_$_FetchBrokerUsersState> get copyWith =>
       throw _privateConstructorUsedError;
 }

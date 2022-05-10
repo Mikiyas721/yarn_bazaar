@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/models/directory_view_model.dart';
+import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
-import 'package:yarn_bazaar/presentation/extensions.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class DirectoryDetailPage extends StatelessWidget {
   const DirectoryDetailPage({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class DirectoryDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final directoryViewModel =
-        ModalRoute.of(context)?.settings.arguments as DirectoryViewModel;
+        ModalRoute.of(context)?.settings.arguments as UserViewModel;
     final size = MediaQuery.of(context).size;
     return DefaultTabController(
       length: 3,

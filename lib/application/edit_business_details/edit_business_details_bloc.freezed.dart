@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EditBusinessDetailsState {
+  bool get isLoadingSaved => throw _privateConstructorUsedError;
   Either<CompanyNameFailure, CompanyName> get companyName =>
       throw _privateConstructorUsedError;
   String get accountType => throw _privateConstructorUsedError;
@@ -41,7 +42,8 @@ abstract class $EditBusinessDetailsStateCopyWith<$Res> {
           $Res Function(EditBusinessDetailsState) then) =
       _$EditBusinessDetailsStateCopyWithImpl<$Res>;
   $Res call(
-      {Either<CompanyNameFailure, CompanyName> companyName,
+      {bool isLoadingSaved,
+      Either<CompanyNameFailure, CompanyName> companyName,
       String accountType,
       String? address,
       String? completeAddress,
@@ -63,6 +65,7 @@ class _$EditBusinessDetailsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? isLoadingSaved = freezed,
     Object? companyName = freezed,
     Object? accountType = freezed,
     Object? address = freezed,
@@ -74,6 +77,10 @@ class _$EditBusinessDetailsStateCopyWithImpl<$Res>
     Object? isSaving = freezed,
   }) {
     return _then(_value.copyWith(
+      isLoadingSaved: isLoadingSaved == freezed
+          ? _value.isLoadingSaved
+          : isLoadingSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
       companyName: companyName == freezed
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
@@ -115,14 +122,16 @@ class _$EditBusinessDetailsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$EditBusinessDetailsStateCopyWith<$Res>
+abstract class _$$_EditBusinessDetailsStateCopyWith<$Res>
     implements $EditBusinessDetailsStateCopyWith<$Res> {
-  factory _$EditBusinessDetailsStateCopyWith(_EditBusinessDetailsState value,
-          $Res Function(_EditBusinessDetailsState) then) =
-      __$EditBusinessDetailsStateCopyWithImpl<$Res>;
+  factory _$$_EditBusinessDetailsStateCopyWith(
+          _$_EditBusinessDetailsState value,
+          $Res Function(_$_EditBusinessDetailsState) then) =
+      __$$_EditBusinessDetailsStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Either<CompanyNameFailure, CompanyName> companyName,
+      {bool isLoadingSaved,
+      Either<CompanyNameFailure, CompanyName> companyName,
       String accountType,
       String? address,
       String? completeAddress,
@@ -134,19 +143,20 @@ abstract class _$EditBusinessDetailsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$EditBusinessDetailsStateCopyWithImpl<$Res>
+class __$$_EditBusinessDetailsStateCopyWithImpl<$Res>
     extends _$EditBusinessDetailsStateCopyWithImpl<$Res>
-    implements _$EditBusinessDetailsStateCopyWith<$Res> {
-  __$EditBusinessDetailsStateCopyWithImpl(_EditBusinessDetailsState _value,
-      $Res Function(_EditBusinessDetailsState) _then)
-      : super(_value, (v) => _then(v as _EditBusinessDetailsState));
+    implements _$$_EditBusinessDetailsStateCopyWith<$Res> {
+  __$$_EditBusinessDetailsStateCopyWithImpl(_$_EditBusinessDetailsState _value,
+      $Res Function(_$_EditBusinessDetailsState) _then)
+      : super(_value, (v) => _then(v as _$_EditBusinessDetailsState));
 
   @override
-  _EditBusinessDetailsState get _value =>
-      super._value as _EditBusinessDetailsState;
+  _$_EditBusinessDetailsState get _value =>
+      super._value as _$_EditBusinessDetailsState;
 
   @override
   $Res call({
+    Object? isLoadingSaved = freezed,
     Object? companyName = freezed,
     Object? accountType = freezed,
     Object? address = freezed,
@@ -157,7 +167,11 @@ class __$EditBusinessDetailsStateCopyWithImpl<$Res>
     Object? hasSubmitted = freezed,
     Object? isSaving = freezed,
   }) {
-    return _then(_EditBusinessDetailsState(
+    return _then(_$_EditBusinessDetailsState(
+      isLoadingSaved: isLoadingSaved == freezed
+          ? _value.isLoadingSaved
+          : isLoadingSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
       companyName: companyName == freezed
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
@@ -202,7 +216,8 @@ class __$EditBusinessDetailsStateCopyWithImpl<$Res>
 
 class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
   const _$_EditBusinessDetailsState(
-      {required this.companyName,
+      {required this.isLoadingSaved,
+      required this.companyName,
       required this.accountType,
       this.address,
       this.completeAddress,
@@ -212,6 +227,8 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
       required this.hasSubmitted,
       required this.isSaving});
 
+  @override
+  final bool isLoadingSaved;
   @override
   final Either<CompanyNameFailure, CompanyName> companyName;
   @override
@@ -233,14 +250,16 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
 
   @override
   String toString() {
-    return 'EditBusinessDetailsState(companyName: $companyName, accountType: $accountType, address: $address, completeAddress: $completeAddress, gstNo: $gstNo, tanNo: $tanNo, panNo: $panNo, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
+    return 'EditBusinessDetailsState(isLoadingSaved: $isLoadingSaved, companyName: $companyName, accountType: $accountType, address: $address, completeAddress: $completeAddress, gstNo: $gstNo, tanNo: $tanNo, panNo: $panNo, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _EditBusinessDetailsState &&
+            other is _$_EditBusinessDetailsState &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadingSaved, isLoadingSaved) &&
             const DeepCollectionEquality()
                 .equals(other.companyName, companyName) &&
             const DeepCollectionEquality()
@@ -259,6 +278,7 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(isLoadingSaved),
       const DeepCollectionEquality().hash(companyName),
       const DeepCollectionEquality().hash(accountType),
       const DeepCollectionEquality().hash(address),
@@ -271,14 +291,15 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
 
   @JsonKey(ignore: true)
   @override
-  _$EditBusinessDetailsStateCopyWith<_EditBusinessDetailsState> get copyWith =>
-      __$EditBusinessDetailsStateCopyWithImpl<_EditBusinessDetailsState>(
-          this, _$identity);
+  _$$_EditBusinessDetailsStateCopyWith<_$_EditBusinessDetailsState>
+      get copyWith => __$$_EditBusinessDetailsStateCopyWithImpl<
+          _$_EditBusinessDetailsState>(this, _$identity);
 }
 
 abstract class _EditBusinessDetailsState implements EditBusinessDetailsState {
   const factory _EditBusinessDetailsState(
-      {required final Either<CompanyNameFailure, CompanyName> companyName,
+      {required final bool isLoadingSaved,
+      required final Either<CompanyNameFailure, CompanyName> companyName,
       required final String accountType,
       final String? address,
       final String? completeAddress,
@@ -288,6 +309,8 @@ abstract class _EditBusinessDetailsState implements EditBusinessDetailsState {
       required final bool hasSubmitted,
       required final bool isSaving}) = _$_EditBusinessDetailsState;
 
+  @override
+  bool get isLoadingSaved => throw _privateConstructorUsedError;
   @override
   Either<CompanyNameFailure, CompanyName> get companyName =>
       throw _privateConstructorUsedError;
@@ -312,6 +335,6 @@ abstract class _EditBusinessDetailsState implements EditBusinessDetailsState {
   bool get isSaving => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EditBusinessDetailsStateCopyWith<_EditBusinessDetailsState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_EditBusinessDetailsStateCopyWith<_$_EditBusinessDetailsState>
+      get copyWith => throw _privateConstructorUsedError;
 }

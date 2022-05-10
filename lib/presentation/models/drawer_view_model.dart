@@ -17,13 +17,4 @@ class DrawerViewModel extends ViewModel {
         username,
         workPlace,
       ];
-
-  //TODO remove after other layers have been setup
-  factory DrawerViewModel.defaults() {
-    return DrawerViewModel(
-      imageUrl: 'assets/images/avatar.png',
-      username: 'Uday Sachdeva',
-      workPlace: 'Sunshine enterprise',
-    );
-  }
 }
