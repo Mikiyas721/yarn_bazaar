@@ -8,8 +8,8 @@ class SignUpActiveIndexChangedEvent extends SignUpEvent {
   SignUpActiveIndexChangedEvent(this.activeIndex);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(activeStepIndex: activeIndex);
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(activeStepIndex: activeIndex);
   }
 }
 
@@ -19,8 +19,8 @@ class SignUpPhoneNumberChangedEvent extends SignUpEvent {
   SignUpPhoneNumberChangedEvent(this.phoneNumber);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(phoneNumber: PhoneNumber.create(phoneNumber));
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(phoneNumber: PhoneNumber.create(phoneNumber));
   }
 }
 
@@ -30,26 +30,50 @@ class SignUpAgreedToTermsChangedEvent extends SignUpEvent {
   SignUpAgreedToTermsChangedEvent(this.hasAgreed);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(hasAgreedToTerms: hasAgreed);
+   handle(SignUpState currentState) {
+    return currentState.copyWith(hasAgreedToTerms: hasAgreed);
   }
 }
 
-class SignUpIsGeneratingOTPChangedEvent extends SignUpEvent {
-  final bool isGeneratingOTP;
-
-  SignUpIsGeneratingOTPChangedEvent(this.isGeneratingOTP);
-
+class SignUpSubmittedPhoneNumberEvent extends SignUpEvent {
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(isGeneratingOTP: isGeneratingOTP);
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(hasSubmittedPhoneNumber: true);
+  }
+}
+
+class SignUpStartedGeneratingOTPEvent extends SignUpEvent {
+  @override
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(isGeneratingOTP: true);
+  }
+}
+
+class SignUpStoppedGeneratingOTPEvent extends SignUpEvent {
+  @override
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(isGeneratingOTP: false);
   }
 }
 
 class SignUpGeneratedOTPEvent extends SignUpEvent {
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(hasGeneratedOTP: true);
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(hasGeneratedOTP: true);
+  }
+}
+
+class SignUpStartedVerifyingOTPChangedEvent extends SignUpEvent {
+  @override
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(isVerifyingOTP: true);
+  }
+}
+
+class SignUpStoppedVerifyingOTPChangedEvent extends SignUpEvent {
+  @override
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(isVerifyingOTP: false);
   }
 }
 
@@ -59,8 +83,8 @@ class SignUpGeneratedOTPChangedEvent extends SignUpEvent {
   SignUpGeneratedOTPChangedEvent(this.generatedOTP);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(generatedOTP: generatedOTP);
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(generatedOTP: generatedOTP);
   }
 }
 
@@ -70,8 +94,8 @@ class SignUpUserEnteredOTPChangedEvent extends SignUpEvent {
   SignUpUserEnteredOTPChangedEvent(this.userEnteredOTP);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(
         userEnteredOTP: VerificationCode.createFromString(userEnteredOTP));
   }
 }
@@ -82,8 +106,8 @@ class SignUpUserTypeChangedEvent extends SignUpEvent {
   SignUpUserTypeChangedEvent(this.userType);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(userType: userType);
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(userType: userType);
   }
 }
 
@@ -93,15 +117,15 @@ class SignUpOtherUserTypeChangedEvent extends SignUpEvent {
   SignUpOtherUserTypeChangedEvent(this.otherUserType);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(otherUserType: OtherUserType.create(otherUserType));
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(otherUserType: OtherUserType.create(otherUserType));
   }
 }
 
 class SignUpSubmittedUserTypeEvent extends SignUpEvent {
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(hasSubmittedUserType: true);
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(hasSubmittedUserType: true);
   }
 }
 
@@ -111,8 +135,8 @@ class SignUpSelectedCategoryChangedEvent extends SignUpEvent {
   SignUpSelectedCategoryChangedEvent(this.selectedCategory);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(yarnCategorySelected: selectedCategory);
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(yarnCategorySelected: selectedCategory);
   }
 }
 
@@ -122,8 +146,8 @@ class SignUpFirstNameChangedEvent extends SignUpEvent {
   SignUpFirstNameChangedEvent(this.firstName);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(firstName: Name.create(firstName));
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(firstName: Name.create(firstName));
   }
 }
 
@@ -133,8 +157,8 @@ class SignUpLastNameChangedEvent extends SignUpEvent {
   SignUpLastNameChangedEvent(this.lastName);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(lastName: Name.create(lastName));
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(lastName: Name.create(lastName));
   }
 }
 
@@ -144,8 +168,8 @@ class SignUpCompanyNameChangedEvent extends SignUpEvent {
   SignUpCompanyNameChangedEvent(this.companyName);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(companyName: CompanyName.create(companyName));
+  SignUpState handle(SignUpState currentState) {
+    return currentState.copyWith(companyName: CompanyName.create(companyName));
   }
 }
 
@@ -155,25 +179,28 @@ class SignUpPasswordChangedEvent extends SignUpEvent {
   SignUpPasswordChangedEvent(this.password);
 
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(password: Password.create(password));
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(password: Password.create(password));
   }
 }
 
 class SignUpSubmittedUserInformationEvent extends SignUpEvent {
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(hasSubmittedUserType: true);
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(hasSubmittedUserInformation: true);
   }
 }
 
-class SignUpIsAddingUserChangedEvent extends SignUpEvent {
-  final bool isAdding;
-
-  SignUpIsAddingUserChangedEvent(this.isAdding);
-
+class SignUpStartedAddingUserChangedEvent extends SignUpEvent {
   @override
-  Stream<SignUpState> handle(SignUpState currentState) async* {
-    yield currentState.copyWith(isAddingUser: isAdding);
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(isAddingUser: true);
+  }
+}
+
+class SignUpStoppedAddingUserChangedEvent extends SignUpEvent {
+  @override
+  SignUpState handle(SignUpState currentState)  {
+    return currentState.copyWith(isAddingUser: false);
   }
 }

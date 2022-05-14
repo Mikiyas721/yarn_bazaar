@@ -10,7 +10,7 @@ import 'package:yarn_bazaar/application/edit_password/edit_password_bloc.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 
 class EditPasswordController extends BlocViewModelController<EditPasswordBloc,
-    EditPasswordEvent, EditPasswordState, EditPasswordViewModel> with ToastMixin {
+    EditPasswordEvent, EditPasswordState, EditPasswordViewModel> with ShortMessageMixin {
   EditPasswordController(BuildContext context)
       : super(context, getIt.get<EditPasswordBloc>(), true);
 
@@ -56,18 +56,18 @@ class EditPasswordController extends BlocViewModelController<EditPasswordBloc,
       if (bloc.state.oldPassword.isLeft() || bloc.state.newPassword.isLeft()) {
         bloc.add(EditPasswordStoppedSavingEvent());
         toastError("Operation failed: Invalid input(s)");
-      } else if (bloc.state.oldPassword.getOrElse(() => null).value ==
-          bloc.state.newPassword.getOrElse(() => null).value) {
+      } else if (bloc.state.oldPassword.fold((l) => null, (r) => r.value) ==
+          bloc.state.newPassword.fold((l) => null, (r) => r.value)) {
         bloc.add(EditPasswordStoppedSavingEvent());
         toastError("Operation failed: Password should not match");
       } else {
-        final user = await getIt.get<FetchSavedUserBasicInformation>().execute(a.id);
+        final user = await getIt.get<FetchSavedUserBasicInformation>().execute(a.id!);
 
         user.fold((l) {
           bloc.add(EditPasswordStoppedSavingEvent());
           toastError(l.message);
         }, (r) {
-          if (r.password != bloc.state.oldPassword.getOrElse(() => null).value) {
+          if (r.password != bloc.state.oldPassword.fold((l) => null, (r) => r.value)) {
             bloc.add(EditPasswordStoppedSavingEvent());
             toastError("Operation failed: Old Password does not match");
           } else {
@@ -81,13 +81,13 @@ class EditPasswordController extends BlocViewModelController<EditPasswordBloc,
               city: r.city,
               email: r.email?.value,
               website: r.website?.value,
-              password: bloc.state.newPassword.getOrElse(() => null).value,
+              password: currentState.newPassword.fold((l) => null, (r) => r.value),
               createdAt: r.createdAt,
               updatedAt: r.updatedAt,
-              businessDetailsId: r.businessDetailsId,
-              bankDetailsId: r.bankDetailsId,
-              businessDetails: r.businessDetails,
-              bankDetails: r.bankDetails,
+              businessDetailsId: r.businessDetailId,
+              bankDetailsId: r.bankDetailId,
+              businessDetail: r.businessDetail,
+              bankDetail: r.bankDetails,
             );
 
             userToSave.fold(() {

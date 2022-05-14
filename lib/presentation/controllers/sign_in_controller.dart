@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:yarn_bazaar/application/sign_in/sign_in_bloc.dart';
+import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/domain/entities/credentials.dart';
 import 'package:yarn_bazaar/domain/use_cases/cache_logged_in_user.dart';
-import 'package:yarn_bazaar/domain/use_cases/login_user.dart';
+import 'package:yarn_bazaar/domain/use_cases/sign_in_user.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/sign_in_view_model.dart';
+import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 
 import '../../injection.dart';
 
 class SignInController
     extends BlocViewModelController<SignInBloc, SignInEvent, SignInState, SignInViewModel>
-    with ToastMixin {
+    with ShortMessageMixin {
   SignInController(BuildContext context) : super(context, getIt.get<SignInBloc>(), true);
 
   @override
@@ -28,6 +30,14 @@ class SignInController
     );
   }
 
+  onPop() {
+    if (!currentState.isVerifyingCredentials) {
+      Navigator.pop(context);
+    }
+  }
+
+  onCall() {}
+
   onPhoneNumber(String phoneNumber) {
     bloc.add(SignInPhoneNumberChangedEvent(phoneNumber));
   }
@@ -37,7 +47,7 @@ class SignInController
   }
 
   onShowHidePassword(bool isShowing) {
-    bloc.add(SignInShowPasswordChangedEvent(isShowing));
+    bloc.add(SignInPasswordVisibilityChangedEvent(isShowing));
   }
 
   onForgotPassword() {
@@ -46,19 +56,24 @@ class SignInController
 
   onLogin() {
     bloc.add(SignInVerifyingCredentialsStartedEvent());
-    final credentials =
-        Credentials.create(phoneNumber: bloc.state.phoneNumber, password: bloc.state.password);
+    bloc.add(SignInSubmittedCredentialsEvent());
+    final credentials = Credentials.create(
+      phoneNumber: bloc.state.phoneNumber.fold((l) => null, (r) => r.value),
+      password: bloc.state.password.fold((l) => null, (r) => r.value),
+    );
     credentials.fold(
       () {
+        bloc.add(SignInVerifyingCredentialsStoppedEvent());
         toastError("Please enter valid inputs");
       },
       (a) async {
-        final appUser = await getIt.get<LoginUser>().execute(a);
+        final appUser = await getIt.get<SignInUser>().execute(a);
         appUser.fold((l) {
           bloc.add(SignInVerifyingCredentialsStoppedEvent());
           toastError(l.message);
         }, (r) async {
           final userWasCached = await getIt.get<CacheLoggedInUser>().execute(r);
+          getIt.get<SplashBloc>().add(SplashAppUserChangedEvent(getOption(r)));
           bloc.add(SignInVerifyingCredentialsStoppedEvent());
 
           if (userWasCached) {
@@ -75,5 +90,9 @@ class SignInController
         });
       },
     );
+  }
+
+  onRegister() {
+    Navigator.pushReplacementNamed(context, '/signUpPage');
   }
 }

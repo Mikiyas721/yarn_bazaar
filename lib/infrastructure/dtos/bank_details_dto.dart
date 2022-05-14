@@ -47,8 +47,8 @@ class BankDetailsDto extends IdDto implements TimeStampedDto {
   Map<String, dynamic> toJson() => _$BankDetailsDtoToJson(this);
 
   @override
-  Option<BankDetails> toDomain() {
-    return BankDetails.create(
+  Option<BankDetail> toDomain() {
+    return BankDetail.create(
       id: id,
       accountName: accountName,
       accountNumber: accountNumber,
@@ -64,7 +64,7 @@ class BankDetailsDto extends IdDto implements TimeStampedDto {
     );
   }
 
-  static BankDetailsDto fromDomain(BankDetails bankDetails) {
+  static BankDetailsDto fromDomain(BankDetail bankDetails) {
     return BankDetailsDto(
       id: bankDetails.id,
       accountName: bankDetails.accountName,

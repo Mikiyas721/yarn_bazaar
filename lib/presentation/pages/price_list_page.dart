@@ -82,13 +82,229 @@ class PriceListPage extends StatelessWidget {
                     ),
                     onRefresh: controller.onRefresh,
                   );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
+                }),
+            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
+                create: () => AllYarnsController(context),
+                builder: (context, controller, yarnViewModel) {
+                  return RefreshIndicator(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                      child: YarnListView(
+                        pricesViewModel: yarnViewModel!,
+                        onReload: controller.onReload,
+                        onWatchlist: controller.onWatchlist,
+                        onCompare: controller.onCompare,
+                        onDetail: controller.onDetail,
+                        onShare: controller.onShare,
+                      ),
+                    ),
+                    onRefresh: controller.onRefresh,
+                  );
                 })
-            //TODO 11 more tabs remain
+            //TODO replace with the right corresponding controllers
           ]),
           bottomNavigationBar: ViewModelBuilder.withController<BottomNavigationBarViewModel,
-              BottomNavigationController>(
+                  BottomNavigationController>(
               create: () => BottomNavigationController(context),
-              onInit: (controller)=> controller.switchTo(1),
+              onInit: (controller) => controller.switchTo(1),
               builder: (context, controller, viewModel) {
                 return BottomNavigationBarView(
                   bottomNavigationBarViewModel: viewModel!,

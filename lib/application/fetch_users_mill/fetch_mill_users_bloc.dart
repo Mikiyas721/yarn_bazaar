@@ -11,11 +11,11 @@ part 'fetch_mill_users_state.dart';
 
 part 'fetch_mill_users_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class FetchMillUsersBloc extends Bloc<FetchMillUsersEvent, FetchMillUsersState> {
   FetchMillUsersBloc() : super(FetchMillUsersState.initial()) {
     on<FetchMillUsersEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

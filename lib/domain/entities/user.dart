@@ -20,10 +20,10 @@ class User extends Entity {
   final Password password;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final String businessDetailsId;
-  final String bankDetailsId;
-  final BusinessDetails? businessDetails;
-  final BankDetails? bankDetails;
+  final String businessDetailId;
+  final String bankDetailId;
+  final BusinessDetail? businessDetail;
+  final BankDetail? bankDetails;
 
   User._({
     String? id,
@@ -38,9 +38,9 @@ class User extends Entity {
     required this.password,
     this.createdAt,
     this.updatedAt,
-    required this.businessDetailsId,
-    required this.bankDetailsId,
-    this.businessDetails,
+    required this.businessDetailId,
+    required this.bankDetailId,
+    this.businessDetail,
     this.bankDetails,
   }) : super(id);
 
@@ -59,26 +59,18 @@ class User extends Entity {
     DateTime? updatedAt,
     String? businessDetailsId,
     String? bankDetailsId,
-    BusinessDetails? businessDetails,
-    BankDetails? bankDetails,
+    BusinessDetail? businessDetail,
+    BankDetail? bankDetail,
   }) {
     if ([
       id,
-      imageUrl,
       firstName,
-      lastName,
       phoneNumber,
-      country,
-      city,
-      email,
-      website,
       password,
       createdAt,
       updatedAt,
       businessDetailsId,
       bankDetailsId,
-      businessDetails,
-      bankDetails,
     ].any((element) => element == null)) return none();
 
     final firstNameObject = Name.create(firstName!);
@@ -89,7 +81,6 @@ class User extends Entity {
     final passwordObject = Password.create(password!);
 
     if (firstNameObject.isLeft() ||
-        lastNameObject.isLeft() ||
         phoneNumberObject.isLeft() ||
         emailObject.isLeft() ||
         websiteObject.isLeft() ||
@@ -98,24 +89,20 @@ class User extends Entity {
     return some(User._(
       id: id,
       imageUrl: imageUrl,
-      firstName:
-          firstNameObject.getOrElse(() => throw Exception('First name Error')),
-      lastName:
-          firstNameObject.getOrElse(() => throw Exception('Last name Error')),
-      phoneNumber: phoneNumberObject
-          .getOrElse(() => throw Exception('Phone number Error')),
+      firstName: firstNameObject.getOrElse(() => throw Exception('First name Error')),
+      lastName: lastNameObject.fold((l) => null, (r) => r),
+      phoneNumber: phoneNumberObject.getOrElse(() => throw Exception('Phone number Error')),
       country: country,
       city: city,
       email: emailObject.getOrElse(() => throw Exception('Email Error')),
       website: websiteObject.getOrElse(() => throw Exception('Website Error')),
-      password:
-          passwordObject.getOrElse(() => throw Exception('Password Error')),
+      password: passwordObject.getOrElse(() => throw Exception('Password Error')),
       createdAt: createdAt,
       updatedAt: updatedAt,
-      businessDetailsId: businessDetailsId!,
-      bankDetailsId: bankDetailsId!,
-      businessDetails: businessDetails,
-      bankDetails: bankDetails,
+      businessDetailId: businessDetailsId!,
+      bankDetailId: bankDetailsId!,
+      businessDetail: businessDetail,
+      bankDetails: bankDetail,
     ));
   }
 
@@ -130,17 +117,17 @@ class User extends Entity {
     String? email,
     String? website,
     String? password,
-    String? businessDetailsId,
-    String? bankDetailsId,
-    BusinessDetails? businessDetails,
-    BankDetails? bankDetails,
+    String? businessDetailId,
+    String? bankDetailId,
+    BusinessDetail? businessDetails,
+    BankDetail? bankDetails,
   }) {
     if ([
       firstName,
       phoneNumber,
       password,
-      businessDetailsId,
-      bankDetailsId,
+      businessDetailId,
+      bankDetailId,
     ].any((element) => element == null)) return none();
 
     final firstNameObject = Name.create(firstName!);
@@ -151,7 +138,6 @@ class User extends Entity {
     final passwordObject = Password.create(password!);
 
     if (firstNameObject.isLeft() ||
-        lastNameObject.isLeft() ||
         phoneNumberObject.isLeft() ||
         emailObject.isLeft() ||
         websiteObject.isLeft() ||
@@ -159,21 +145,17 @@ class User extends Entity {
 
     return some(User._(
       imageUrl: imageUrl,
-      firstName:
-          firstNameObject.getOrElse(() => throw Exception('First name Error')),
-      lastName:
-          firstNameObject.getOrElse(() => throw Exception('Last name Error')),
-      phoneNumber: phoneNumberObject
-          .getOrElse(() => throw Exception('Phone number Error')),
+      firstName: firstNameObject.getOrElse(() => throw Exception('First name Error')),
+      lastName: lastNameObject.fold((l) => null, (r) => r),
+      phoneNumber: phoneNumberObject.getOrElse(() => throw Exception('Phone number Error')),
       country: country,
       city: city,
       email: emailObject.getOrElse(() => throw Exception('Email Error')),
       website: websiteObject.getOrElse(() => throw Exception('Website Error')),
-      password:
-          passwordObject.getOrElse(() => throw Exception('Password Error')),
-      businessDetailsId: businessDetailsId!,
-      bankDetailsId: bankDetailsId!,
-      businessDetails: businessDetails,
+      password: passwordObject.getOrElse(() => throw Exception('Password Error')),
+      businessDetailId: businessDetailId!,
+      bankDetailId: bankDetailId!,
+      businessDetail: businessDetails,
       bankDetails: bankDetails,
     ));
   }

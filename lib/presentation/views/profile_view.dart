@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/labeled_icon_button.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_image_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/navigate_button.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
@@ -50,9 +51,7 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery
-        .of(context)
-        .size;
+    final size = MediaQuery.of(context).size;
     final percentageWidget = Padding(
       padding: EdgeInsets.only(
         left: ((size.width * 0.6) * profileViewModel.profileCompletedInPercent / 100) -
@@ -71,10 +70,7 @@ class ProfileView extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleAvatar(
-                backgroundImage: AssetImage(profileViewModel.imageUrl),
-                radius: 28,
-              ),
+              MyCircleAvatar(image: profileViewModel.imageUrl),
               10.vSpace,
               Text(
                 profileViewModel.username,
@@ -114,149 +110,152 @@ class ProfileView extends StatelessWidget {
                   children: profileViewModel.profileCompletedInPercent < 10
                       ? [percentageWidget]
                       : [
-                    const Text(
-                      '0',
-                      style: TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                    percentageWidget
-                  ],
+                          const Text(
+                            '0',
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
+                          percentageWidget
+                        ],
                 ),
               ),
               15.vSpace,
             ],
           ),
         ),
-        profileViewModel.selectedProfileIndex == 0 ?
-        Container(
-          padding: const EdgeInsets.all(15),
-          color: Colors.white,
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Wrap(
-              spacing: 40,
-              runSpacing: 20,
-              alignment: WrapAlignment.center,
-              children: [
-                SizedBox(
-                  height: 45,
-                  child: OutlinedButton.icon(
-                    icon: const Icon(Icons.email_outlined),
-                    label: const Text('Post Yarn Requirement'),
-                    onPressed: onBuyerPostYarnRequirement,
-                    style: OutlinedButton.styleFrom(
-                      primary: tabColors[0],
-                      textStyle: TextStyle(
-                        color: tabColors[0],
+        profileViewModel.selectedProfileIndex == 0
+            ? Container(
+                padding: const EdgeInsets.all(15),
+                color: Colors.white,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  child: Wrap(
+                    spacing: 40,
+                    runSpacing: 20,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 45,
+                        child: OutlinedButton.icon(
+                          icon: const Icon(Icons.email_outlined),
+                          label: const Text('Post Yarn Requirement'),
+                          onPressed: onBuyerPostYarnRequirement,
+                          style: OutlinedButton.styleFrom(
+                            primary: tabColors[0],
+                            textStyle: TextStyle(
+                              color: tabColors[0],
+                            ),
+                            minimumSize: Size.infinite,
+                            side: BorderSide(
+                              width: 0.7,
+                              color: tabColors[0],
+                            ),
+                          ),
+                        ),
                       ),
-                      minimumSize: Size.infinite,
-                      side: BorderSide(
-                        width: 0.7,
-                        color: tabColors[0],
+                      LabeledIconButton(
+                        iconData: Icons.email_outlined,
+                        label: 'My Yarn Requirements',
+                        iconColor: tabColors[0],
+                        onTap: onBuyerYarnRequirements,
                       ),
-                    ),
+                      LabeledIconButton(
+                          iconData: Icons.question_answer_outlined,
+                          label: 'My Inquiries',
+                          iconColor: tabColors[0],
+                          onTap: onBuyerMyInquiries),
+                      LabeledIconButton(
+                          iconData: Icons.shopping_cart_outlined,
+                          label: 'My Orders',
+                          iconColor: tabColors[0],
+                          onTap: onBuyerMyOrders),
+                      LabeledIconButton(
+                          iconData: Icons.book_outlined,
+                          label: 'My Address List',
+                          iconColor: tabColors[0],
+                          onTap: onBuyerMyAddressList),
+                      LabeledIconButton(
+                          iconData: Icons.article_outlined,
+                          label: 'My Activity Log',
+                          iconColor: tabColors[0],
+                          onTap: onBuyerMyActivityLog),
+                    ],
                   ),
                 ),
-                LabeledIconButton(
-                  iconData: Icons.email_outlined,
-                  label: 'My Yarn Requirements',
-                  iconColor: tabColors[0],
-                  onTap: onBuyerYarnRequirements,
+              )
+            : Container(
+                padding: const EdgeInsets.all(15),
+                color: Colors.white,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  child: Wrap(
+                    spacing: 40,
+                    runSpacing: 20,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      LabeledIconButton(
+                        iconData: Icons.email_outlined,
+                        label: 'Yarn Requirements',
+                        iconColor: tabColors[1],
+                        onTap: onSellerYarnRequirements,
+                      ),
+                      LabeledIconButton(
+                        iconData: Icons.question_answer_outlined,
+                        label: 'My Inquiries',
+                        iconColor: tabColors[1],
+                        onTap: onSellerMyInquiries,
+                      ),
+                      LabeledIconButton(
+                        iconData: Icons.shopping_cart_outlined,
+                        label: 'My Orders',
+                        iconColor: tabColors[1],
+                        onTap: onSellerMyOrders,
+                      ),
+                      LabeledIconButton(
+                        iconData: Icons.book_outlined,
+                        label: 'My Products Listings',
+                        iconColor: tabColors[1],
+                        onTap: onSellerMyProductListings,
+                      ),
+                      LabeledIconButton(
+                        iconData: Icons.people_outline,
+                        label: 'My Brokers',
+                        iconColor: tabColors[1],
+                        onTap: onSellerMyBrokers,
+                      ),
+                      LabeledIconButton(
+                        iconData: Icons.article_outlined,
+                        label: 'My Activity Log',
+                        iconColor: tabColors[1],
+                        onTap: onSellerMyActivityLog,
+                      ),
+                    ],
+                  ),
                 ),
-                LabeledIconButton(
-                    iconData: Icons.question_answer_outlined,
-                    label: 'My Inquiries',
-                    iconColor: tabColors[0],
-                    onTap: onBuyerMyInquiries),
-                LabeledIconButton(
-                    iconData: Icons.shopping_cart_outlined,
-                    label: 'My Orders',
-                    iconColor: tabColors[0],
-                    onTap: onBuyerMyOrders),
-                LabeledIconButton(
-                    iconData: Icons.book_outlined,
-                    label: 'My Address List',
-                    iconColor: tabColors[0],
-                    onTap: onBuyerMyAddressList),
-                LabeledIconButton(
-                    iconData: Icons.article_outlined,
-                    label: 'My Activity Log',
-                    iconColor: tabColors[0],
-                    onTap: onBuyerMyActivityLog),
-              ],
-            ),
-          ),
-        ) : Container(
-          padding: const EdgeInsets.all(15),
-          color: Colors.white,
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Wrap(
-              spacing: 40,
-              runSpacing: 20,
-              alignment: WrapAlignment.center,
-              children: [
-                LabeledIconButton(
-                  iconData: Icons.email_outlined,
-                  label: 'Yarn Requirements',
-                  iconColor: tabColors[1],
-                  onTap: onSellerYarnRequirements,
-                ),
-                LabeledIconButton(
-                  iconData: Icons.question_answer_outlined,
-                  label: 'My Inquiries',
-                  iconColor: tabColors[1],
-                  onTap: onSellerMyInquiries,
-                ),
-                LabeledIconButton(
-                  iconData: Icons.shopping_cart_outlined,
-                  label: 'My Orders',
-                  iconColor: tabColors[1],
-                  onTap: onSellerMyOrders,
-                ),
-                LabeledIconButton(
-                  iconData: Icons.book_outlined,
-                  label: 'My Products Listings',
-                  iconColor: tabColors[1],
-                  onTap: onSellerMyProductListings,
-                ),
-                LabeledIconButton(
-                  iconData: Icons.people_outline,
-                  label: 'My Brokers',
-                  iconColor: tabColors[1],
-                  onTap: onSellerMyBrokers,
-                ),
-                LabeledIconButton(
-                  iconData: Icons.article_outlined,
-                  label: 'My Activity Log',
-                  iconColor: tabColors[1],
-                  onTap: onSellerMyActivityLog,
-                ),
-              ],
-            ),
-          ),
-        ),
+              ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-              children: [
-                15.vSpace,
-                profileViewModel.selectedProfileIndex == 0 ? NavigateButton(
-                  label: 'My Product Listing Plan',
-                  onTap: onBuyerMembershipDetail,
-                ) : NavigateButton(
-                  label: 'My Product Listing Plan',
-                  onTap: onSellerProductListingPlan,
-                ),
-                15.vSpace,
-                profileViewModel.selectedProfileIndex == 0 ? NavigateButton(
-                  label: 'Suggest a Company/Yarn/Feature',
-                  onTap: onBuyerSuggestion,
-                ) : NavigateButton(
-                  label: 'Suggest a Company/Yarn/Feature',
-                  onTap: onSellerSuggestion,
-                ),
-              ]
-          ),
+          child: Column(children: [
+            15.vSpace,
+            profileViewModel.selectedProfileIndex == 0
+                ? NavigateButton(
+                    label: 'My Product Listing Plan',
+                    onTap: onBuyerMembershipDetail,
+                  )
+                : NavigateButton(
+                    label: 'My Product Listing Plan',
+                    onTap: onSellerProductListingPlan,
+                  ),
+            15.vSpace,
+            profileViewModel.selectedProfileIndex == 0
+                ? NavigateButton(
+                    label: 'Suggest a Company/Yarn/Feature',
+                    onTap: onBuyerSuggestion,
+                  )
+                : NavigateButton(
+                    label: 'Suggest a Company/Yarn/Feature',
+                    onTap: onSellerSuggestion,
+                  ),
+          ]),
         )
       ],
     );

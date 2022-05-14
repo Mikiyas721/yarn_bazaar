@@ -8,8 +8,8 @@ class FetchRayonYarnsDataChangedEvent extends FetchRayonYarnsEvent {
   FetchRayonYarnsDataChangedEvent(this.yarns);
 
   @override
-  Stream<FetchRayonYarnsState> handle(FetchRayonYarnsState currentState) async* {
-    yield currentState.copyWith(yarns: yarns);
+  FetchRayonYarnsState handle(FetchRayonYarnsState currentState)  {
+    return currentState.copyWith(yarns: yarns);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchRayonYarnsIsLoadingChangedEvent extends FetchRayonYarnsEvent {
   FetchRayonYarnsIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchRayonYarnsState> handle(FetchRayonYarnsState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchRayonYarnsState handle(FetchRayonYarnsState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchRayonYarnsLoadFailureEvent extends FetchRayonYarnsEvent {
   FetchRayonYarnsLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchRayonYarnsState> handle(FetchRayonYarnsState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchRayonYarnsState handle(FetchRayonYarnsState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

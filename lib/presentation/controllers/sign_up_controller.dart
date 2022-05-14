@@ -1,17 +1,26 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/application/sign_up/sign_up_bloc.dart';
+import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/domain/entities/app_user.dart';
+import 'package:yarn_bazaar/domain/use_cases/add_new_user.dart';
+import 'package:yarn_bazaar/domain/use_cases/cache_logged_in_user.dart';
+import 'package:yarn_bazaar/domain/use_cases/check_phone_number.dart';
+import 'package:yarn_bazaar/domain/use_cases/request_firebase_phone_auth_code.dart';
+import 'package:yarn_bazaar/domain/use_cases/verify_firebase_phone_auth_code.dart';
 import 'package:yarn_bazaar/domain/value_objects/name.dart';
+import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
 import 'package:yarn_bazaar/domain/value_objects/yarn_categories.dart';
+import 'package:yarn_bazaar/infrastructure/repos/firebase_repo_impl.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/sign_up_view_model.dart';
 import 'package:yarn_bazaar/common/enum_extensions.dart';
-import 'package:yarn_bazaar/common/other_extensions.dart';
+import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 
 class SignUpController
     extends BlocViewModelController<SignUpBloc, SignUpEvent, SignUpState, SignUpViewModel>
-    with ToastMixin {
+    with ShortMessageMixin {
   SignUpController(BuildContext context) : super(context, getIt.get<SignUpBloc>(), true);
 
   @override
@@ -23,6 +32,7 @@ class SignUpController
           s.hasSubmittedPhoneNumber ? s.phoneNumber.fold((l) => l.message, (r) => null) : null,
       hasAgreedToTerms: s.hasAgreedToTerms,
       isGeneratingOTP: s.isGeneratingOTP,
+      isVerifyingOTP: s.isVerifyingOTP,
       hasGeneratedOTP: s.hasGeneratedOTP,
       oTP: s.userEnteredOTP.fold((l) => null, (r) => r.value.toString()),
       oTPError:
@@ -57,16 +67,25 @@ class SignUpController
     );
   }
 
+  onPop() async {
+    if (!currentState.isGeneratingOTP && !currentState.hasGeneratedOTP) {
+      Navigator.pop(context);
+    } else {
+      final confirmed = await showConfirmationDialog(context);
+      if (confirmed) Navigator.pop(context);
+    }
+  }
+
   String getTitle() {
-    if (bloc.state.activeStepIndex == 0 && !bloc.state.hasGeneratedOTP)
+    if (currentState.activeStepIndex == 0 && !currentState.hasGeneratedOTP)
       return 'Enter Mobile Number';
-    else if (bloc.state.activeStepIndex == 0 && bloc.state.hasGeneratedOTP)
+    else if (currentState.activeStepIndex == 0 && currentState.hasGeneratedOTP)
       return 'Enter OTP';
-    else if (bloc.state.activeStepIndex == 1)
+    else if (currentState.activeStepIndex == 1)
       return 'Select user type';
-    else if (bloc.state.activeStepIndex == 2)
+    else if (currentState.activeStepIndex == 2)
       return 'Select yarn categories';
-    else if (bloc.state.activeStepIndex == 3)
+    else if (currentState.activeStepIndex == 3)
       return 'Enter user information';
     else
       return '';
@@ -77,19 +96,67 @@ class SignUpController
   }
 
   onAgreeTerms(bool? hasAgreed) {
-    bloc.add(SignUpAgreedToTermsChangedEvent(hasAgreed!));
+    if (!currentState.isGeneratingOTP && !currentState.hasGeneratedOTP)
+      bloc.add(SignUpAgreedToTermsChangedEvent(hasAgreed!));
+    else
+      toastInformation("Action can not be completed because OTP generation started");
   }
 
   onTermsAndConditions() {
-    //TODO navigate to terms and conditions page
+    Navigator.pushNamed(context, '/termsAndConditionsPage');
   }
 
   onPrivacyPolicy() {
-    //TODO navigate to terms and conditions page
+    Navigator.pushNamed(context, '/privacyPolicyPage');
   }
 
   onGenerateOTP() {
+    bloc.add(SignUpSubmittedPhoneNumberEvent());
+    currentState.phoneNumber.fold((l) {
+      toastError(l.message);
+    }, (r) async {
+      bloc.add(SignUpStartedGeneratingOTPEvent());
+      final apiAccountCheckResult = await getIt.get<CheckPhoneNumber>().execute(r);
 
+      apiAccountCheckResult.fold((l) {
+        bloc.add(SignUpStoppedGeneratingOTPEvent());
+        toastError(l.message);
+      }, (accountExists) async {
+        if (accountExists) {
+          bloc.add(SignUpStoppedGeneratingOTPEvent());
+          toastError("Phone number already in use");
+        } else {
+          final firebaseAuthResult =
+              await getIt.get<RequestFirebasePhoneAuthCode>().execute(r);
+
+          bloc.add(SignUpStoppedGeneratingOTPEvent());
+          if (firebaseAuthResult is PhoneAuthSuccessResult) {
+            bloc.add(SignUpActiveIndexChangedEvent(1));
+          } else if (firebaseAuthResult is PhoneAuthFailedResult) {
+            toastError(firebaseAuthResult.failureMessage);
+          } else if (firebaseAuthResult is PhoneAuthTimeoutResult) {
+            bloc.add(SignUpGeneratedOTPEvent());
+          }
+        }
+      });
+    });
+  }
+
+  onVerifyOTP() async {
+    bloc.add(SignUpStartedVerifyingOTPChangedEvent());
+    bloc.state.userEnteredOTP.fold((l) {
+      toastError(l.message);
+      bloc.add(SignUpStoppedVerifyingOTPChangedEvent());
+    }, (r) async {
+      final verificationResult =
+          await getIt.get<VerifyFirebasePhoneAuthCode>().execute(r.value.toString());
+      verificationResult.fold((l) {
+        bloc.add(SignUpStoppedVerifyingOTPChangedEvent());
+        toastError(l.message);
+      }, (r) {
+        bloc.add(SignUpActiveIndexChangedEvent(1));
+      });
+    });
   }
 
   onOTP(String oTP) {
@@ -97,16 +164,26 @@ class SignUpController
   }
 
   onResendOTP() {
+    bloc.state.phoneNumber.fold((l) {
+      toastError(l.message);
+    }, (r) async {
+      bloc.add(SignUpStartedGeneratingOTPEvent());
+      final firebaseAuthResult = await getIt.get<RequestFirebasePhoneAuthCode>().execute(r);
+      bloc.add(SignUpStoppedGeneratingOTPEvent());
 
-  }
-
-  onSubmitOTP() {
-
+      if (firebaseAuthResult is PhoneAuthSuccessResult) {
+        bloc.add(SignUpActiveIndexChangedEvent(1));
+      } else if (firebaseAuthResult is PhoneAuthFailedResult) {
+        toastError(firebaseAuthResult.failureMessage);
+      } else if (firebaseAuthResult is PhoneAuthTimeoutResult) {
+        bloc.add(SignUpGeneratedOTPEvent());
+      }
+    });
   }
 
   onSecondStepComplete() {
     if (bloc.state.userType != -1) {
-      if (bloc.state.otherUserType.isLeft()) {
+      if (bloc.state.userType == UserType.other && bloc.state.otherUserType.isLeft()) {
         toastInformation("Please provide user type");
       } else {
         bloc.add(SignUpActiveIndexChangedEvent(2));
@@ -124,12 +201,34 @@ class SignUpController
     }
   }
 
-  onFourthStepComplete() {
-    if (bloc.state.yarnCategorySelected.length == 0) {
-      toastInformation("Please select at least one category");
-    } else {
-      bloc.add(SignUpActiveIndexChangedEvent(3));
-    }
+  onSignUp() {
+    bloc.add(SignUpStartedAddingUserChangedEvent());
+    bloc.add(SignUpSubmittedUserInformationEvent());
+    final appUser = AppUser.createFromInput(
+        firstName: currentState.firstName.fold((l) => null, (r) => r.value),
+        lastName: currentState.lastName.fold((l) => null, (r) => r.value),
+        phoneNumber: currentState.phoneNumber.fold((l) => null, (r) => r.value),
+        companyName: currentState.companyName.fold((l) => null, (r) => r.value),
+        accountType: currentState.userType.getString(),
+        categories: currentState.yarnCategorySelected.getYarnCategories(),
+        password: currentState.password.fold((l) => null, (r) => r.value));
+    appUser.fold(() {
+      toastError("Operation failed: Invalid Input(s)");
+      bloc.add(SignUpStoppedAddingUserChangedEvent());
+    }, (a) async {
+      final result = await getIt.get<AddNewUser>().execute(a);
+      result.fold((l) {
+        toastError(l.message);
+        bloc.add(SignUpStoppedAddingUserChangedEvent());
+      }, (r) async {
+        bloc.add(SignUpStoppedAddingUserChangedEvent());
+        getIt.get<SplashBloc>().add(SplashAppUserChangedEvent(getOption(r)));
+        final userWasCached = await getIt.get<CacheLoggedInUser>().execute(r);
+        if (!userWasCached) toastInformation("Unable to cache user");
+
+        Navigator.pushNamedAndRemoveUntil(context, '/homePage', (route) => false);
+      });
+    });
   }
 
   onUserType(int buttonIndex) {
@@ -140,9 +239,10 @@ class SignUpController
     bloc.add(SignUpOtherUserTypeChangedEvent(otherUserType));
   }
 
-  onYarnCategory(int categoryIndex, bool isElevated) {
-    bloc.add(SignUpSelectedCategoryChangedEvent(
-        (bloc.state.yarnCategorySelected as List).change(categoryIndex, isElevated)));
+  onYarnCategory(int categoryIndex, bool isSelected) {
+    List<bool> updatedList = List.of(bloc.state.yarnCategorySelected);
+    updatedList[categoryIndex] = isSelected;
+    bloc.add(SignUpSelectedCategoryChangedEvent(updatedList));
   }
 
   onFirstName(String firstName) {
@@ -150,7 +250,7 @@ class SignUpController
   }
 
   onLastName(String lastName) {
-    bloc.add(SignUpFirstNameChangedEvent(lastName));
+    bloc.add(SignUpLastNameChangedEvent(lastName));
   }
 
   onCompanyName(String companyName) {

@@ -12,7 +12,7 @@ class ProfileController extends BlocViewModelController<ProfileBloc, ProfileEven
   ProfileViewModel mapStateToViewModel(ProfileState s) {
     return ProfileViewModel(
       selectedProfileIndex: s.selectedProfileIndex,
-      imageUrl: s.appUser.fold(() => '', (a) => a.imageUrl ?? ''),
+      imageUrl: s.appUser.fold(() => '', (a) => a.imageUrl),
       username: s.appUser.fold(() => '', (a) => a.firstName.value ?? '') +
           ' ' +
           s.appUser.fold(() => '', (a) => a.lastName?.value ?? ''),
@@ -22,7 +22,7 @@ class ProfileController extends BlocViewModelController<ProfileBloc, ProfileEven
   }
 
   onProfileTypeSelected(bool selectedFirstTab) {
-    if (selectedFirstTab && bloc.state.selectedProfileIndex!.selectedProfileIndex == 1) {
+    if (selectedFirstTab && bloc.state.selectedProfileIndex == 1) {
       bloc.add(ProfileBuyerSelectedEvent());
     } else if (!selectedFirstTab && bloc.state.selectedProfileIndex == 0) {
       bloc.add(ProfileSellerSelectedEvent());

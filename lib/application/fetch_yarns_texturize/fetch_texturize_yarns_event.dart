@@ -8,8 +8,8 @@ class FetchTexturizeYarnsDataChangedEvent extends FetchTexturizeYarnsEvent {
   FetchTexturizeYarnsDataChangedEvent(this.yarns);
 
   @override
-  Stream<FetchTexturizeYarnsState> handle(FetchTexturizeYarnsState currentState) async* {
-    yield currentState.copyWith(yarns: yarns);
+  FetchTexturizeYarnsState handle(FetchTexturizeYarnsState currentState)  {
+    return currentState.copyWith(yarns: yarns);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchTexturizeYarnsIsLoadingChangedEvent extends FetchTexturizeYarnsEvent 
   FetchTexturizeYarnsIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchTexturizeYarnsState> handle(FetchTexturizeYarnsState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchTexturizeYarnsState handle(FetchTexturizeYarnsState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchTexturizeYarnsLoadFailureEvent extends FetchTexturizeYarnsEvent {
   FetchTexturizeYarnsLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchTexturizeYarnsState> handle(FetchTexturizeYarnsState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchTexturizeYarnsState handle(FetchTexturizeYarnsState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

@@ -6,12 +6,12 @@ import 'package:yarn_bazaar/domain/entities/credentials.dart';
 import 'package:yarn_bazaar/domain/ports/user_repo.dart';
 
 @lazySingleton
-class LoginUser {
+class SignInUser {
   final IUserRepo _iUserRepo;
 
-  LoginUser(this._iUserRepo);
+  SignInUser(this._iUserRepo);
 
   Future<Either<Failure, AppUser>> execute(Credentials credentials) {
-    return _iUserRepo.loginUser(credentials);
+    return _iUserRepo.signInUser(credentials);
   }
 }

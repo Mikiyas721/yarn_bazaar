@@ -11,11 +11,11 @@ part 'splash_state.dart';
 
 part 'splash_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(SplashState.initial()) {
     on<SplashEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

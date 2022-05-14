@@ -1,4 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_bank_details.dart';
@@ -14,7 +16,15 @@ class EditBankDetailsController extends BlocViewModelController<
     EditBankDetailsBloc,
     EditBankDetailsEvent,
     EditBankDetailsState,
-    EditBankDetailViewModel> with ToastMixin, DateTimeMixin {
+    EditBankDetailViewModel> with ShortMessageMixin, DateTimeMixin {
+  final accountNameController = TextEditingController();
+  final accountNumberController = TextEditingController();
+  final iFSCCodeController = TextEditingController();
+  final bankNameController = TextEditingController();
+  final bankBranchController = TextEditingController();
+  final bankStateController = TextEditingController();
+  final bankCityController = TextEditingController();
+
   EditBankDetailsController(BuildContext context)
       : super(context, getIt.get<EditBankDetailsBloc>(), true);
 
@@ -22,6 +32,7 @@ class EditBankDetailsController extends BlocViewModelController<
   EditBankDetailViewModel mapStateToViewModel(EditBankDetailsState s) {
     return EditBankDetailViewModel(
       isLoadingSaved: s.isLoadingSaved,
+      error: s.failure.fold(() => null, (a) => a.message),
       accountName: s.accountName,
       accountNameError:
           s.hasSubmitted ? s.accountNumber.fold((l) => l.message, (r) => null) : null,
@@ -43,17 +54,28 @@ class EditBankDetailsController extends BlocViewModelController<
   }
 
   loadSavedBankDetails() {
+    bloc.add(EditBankDetailsFailureChangedEvent(none()));
+    bloc.add(EditBankDetailsStartedLoadingPreviousEvent());
     final savedUser = getIt.get<SplashBloc>().state.appUser;
-    savedUser.fold(() {
+    savedUser.fold(() async {
       bloc.add(EditBankDetailsStoppedLoadingPreviousEvent());
       toastError("Operation failed: Cached user not found.");
-    }, (a) async{
-      final apiResponse = await getIt.get<FetchSavedUserBankDetails>().execute(a.id);
+      await delay(milliSeconds: 500);
+      Navigator.pop(context);
+    }, (a) async {
+      final apiResponse = await getIt.get<FetchSavedUserBankDetails>().execute(a.id!);
       bloc.add(EditBankDetailsStoppedLoadingPreviousEvent());
-      apiResponse.fold((l){
+      apiResponse.fold((l) {
         toastError(l.message);
+        bloc.add(EditBankDetailsFailureChangedEvent(getOption(l)));
       }, (r) {
-
+        accountNameController.text = r.accountName ?? '';
+        accountNumberController.text = r.accountNumber.value ?? '';
+        iFSCCodeController.text = r.iFSCCode.value ?? '';
+        bankNameController.text = r.bankName ?? '';
+        bankBranchController.text = r.bankBranch ?? '';
+        bankStateController.text = r.bankState ?? '';
+        bankCityController.text = r.bankCity ?? '';
       });
     });
   }
@@ -98,11 +120,11 @@ class EditBankDetailsController extends BlocViewModelController<
       bloc.add(EditBankDetailsStoppedSavingEvent());
       toastError("Operation failed: Cached user not found.");
     }, (a) {
-      final bankDetails = BankDetails.createFromInput(
-        id: a.bankDetailsId,
+      final bankDetails = BankDetail.createFromInput(
+        id: a.bankDetailId!,
         accountName: bloc.state.accountName,
-        accountNumber: bloc.state.accountNumber,
-        iFSCCode: bloc.state.iFSCCode,
+        accountNumber: bloc.state.accountNumber.fold((l) => null, (r) => r.value),
+        iFSCCode: bloc.state.iFSCCode.fold((l) => null, (r) => r.value),
         bankName: bloc.state.bankName,
         bankBranch: bloc.state.bankBranch,
         bankState: bloc.state.bankState,
@@ -122,7 +144,7 @@ class EditBankDetailsController extends BlocViewModelController<
           toastError(l.message);
         }, (r) async {
           toastSuccess("Successfully updated");
-          await delay(1);
+          await delay(seconds: 1);
           Navigator.pop(context);
         });
       });

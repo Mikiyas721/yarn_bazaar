@@ -4,112 +4,123 @@ abstract class EditBankDetailsEvent extends BlocEvent<EditBankDetailsState> {}
 
 class EditBankDetailsStartedLoadingPreviousEvent extends EditBankDetailsEvent {
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(isLoadingSaved: true);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(isLoadingSaved: true);
   }
 }
 
 class EditBankDetailsStoppedLoadingPreviousEvent extends EditBankDetailsEvent {
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(isLoadingSaved: false);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(isLoadingSaved: false);
+  }
+}
+
+class EditBankDetailsFailureChangedEvent extends EditBankDetailsEvent {
+  final Option<Failure> failure;
+
+  EditBankDetailsFailureChangedEvent(this.failure);
+
+  @override
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(failure: failure);
   }
 }
 
 class EditBankDetailsAccountNameChangedEvent extends EditBankDetailsEvent {
-  final String accountName;
+  final String? accountName;
 
   EditBankDetailsAccountNameChangedEvent(this.accountName);
 
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(accountName: accountName);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(accountName: accountName);
   }
 }
 
 class EditBankDetailsAccountNumberChangedEvent extends EditBankDetailsEvent {
-  final String accountNumber;
+  final String? accountNumber;
 
   EditBankDetailsAccountNumberChangedEvent(this.accountNumber);
 
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(accountNumber: AccountNumber.create(accountNumber));
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(accountNumber: AccountNumber.create(accountNumber));
   }
 }
 
 class EditBankDetailsIFSCCodeChangedEvent extends EditBankDetailsEvent {
-  final String iFSCCode;
+  final String? iFSCCode;
 
   EditBankDetailsIFSCCodeChangedEvent(this.iFSCCode);
 
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(iFSCCode: IFSCCode.create(iFSCCode));
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(iFSCCode: IFSCCode.create(iFSCCode));
   }
 }
 
 class EditBankDetailsBankNameChangedEvent extends EditBankDetailsEvent {
-  final String bankName;
+  final String? bankName;
 
   EditBankDetailsBankNameChangedEvent(this.bankName);
 
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(bankName: bankName);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(bankName: bankName);
   }
 }
 
 class EditBankDetailsBankBranchChangedEvent extends EditBankDetailsEvent {
-  final String bankBranch;
+  final String? bankBranch;
 
   EditBankDetailsBankBranchChangedEvent(this.bankBranch);
 
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(bankBranch: bankBranch);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(bankBranch: bankBranch);
   }
 }
 
 class EditBankDetailsBankStateChangedEvent extends EditBankDetailsEvent {
-  final String bankState;
+  final String? bankState;
 
   EditBankDetailsBankStateChangedEvent(this.bankState);
 
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(bankState: bankState);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(bankState: bankState);
   }
 }
 
 class EditBankDetailsBankCityChangedEvent extends EditBankDetailsEvent {
-  final String bankCity;
+  final String? bankCity;
 
   EditBankDetailsBankCityChangedEvent(this.bankCity);
 
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(bankCity: bankCity);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(bankCity: bankCity);
   }
 }
 
 class EditBankDetailsSubmittedEvent extends EditBankDetailsEvent {
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(hasSubmitted: true);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(hasSubmitted: true);
   }
 }
 
 class EditBankDetailsStartedSavingEvent extends EditBankDetailsEvent {
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(isSaving: true);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(isSaving: true);
   }
 }
 
 class EditBankDetailsStoppedSavingEvent extends EditBankDetailsEvent {
   @override
-  Stream<EditBankDetailsState> handle(EditBankDetailsState currentState) async* {
-    yield currentState.copyWith(isSaving: false);
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(isSaving: false);
   }
 }

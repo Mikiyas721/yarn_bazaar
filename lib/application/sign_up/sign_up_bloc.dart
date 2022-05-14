@@ -16,14 +16,15 @@ part 'sign_up_state.dart';
 
 part 'sign_up_bloc.freezed.dart';
 
-
-@injectable
+@lazySingleton
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   SignUpBloc() : super(SignUpState.initial()){
-    on<SignUpEvent>((SignUpEvent event, emit) {
-      event.handle(state);
+    on<SignUpEvent>((SignUpEvent event, emit){
+      emit(event.handle(state));
     });
   }
+
+
 
   SignUpState get initialState => SignUpState.initial();
 

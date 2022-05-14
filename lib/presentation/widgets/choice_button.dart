@@ -52,6 +52,7 @@ class ChoiceButton extends StatelessWidget {
                       Text(
                         label,
                         style: TextStyle(color: context.primaryColor),
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Icon(
                         Icons.check_circle,

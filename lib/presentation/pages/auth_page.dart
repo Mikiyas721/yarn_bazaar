@@ -71,7 +71,7 @@ class AuthPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           child: MyActionButton(
-                            onSubmit: controller.onSignUp(),
+                            onSubmit: controller.onSignUp,
                             label: 'REGISTER FREE',
                           ),
                         ),
@@ -79,7 +79,7 @@ class AuthPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5, top: 15),
                           child: MyActionButton(
-                            onSubmit: controller.onSignIn(),
+                            onSubmit: controller.onSignIn,
                             label: 'LOGIN',
                           ),
                         ),

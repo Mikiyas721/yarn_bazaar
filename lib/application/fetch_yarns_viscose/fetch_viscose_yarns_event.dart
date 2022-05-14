@@ -8,8 +8,8 @@ class FetchViscoseYarnsDataChangedEvent extends FetchViscoseYarnsEvent {
   FetchViscoseYarnsDataChangedEvent(this.yarns);
 
   @override
-  Stream<FetchViscoseYarnsState> handle(FetchViscoseYarnsState currentState) async* {
-    yield currentState.copyWith(yarns: yarns);
+  FetchViscoseYarnsState handle(FetchViscoseYarnsState currentState)  {
+    return currentState.copyWith(yarns: yarns);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchViscoseYarnsIsLoadingChangedEvent extends FetchViscoseYarnsEvent {
   FetchViscoseYarnsIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchViscoseYarnsState> handle(FetchViscoseYarnsState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchViscoseYarnsState handle(FetchViscoseYarnsState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchViscoseYarnsLoadFailureEvent extends FetchViscoseYarnsEvent {
   FetchViscoseYarnsLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchViscoseYarnsState> handle(FetchViscoseYarnsState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchViscoseYarnsState handle(FetchViscoseYarnsState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

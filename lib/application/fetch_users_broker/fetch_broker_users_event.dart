@@ -8,8 +8,8 @@ class FetchBrokerUsersDataChangedEvent extends FetchBrokerUsersEvent {
   FetchBrokerUsersDataChangedEvent(this.users);
 
   @override
-  Stream<FetchBrokerUsersState> handle(FetchBrokerUsersState currentState) async* {
-    yield currentState.copyWith(users: users);
+  FetchBrokerUsersState handle(FetchBrokerUsersState currentState)  {
+    return currentState.copyWith(users: users);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchBrokerUsersIsLoadingChangedEvent extends FetchBrokerUsersEvent {
   FetchBrokerUsersIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchBrokerUsersState> handle(FetchBrokerUsersState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchBrokerUsersState handle(FetchBrokerUsersState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchBrokerUsersLoadFailureEvent extends FetchBrokerUsersEvent {
   FetchBrokerUsersLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchBrokerUsersState> handle(FetchBrokerUsersState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchBrokerUsersState handle(FetchBrokerUsersState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

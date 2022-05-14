@@ -8,8 +8,8 @@ class FetchAllUsersDataChangedEvent extends FetchAllUsersEvent {
   FetchAllUsersDataChangedEvent(this.users);
 
   @override
-  Stream<FetchAllUsersState> handle(FetchAllUsersState currentState) async* {
-    yield currentState.copyWith(users: users);
+  FetchAllUsersState handle(FetchAllUsersState currentState)  {
+    return currentState.copyWith(users: users);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchAllUsersIsLoadingChangedEvent extends FetchAllUsersEvent {
   FetchAllUsersIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchAllUsersState> handle(FetchAllUsersState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchAllUsersState handle(FetchAllUsersState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchAllUsersLoadFailureEvent extends FetchAllUsersEvent {
   FetchAllUsersLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchAllUsersState> handle(FetchAllUsersState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchAllUsersState handle(FetchAllUsersState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

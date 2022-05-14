@@ -11,11 +11,11 @@ part 'fetch_psf_yarns_state.dart';
 
 part 'fetch_psf_yarns_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class FetchPsfYarnsBloc extends Bloc<FetchPsfYarnsEvent, FetchPsfYarnsState> {
   FetchPsfYarnsBloc() : super(FetchPsfYarnsState.initial()) {
     on<FetchPsfYarnsEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

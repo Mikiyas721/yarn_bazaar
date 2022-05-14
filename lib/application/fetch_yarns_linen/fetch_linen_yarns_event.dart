@@ -8,8 +8,8 @@ class FetchLinenYarnsDataChangedEvent extends FetchLinenYarnsEvent {
   FetchLinenYarnsDataChangedEvent(this.yarns);
 
   @override
-  Stream<FetchLinenYarnsState> handle(FetchLinenYarnsState currentState) async* {
-    yield currentState.copyWith(yarns: yarns);
+  FetchLinenYarnsState handle(FetchLinenYarnsState currentState)  {
+    return currentState.copyWith(yarns: yarns);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchLinenYarnsIsLoadingChangedEvent extends FetchLinenYarnsEvent {
   FetchLinenYarnsIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchLinenYarnsState> handle(FetchLinenYarnsState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchLinenYarnsState handle(FetchLinenYarnsState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,8 +30,8 @@ class FetchLinenYarnsLoadFailureEvent extends FetchLinenYarnsEvent {
   FetchLinenYarnsLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchLinenYarnsState> handle(FetchLinenYarnsState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchLinenYarnsState handle(FetchLinenYarnsState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:yarn_bazaar/presentation/models/edit_basic_profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
+import 'package:yarn_bazaar/presentation/widgets/stacked_loading_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
@@ -15,6 +16,15 @@ class EditBasicProfileView extends StatelessWidget {
   final Function(String email) onEmail;
   final Function(String website) onWebsite;
   final VoidCallback onSave;
+  final VoidCallback onReload;
+  final TextEditingController? firstNameTextEditingController;
+  final TextEditingController? lastNameTextEditingController;
+  final TextEditingController? inBusinessSinceTextEditingController;
+  final TextEditingController? primaryNumberTextEditingController;
+  final TextEditingController? countryTextEditingController;
+  final TextEditingController? cityTextEditingController;
+  final TextEditingController? emailTextEditingController;
+  final TextEditingController? websiteTextEditingController;
 
   const EditBasicProfileView({
     Key? key,
@@ -28,6 +38,15 @@ class EditBasicProfileView extends StatelessWidget {
     required this.onEmail,
     required this.onWebsite,
     required this.onSave,
+    required this.onReload,
+    this.firstNameTextEditingController,
+    this.lastNameTextEditingController,
+    this.inBusinessSinceTextEditingController,
+    this.primaryNumberTextEditingController,
+    this.countryTextEditingController,
+    this.cityTextEditingController,
+    this.emailTextEditingController,
+    this.websiteTextEditingController,
   }) : super(key: key);
 
   @override
@@ -43,7 +62,7 @@ class EditBasicProfileView extends StatelessWidget {
                 children: [
                   TextFieldWithTitle(
                     title: 'First Name',
-                    textFieldValue: editBasicProfileViewModel.firstName,
+                    controller: firstNameTextEditingController,
                     errorMessage: editBasicProfileViewModel.firstNameError,
                     hintText: 'John',
                     usesPrimaryColor: false,
@@ -53,7 +72,7 @@ class EditBasicProfileView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                     title: 'Last Name',
-                    textFieldValue: editBasicProfileViewModel.lastName,
+                    controller: lastNameTextEditingController,
                     errorMessage: editBasicProfileViewModel.lastNameError,
                     hintText: 'Williams',
                     usesPrimaryColor: false,
@@ -63,9 +82,8 @@ class EditBasicProfileView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                     title: 'In Business Since',
-                    textFieldValue: editBasicProfileViewModel.inBusinessSince,
-                    errorMessage:
-                        editBasicProfileViewModel.inBusinessSinceError,
+                    controller: inBusinessSinceTextEditingController,
+                    errorMessage: editBasicProfileViewModel.inBusinessSinceError,
                     keyboardType: TextInputType.number,
                     hintText: '1995',
                     usesPrimaryColor: false,
@@ -77,7 +95,7 @@ class EditBasicProfileView extends StatelessWidget {
                     title: 'Primary Number',
                     readOnly: true,
                     enabled: false,
-                    textFieldValue: editBasicProfileViewModel.primaryNumber,
+                    controller: primaryNumberTextEditingController,
                     usesPrimaryColor: false,
                     fieldIsOptional: false,
                     onTap: onPhoneNumber,
@@ -87,7 +105,7 @@ class EditBasicProfileView extends StatelessWidget {
                     title: 'Country',
                     readOnly: true,
                     enabled: false,
-                    textFieldValue: editBasicProfileViewModel.country,
+                    controller: countryTextEditingController,
                     hintText: 'India',
                     usesPrimaryColor: false,
                     fieldIsOptional: false,
@@ -98,7 +116,7 @@ class EditBasicProfileView extends StatelessWidget {
                     title: 'City',
                     readOnly: true,
                     enabled: false,
-                    textFieldValue: editBasicProfileViewModel.city,
+                    controller: cityTextEditingController,
                     hintText: 'Addis',
                     usesPrimaryColor: false,
                     fieldIsOptional: false,
@@ -107,7 +125,7 @@ class EditBasicProfileView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                     title: 'Email',
-                    textFieldValue: editBasicProfileViewModel.email,
+                    controller: emailTextEditingController,
                     errorMessage: editBasicProfileViewModel.emailError,
                     hintText: 'xyz123@gmail.com',
                     usesPrimaryColor: false,
@@ -117,7 +135,7 @@ class EditBasicProfileView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                     title: 'Website',
-                    textFieldValue: editBasicProfileViewModel.website,
+                    controller: websiteTextEditingController,
                     errorMessage: editBasicProfileViewModel.websiteError,
                     hintText: 'https://www.xyz.com',
                     usesPrimaryColor: false,
@@ -138,7 +156,12 @@ class EditBasicProfileView extends StatelessWidget {
               label: 'SAVE',
               onSubmit: onSave,
               isLoading: editBasicProfileViewModel.isSaving,
-            ))
+            )),
+        MyStackedLoadingView(
+          isLoading: editBasicProfileViewModel.isLoadingSaved,
+          error: editBasicProfileViewModel.error,
+          onReload: onReload,
+        )
       ],
     );
   }

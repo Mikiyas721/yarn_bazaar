@@ -8,8 +8,8 @@ class SignInPhoneNumberChangedEvent extends SignInEvent {
   SignInPhoneNumberChangedEvent(this.phoneNumber);
 
   @override
-  Stream<SignInState> handle(SignInState currentState) async* {
-    yield currentState.copyWith(phoneNumber: PhoneNumber.create(phoneNumber));
+  SignInState handle(SignInState currentState)  {
+    return currentState.copyWith(phoneNumber: PhoneNumber.create(phoneNumber));
   }
 }
 
@@ -19,19 +19,8 @@ class SignInPasswordChangedEvent extends SignInEvent {
   SignInPasswordChangedEvent(this.password);
 
   @override
-  Stream<SignInState> handle(SignInState currentState) async* {
-    yield currentState.copyWith(password: Password.create(password));
-  }
-}
-
-class SignInShowPasswordChangedEvent extends SignInEvent {
-  final bool showPassword;
-
-  SignInShowPasswordChangedEvent(this.showPassword);
-
-  @override
-  Stream<SignInState> handle(SignInState currentState) async* {
-    yield currentState.copyWith(showPassword: showPassword);
+  SignInState handle(SignInState currentState)  {
+    return currentState.copyWith(password: Password.create(password));
   }
 }
 
@@ -41,28 +30,28 @@ class SignInPasswordVisibilityChangedEvent extends SignInEvent {
   SignInPasswordVisibilityChangedEvent(this.isVisible);
 
   @override
-  Stream<SignInState> handle(SignInState currentState) async* {
-    yield currentState.copyWith(isShowingPassword: isVisible);
+  SignInState handle(SignInState currentState)  {
+    return currentState.copyWith(isShowingPassword: isVisible);
   }
 }
 
 class SignInSubmittedCredentialsEvent extends SignInEvent {
   @override
-  Stream<SignInState> handle(SignInState currentState) async* {
-    yield currentState.copyWith(hasSubmittedCredentials: true);
+  SignInState handle(SignInState currentState)  {
+    return currentState.copyWith(hasSubmittedCredentials: true);
   }
 }
 
 class SignInVerifyingCredentialsStartedEvent extends SignInEvent {
   @override
-  Stream<SignInState> handle(SignInState currentState) async* {
-    yield currentState.copyWith(isVerifyingCredentials: true);
+  SignInState handle(SignInState currentState)  {
+    return currentState.copyWith(isVerifyingCredentials: true);
   }
 }
 
 class SignInVerifyingCredentialsStoppedEvent extends SignInEvent {
   @override
-  Stream<SignInState> handle(SignInState currentState) async* {
-    yield currentState.copyWith(isVerifyingCredentials: false);
+  SignInState handle(SignInState currentState)  {
+    return currentState.copyWith(isVerifyingCredentials: false);
   }
 }

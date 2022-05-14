@@ -4,7 +4,7 @@ import 'package:yarn_bazaar/domain/value_objects/gst_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/pan_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/tan_number.dart';
 
-class BusinessDetails extends Entity {
+class BusinessDetail extends Entity {
   final String companyName;
   final String accountType;
   final List<String> categories;
@@ -18,7 +18,7 @@ class BusinessDetails extends Entity {
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  BusinessDetails._({
+  BusinessDetail._({
     String? id,
     required this.companyName,
     required this.accountType,
@@ -34,7 +34,7 @@ class BusinessDetails extends Entity {
     this.updatedAt,
   }) : super(id);
 
-  static Option<BusinessDetails> create({
+  static Option<BusinessDetail> create({
     String? id,
     String? companyName,
     String? accountType,
@@ -73,7 +73,7 @@ class BusinessDetails extends Entity {
         tanNumberObject.isLeft() ||
         panNumberObject.isLeft()) return none();
 
-    return some(BusinessDetails._(
+    return some(BusinessDetail._(
       id: id,
       companyName: companyName!,
       accountType: accountType!,
@@ -93,7 +93,7 @@ class BusinessDetails extends Entity {
     ));
   }
 
-  static Option<BusinessDetails> createFromInput({
+  static Option<BusinessDetail> createFromInput({
     String? id,
     String? companyName,
     String? accountType,
@@ -121,7 +121,7 @@ class BusinessDetails extends Entity {
         tanNumberObject.isLeft() ||
         panNumberObject.isLeft()) return none();
 
-    return some(BusinessDetails._(
+    return some(BusinessDetail._(
       companyName: companyName!,
       accountType: accountType!,
       categories: categories!,

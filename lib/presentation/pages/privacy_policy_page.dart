@@ -9,6 +9,7 @@ class PrivacyPolicyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const PopButton(),
+        title: Text("Privacy Policies"),
       ),
     );
   }

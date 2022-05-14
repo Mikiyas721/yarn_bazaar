@@ -10,58 +10,59 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const PopButton(),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.phone_outlined),
-            onPressed: () {},
-          )
-        ],
-      ),
-      body: ViewModelBuilder.withController<SignInViewModel, SignInController>(
-          create: () => SignInController(context),
-          builder: (context, controller, signInViewModel) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/yarn.jpg',
-                    width: 250,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-                    child: SignInView(
-                      signInViewModel: signInViewModel!,
-                      onPhoneNumber: controller.onPhoneNumber,
-                      onPassword: controller.onPassword,
-                      onShowHidePassword: controller.onShowHidePassword,
-                      onForgotPassword: controller.onForgotPassword,
-                      onLogin: controller.onLogin,
-                    ),
-                  ),
-                  const Text("Don't have an account?"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Click '),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('here'),
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(0),
-                          minimumSize: const Size(0, 0),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                      ),
-                      const Text(' to register')
-                    ],
+    return ViewModelBuilder.withController<SignInViewModel, SignInController>(
+        create: () => SignInController(context),
+        builder: (context, controller, signInViewModel) {
+          return Scaffold(
+              appBar: AppBar(
+                elevation: 0,
+                backgroundColor: Colors.white10,
+                leading: PopButton(onPop: controller.onPop),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.phone_outlined),
+                    onPressed: controller.onCall,
                   )
                 ],
               ),
-            );
-          }),
-    );
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/yarn.jpg',
+                      width: 250,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                      child: SignInView(
+                        signInViewModel: signInViewModel!,
+                        onPhoneNumber: controller.onPhoneNumber,
+                        onPassword: controller.onPassword,
+                        onShowHidePassword: controller.onShowHidePassword,
+                        onForgotPassword: controller.onForgotPassword,
+                        onLogin: controller.onLogin,
+                      ),
+                    ),
+                    const Text("Don't have an account?"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Click '),
+                        TextButton(
+                          onPressed: controller.onRegister,
+                          child: const Text('here'),
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(0),
+                            minimumSize: const Size(0, 0),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                        ),
+                        const Text(' to register')
+                      ],
+                    )
+                  ],
+                ),
+              ));
+        });
   }
 }

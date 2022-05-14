@@ -19,8 +19,8 @@ class UserDto extends IdDto implements TimeStampedDto {
   final String? email;
   final String? website;
   final String password;
-  final String businessDetailsId;
-  final String bankDetailsId;
+  final String businessDetailId;
+  final String bankDetailId;
   @override
   @JsonKey(includeIfNull: false)
   final DateTime? createdAt;
@@ -39,8 +39,8 @@ class UserDto extends IdDto implements TimeStampedDto {
     required this.email,
     required this.website,
     required this.password,
-    required this.businessDetailsId,
-    required this.bankDetailsId,
+    required this.businessDetailId,
+    required this.bankDetailId,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -62,8 +62,8 @@ class UserDto extends IdDto implements TimeStampedDto {
       email: email,
       website: website,
       password: password,
-      businessDetailsId: businessDetailsId,
-      bankDetailsId: bankDetailsId,
+      businessDetailsId: businessDetailId,
+      bankDetailsId: bankDetailId,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
@@ -81,8 +81,8 @@ class UserDto extends IdDto implements TimeStampedDto {
       email: user.email?.value,
       website: user.website?.value,
       password: user.password.value,
-      businessDetailsId: user.businessDetailsId,
-      bankDetailsId: user.bankDetailsId,
+      businessDetailId: user.businessDetailId,
+      bankDetailId: user.bankDetailId,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     );

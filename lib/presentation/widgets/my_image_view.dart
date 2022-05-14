@@ -25,21 +25,44 @@ class MyImageView extends StatelessWidget {
 
   Widget buildImage() {
     return Image(
-      image: imageProvider(image),
+      image: _imageProvider(image),
       height: height,
       width: width,
       fit: fit,
     );
   }
+}
 
-  static ImageProvider imageProvider(image) {
-    if (image == null) return AssetImage('assets/images/error.png');
-    if (image is Uint8List) return MemoryImage(image);
-    if (image is File) return FileImage(image);
-    String imageUrl = image;
-    if (imageUrl.startsWith("assets")) return AssetImage(imageUrl);
+class MyCircleAvatar extends StatelessWidget {
+  final dynamic image;
+  final double radius;
+  final VoidCallback? onTap;
 
-    return NetworkImage(imageUrl);
+  const MyCircleAvatar({
+    Key? key,
+    this.image,
+    this.radius = 28,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: CircleAvatar(
+        backgroundImage: _imageProvider(image),
+        radius: radius,
+      ),
+    );
   }
 }
 
+ImageProvider _imageProvider(image) {
+  if (image == null) return AssetImage('assets/images/avatar.png');
+  if (image is Uint8List) return MemoryImage(image);
+  if (image is File) return FileImage(image);
+  String imageUrl = image;
+  if (imageUrl.startsWith("assets")) return AssetImage(imageUrl);
+
+  return NetworkImage(imageUrl);
+}

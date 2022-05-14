@@ -16,7 +16,7 @@ class DioRestDataSource implements RestDataSource {
           BaseOptions(
             connectTimeout: 10000,
             receiveTimeout: 10000,
-            baseUrl: 'http://localhost:3000/api',
+            baseUrl: 'http://192.168.1.116:3000/api',
           ),
         ) {
     //TODO add interceptor and replace baseUrl

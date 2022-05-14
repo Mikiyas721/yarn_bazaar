@@ -3,7 +3,7 @@ import 'package:yarn_bazaar/common/entity.dart';
 import 'package:yarn_bazaar/domain/value_objects/account_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/ifsc_code.dart';
 
-class BankDetails extends Entity {
+class BankDetail extends Entity {
   final String? accountName;
   final AccountNumber accountNumber;
   final IFSCCode iFSCCode;
@@ -16,7 +16,7 @@ class BankDetails extends Entity {
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  BankDetails({
+  BankDetail({
     String? id,
     this.accountName,
     required this.accountNumber,
@@ -31,7 +31,7 @@ class BankDetails extends Entity {
     this.updatedAt,
   }) : super(id);
 
-  static Option<BankDetails> create({
+  static Option<BankDetail> create({
     String? id,
     String? accountName,
     String? accountNumber,
@@ -65,7 +65,7 @@ class BankDetails extends Entity {
 
     if (accountNumberObject.isLeft() || ifscCodeObject.isLeft()) return none();
 
-    return some(BankDetails(
+    return some(BankDetail(
       id: id,
       accountName: accountName,
       accountNumber: accountNumberObject
@@ -83,7 +83,7 @@ class BankDetails extends Entity {
     ));
   }
 
-  static Option<BankDetails> createFromInput({
+  static Option<BankDetail> createFromInput({
     required String id,
     String? accountName,
     String? accountNumber,
@@ -100,7 +100,7 @@ class BankDetails extends Entity {
 
     if (accountNumberObject.isLeft() || ifscCodeObject.isLeft()) return none();
 
-    return some(BankDetails(
+    return some(BankDetail(
       accountName: accountName,
       accountNumber: accountNumberObject
           .getOrElse(() => throw Exception('Account number error')),

@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ToastMixin {
+class ShortMessageMixin {
   showErrorSnackBar(
     BuildContext context,
     String message, {
@@ -54,7 +56,7 @@ class ToastMixin {
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.cyan,
       textColor: Colors.white,
       fontSize: 16.0,
     );
@@ -69,5 +71,37 @@ class ToastMixin {
       textColor: Colors.white,
       fontSize: 16.0,
     );
+  }
+
+  Future<bool> showConfirmationDialog(BuildContext context,
+      {String title = "Confirm", String content = "Are you sure you want to proceed?"}) async {
+    return await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(content),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Text(
+                  'Ok',
+                  style: TextStyle(color: Colors.red),
+                ),
+              )
+            ],
+          );
+        });
   }
 }

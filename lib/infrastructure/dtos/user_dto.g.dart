@@ -17,8 +17,8 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
       email: json['email'] as String?,
       website: json['website'] as String?,
       password: json['password'] as String,
-      businessDetailsId: json['businessDetailsId'] as String,
-      bankDetailsId: json['bankDetailsId'] as String,
+      businessDetailId: json['businessDetailId'] as String,
+      bankDetailId: json['bankDetailId'] as String,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -46,8 +46,8 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) {
   val['email'] = instance.email;
   val['website'] = instance.website;
   val['password'] = instance.password;
-  val['businessDetailsId'] = instance.businessDetailsId;
-  val['bankDetailsId'] = instance.bankDetailsId;
+  val['businessDetailId'] = instance.businessDetailId;
+  val['bankDetailId'] = instance.bankDetailId;
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
   return val;

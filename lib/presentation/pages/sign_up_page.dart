@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/domain/value_objects/yarn_categories.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
 import 'package:yarn_bazaar/presentation/controllers/sign_up_controller.dart';
 import 'package:yarn_bazaar/presentation/models/sign_up_view_model.dart';
@@ -16,7 +15,9 @@ class SignUpPage extends StatelessWidget {
         builder: (context, controller, signUpViewModel) {
           return Scaffold(
             appBar: AppBar(
-              leading: const PopButton(),
+              elevation: 0,
+              backgroundColor: Colors.white10,
+              leading: PopButton(onPop: controller.onPop),
               title: Text(
                 controller.getTitle(),
                 overflow: TextOverflow.ellipsis,
@@ -24,17 +25,17 @@ class SignUpPage extends StatelessWidget {
             ),
             body: SignUpView(
               signUpViewModel: signUpViewModel!,
-              onPhoneNumber: controller.onPassword,
+              onPhoneNumber: controller.onPhoneNumber,
               onAgreeTerms: controller.onAgreeTerms,
               onTermsAndConditions: controller.onTermsAndConditions,
               onPrivacyPolicy: controller.onPrivacyPolicy,
               onGenerateOTP: controller.onGenerateOTP,
               onSecondStepComplete: controller.onSecondStepComplete,
               onThirdStepComplete: controller.onThirdStepComplete,
-              onFourthStepComplete: controller.onFourthStepComplete,
+              onSignUp: controller.onSignUp,
               onOTP: controller.onOTP,
               onResendOTP: controller.onResendOTP,
-              onSubmitOTP: controller.onSubmitOTP,
+              onSubmitOTP: controller.onVerifyOTP,
               onUserType: controller.onUserType,
               onOtherUserType: controller.onOtherUserType,
               onYarnCategory: controller.onYarnCategory,

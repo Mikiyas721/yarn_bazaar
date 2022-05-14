@@ -11,6 +11,8 @@ final getIt = GetIt.instance;
   asExtension: false, // default
 )
 
+Future setUpDependencies() => $initGetIt(getIt);
+
 @module
 abstract class RegisterModule {
   @preResolve

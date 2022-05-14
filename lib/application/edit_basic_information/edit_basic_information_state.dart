@@ -4,6 +4,7 @@ part of 'edit_basic_information_bloc.dart';
 abstract class EditBasicInformationState extends BlocState with _$EditBasicInformationState {
   const factory EditBasicInformationState({
     required bool isLoadingSaved,
+    required Option<Failure> failure,
     required Either<NameFailure, Name> firstName,
     required Either<NameFailure, Name> lastName,
     required Either<YearFailure, Year> inBusinessSince,
@@ -18,6 +19,7 @@ abstract class EditBasicInformationState extends BlocState with _$EditBasicInfor
 
   factory EditBasicInformationState.initial() => EditBasicInformationState(
         isLoadingSaved: true,
+        failure: none(),
         firstName: Name.create(''),
         lastName: Name.create(''),
         inBusinessSince: Year.create(''),

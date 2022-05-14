@@ -8,8 +8,8 @@ class FetchTraderUsersDataChangedEvent extends FetchTraderUsersEvent {
   FetchTraderUsersDataChangedEvent(this.users);
 
   @override
-  Stream<FetchTraderUsersState> handle(FetchTraderUsersState currentState) async* {
-    yield currentState.copyWith(users: users);
+  FetchTraderUsersState handle(FetchTraderUsersState currentState)  {
+    return currentState.copyWith(users: users);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchTraderUsersIsLoadingChangedEvent extends FetchTraderUsersEvent {
   FetchTraderUsersIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchTraderUsersState> handle(FetchTraderUsersState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchTraderUsersState handle(FetchTraderUsersState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchTraderUsersLoadFailureEvent extends FetchTraderUsersEvent {
   FetchTraderUsersLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchTraderUsersState> handle(FetchTraderUsersState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchTraderUsersState handle(FetchTraderUsersState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

@@ -2,6 +2,7 @@ import 'package:yarn_bazaar/common/view_model.dart';
 
 class EditBasicProfileViewModel extends ViewModel {
   final bool isLoadingSaved;
+  final String? error;
   final String? firstName;
   final String? firstNameError;
   final String? lastName;
@@ -19,6 +20,7 @@ class EditBasicProfileViewModel extends ViewModel {
 
   EditBasicProfileViewModel({
     required this.isLoadingSaved,
+    this.error,
     required this.firstName,
     this.firstNameError,
     required this.lastName,
@@ -38,6 +40,7 @@ class EditBasicProfileViewModel extends ViewModel {
   @override
   List<Object?> get props => [
         isLoadingSaved,
+        error,
         firstName,
         firstNameError,
         lastName,
@@ -53,5 +56,4 @@ class EditBasicProfileViewModel extends ViewModel {
         websiteError,
         isSaving,
       ];
-
 }

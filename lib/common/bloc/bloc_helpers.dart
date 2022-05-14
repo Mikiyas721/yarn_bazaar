@@ -5,5 +5,5 @@ abstract class BlocState {}
 
 @immutable
 abstract class BlocEvent<S extends BlocState> {
-  Stream<S> handle(S currentState);
+  S handle(S currentState);
 }

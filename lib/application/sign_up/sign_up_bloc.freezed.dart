@@ -22,6 +22,7 @@ mixin _$SignUpState {
   bool get hasSubmittedPhoneNumber => throw _privateConstructorUsedError;
   bool get hasAgreedToTerms => throw _privateConstructorUsedError;
   bool get isGeneratingOTP => throw _privateConstructorUsedError;
+  bool get isVerifyingOTP => throw _privateConstructorUsedError;
   bool get hasGeneratedOTP => throw _privateConstructorUsedError;
   String? get generatedOTP => throw _privateConstructorUsedError;
   Either<VerificationCodeFailure, VerificationCode> get userEnteredOTP =>
@@ -57,6 +58,7 @@ abstract class $SignUpStateCopyWith<$Res> {
       bool hasSubmittedPhoneNumber,
       bool hasAgreedToTerms,
       bool isGeneratingOTP,
+      bool isVerifyingOTP,
       bool hasGeneratedOTP,
       String? generatedOTP,
       Either<VerificationCodeFailure, VerificationCode> userEnteredOTP,
@@ -88,6 +90,7 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
     Object? hasSubmittedPhoneNumber = freezed,
     Object? hasAgreedToTerms = freezed,
     Object? isGeneratingOTP = freezed,
+    Object? isVerifyingOTP = freezed,
     Object? hasGeneratedOTP = freezed,
     Object? generatedOTP = freezed,
     Object? userEnteredOTP = freezed,
@@ -123,6 +126,10 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
       isGeneratingOTP: isGeneratingOTP == freezed
           ? _value.isGeneratingOTP
           : isGeneratingOTP // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isVerifyingOTP: isVerifyingOTP == freezed
+          ? _value.isVerifyingOTP
+          : isVerifyingOTP // ignore: cast_nullable_to_non_nullable
               as bool,
       hasGeneratedOTP: hasGeneratedOTP == freezed
           ? _value.hasGeneratedOTP
@@ -197,6 +204,7 @@ abstract class _$$_SignUpStateCopyWith<$Res>
       bool hasSubmittedPhoneNumber,
       bool hasAgreedToTerms,
       bool isGeneratingOTP,
+      bool isVerifyingOTP,
       bool hasGeneratedOTP,
       String? generatedOTP,
       Either<VerificationCodeFailure, VerificationCode> userEnteredOTP,
@@ -230,6 +238,7 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
     Object? hasSubmittedPhoneNumber = freezed,
     Object? hasAgreedToTerms = freezed,
     Object? isGeneratingOTP = freezed,
+    Object? isVerifyingOTP = freezed,
     Object? hasGeneratedOTP = freezed,
     Object? generatedOTP = freezed,
     Object? userEnteredOTP = freezed,
@@ -265,6 +274,10 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
       isGeneratingOTP: isGeneratingOTP == freezed
           ? _value.isGeneratingOTP
           : isGeneratingOTP // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isVerifyingOTP: isVerifyingOTP == freezed
+          ? _value.isVerifyingOTP
+          : isVerifyingOTP // ignore: cast_nullable_to_non_nullable
               as bool,
       hasGeneratedOTP: hasGeneratedOTP == freezed
           ? _value.hasGeneratedOTP
@@ -335,6 +348,7 @@ class _$_SignUpState implements _SignUpState {
       required this.hasSubmittedPhoneNumber,
       required this.hasAgreedToTerms,
       required this.isGeneratingOTP,
+      required this.isVerifyingOTP,
       required this.hasGeneratedOTP,
       this.generatedOTP,
       required this.userEnteredOTP,
@@ -361,6 +375,8 @@ class _$_SignUpState implements _SignUpState {
   final bool hasAgreedToTerms;
   @override
   final bool isGeneratingOTP;
+  @override
+  final bool isVerifyingOTP;
   @override
   final bool hasGeneratedOTP;
   @override
@@ -397,7 +413,7 @@ class _$_SignUpState implements _SignUpState {
 
   @override
   String toString() {
-    return 'SignUpState(activeStepIndex: $activeStepIndex, phoneNumber: $phoneNumber, hasSubmittedPhoneNumber: $hasSubmittedPhoneNumber, hasAgreedToTerms: $hasAgreedToTerms, isGeneratingOTP: $isGeneratingOTP, hasGeneratedOTP: $hasGeneratedOTP, generatedOTP: $generatedOTP, userEnteredOTP: $userEnteredOTP, hasSubmittedOTP: $hasSubmittedOTP, userType: $userType, otherUserType: $otherUserType, hasSubmittedUserType: $hasSubmittedUserType, yarnCategorySelected: $yarnCategorySelected, firstName: $firstName, lastName: $lastName, companyName: $companyName, password: $password, hasSubmittedUserInformation: $hasSubmittedUserInformation, isAddingUser: $isAddingUser)';
+    return 'SignUpState(activeStepIndex: $activeStepIndex, phoneNumber: $phoneNumber, hasSubmittedPhoneNumber: $hasSubmittedPhoneNumber, hasAgreedToTerms: $hasAgreedToTerms, isGeneratingOTP: $isGeneratingOTP, isVerifyingOTP: $isVerifyingOTP, hasGeneratedOTP: $hasGeneratedOTP, generatedOTP: $generatedOTP, userEnteredOTP: $userEnteredOTP, hasSubmittedOTP: $hasSubmittedOTP, userType: $userType, otherUserType: $otherUserType, hasSubmittedUserType: $hasSubmittedUserType, yarnCategorySelected: $yarnCategorySelected, firstName: $firstName, lastName: $lastName, companyName: $companyName, password: $password, hasSubmittedUserInformation: $hasSubmittedUserInformation, isAddingUser: $isAddingUser)';
   }
 
   @override
@@ -415,6 +431,8 @@ class _$_SignUpState implements _SignUpState {
                 .equals(other.hasAgreedToTerms, hasAgreedToTerms) &&
             const DeepCollectionEquality()
                 .equals(other.isGeneratingOTP, isGeneratingOTP) &&
+            const DeepCollectionEquality()
+                .equals(other.isVerifyingOTP, isVerifyingOTP) &&
             const DeepCollectionEquality()
                 .equals(other.hasGeneratedOTP, hasGeneratedOTP) &&
             const DeepCollectionEquality()
@@ -450,6 +468,7 @@ class _$_SignUpState implements _SignUpState {
         const DeepCollectionEquality().hash(hasSubmittedPhoneNumber),
         const DeepCollectionEquality().hash(hasAgreedToTerms),
         const DeepCollectionEquality().hash(isGeneratingOTP),
+        const DeepCollectionEquality().hash(isVerifyingOTP),
         const DeepCollectionEquality().hash(hasGeneratedOTP),
         const DeepCollectionEquality().hash(generatedOTP),
         const DeepCollectionEquality().hash(userEnteredOTP),
@@ -479,6 +498,7 @@ abstract class _SignUpState implements SignUpState {
       required final bool hasSubmittedPhoneNumber,
       required final bool hasAgreedToTerms,
       required final bool isGeneratingOTP,
+      required final bool isVerifyingOTP,
       required final bool hasGeneratedOTP,
       final String? generatedOTP,
       required final Either<VerificationCodeFailure, VerificationCode>
@@ -506,6 +526,8 @@ abstract class _SignUpState implements SignUpState {
   bool get hasAgreedToTerms => throw _privateConstructorUsedError;
   @override
   bool get isGeneratingOTP => throw _privateConstructorUsedError;
+  @override
+  bool get isVerifyingOTP => throw _privateConstructorUsedError;
   @override
   bool get hasGeneratedOTP => throw _privateConstructorUsedError;
   @override

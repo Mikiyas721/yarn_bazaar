@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$EditBankDetailsState {
   bool get isLoadingSaved => throw _privateConstructorUsedError;
+  Option<Failure> get failure => throw _privateConstructorUsedError;
   String? get accountName => throw _privateConstructorUsedError;
   Either<AccountNumberFailure, AccountNumber> get accountNumber =>
       throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $EditBankDetailsStateCopyWith<$Res> {
       _$EditBankDetailsStateCopyWithImpl<$Res>;
   $Res call(
       {bool isLoadingSaved,
+      Option<Failure> failure,
       String? accountName,
       Either<AccountNumberFailure, AccountNumber> accountNumber,
       Either<IFSCCodeFailure, IFSCCode> iFSCCode,
@@ -64,6 +66,7 @@ class _$EditBankDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoadingSaved = freezed,
+    Object? failure = freezed,
     Object? accountName = freezed,
     Object? accountNumber = freezed,
     Object? iFSCCode = freezed,
@@ -79,6 +82,10 @@ class _$EditBankDetailsStateCopyWithImpl<$Res>
           ? _value.isLoadingSaved
           : isLoadingSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Option<Failure>,
       accountName: accountName == freezed
           ? _value.accountName
           : accountName // ignore: cast_nullable_to_non_nullable
@@ -128,6 +135,7 @@ abstract class _$$_EditBankDetailsStateCopyWith<$Res>
   @override
   $Res call(
       {bool isLoadingSaved,
+      Option<Failure> failure,
       String? accountName,
       Either<AccountNumberFailure, AccountNumber> accountNumber,
       Either<IFSCCodeFailure, IFSCCode> iFSCCode,
@@ -153,6 +161,7 @@ class __$$_EditBankDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoadingSaved = freezed,
+    Object? failure = freezed,
     Object? accountName = freezed,
     Object? accountNumber = freezed,
     Object? iFSCCode = freezed,
@@ -168,6 +177,10 @@ class __$$_EditBankDetailsStateCopyWithImpl<$Res>
           ? _value.isLoadingSaved
           : isLoadingSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Option<Failure>,
       accountName: accountName == freezed
           ? _value.accountName
           : accountName // ignore: cast_nullable_to_non_nullable
@@ -213,6 +226,7 @@ class __$$_EditBankDetailsStateCopyWithImpl<$Res>
 class _$_EditBankDetailsState implements _EditBankDetailsState {
   const _$_EditBankDetailsState(
       {required this.isLoadingSaved,
+      required this.failure,
       this.accountName,
       required this.accountNumber,
       required this.iFSCCode,
@@ -225,6 +239,8 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
 
   @override
   final bool isLoadingSaved;
+  @override
+  final Option<Failure> failure;
   @override
   final String? accountName;
   @override
@@ -246,7 +262,7 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
 
   @override
   String toString() {
-    return 'EditBankDetailsState(isLoadingSaved: $isLoadingSaved, accountName: $accountName, accountNumber: $accountNumber, iFSCCode: $iFSCCode, bankName: $bankName, bankBranch: $bankBranch, bankState: $bankState, bankCity: $bankCity, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
+    return 'EditBankDetailsState(isLoadingSaved: $isLoadingSaved, failure: $failure, accountName: $accountName, accountNumber: $accountNumber, iFSCCode: $iFSCCode, bankName: $bankName, bankBranch: $bankBranch, bankState: $bankState, bankCity: $bankCity, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
   }
 
   @override
@@ -256,6 +272,7 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
             other is _$_EditBankDetailsState &&
             const DeepCollectionEquality()
                 .equals(other.isLoadingSaved, isLoadingSaved) &&
+            const DeepCollectionEquality().equals(other.failure, failure) &&
             const DeepCollectionEquality()
                 .equals(other.accountName, accountName) &&
             const DeepCollectionEquality()
@@ -275,6 +292,7 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isLoadingSaved),
+      const DeepCollectionEquality().hash(failure),
       const DeepCollectionEquality().hash(accountName),
       const DeepCollectionEquality().hash(accountNumber),
       const DeepCollectionEquality().hash(iFSCCode),
@@ -295,6 +313,7 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
 abstract class _EditBankDetailsState implements EditBankDetailsState {
   const factory _EditBankDetailsState(
       {required final bool isLoadingSaved,
+      required final Option<Failure> failure,
       final String? accountName,
       required final Either<AccountNumberFailure, AccountNumber> accountNumber,
       required final Either<IFSCCodeFailure, IFSCCode> iFSCCode,
@@ -307,6 +326,8 @@ abstract class _EditBankDetailsState implements EditBankDetailsState {
 
   @override
   bool get isLoadingSaved => throw _privateConstructorUsedError;
+  @override
+  Option<Failure> get failure => throw _privateConstructorUsedError;
   @override
   String? get accountName => throw _privateConstructorUsedError;
   @override

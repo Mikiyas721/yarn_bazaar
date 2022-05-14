@@ -12,7 +12,7 @@ part 'bottom_navigation_bloc.freezed.dart';
 class BottomNavigationBloc extends Bloc<BottomNavigationEvent, BottomNavigationState> {
   BottomNavigationBloc() : super(BottomNavigationState.initial()) {
     on<BottomNavigationEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 }

@@ -7,6 +7,7 @@ class MyActionButton extends StatelessWidget {
   final double minWidth;
   final double? elevation;
   final EdgeInsets? padding;
+  final bool isEnabled;
   final VoidCallback onSubmit;
 
   const MyActionButton({
@@ -16,6 +17,7 @@ class MyActionButton extends StatelessWidget {
     this.minWidth = double.infinity,
     this.elevation,
     this.padding,
+    this.isEnabled = true,
     required this.onSubmit,
   }) : super(key: key);
 
@@ -28,19 +30,21 @@ class MyActionButton extends StatelessWidget {
           ),
           padding: padding,
           elevation: elevation,
-          backgroundColor: context.primaryColor,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(2))),
+          backgroundColor: isEnabled ? context.primaryColor : Colors.black12,
+          shape:
+              const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2))),
           minimumSize: Size(minWidth, 48)),
-      onPressed: onSubmit,
+      onPressed: isEnabled && !isLoading ? onSubmit : null,
       child: isLoading
-          ? const CircularProgressIndicator(
-              backgroundColor: Colors.white,
+          ? SizedBox(
+              height: 32,
+              width: 32,
+              child: const CircularProgressIndicator(backgroundColor: Colors.white),
             )
-          : Text(label,
-              style: const TextStyle(
-                color: Colors.white,
-              )),
+          : Text(
+              label,
+              style: const TextStyle(color: Colors.white),
+            ),
     );
   }
 }

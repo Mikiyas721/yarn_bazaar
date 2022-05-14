@@ -10,11 +10,11 @@ part 'edit_password_state.dart';
 
 part 'edit_password_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class EditPasswordBloc extends Bloc<EditPasswordEvent, EditPasswordState> {
   EditPasswordBloc() : super(EditPasswordState.initial()) {
     on<EditPasswordEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

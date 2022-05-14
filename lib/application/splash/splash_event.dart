@@ -8,8 +8,8 @@ class SplashAppUserChangedEvent extends SplashEvent{
   SplashAppUserChangedEvent(this.appUser);
 
   @override
-  Stream<SplashState> handle(SplashState currentState) async*{
-    yield currentState.copyWith(appUser: appUser);
+  SplashState handle(SplashState currentState) {
+    return currentState.copyWith(appUser: appUser);
   }
 
 }

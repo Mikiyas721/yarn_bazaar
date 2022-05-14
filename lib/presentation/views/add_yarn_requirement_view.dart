@@ -81,7 +81,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                 children: [
                   TextFieldWithTitle(
                     title: 'Quality Details',
-                    textFieldValue: yarnRequirementViewModel.qualityDetails,
                     errorMessage: yarnRequirementViewModel.qualityDetailsError,
                     fieldIsOptional: true,
                     hintText: 'Enter tech specs. ex - combed, 2600 CSP etc',
@@ -89,7 +88,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Colour',
-                    textFieldValue: yarnRequirementViewModel.color,
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: 'Select Colour',
@@ -98,7 +96,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Quantity (in kgs)',
-                    textFieldValue: yarnRequirementViewModel.quantityInKgs,
                     errorMessage: yarnRequirementViewModel.quantityInKgsError,
                     fieldIsOptional: false,
                     hintText: 'Enter quantity ex - 1000 kgs',
@@ -107,7 +104,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Delivery Area',
-                    textFieldValue: yarnRequirementViewModel.deliveryArea,
                     errorMessage: yarnRequirementViewModel.deliveryAreaError,
                     fieldIsOptional: false,
                     hintText: 'Enter ship to area. ex - Sonale, bhiwandi',
@@ -115,7 +111,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Delivery Period',
-                    textFieldValue: yarnRequirementViewModel.deliveryPeriod,
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: 'ex - ready or within 1 week',
@@ -124,7 +119,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Payment Terms',
-                    textFieldValue: yarnRequirementViewModel.paymentTerms,
                     errorMessage: yarnRequirementViewModel.paymentTermsError,
                     fieldIsOptional: false,
                     hintText: 'ex - within 15 days',
@@ -132,8 +126,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Inquiry Closes Within',
-                    textFieldValue:
-                        getTimeString(yarnRequirementViewModel.inquiryClosesWithin),
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: '03:00:00',
@@ -142,7 +134,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Send Requirement to',
-                    textFieldValue: yarnRequirementViewModel.sendRequirementTo,
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: 'All Sellers',
@@ -151,7 +142,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Additional Comments',
-                    textFieldValue: yarnRequirementViewModel.additionalComment,
                     errorMessage: yarnRequirementViewModel.additionalCommentError,
                     fieldIsOptional: true,
                     hintText: 'ex - I want lowest price',

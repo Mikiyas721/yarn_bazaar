@@ -6,6 +6,7 @@ class SignUpViewModel extends ViewModel {
   final String? phoneNumberError;
   final bool hasAgreedToTerms;
   final bool isGeneratingOTP;
+  final bool isVerifyingOTP;
   final bool hasGeneratedOTP;
   final String? oTP;
   final String? oTPError;
@@ -30,6 +31,7 @@ class SignUpViewModel extends ViewModel {
     required this.hasAgreedToTerms,
     required this.isGeneratingOTP,
     required this.hasGeneratedOTP,
+    required this.isVerifyingOTP,
     required this.oTP,
     required this.oTPError,
     required this.userTypeIndex,
@@ -55,6 +57,7 @@ class SignUpViewModel extends ViewModel {
         hasAgreedToTerms,
         isGeneratingOTP,
         hasGeneratedOTP,
+        isVerifyingOTP,
         oTP,
         oTPError,
         userTypeIndex,

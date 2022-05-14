@@ -8,8 +8,8 @@ class FetchWorstedWoolYarnsDataChangedEvent extends FetchWorstedWoolYarnsEvent {
   FetchWorstedWoolYarnsDataChangedEvent(this.yarns);
 
   @override
-  Stream<FetchWorstedWoolYarnsState> handle(FetchWorstedWoolYarnsState currentState) async* {
-    yield currentState.copyWith(yarns: yarns);
+  FetchWorstedWoolYarnsState handle(FetchWorstedWoolYarnsState currentState)  {
+    return currentState.copyWith(yarns: yarns);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchWorstedWoolYarnsIsLoadingChangedEvent extends FetchWorstedWoolYarnsEv
   FetchWorstedWoolYarnsIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchWorstedWoolYarnsState> handle(FetchWorstedWoolYarnsState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchWorstedWoolYarnsState handle(FetchWorstedWoolYarnsState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchWorstedWoolYarnsLoadFailureEvent extends FetchWorstedWoolYarnsEvent {
   FetchWorstedWoolYarnsLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchWorstedWoolYarnsState> handle(FetchWorstedWoolYarnsState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchWorstedWoolYarnsState handle(FetchWorstedWoolYarnsState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

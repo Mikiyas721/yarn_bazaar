@@ -10,7 +10,7 @@ class FetchSavedUserBankDetails{
 
   FetchSavedUserBankDetails(this._iBankDetailsRepo);
 
-  Future<Either<Failure, BankDetails>> execute(String userId){
+  Future<Either<Failure, BankDetail>> execute(String userId){
     return _iBankDetailsRepo.fetchUserBankDetails(userId);
   }
 

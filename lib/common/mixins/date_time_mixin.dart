@@ -15,8 +15,7 @@ mixin DateTimeMixin {
     } else if (dayOfWeek == 7) {
       return 'S';
     } else {
-      throw Exception(
-          'Unknown Day of Week Parameter.Method getDayOfWeekShort()');
+      throw Exception('Unknown Day of Week Parameter.Method getDayOfWeekShort()');
     }
   }
 
@@ -36,8 +35,7 @@ mixin DateTimeMixin {
     } else if (dayOfWeek == 7) {
       return 'Sun';
     } else {
-      throw Exception(
-          'Unknown Day of Week Parameter.Method getDayOfWeekShort()');
+      throw Exception('Unknown Day of Week Parameter.Method getDayOfWeekShort()');
     }
   }
 
@@ -57,8 +55,7 @@ mixin DateTimeMixin {
     } else if (dayOfWeek == 7) {
       return 'Sunday';
     } else {
-      throw Exception(
-          'Unknown Day of Week Parameter.Method getDayOfWeekLong()');
+      throw Exception('Unknown Day of Week Parameter.Method getDayOfWeekLong()');
     }
   }
 
@@ -88,8 +85,7 @@ mixin DateTimeMixin {
     } else if (month == 12) {
       return 'December';
     } else {
-      throw Exception(
-          "Couldn't Map month number. Method mapToLongMonth(int month)");
+      throw Exception("Couldn't Map month number. Method mapToLongMonth(int month)");
     }
   }
 
@@ -119,8 +115,7 @@ mixin DateTimeMixin {
     } else if (month == 12) {
       return 'Dec';
     } else {
-      throw Exception(
-          "Couldn't Map month number. Method mapToShortMonth(int month)");
+      throw Exception("Couldn't Map month number. Method mapToShortMonth(int month)");
     }
   }
 
@@ -137,9 +132,7 @@ mixin DateTimeMixin {
       dateTime == null ? null : dateTime.toString().split(' ')[1];
 
   String mapTimeToMeridian(DateTime dateTime) {
-    String minute = dateTime.minute < 10
-        ? '0${dateTime.minute}'
-        : dateTime.minute.toString();
+    String minute = dateTime.minute < 10 ? '0${dateTime.minute}' : dateTime.minute.toString();
     if (dateTime.hour == 0) {
       return '${12}:$minute AM';
     } else if (dateTime.hour == 12) {
@@ -161,7 +154,10 @@ mixin DateTimeMixin {
     }
   }
 
-  Future delay(int seconds)async{
-    return await Future.delayed(Duration(seconds: seconds));
+  Future delay({int? seconds, int? milliSeconds}) async {
+    return await Future.delayed(Duration(
+      seconds: seconds ?? 0,
+      milliseconds: milliSeconds ?? 0,
+    ));
   }
 }

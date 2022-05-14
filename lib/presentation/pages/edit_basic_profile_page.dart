@@ -31,6 +31,15 @@ class EditBasicProfilePage extends StatelessWidget {
               onEmail: controller.onEmail,
               onWebsite: controller.onWebsite,
               onSave: controller.onSave,
+              onReload: controller.loadSaved(),
+              firstNameTextEditingController:controller.firstNameTextEditingController,
+              lastNameTextEditingController:controller.lastNameTextEditingController,
+              inBusinessSinceTextEditingController:controller.inBusinessSinceTextEditingController,
+              primaryNumberTextEditingController:controller.primaryNumberTextEditingController,
+              countryTextEditingController:controller.countryTextEditingController,
+              cityTextEditingController:controller.cityTextEditingController,
+              emailTextEditingController:controller.emailTextEditingController,
+              websiteTextEditingController:controller.websiteTextEditingController,
             ),
           );
         });

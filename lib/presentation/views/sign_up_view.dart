@@ -16,11 +16,11 @@ class SignUpView extends StatelessWidget {
   final VoidCallback onSubmitOTP;
   final VoidCallback onSecondStepComplete;
   final VoidCallback onThirdStepComplete;
-  final VoidCallback onFourthStepComplete;
+  final VoidCallback onSignUp;
   final Function(String input) onOTP;
   final Function(int buttonIndex) onUserType;
   final Function(String otherUserType) onOtherUserType;
-  final Function(int categoryIndex, bool isElevated) onYarnCategory;
+  final Function(int categoryIndex, bool isSelected) onYarnCategory;
   final Function(String firstName) onFirstName;
   final Function(String lastName) onLastName;
   final Function(String companyName) onCompanyName;
@@ -28,29 +28,29 @@ class SignUpView extends StatelessWidget {
 
   final List<String> categories;
 
-  const SignUpView({
-    Key? key,
-    required this.signUpViewModel,
-    required this.onPhoneNumber,
-    required this.onAgreeTerms,
-    required this.onTermsAndConditions,
-    required this.onPrivacyPolicy,
-    required this.onGenerateOTP,
-    required this.onResendOTP,
-    required this.onSubmitOTP,
-    required this.onSecondStepComplete,
-    required this.onThirdStepComplete,
-    required this.onFourthStepComplete,
-    required this.onOTP,
-    required this.onUserType,
-    required this.onOtherUserType,
-    required this.onYarnCategory,
-    required this.onFirstName,
-    required this.onLastName,
-    required this.onCompanyName,
-    required this.onPassword,
-    required this.categories
-  }) : super(key: key);
+  const SignUpView(
+      {Key? key,
+      required this.signUpViewModel,
+      required this.onPhoneNumber,
+      required this.onAgreeTerms,
+      required this.onTermsAndConditions,
+      required this.onPrivacyPolicy,
+      required this.onGenerateOTP,
+      required this.onResendOTP,
+      required this.onSubmitOTP,
+      required this.onSecondStepComplete,
+      required this.onThirdStepComplete,
+      required this.onSignUp,
+      required this.onOTP,
+      required this.onUserType,
+      required this.onOtherUserType,
+      required this.onYarnCategory,
+      required this.onFirstName,
+      required this.onLastName,
+      required this.onCompanyName,
+      required this.onPassword,
+      required this.categories})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,14 +71,14 @@ class SignUpView extends StatelessWidget {
                           color: context.primaryColor,
                         ),
                       ),
-                      style: TextButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 45)),
+                      style:
+                          TextButton.styleFrom(minimumSize: const Size(double.infinity, 45)),
                     ),
                     10.vSpace,
                     MyActionButton(
                       label: 'SUBMIT',
                       onSubmit: onSubmitOTP,
-                      isLoading: signUpViewModel.isGeneratingOTP,
+                      isLoading: signUpViewModel.isVerifyingOTP,
                     ),
                   ],
                 )
@@ -86,6 +86,7 @@ class SignUpView extends StatelessWidget {
                   label: 'GENERATE OTP',
                   onSubmit: onGenerateOTP,
                   isLoading: signUpViewModel.isGeneratingOTP,
+                  isEnabled: signUpViewModel.hasAgreedToTerms,
                 );
         } else if (controlsDetails.currentStep == 1) {
           return MyActionButton(
@@ -99,9 +100,9 @@ class SignUpView extends StatelessWidget {
           );
         } else if (controlsDetails.currentStep == 3) {
           return MyActionButton(
-            label: 'Submit',
+            label: 'Sign Up',
             isLoading: signUpViewModel.isAddingUser,
-            onSubmit: onFourthStepComplete,
+            onSubmit: onSignUp,
           );
         } else {
           return const SizedBox(
@@ -139,39 +140,25 @@ class SignUpView extends StatelessWidget {
                               decoration: InputDecoration(
                                 errorText: signUpViewModel.phoneNumberError,
                               ),
-                              controller: TextEditingController(
-                                  text: signUpViewModel.phoneNumber),
-                              onChanged: onPhoneNumber,
+                              controller:
+                                  TextEditingController(text: signUpViewModel.phoneNumber),
                             ))
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 2,
-                              child: TextField(
-                                textAlign: TextAlign.center,
-                                readOnly: true,
-                                enabled: false,
-                                controller: TextEditingController(text: 'TYB-'),
-                              )),
-                          Expanded(
-                              flex: 9,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  errorText: signUpViewModel.oTPError,
-                                ),
-                                onChanged: onOTP,
-                              ))
-                        ],
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          errorText: signUpViewModel.oTPError,
+                        ),
+                        onChanged: onOTP,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20, bottom: 10),
                       child: Text(
-                        'Please type the OTP code sent to \n+91 ${signUpViewModel.phoneNumber}',
+                        'Please type the OTP code sent to \n${signUpViewModel.phoneNumber}',
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.grey.shade500),
                       ),
@@ -197,6 +184,7 @@ class SignUpView extends StatelessWidget {
                         Expanded(
                             flex: 9,
                             child: TextField(
+                              keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
                                   errorText: signUpViewModel.phoneNumberError,
                                   hintText: 'Mobile Number'),
@@ -261,45 +249,44 @@ class SignUpView extends StatelessWidget {
           title: const SizedBox(height: 0, width: 0),
           content: Column(
             children: [
-              const Text('What type of user are you?'),
-              20.vSpace,
+              30.vSpace,
               ChoiceButton(
                 label: 'Yarn Manufacturer',
                 isSelected: signUpViewModel.userTypeIndex == 0,
-                onClick: (bool isElevated) {
-                  if (!isElevated) onUserType(0);
+                onClick: (bool isSelected) {
+                  if (isSelected) onUserType(0);
                 },
               ),
               10.vSpace,
               ChoiceButton(
                 label: 'Yarn Trader',
                 isSelected: signUpViewModel.userTypeIndex == 1,
-                onClick: (bool isElevated) {
-                  if (!isElevated) onUserType(1);
+                onClick: (bool isSelected) {
+                  if (isSelected) onUserType(1);
                 },
               ),
               10.vSpace,
               ChoiceButton(
                 label: 'Yarn Broker',
                 isSelected: signUpViewModel.userTypeIndex == 2,
-                onClick: (bool isElevated) {
-                  if (!isElevated) onUserType(2);
+                onClick: (bool isSelected) {
+                  if (isSelected) onUserType(2);
                 },
               ),
               10.vSpace,
               ChoiceButton(
                 label: 'Fabric Manufacturer',
                 isSelected: signUpViewModel.userTypeIndex == 3,
-                onClick: (bool isElevated) {
-                  if (!isElevated) onUserType(3);
+                onClick: (bool isSelected) {
+                  if (isSelected) onUserType(3);
                 },
               ),
               10.vSpace,
               ChoiceButton(
                 label: 'Other',
                 isSelected: signUpViewModel.userTypeIndex == 4,
-                onClick: (bool isElevated) {
-                  if (!isElevated) onUserType(4);
+                onClick: (bool isSelected) {
+                  if (isSelected) onUserType(4);
                 },
               ),
               signUpViewModel.userTypeIndex == 4
@@ -331,8 +318,8 @@ class SignUpView extends StatelessWidget {
                 return ChoiceButton(
                   label: categories[index],
                   isSelected: signUpViewModel.yarnCategorySelected[index],
-                  onClick: (bool isElevated) {
-                    onYarnCategory(index, isElevated);
+                  onClick: (bool isSelected) {
+                    onYarnCategory(index, isSelected);
                   },
                 );
               },

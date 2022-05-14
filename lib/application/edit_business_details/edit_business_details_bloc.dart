@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/bloc/bloc_helpers.dart';
+import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/domain/value_objects/company_name.dart';
 import 'package:yarn_bazaar/domain/value_objects/gst_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/pan_number.dart';
@@ -17,7 +18,7 @@ part 'edit_business_details_bloc.freezed.dart';
 class EditBusinessDetailsBloc extends Bloc<EditBusinessDetailsEvent, EditBusinessDetailsState> {
   EditBusinessDetailsBloc() : super(EditBusinessDetailsState.initial()) {
     on<EditBusinessDetailsEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 }

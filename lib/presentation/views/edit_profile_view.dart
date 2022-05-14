@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/edit_profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_image_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/navigate_button.dart';
 
 class EditProfileView extends StatelessWidget {
@@ -42,10 +43,7 @@ class EditProfileView extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleAvatar(
-                backgroundImage: AssetImage(buyerProfileViewModel.imageUrl),
-                radius: 28,
-              ),
+              MyCircleAvatar(image: buyerProfileViewModel.imageUrl),
               10.vSpace,
               Text(
                 buyerProfileViewModel.username,

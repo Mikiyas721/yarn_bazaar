@@ -35,7 +35,6 @@ class EditPasswordView extends StatelessWidget {
                 children: [
                   TextFieldWithTitle(
                     title: 'Old Password',
-                    textFieldValue: editPasswordViewModel.oldPassword,
                     errorMessage: editPasswordViewModel.oldPasswordError,
                     hintText: 'Old Password',
                     usesPrimaryColor: false,
@@ -53,7 +52,6 @@ class EditPasswordView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                       title: 'New Password',
-                      textFieldValue: editPasswordViewModel.newPassword,
                       errorMessage: editPasswordViewModel.newPasswordError,
                       hintText: 'New Password',
                       usesPrimaryColor: false,

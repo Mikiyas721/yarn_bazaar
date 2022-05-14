@@ -10,7 +10,7 @@ class UpdateUserBusinessDetails {
 
   UpdateUserBusinessDetails(this._iBusinessDetailRepo);
 
-  Future<Either<Failure, BusinessDetails>> execute(BusinessDetails businessDetails) {
+  Future<Either<Failure, BusinessDetail>> execute(BusinessDetail businessDetails) {
     return _iBusinessDetailRepo.updateUserBusinessDetails(businessDetails);
   }
 }

@@ -10,7 +10,7 @@ class UpdateUserBankDetails {
 
   UpdateUserBankDetails(this._iBankDetails);
 
-  Future<Either<Failure, BankDetails>> execute(BankDetails bankDetails) {
+  Future<Either<Failure, BankDetail>> execute(BankDetail bankDetails) {
     return _iBankDetails.updateUserBankDetails(bankDetails);
   }
 }

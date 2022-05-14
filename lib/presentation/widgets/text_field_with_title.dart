@@ -4,13 +4,14 @@ import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 class TextFieldWithTitle extends StatelessWidget {
   final String title;
   final bool usesPrimaryColor;
-  final String? textFieldValue;
+  final TextEditingController? controller;
   final String? labelText;
   final String? hintText;
   final String? errorMessage;
   final bool? fieldIsOptional;
   final bool readOnly;
   final bool enabled;
+  final bool obscureText;
   final Widget? suffixIcon;
   final VoidCallback? onTap;
   final TextInputType keyboardType;
@@ -21,7 +22,7 @@ class TextFieldWithTitle extends StatelessWidget {
     Key? key,
     required this.title,
     this.usesPrimaryColor = false,
-    this.textFieldValue,
+    this.controller,
     this.hintText,
     this.labelText,
     this.errorMessage,
@@ -30,6 +31,7 @@ class TextFieldWithTitle extends StatelessWidget {
     this.enabled = true,
     this.onTap,
     this.keyboardType = TextInputType.text,
+    this.obscureText = false,
     this.suffixIcon,
     this.onChanged,
     this.onSubmitted,
@@ -59,7 +61,8 @@ class TextFieldWithTitle extends StatelessWidget {
                 : const Text('')
           ]),
           TextField(
-            controller: TextEditingController(text: textFieldValue),
+            controller: controller,
+            obscureText: obscureText,
             keyboardType: keyboardType,
             decoration: InputDecoration(
                 label: labelText == null ? null : Text(labelText!),

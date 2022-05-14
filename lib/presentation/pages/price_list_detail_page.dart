@@ -6,7 +6,6 @@ import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
 import 'package:yarn_bazaar/presentation/widgets/labeled_icon_button.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
-import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class PriceListDetailPage extends StatelessWidget {
   const PriceListDetailPage({Key? key}) : super(key: key);

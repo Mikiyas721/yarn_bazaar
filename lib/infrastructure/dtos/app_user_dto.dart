@@ -8,14 +8,17 @@ part 'app_user_dto.g.dart';
 @JsonSerializable()
 class AppUserDto extends IdDto {
   @override
-  final String id;
+  final String? id;
   @JsonKey(includeIfNull: false) final String? imageUrl;
   final String firstName;
   @JsonKey(includeIfNull: false) final String? lastName;
   final String phoneNumber;
   final String companyName;
-  final String businessDetailsId;
-  final String bankDetailsId;
+  final String accountType;
+  final List<String> categories;
+  final String? password;
+  final String? businessDetailId;
+  final String? bankDetailId;
 
   const AppUserDto({
     required this.id,
@@ -24,8 +27,11 @@ class AppUserDto extends IdDto {
     required this.lastName,
     required this.phoneNumber,
     required this.companyName,
-    required this.businessDetailsId,
-    required this.bankDetailsId,
+    required this.accountType,
+    required this.categories,
+    required this.password,
+    required this.businessDetailId,
+    required this.bankDetailId,
   });
 
   factory AppUserDto.fromJson(Map<String, dynamic> map) => _$AppUserDtoFromJson(map);
@@ -40,7 +46,12 @@ class AppUserDto extends IdDto {
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
-      companyName: companyName
+      companyName: companyName,
+      accountType: accountType,
+      categories: categories,
+      password: password,
+      businessDetailId: businessDetailId,
+      bankDetailId: bankDetailId
     );
   }
 
@@ -52,8 +63,11 @@ class AppUserDto extends IdDto {
       lastName: user.lastName?.value,
       phoneNumber: user.phoneNumber.value,
       companyName: user.companyName.value,
-      businessDetailsId: user.businessDetailsId,
-      bankDetailsId: user.bankDetailsId,
+      accountType: user.accountType,
+      categories: user.categories,
+      password: user.password?.value,
+      businessDetailId: user.businessDetailId,
+      bankDetailId: user.bankDetailId,
     );
   }
 }

@@ -4,6 +4,7 @@ part of 'edit_bank_details_bloc.dart';
 abstract class EditBankDetailsState extends BlocState with _$EditBankDetailsState {
   const factory EditBankDetailsState({
     required bool isLoadingSaved,
+    required Option<Failure> failure,
     String? accountName,
     required Either<AccountNumberFailure, AccountNumber> accountNumber,
     required Either<IFSCCodeFailure, IFSCCode> iFSCCode,
@@ -18,6 +19,7 @@ abstract class EditBankDetailsState extends BlocState with _$EditBankDetailsStat
   factory EditBankDetailsState.initial()=>
       EditBankDetailsState(
         isLoadingSaved: true,
+        failure: none(),
         accountNumber: AccountNumber.create(''),
         iFSCCode: IFSCCode.create(''),
         hasSubmitted: false,

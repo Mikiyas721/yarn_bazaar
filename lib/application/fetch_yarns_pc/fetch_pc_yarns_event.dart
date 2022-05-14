@@ -8,8 +8,8 @@ class FetchPcYarnsDataChangedEvent extends FetchPcYarnsEvent {
   FetchPcYarnsDataChangedEvent(this.yarns);
 
   @override
-  Stream<FetchPcYarnsState> handle(FetchPcYarnsState currentState) async* {
-    yield currentState.copyWith(yarns: yarns);
+  FetchPcYarnsState handle(FetchPcYarnsState currentState)  {
+    return currentState.copyWith(yarns: yarns);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchPcYarnsIsLoadingChangedEvent extends FetchPcYarnsEvent {
   FetchPcYarnsIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchPcYarnsState> handle(FetchPcYarnsState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchPcYarnsState handle(FetchPcYarnsState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchPcYarnsLoadFailureEvent extends FetchPcYarnsEvent {
   FetchPcYarnsLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchPcYarnsState> handle(FetchPcYarnsState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchPcYarnsState handle(FetchPcYarnsState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

@@ -11,11 +11,11 @@ part 'fetch_all_users_state.dart';
 
 part 'fetch_all_users_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class FetchAllUsersBloc extends Bloc<FetchAllUsersEvent, FetchAllUsersState> {
   FetchAllUsersBloc() : super(FetchAllUsersState.initial()) {
     on<FetchAllUsersEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

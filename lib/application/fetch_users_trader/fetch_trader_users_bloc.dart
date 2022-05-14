@@ -11,11 +11,11 @@ part 'fetch_trader_users_state.dart';
 
 part 'fetch_trader_users_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class FetchTraderUsersBloc extends Bloc<FetchTraderUsersEvent, FetchTraderUsersState> {
   FetchTraderUsersBloc() : super(FetchTraderUsersState.initial()) {
     on<FetchTraderUsersEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

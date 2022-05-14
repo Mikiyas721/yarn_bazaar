@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:yarn_bazaar/presentation/models/edit_bank_detail_view_model.dart';
+import 'package:yarn_bazaar/presentation/widgets/empty_error_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_loading_view.dart';
+import 'package:yarn_bazaar/presentation/widgets/stacked_loading_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
@@ -16,6 +19,14 @@ class EditBankDetailsView extends StatelessWidget {
   final VoidCallback onAttachAddress;
   final VoidCallback onAttachCheque;
   final VoidCallback onSave;
+  final VoidCallback onReload;
+  final TextEditingController? accountNameController;
+  final TextEditingController? accountNumberController;
+  final TextEditingController? iFSCCodeController;
+  final TextEditingController? bankNameController;
+  final TextEditingController? bankBranchController;
+  final TextEditingController? bankStateController;
+  final TextEditingController? bankCityController;
 
   const EditBankDetailsView({
     Key? key,
@@ -30,6 +41,14 @@ class EditBankDetailsView extends StatelessWidget {
     required this.onAttachAddress,
     required this.onAttachCheque,
     required this.onSave,
+    required this.onReload,
+    this.accountNameController,
+    this.accountNumberController,
+    this.iFSCCodeController,
+    this.bankNameController,
+    this.bankBranchController,
+    this.bankStateController,
+    this.bankCityController,
   }) : super(key: key);
 
   @override
@@ -45,7 +64,7 @@ class EditBankDetailsView extends StatelessWidget {
                 children: [
                   TextFieldWithTitle(
                     title: 'Account Name',
-                    textFieldValue: editBankDetailViewModel.accountName,
+                    controller: accountNameController,
                     errorMessage: editBankDetailViewModel.accountNameError,
                     hintText: 'Enter Account Name',
                     usesPrimaryColor: false,
@@ -55,7 +74,7 @@ class EditBankDetailsView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                     title: 'Account Number',
-                    textFieldValue: editBankDetailViewModel.accountNumber,
+                    controller: accountNumberController,
                     errorMessage: editBankDetailViewModel.accountNumberError,
                     hintText: 'Enter Account Number',
                     usesPrimaryColor: false,
@@ -65,7 +84,7 @@ class EditBankDetailsView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                     title: 'IFSC Code',
-                    textFieldValue: editBankDetailViewModel.ifscCode,
+                    controller: iFSCCodeController,
                     errorMessage: editBankDetailViewModel.ifscCodeError,
                     keyboardType: TextInputType.number,
                     hintText: '1995',
@@ -78,7 +97,7 @@ class EditBankDetailsView extends StatelessWidget {
                       Expanded(
                           child: TextFieldWithTitle(
                         title: 'Bank Name',
-                        textFieldValue: editBankDetailViewModel.bankName,
+                        controller: bankNameController,
                         errorMessage: editBankDetailViewModel.bankNameError,
                         hintText: '',
                         usesPrimaryColor: false,
@@ -89,7 +108,7 @@ class EditBankDetailsView extends StatelessWidget {
                       Expanded(
                           child: TextFieldWithTitle(
                         title: 'Branch',
-                        textFieldValue: editBankDetailViewModel.bankBranch,
+                        controller: bankBranchController,
                         errorMessage: editBankDetailViewModel.bankBranchError,
                         hintText: '',
                         usesPrimaryColor: false,
@@ -104,7 +123,7 @@ class EditBankDetailsView extends StatelessWidget {
                       Expanded(
                           child: TextFieldWithTitle(
                         title: 'State',
-                        textFieldValue: editBankDetailViewModel.bankState,
+                        controller: bankStateController,
                         errorMessage: editBankDetailViewModel.bankStateError,
                         hintText: '',
                         usesPrimaryColor: false,
@@ -114,7 +133,7 @@ class EditBankDetailsView extends StatelessWidget {
                       Expanded(
                           child: TextFieldWithTitle(
                         title: 'City',
-                        textFieldValue: editBankDetailViewModel.bankCity,
+                        controller: bankCityController,
                         errorMessage: editBankDetailViewModel.bankCityError,
                         hintText: '',
                         usesPrimaryColor: false,
@@ -154,7 +173,12 @@ class EditBankDetailsView extends StatelessWidget {
               label: 'SAVE',
               onSubmit: onSave,
               isLoading: editBankDetailViewModel.isSaving,
-            ))
+            )),
+        MyStackedLoadingView(
+          isLoading: editBankDetailViewModel.isLoadingSaved,
+          error: editBankDetailViewModel.error,
+          onReload: onReload,
+        )
       ],
     );
   }

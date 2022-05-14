@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_image_view.dart';
 
 class DrawerView extends StatelessWidget {
   final DrawerViewModel drawerViewModel;
@@ -55,11 +56,7 @@ class DrawerView extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 20, bottom: 10),
-                          child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage(drawerViewModel.imageUrl),
-                            radius: 28,
-                          ),
+                          child: MyCircleAvatar(image: drawerViewModel.imageUrl),
                         ),
                         Text(
                           drawerViewModel.username,

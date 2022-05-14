@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/edit_business_detail_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
+import 'package:yarn_bazaar/presentation/widgets/stacked_loading_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 
 class EditBusinessDetailView extends StatelessWidget {
   final EditBusinessDetailViewModel editBusinessDetailViewModel;
   final Function(String companyName) onCompanyName;
   final VoidCallback onAccountType;
+  final VoidCallback onEditCategories;
   final Function(String address) onAddress;
   final Function(String completeAddress) onCompleteAddress;
   final Function(String gstNo) onGSTNo;
@@ -16,12 +18,21 @@ class EditBusinessDetailView extends StatelessWidget {
   final Function(String panNo) onPANNo;
   final VoidCallback onPANCardDocument;
   final VoidCallback onSave;
+  final VoidCallback onReload;
+  final TextEditingController? companyNameTextEditingController;
+  final TextEditingController? accountTypeTextEditingController;
+  final TextEditingController? addressTextEditingController;
+  final TextEditingController? completeAddressTextEditingController;
+  final TextEditingController? gstNoTextEditingController;
+  final TextEditingController? tanNoTextEditingController;
+  final TextEditingController? panNoTextEditingController;
 
   const EditBusinessDetailView({
     Key? key,
     required this.editBusinessDetailViewModel,
     required this.onCompanyName,
     required this.onAccountType,
+    required this.onEditCategories,
     required this.onAddress,
     required this.onCompleteAddress,
     required this.onGSTNo,
@@ -30,6 +41,14 @@ class EditBusinessDetailView extends StatelessWidget {
     required this.onPANNo,
     required this.onPANCardDocument,
     required this.onSave,
+    required this.onReload,
+    this.companyNameTextEditingController,
+    this.accountTypeTextEditingController,
+    this.addressTextEditingController,
+    this.completeAddressTextEditingController,
+    this.gstNoTextEditingController,
+    this.tanNoTextEditingController,
+    this.panNoTextEditingController,
   }) : super(key: key);
 
   @override
@@ -45,7 +64,7 @@ class EditBusinessDetailView extends StatelessWidget {
                 children: [
                   TextFieldWithTitle(
                     title: 'Company Name',
-                    textFieldValue: editBusinessDetailViewModel.companyName,
+                    controller: completeAddressTextEditingController,
                     errorMessage: editBusinessDetailViewModel.companyNameError,
                     hintText: 'xyz enterprise',
                     usesPrimaryColor: false,
@@ -55,15 +74,22 @@ class EditBusinessDetailView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                     title: 'Account Type',
-                    textFieldValue: editBusinessDetailViewModel.accountType,
+                    controller: accountTypeTextEditingController,
                     hintText: 'Trader',
                     usesPrimaryColor: false,
                     onTap: onAccountType,
                   ),
                   15.vSpace,
                   TextFieldWithTitle(
+                    title: 'Categories',
+                    hintText: 'Edit Categories',
+                    usesPrimaryColor: false,
+                    onTap: onEditCategories,
+                  ),
+                  15.vSpace,
+                  TextFieldWithTitle(
                     title: 'Address',
-                    textFieldValue: editBusinessDetailViewModel.address,
+                    controller: addressTextEditingController,
                     errorMessage: editBusinessDetailViewModel.addressError,
                     hintText: 'Addis, Ethiopia',
                     usesPrimaryColor: false,
@@ -73,9 +99,8 @@ class EditBusinessDetailView extends StatelessWidget {
                   15.vSpace,
                   TextFieldWithTitle(
                     title: 'Complete Address',
-                    textFieldValue: editBusinessDetailViewModel.completeAddress,
-                    errorMessage:
-                        editBusinessDetailViewModel.completeAddressError,
+                    controller: completeAddressTextEditingController,
+                    errorMessage: editBusinessDetailViewModel.completeAddressError,
                     hintText: 'Complete Address',
                     usesPrimaryColor: false,
                     fieldIsOptional: false,
@@ -88,10 +113,8 @@ class EditBusinessDetailView extends StatelessWidget {
                         flex: 1,
                         child: TextFieldWithTitle(
                           title: 'GST No',
-                          textFieldValue:
-                              editBusinessDetailViewModel.gstNo,
-                          errorMessage:
-                              editBusinessDetailViewModel.gstNoError,
+                          controller: gstNoTextEditingController,
+                          errorMessage: editBusinessDetailViewModel.gstNoError,
                           hintText: '22AAAAA0000A1Z5',
                           usesPrimaryColor: false,
                           fieldIsOptional: false,
@@ -103,10 +126,8 @@ class EditBusinessDetailView extends StatelessWidget {
                         flex: 1,
                         child: TextFieldWithTitle(
                           title: 'TAN No',
-                          textFieldValue:
-                              editBusinessDetailViewModel.tanNo,
-                          errorMessage:
-                              editBusinessDetailViewModel.tanNoError,
+                          controller: tanNoTextEditingController,
+                          errorMessage: editBusinessDetailViewModel.tanNoError,
                           hintText: 'AAAA99999A',
                           usesPrimaryColor: false,
                           fieldIsOptional: false,
@@ -119,7 +140,7 @@ class EditBusinessDetailView extends StatelessWidget {
                     title: 'Business PAN Number',
                     readOnly: true,
                     enabled: false,
-                    textFieldValue: editBusinessDetailViewModel.panNo,
+                    controller: panNoTextEditingController,
                     errorMessage: editBusinessDetailViewModel.panNoError,
                     hintText: 'AAAAA8888A',
                     usesPrimaryColor: false,
@@ -140,7 +161,12 @@ class EditBusinessDetailView extends StatelessWidget {
               label: 'SAVE',
               onSubmit: onSave,
               isLoading: editBusinessDetailViewModel.isSaving,
-            ))
+            )),
+        MyStackedLoadingView(
+          isLoading: editBusinessDetailViewModel.isLoadingSaved,
+          error: editBusinessDetailViewModel.error,
+          onReload: onReload,
+        )
       ],
     );
   }

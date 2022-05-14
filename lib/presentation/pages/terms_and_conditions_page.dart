@@ -9,6 +9,7 @@ class TermsAndConditionsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const PopButton(),
+        title: Text("Terms and Conditions"),
       ),
     );
   }

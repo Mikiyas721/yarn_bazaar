@@ -8,8 +8,8 @@ class FetchCottonYarnsDataChangedEvent extends FetchCottonYarnsEvent {
   FetchCottonYarnsDataChangedEvent(this.yarns);
 
   @override
-  Stream<FetchCottonYarnsState> handle(FetchCottonYarnsState currentState) async* {
-    yield currentState.copyWith(yarns: yarns);
+  FetchCottonYarnsState handle(FetchCottonYarnsState currentState)  {
+    return currentState.copyWith(yarns: yarns);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchCottonYarnsIsLoadingChangedEvent extends FetchCottonYarnsEvent {
   FetchCottonYarnsIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchCottonYarnsState> handle(FetchCottonYarnsState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchCottonYarnsState handle(FetchCottonYarnsState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchCottonYarnsLoadFailureEvent extends FetchCottonYarnsEvent {
   FetchCottonYarnsLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchCottonYarnsState> handle(FetchCottonYarnsState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchCottonYarnsState handle(FetchCottonYarnsState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

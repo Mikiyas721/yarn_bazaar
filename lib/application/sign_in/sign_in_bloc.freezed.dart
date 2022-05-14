@@ -20,7 +20,6 @@ mixin _$SignInState {
       throw _privateConstructorUsedError;
   Either<PasswordFailure, Password> get password =>
       throw _privateConstructorUsedError;
-  bool get showPassword => throw _privateConstructorUsedError;
   bool get isShowingPassword => throw _privateConstructorUsedError;
   bool get hasSubmittedCredentials => throw _privateConstructorUsedError;
   bool get isVerifyingCredentials => throw _privateConstructorUsedError;
@@ -38,7 +37,6 @@ abstract class $SignInStateCopyWith<$Res> {
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Either<PasswordFailure, Password> password,
-      bool showPassword,
       bool isShowingPassword,
       bool hasSubmittedCredentials,
       bool isVerifyingCredentials});
@@ -56,7 +54,6 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
   $Res call({
     Object? phoneNumber = freezed,
     Object? password = freezed,
-    Object? showPassword = freezed,
     Object? isShowingPassword = freezed,
     Object? hasSubmittedCredentials = freezed,
     Object? isVerifyingCredentials = freezed,
@@ -70,10 +67,6 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Either<PasswordFailure, Password>,
-      showPassword: showPassword == freezed
-          ? _value.showPassword
-          : showPassword // ignore: cast_nullable_to_non_nullable
-              as bool,
       isShowingPassword: isShowingPassword == freezed
           ? _value.isShowingPassword
           : isShowingPassword // ignore: cast_nullable_to_non_nullable
@@ -100,7 +93,6 @@ abstract class _$$_SignInStateCopyWith<$Res>
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Either<PasswordFailure, Password> password,
-      bool showPassword,
       bool isShowingPassword,
       bool hasSubmittedCredentials,
       bool isVerifyingCredentials});
@@ -120,7 +112,6 @@ class __$$_SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
   $Res call({
     Object? phoneNumber = freezed,
     Object? password = freezed,
-    Object? showPassword = freezed,
     Object? isShowingPassword = freezed,
     Object? hasSubmittedCredentials = freezed,
     Object? isVerifyingCredentials = freezed,
@@ -134,10 +125,6 @@ class __$$_SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Either<PasswordFailure, Password>,
-      showPassword: showPassword == freezed
-          ? _value.showPassword
-          : showPassword // ignore: cast_nullable_to_non_nullable
-              as bool,
       isShowingPassword: isShowingPassword == freezed
           ? _value.isShowingPassword
           : isShowingPassword // ignore: cast_nullable_to_non_nullable
@@ -160,7 +147,6 @@ class _$_SignInState implements _SignInState {
   const _$_SignInState(
       {required this.phoneNumber,
       required this.password,
-      required this.showPassword,
       required this.isShowingPassword,
       required this.hasSubmittedCredentials,
       required this.isVerifyingCredentials});
@@ -170,8 +156,6 @@ class _$_SignInState implements _SignInState {
   @override
   final Either<PasswordFailure, Password> password;
   @override
-  final bool showPassword;
-  @override
   final bool isShowingPassword;
   @override
   final bool hasSubmittedCredentials;
@@ -180,7 +164,7 @@ class _$_SignInState implements _SignInState {
 
   @override
   String toString() {
-    return 'SignInState(phoneNumber: $phoneNumber, password: $password, showPassword: $showPassword, isShowingPassword: $isShowingPassword, hasSubmittedCredentials: $hasSubmittedCredentials, isVerifyingCredentials: $isVerifyingCredentials)';
+    return 'SignInState(phoneNumber: $phoneNumber, password: $password, isShowingPassword: $isShowingPassword, hasSubmittedCredentials: $hasSubmittedCredentials, isVerifyingCredentials: $isVerifyingCredentials)';
   }
 
   @override
@@ -191,8 +175,6 @@ class _$_SignInState implements _SignInState {
             const DeepCollectionEquality()
                 .equals(other.phoneNumber, phoneNumber) &&
             const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality()
-                .equals(other.showPassword, showPassword) &&
             const DeepCollectionEquality()
                 .equals(other.isShowingPassword, isShowingPassword) &&
             const DeepCollectionEquality().equals(
@@ -206,7 +188,6 @@ class _$_SignInState implements _SignInState {
       runtimeType,
       const DeepCollectionEquality().hash(phoneNumber),
       const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(showPassword),
       const DeepCollectionEquality().hash(isShowingPassword),
       const DeepCollectionEquality().hash(hasSubmittedCredentials),
       const DeepCollectionEquality().hash(isVerifyingCredentials));
@@ -221,7 +202,6 @@ abstract class _SignInState implements SignInState {
   const factory _SignInState(
       {required final Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       required final Either<PasswordFailure, Password> password,
-      required final bool showPassword,
       required final bool isShowingPassword,
       required final bool hasSubmittedCredentials,
       required final bool isVerifyingCredentials}) = _$_SignInState;
@@ -232,8 +212,6 @@ abstract class _SignInState implements SignInState {
   @override
   Either<PasswordFailure, Password> get password =>
       throw _privateConstructorUsedError;
-  @override
-  bool get showPassword => throw _privateConstructorUsedError;
   @override
   bool get isShowingPassword => throw _privateConstructorUsedError;
   @override

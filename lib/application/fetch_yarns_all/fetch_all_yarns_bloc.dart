@@ -12,11 +12,11 @@ part 'fetch_all_yarns_state.dart';
 
 part 'fetch_all_yarns_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class FetchAllYarnsBloc extends Bloc<FetchAllYarnsEvent, FetchAllYarnsState> {
   FetchAllYarnsBloc() : super(FetchAllYarnsState.initial()) {
     on<FetchAllYarnsEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

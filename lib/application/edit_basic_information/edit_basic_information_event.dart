@@ -4,15 +4,26 @@ abstract class EditBasicInformationEvent extends BlocEvent<EditBasicInformationS
 
 class EditBasicInformationStartedLoadingSavedEvent extends EditBasicInformationEvent {
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(isLoadingSaved: true);
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(isLoadingSaved: true);
   }
 }
 
 class EditBasicInformationStoppedLoadingSavedEvent extends EditBasicInformationEvent {
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(isLoadingSaved: false);
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(isLoadingSaved: false);
+  }
+}
+
+class EditBasicInformationFailureChangedEvent extends EditBasicInformationEvent {
+  final Option<Failure> failure;
+
+  EditBasicInformationFailureChangedEvent(this.failure);
+
+  @override
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(failure: failure);
   }
 }
 
@@ -22,8 +33,8 @@ class EditBasicInformationFirstNameChangedEvent extends EditBasicInformationEven
   EditBasicInformationFirstNameChangedEvent(this.name);
 
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(firstName: Name.create(name));
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(firstName: Name.create(name));
   }
 }
 
@@ -33,8 +44,8 @@ class EditBasicInformationLastNameChangedEvent extends EditBasicInformationEvent
   EditBasicInformationLastNameChangedEvent(this.name);
 
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(lastName: Name.create(name));
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(lastName: Name.create(name));
   }
 }
 
@@ -44,8 +55,8 @@ class EditBasicInformationInBusinessSinceChangedEvent extends EditBasicInformati
   EditBasicInformationInBusinessSinceChangedEvent(this.year);
 
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(inBusinessSince: Year.create(year));
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(inBusinessSince: Year.create(year));
   }
 }
 
@@ -55,8 +66,8 @@ class EditBasicInformationPrimaryNumberChangedEvent extends EditBasicInformation
   EditBasicInformationPrimaryNumberChangedEvent(this.phoneNumber);
 
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(primaryNumber: PhoneNumber.create(phoneNumber));
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(primaryNumber: PhoneNumber.create(phoneNumber));
   }
 }
 
@@ -66,8 +77,8 @@ class EditBasicInformationCountryChangedEvent extends EditBasicInformationEvent 
   EditBasicInformationCountryChangedEvent(this.country);
 
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(country: country);
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(country: country);
   }
 }
 
@@ -77,8 +88,8 @@ class EditBasicInformationCityChangedEvent extends EditBasicInformationEvent {
   EditBasicInformationCityChangedEvent(this.city);
 
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(city: city);
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(city: city);
   }
 }
 
@@ -88,8 +99,8 @@ class EditBasicInformationEmailChangedEvent extends EditBasicInformationEvent {
   EditBasicInformationEmailChangedEvent(this.email);
 
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(email: Email.create(email));
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(email: Email.create(email));
   }
 }
 
@@ -99,28 +110,28 @@ class EditBasicInformationWebsiteUrlChangedEvent extends EditBasicInformationEve
   EditBasicInformationWebsiteUrlChangedEvent(this.websiteUrl);
 
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(website: WebsiteUrl.create(websiteUrl));
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(website: WebsiteUrl.create(websiteUrl));
   }
 }
 
 class EditBasicInformationSubmittedEvent extends EditBasicInformationEvent {
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(hasSubmitted: true);
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(hasSubmitted: true);
   }
 }
 
 class EditBasicInformationStartedSavingEvent extends EditBasicInformationEvent {
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(isSaving: true);
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(isSaving: true);
   }
 }
 
 class EditBasicInformationStoppedSavingEvent extends EditBasicInformationEvent {
   @override
-  Stream<EditBasicInformationState> handle(EditBasicInformationState currentState) async* {
-    yield currentState.copyWith(isSaving: false);
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(isSaving: false);
   }
 }

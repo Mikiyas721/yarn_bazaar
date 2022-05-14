@@ -11,7 +11,7 @@ class EditProfileController
   @override
   EditProfileViewModel mapStateToViewModel(SplashState s) {
     return EditProfileViewModel(
-      imageUrl: s.appUser.fold(() => '', (a) => a.imageUrl ?? ''),
+      imageUrl: s.appUser.fold(() => '', (a) => a.imageUrl),
       username: s.appUser.fold(() => '', (a) => a.firstName.value ?? '') +
           ' ' +
           s.appUser.fold(() => '', (a) => a.lastName?.value ?? ''),

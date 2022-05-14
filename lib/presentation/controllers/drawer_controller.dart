@@ -11,7 +11,7 @@ class MyDrawerController
   @override
   DrawerViewModel mapStateToViewModel(SplashState s) {
     return DrawerViewModel(
-      imageUrl: s.appUser.fold(() => '', (a) => a.imageUrl ?? ''),
+      imageUrl: s.appUser.fold(() => '', (a) => a.imageUrl),
       username: s.appUser.fold(() => '', (a) => a.firstName.value ?? '') +
           ' ' +
           s.appUser.fold(() => '', (a) => a.lastName?.value ?? ''),

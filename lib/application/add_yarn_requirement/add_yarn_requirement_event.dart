@@ -8,8 +8,8 @@ class AddYarnRequirementIntentionChangedEvent extends AddYarnRequirementEvent {
   AddYarnRequirementIntentionChangedEvent(this.intention);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(intention: intention);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(intention: intention);
   }
 }
 
@@ -19,8 +19,8 @@ class AddYarnRequirementYarnQualityDetailChangedEvent extends AddYarnRequirement
   AddYarnRequirementYarnQualityDetailChangedEvent(this.yarnQuality);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(yarnQuality: yarnQuality);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(yarnQuality: yarnQuality);
   }
 }
 
@@ -30,8 +30,8 @@ class AddYarnRequirementQualityDetailsChangedEvent extends AddYarnRequirementEve
   AddYarnRequirementQualityDetailsChangedEvent(this.qualityDetails);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(qualityDetails: qualityDetails);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(qualityDetails: qualityDetails);
   }
 }
 
@@ -41,8 +41,8 @@ class AddYarnRequirementColorChangedEvent extends AddYarnRequirementEvent {
   AddYarnRequirementColorChangedEvent(this.color);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(color: color);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(color: color);
   }
 }
 
@@ -52,8 +52,8 @@ class AddYarnRequirementQuantityInKgsChangedEvent extends AddYarnRequirementEven
   AddYarnRequirementQuantityInKgsChangedEvent(this.quantityInKgs);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(quantityInKgs: Quantity.create(quantityInKgs));
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(quantityInKgs: Quantity.create(quantityInKgs));
   }
 }
 
@@ -63,8 +63,8 @@ class AddYarnRequirementDeliveryAreaChangedEvent extends AddYarnRequirementEvent
   AddYarnRequirementDeliveryAreaChangedEvent(this.deliveryArea);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(deliveryArea: Location.create(deliveryArea));
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(deliveryArea: Location.create(deliveryArea));
   }
 }
 
@@ -74,8 +74,8 @@ class AddYarnRequirementDeliveryPeriodChangedEvent extends AddYarnRequirementEve
   AddYarnRequirementDeliveryPeriodChangedEvent(this.deliveryPeriod);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(deliveryPeriod: deliveryPeriod);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(deliveryPeriod: deliveryPeriod);
   }
 }
 
@@ -85,8 +85,8 @@ class AddYarnRequirementPaymentTermsChangedEvent extends AddYarnRequirementEvent
   AddYarnRequirementPaymentTermsChangedEvent(this.paymentTerms);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(paymentTerms: PaymentTerms.create(paymentTerms));
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(paymentTerms: PaymentTerms.create(paymentTerms));
   }
 }
 
@@ -96,8 +96,8 @@ class AddYarnRequirementInquiryClosesWithinChangedEvent extends AddYarnRequireme
   AddYarnRequirementInquiryClosesWithinChangedEvent(this.inquiryClosesWithin);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(inquiryClosesWithin: inquiryClosesWithin);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(inquiryClosesWithin: inquiryClosesWithin);
   }
 }
 
@@ -107,8 +107,8 @@ class AddYarnRequirementSendRequirementToChangedEvent extends AddYarnRequirement
   AddYarnRequirementSendRequirementToChangedEvent(this.sendRequirementTo);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(sendRequirementTo: sendRequirementTo);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(sendRequirementTo: sendRequirementTo);
   }
 }
 
@@ -118,8 +118,8 @@ class AddYarnRequirementAdditionalCommentChangedEvent extends AddYarnRequirement
   AddYarnRequirementAdditionalCommentChangedEvent(this.additionalComment);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(additionalComment: additionalComment);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(additionalComment: additionalComment);
   }
 }
 
@@ -129,14 +129,14 @@ class AddYarnRequirementWantToTestReportChangedEvent extends AddYarnRequirementE
   AddYarnRequirementWantToTestReportChangedEvent(this.wantToTestReport);
 
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(wantToTestReport: wantToTestReport);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(wantToTestReport: wantToTestReport);
   }
 }
 
 class AddYarnRequirementSubmittedEvent extends AddYarnRequirementEvent {
   @override
-  Stream<AddYarnRequirementState> handle(AddYarnRequirementState currentState) async* {
-    yield currentState.copyWith(hasSubmitted: true);
+  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
+    return currentState.copyWith(hasSubmitted: true);
   }
 }

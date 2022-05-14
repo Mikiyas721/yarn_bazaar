@@ -11,11 +11,11 @@ part 'fetch_cp_yarns_state.dart';
 
 part 'fetch_cp_yarns_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class FetchCpYarnsBloc extends Bloc<FetchCpYarnsEvent, FetchCpYarnsState> {
   FetchCpYarnsBloc() : super(FetchCpYarnsState.initial()) {
     on<FetchCpYarnsEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

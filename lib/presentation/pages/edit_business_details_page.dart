@@ -24,6 +24,7 @@ class EditBusinessDetailPage extends StatelessWidget {
                 editBusinessDetailViewModel: editBusinessDetailsViewModel!,
                 onCompanyName: controller.onCompanyName,
                 onAccountType: controller.onAccountType,
+                onEditCategories: controller.onEditCategories,
                 onAddress: controller.onAddress,
                 onCompleteAddress: controller.onCompleteAddress,
                 onGSTNo: controller.onGSTNo,
@@ -32,6 +33,14 @@ class EditBusinessDetailPage extends StatelessWidget {
                 onPANNo: controller.onPANNo,
                 onPANCardDocument: controller.onPANCardDocument,
                 onSave: controller.onSave,
+                onReload: controller.loadSaved(),
+                companyNameTextEditingController: controller.companyNameTextEditingController,
+                accountTypeTextEditingController: controller.accountTypeTextEditingController,
+                addressTextEditingController: controller.addressTextEditingController,
+                completeAddressTextEditingController: controller.completeAddressTextEditingController,
+                gstNoTextEditingController: controller.gstNoTextEditingController,
+                tanNoTextEditingController: controller.tanNoTextEditingController,
+                panNoTextEditingController: controller.panNoTextEditingController,
               ));
         });
   }

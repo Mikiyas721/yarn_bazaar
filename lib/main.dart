@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/pages/add_yarn_requirement_page.dart';
 import 'package:yarn_bazaar/presentation/pages/auth_page.dart';
 import 'package:yarn_bazaar/presentation/pages/categories_page.dart';
@@ -14,13 +16,18 @@ import 'package:yarn_bazaar/presentation/pages/home_page.dart';
 import 'package:yarn_bazaar/presentation/pages/input_selection_page.dart';
 import 'package:yarn_bazaar/presentation/pages/price_list_detail_page.dart';
 import 'package:yarn_bazaar/presentation/pages/price_list_page.dart';
+import 'package:yarn_bazaar/presentation/pages/privacy_policy_page.dart';
 import 'package:yarn_bazaar/presentation/pages/profile_page.dart';
 import 'package:yarn_bazaar/presentation/pages/sign_in_page.dart';
 import 'package:yarn_bazaar/presentation/pages/sign_up_page.dart';
 import 'package:yarn_bazaar/presentation/pages/splash_page.dart';
+import 'package:yarn_bazaar/presentation/pages/terms_and_conditions_page.dart';
 import 'package:yarn_bazaar/presentation/pages/watchlist_page.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await setUpDependencies();
   runApp(const YarnBazaar());
 }
 
@@ -47,9 +54,6 @@ class YarnBazaar extends StatelessWidget {
               .copyWith(primary: const Color(0xFFFF9F10))),
       initialRoute: '/',
       routes: routes,
-      onGenerateRoute: (RouteSettings settings) {
-        return null;
-      },
     );
   }
 }
@@ -71,8 +75,10 @@ final routes = {
   '/inputSelectionPage': (BuildContext context) => const InputSelectionPage(),
   '/priceListDetailPage': (BuildContext context) => const PriceListDetailPage(),
   '/priceListPage': (BuildContext context) => const PriceListPage(),
+  '/privacyPolicyPage': (BuildContext context) => const PrivacyPolicyPage(),
   '/profilePage': (BuildContext context) => const ProfilePage(),
   '/signInPage': (BuildContext context) => const SignInPage(),
   '/signUpPage': (BuildContext context) => const SignUpPage(),
+  '/termsAndConditionsPage': (BuildContext context) => const TermsAndConditionsPage(),
   '/watchlistPage': (BuildContext context) => const WatchlistPage(),
 };

@@ -4,15 +4,26 @@ abstract class EditBusinessDetailsEvent extends BlocEvent<EditBusinessDetailsSta
 
 class EditBusinessDetailsStartedLoadingSavedEvent extends EditBusinessDetailsEvent {
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(isLoadingSaved: true);
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(isLoadingSaved: true);
   }
 }
 
 class EditBusinessDetailsStoppedLoadingSavedEvent extends EditBusinessDetailsEvent {
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(isLoadingSaved: false);
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(isLoadingSaved: false);
+  }
+}
+
+class EditBusinessDetailsFailureChangedEvent extends EditBusinessDetailsEvent {
+  final Option<Failure> failure;
+
+  EditBusinessDetailsFailureChangedEvent(this.failure);
+
+  @override
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(failure: failure);
   }
 }
 
@@ -22,8 +33,8 @@ class EditBusinessDetailsCompanyNameChangedEvent extends EditBusinessDetailsEven
   EditBusinessDetailsCompanyNameChangedEvent(this.companyName);
 
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(companyName: CompanyName.create(companyName));
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(companyName: CompanyName.create(companyName));
   }
 }
 
@@ -33,8 +44,19 @@ class EditBusinessDetailsAccountTypeChangedEvent extends EditBusinessDetailsEven
   EditBusinessDetailsAccountTypeChangedEvent(this.accountType);
 
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(accountType: accountType);
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(accountType: accountType);
+  }
+}
+
+class EditBusinessDetailsCategoriesChangedEvent extends EditBusinessDetailsEvent {
+  final List<String> categories;
+
+  EditBusinessDetailsCategoriesChangedEvent(this.categories);
+
+  @override
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(categories: categories);
   }
 }
 
@@ -44,8 +66,8 @@ class EditBusinessDetailsAddressChangedEvent extends EditBusinessDetailsEvent {
   EditBusinessDetailsAddressChangedEvent(this.address);
 
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(address: address);
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(address: address);
   }
 }
 
@@ -55,8 +77,8 @@ class EditBusinessDetailsCompleteAddressChangedEvent extends EditBusinessDetails
   EditBusinessDetailsCompleteAddressChangedEvent(this.completeAddress);
 
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(completeAddress: completeAddress);
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(completeAddress: completeAddress);
   }
 }
 
@@ -66,8 +88,8 @@ class EditBusinessDetailsGSTNoChangedEvent extends EditBusinessDetailsEvent {
   EditBusinessDetailsGSTNoChangedEvent(this.gstNo);
 
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(gstNo: GSTNumber.create(gstNo));
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(gstNo: GSTNumber.create(gstNo));
   }
 }
 
@@ -77,8 +99,8 @@ class EditBusinessDetailsTANNoChangedEvent extends EditBusinessDetailsEvent {
   EditBusinessDetailsTANNoChangedEvent(this.tanNo);
 
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(tanNo: TANNumber.create(tanNo));
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(tanNo: TANNumber.create(tanNo));
   }
 }
 
@@ -88,28 +110,28 @@ class EditBusinessDetailsPANNoChangedEvent extends EditBusinessDetailsEvent {
   EditBusinessDetailsPANNoChangedEvent(this.panNo);
 
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(panNo: PANNumber.create(panNo));
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(panNo: PANNumber.create(panNo));
   }
 }
 
 class EditBusinessDetailsSubmittedEvent extends EditBusinessDetailsEvent {
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(hasSubmitted: true);
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(hasSubmitted: true);
   }
 }
 
 class EditBusinessDetailsStartedSavingEvent extends EditBusinessDetailsEvent {
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(isSaving: true);
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(isSaving: true);
   }
 }
 
 class EditBusinessDetailsStoppedSavingEvent extends EditBusinessDetailsEvent {
   @override
-  Stream<EditBusinessDetailsState> handle(EditBusinessDetailsState currentState) async* {
-    yield currentState.copyWith(isSaving: false);
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(isSaving: false);
   }
 }

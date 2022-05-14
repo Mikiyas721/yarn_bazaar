@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:yarn_bazaar/domain/value_objects/delivery_area.dart';
 import 'package:yarn_bazaar/domain/value_objects/payment_terms.dart';
 import 'package:yarn_bazaar/domain/value_objects/quantity.dart';
+import 'package:yarn_bazaar/domain/value_objects/yarn_requirement_intention.dart';
+import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 import '../../common/entity.dart';
 
@@ -86,24 +88,20 @@ class Yarn extends Entity {
     final deliveryAreaObject = Location.create(deliveryArea!);
     final paymentTermsObject = PaymentTerms.create(paymentTerms!);
 
-    if (quantityObject.isLeft() ||
-        deliveryAreaObject.isLeft() ||
-        paymentTermsObject.isLeft()) return none();
+    if (quantityObject.isLeft() || deliveryAreaObject.isLeft() || paymentTermsObject.isLeft())
+      return none();
 
     return some(Yarn._(
       id: id,
       intention: intention!,
-      count:count!,
-      yarnType:yarnType!,
-      purpose:purpose!,
+      count: count!,
+      yarnType: yarnType!,
+      purpose: purpose!,
       colour: colour!,
-      quantityInKgs: quantityObject
-          .getOrElse(() => throw Exception('Yarn Quantity Error')),
-      deliveryArea: deliveryAreaObject
-          .getOrElse(() => throw Exception('Delivery Area Error')),
+      quantityInKgs: quantityObject.getOrElse(() => throw Exception('Yarn Quantity Error')),
+      deliveryArea: deliveryAreaObject.getOrElse(() => throw Exception('Delivery Area Error')),
       deliveryPeriod: deliveryPeriod!,
-      paymentTerms: paymentTermsObject
-          .getOrElse(() => throw Exception('Payment Terms Error')),
+      paymentTerms: paymentTermsObject.getOrElse(() => throw Exception('Payment Terms Error')),
       inquiryClosesWithIn: inquiryClosesWithIn!,
       sendRequirementTo: sendRequirementTo!,
       additionalComments: additionalComments,
@@ -127,6 +125,7 @@ class Yarn extends Entity {
     String? inquiryClosesWithIn,
     String? sendRequirementTo,
     String? additionalComments,
+    String? userId,
   }) {
     if ([
       intention,
@@ -140,32 +139,33 @@ class Yarn extends Entity {
       paymentTerms,
       inquiryClosesWithIn,
       sendRequirementTo,
+      userId
     ].any((element) => element == null)) return none();
+
+    if (intention == YarnRequirementIntention.None.getString()) return none();
 
     final quantityObject = Quantity.create(quantityInKgs!);
     final deliveryAreaObject = Location.create(deliveryArea!);
     final paymentTermsObject = PaymentTerms.create(paymentTerms!);
 
-    if (quantityObject.isLeft() ||
-        deliveryAreaObject.isLeft() ||
-        paymentTermsObject.isLeft()) return none();
+    if (quantityObject.isLeft() || deliveryAreaObject.isLeft() || paymentTermsObject.isLeft())
+      return none();
 
     return some(Yarn._(
       intention: intention!,
-      count:count!,
-      yarnType:yarnType!,
-      purpose:purpose!,
+      count: count!,
+      yarnType: yarnType!,
+      purpose: purpose!,
+      qualityDetails: qualityDetails,
       colour: colour!,
-      quantityInKgs: quantityObject
-          .getOrElse(() => throw Exception('Yarn Quantity Error')),
-      deliveryArea: deliveryAreaObject
-          .getOrElse(() => throw Exception('Delivery Area Error')),
+      quantityInKgs: quantityObject.getOrElse(() => throw Exception('Yarn Quantity Error')),
+      deliveryArea: deliveryAreaObject.getOrElse(() => throw Exception('Delivery Area Error')),
       deliveryPeriod: deliveryPeriod!,
-      paymentTerms: paymentTermsObject
-          .getOrElse(() => throw Exception('Payment Terms Error')),
+      paymentTerms: paymentTermsObject.getOrElse(() => throw Exception('Payment Terms Error')),
       inquiryClosesWithIn: inquiryClosesWithIn!,
       sendRequirementTo: sendRequirementTo!,
       additionalComments: additionalComments,
+      userId: userId
     ));
   }
 }

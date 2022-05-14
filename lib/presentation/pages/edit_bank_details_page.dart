@@ -31,6 +31,14 @@ class EditBankDetailsPage extends StatelessWidget {
                 onAttachAddress: controller.onAttachAddress,
                 onAttachCheque: controller.onAttachCheque,
                 onSave: controller.onSave,
+                onReload: controller.loadSavedBankDetails(),
+                accountNameController: controller.accountNameController,
+                accountNumberController: controller.accountNumberController,
+                iFSCCodeController: controller.iFSCCodeController,
+                bankNameController: controller.bankNameController,
+                bankBranchController: controller.bankBranchController,
+                bankStateController: controller.bankStateController,
+                bankCityController: controller.bankCityController,
               ));
         });
   }

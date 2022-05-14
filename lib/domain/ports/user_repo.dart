@@ -13,5 +13,7 @@ abstract class IUserRepo{
   Future<bool> cacheLoggedInUser(AppUser user);
   Future<Option<AppUser>> getCurrentLoggedInUser();
   Future<bool> clearLoggedInUser();
-  Future<Either<Failure,AppUser >> loginUser(Credentials credentials);
+  Future<Either<Failure,AppUser>> signInUser(Credentials credentials);
+  Future<Either<Failure,AppUser>> addUser(AppUser appUser);
+  Future<Either<Failure,bool>> checkPhoneNumberExists(String phoneNumber);
 }

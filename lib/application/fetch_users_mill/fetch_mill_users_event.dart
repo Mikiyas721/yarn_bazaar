@@ -8,8 +8,8 @@ class FetchMillUsersDataChangedEvent extends FetchMillUsersEvent {
   FetchMillUsersDataChangedEvent(this.users);
 
   @override
-  Stream<FetchMillUsersState> handle(FetchMillUsersState currentState) async* {
-    yield currentState.copyWith(users: users);
+  FetchMillUsersState handle(FetchMillUsersState currentState)  {
+    return currentState.copyWith(users: users);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchMillUsersIsLoadingChangedEvent extends FetchMillUsersEvent {
   FetchMillUsersIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchMillUsersState> handle(FetchMillUsersState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchMillUsersState handle(FetchMillUsersState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchMillUsersLoadFailureEvent extends FetchMillUsersEvent {
   FetchMillUsersLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchMillUsersState> handle(FetchMillUsersState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchMillUsersState handle(FetchMillUsersState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

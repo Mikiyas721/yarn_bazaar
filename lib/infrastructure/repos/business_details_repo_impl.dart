@@ -17,7 +17,7 @@ class BusinessDetailsRepoImpl extends IBusinessDetailsRepo {
   BusinessDetailsRepoImpl(this._businessDetailsCrudDatasource);
 
   @override
-  Future<Either<Failure, BusinessDetails>> fetchUserBusinessDetails(String userId) async {
+  Future<Either<Failure, BusinessDetail>> fetchUserBusinessDetails(String userId) async {
     final result = await _businessDetailsCrudDatasource.find(options: {
       "filter": {
         "where": {"userId": userId}
@@ -25,13 +25,13 @@ class BusinessDetailsRepoImpl extends IBusinessDetailsRepo {
     });
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<BusinessDetails, BusinessDetailsDto>(r).first),
+      (r) => right(IdDto.toDomainList<BusinessDetail, BusinessDetailsDto>(r).first),
     );
   }
 
   @override
-  Future<Either<Failure, BusinessDetails>> updateUserBusinessDetails(
-      BusinessDetails newBusinessDetails) async {
+  Future<Either<Failure, BusinessDetail>> updateUserBusinessDetails(
+      BusinessDetail newBusinessDetails) async {
     final result = await _businessDetailsCrudDatasource
         .update(BusinessDetailsDto.fromDomain(newBusinessDetails));
     return result.fold(

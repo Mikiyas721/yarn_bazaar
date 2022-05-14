@@ -17,7 +17,7 @@ class BankDetailsRepoImpl extends IBankDetailsRepo {
       const SimpleFailure('Unable to map bank details json from API to Domain');
 
   @override
-  Future<Either<Failure, BankDetails>> fetchUserBankDetails(String userId) async {
+  Future<Either<Failure, BankDetail>> fetchUserBankDetails(String userId) async {
     final result = await _bankDetailsCrudDatasource.find(options: {
       "filter": {
         "where": {"userId": userId}
@@ -25,12 +25,12 @@ class BankDetailsRepoImpl extends IBankDetailsRepo {
     });
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<BankDetails, BankDetailsDto>(r).first),
+      (r) => right(IdDto.toDomainList<BankDetail, BankDetailsDto>(r).first),
     );
   }
 
   @override
-  Future<Either<Failure, BankDetails>> updateUserBankDetails(BankDetails newBankDetails) async {
+  Future<Either<Failure, BankDetail>> updateUserBankDetails(BankDetail newBankDetails) async {
     final result =
         await _bankDetailsCrudDatasource.update(BankDetailsDto.fromDomain(newBankDetails));
     return result.fold(

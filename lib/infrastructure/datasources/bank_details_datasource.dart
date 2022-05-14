@@ -4,7 +4,6 @@ import 'package:yarn_bazaar/infrastructure/datasources/shared/crud_datasource/re
 import 'package:yarn_bazaar/infrastructure/datasources/shared/rest_datasource/rest_datasource.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/shared/rest_datasource/rest_response.dart';
 import 'package:yarn_bazaar/infrastructure/dtos/bank_details_dto.dart';
-import 'package:yarn_bazaar/infrastructure/dtos/business_details_dto.dart';
 
 abstract class BankDetailsCrudDatasource
     extends CrudDataSource<BankDetailsDto, RestResponseFailure> {}

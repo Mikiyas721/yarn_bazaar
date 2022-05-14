@@ -2,6 +2,7 @@ import 'package:yarn_bazaar/common/view_model.dart';
 
 class EditBankDetailViewModel extends ViewModel {
   final bool isLoadingSaved;
+  final String? error;
   final String? accountName;
   final String? accountNameError;
   final String? accountNumber;
@@ -20,6 +21,7 @@ class EditBankDetailViewModel extends ViewModel {
 
   EditBankDetailViewModel({
     required this.isLoadingSaved,
+    this.error,
     required this.accountName,
     this.accountNameError,
     required this.accountNumber,
@@ -40,6 +42,7 @@ class EditBankDetailViewModel extends ViewModel {
   @override
   List<Object?> get props => [
         isLoadingSaved,
+        error,
         accountName,
         accountNameError,
         accountNumber,

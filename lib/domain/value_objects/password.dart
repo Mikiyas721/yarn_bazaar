@@ -10,7 +10,7 @@ class EmptyPasswordFailure extends PasswordFailure {
 
 class ShortPasswordFailure extends PasswordFailure {
   @override
-  String get message => 'Password has to be at least 6 characters long';
+  String get message => 'Password has to be 6 characters long';
 }
 
 class LongPasswordFailure extends PasswordFailure {

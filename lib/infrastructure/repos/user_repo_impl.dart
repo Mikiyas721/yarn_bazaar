@@ -7,7 +7,7 @@ import 'package:yarn_bazaar/domain/entities/credentials.dart';
 import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/ports/user_repo.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/user_cache_datasource.dart';
-import 'package:yarn_bazaar/infrastructure/datasources/user_datasource.dart';
+import 'package:yarn_bazaar/infrastructure/datasources/user_remote_datasource.dart';
 import 'package:yarn_bazaar/infrastructure/dtos/app_user_dto.dart';
 import 'package:yarn_bazaar/infrastructure/dtos/user_dto.dart';
 
@@ -52,9 +52,7 @@ class UserRepoImpl extends IUserRepo {
     final result = await _userCrudDatasource.findById(id);
     return result.fold(
       (l) => left(l),
-      (r) => r
-          .toDomain()
-          .fold(() => left(userDtoMappingSimpleFailure), (a) => right(a)),
+      (r) => r.toDomain().fold(() => left(userDtoMappingSimpleFailure), (a) => right(a)),
     );
   }
 
@@ -81,9 +79,8 @@ class UserRepoImpl extends IUserRepo {
 
   @override
   Future<Option<AppUser>> getCurrentLoggedInUser() {
-    return _userCacheDataSource.getMap(_userCacheDataSource.userCacheKey).then(
-        (value) => value.flatMap(
-            (a) => AppUserDto.fromJson(a as Map<String, dynamic>).toDomain()));
+    return _userCacheDataSource.getMap(_userCacheDataSource.userCacheKey).then((value) =>
+        value.flatMap((a) => AppUserDto.fromJson(a as Map<String, dynamic>).toDomain()));
   }
 
   @override
@@ -107,7 +104,32 @@ class UserRepoImpl extends IUserRepo {
   }
 
   @override
-  Future<Either<Failure, AppUser>> loginUser(Credentials credentials) {
-    throw UnimplementedError();
+  Future<Either<Failure, AppUser>> signInUser(Credentials credentials) {
+    return _userCrudDatasource.signIn(credentials);
+  }
+
+  @override
+  Future<Either<Failure, AppUser>> addUser(AppUser appUser) {
+    return _userCrudDatasource.addUser(appUser);
+  }
+
+  Future<Either<Failure, bool>> checkPhoneNumberExists(String phoneNumber) async {
+    //TODO better to have remote method on server
+    final result = await _userCrudDatasource.findOne(options: {
+      "filter": {
+        "where": {
+          "phoneNumber": {"eq": phoneNumber}
+        }
+      }
+    });
+    return result.fold(
+      (l) {
+        if (l.message.contains('404'))
+          return right(false);
+        else
+          return left(l);
+      },
+      (r) => right(true),
+    );
   }
 }

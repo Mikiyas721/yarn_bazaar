@@ -71,8 +71,59 @@ class DirectoryPage extends StatelessWidget {
                       ),
                       onRefresh: controller.onRefresh,
                     );
+                  }),
+              ViewModelBuilder.withController<UsersViewModel, AllUsersController>(
+                  create: () => AllUsersController(context),
+                  builder: (context, controller, usersViewModel) {
+                    return RefreshIndicator(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: DirectoriesView(
+                          directoriesViewModel: usersViewModel!,
+                          onReload: controller.onReload,
+                          onWatchlist: controller.onWatchlist,
+                          onDetail: controller.onDetail,
+                          onShare: controller.onShare,
+                        ),
+                      ),
+                      onRefresh: controller.onRefresh,
+                    );
+                  }),
+              ViewModelBuilder.withController<UsersViewModel, AllUsersController>(
+                  create: () => AllUsersController(context),
+                  builder: (context, controller, usersViewModel) {
+                    return RefreshIndicator(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: DirectoriesView(
+                          directoriesViewModel: usersViewModel!,
+                          onReload: controller.onReload,
+                          onWatchlist: controller.onWatchlist,
+                          onDetail: controller.onDetail,
+                          onShare: controller.onShare,
+                        ),
+                      ),
+                      onRefresh: controller.onRefresh,
+                    );
+                  }),
+              ViewModelBuilder.withController<UsersViewModel, AllUsersController>(
+                  create: () => AllUsersController(context),
+                  builder: (context, controller, usersViewModel) {
+                    return RefreshIndicator(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: DirectoriesView(
+                          directoriesViewModel: usersViewModel!,
+                          onReload: controller.onReload,
+                          onWatchlist: controller.onWatchlist,
+                          onDetail: controller.onDetail,
+                          onShare: controller.onShare,
+                        ),
+                      ),
+                      onRefresh: controller.onRefresh,
+                    );
                   })
-              //TODO Three more tabs remain
+              //TODO replace with the right controller for each tab
             ],
           ),
           bottomNavigationBar: ViewModelBuilder.withController<BottomNavigationBarViewModel,

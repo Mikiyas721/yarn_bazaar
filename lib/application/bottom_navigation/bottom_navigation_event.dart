@@ -8,7 +8,7 @@ class BottomNavigationSelectedIndexChangedEvent extends BottomNavigationEvent {
   BottomNavigationSelectedIndexChangedEvent(this.index);
 
   @override
-  Stream<BottomNavigationState> handle(BottomNavigationState currentState) async* {
-    yield currentState.copyWith(activeIndex: index);
+  BottomNavigationState handle(BottomNavigationState currentState)  {
+    return currentState.copyWith(activeIndex: index);
   }
 }

@@ -13,11 +13,11 @@ part 'add_yarn_requirement_state.dart';
 
 part 'add_yarn_requirement_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class AddYarnRequirementBloc extends Bloc<AddYarnRequirementEvent, AddYarnRequirementState> {
   AddYarnRequirementBloc() : super(AddYarnRequirementState.initial()) {
     on<AddYarnRequirementEvent>((event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 

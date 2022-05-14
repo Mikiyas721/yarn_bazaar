@@ -8,8 +8,8 @@ class FetchModalYarnsDataChangedEvent extends FetchModalYarnsEvent {
   FetchModalYarnsDataChangedEvent(this.yarns);
 
   @override
-  Stream<FetchModalYarnsState> handle(FetchModalYarnsState currentState) async* {
-    yield currentState.copyWith(yarns: yarns);
+  FetchModalYarnsState handle(FetchModalYarnsState currentState)  {
+    return currentState.copyWith(yarns: yarns);
   }
 }
 
@@ -19,8 +19,8 @@ class FetchModalYarnsIsLoadingChangedEvent extends FetchModalYarnsEvent {
   FetchModalYarnsIsLoadingChangedEvent(this.isLoading);
 
   @override
-  Stream<FetchModalYarnsState> handle(FetchModalYarnsState currentState) async* {
-    yield currentState.copyWith(isLoading: isLoading);
+  FetchModalYarnsState handle(FetchModalYarnsState currentState)  {
+    return currentState.copyWith(isLoading: isLoading);
   }
 }
 
@@ -30,7 +30,7 @@ class FetchModalYarnsLoadFailureEvent extends FetchModalYarnsEvent {
   FetchModalYarnsLoadFailureEvent(this.errorMessage);
 
   @override
-  Stream<FetchModalYarnsState> handle(FetchModalYarnsState currentState) async* {
-    yield currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchModalYarnsState handle(FetchModalYarnsState currentState)  {
+    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
   }
 }

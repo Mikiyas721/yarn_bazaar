@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/sign_in_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
+import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 
 class SignInView extends StatelessWidget {
   final SignInViewModel signInViewModel;
@@ -26,7 +27,7 @@ class SignInView extends StatelessWidget {
       children: [
         Row(
           children: const [
-            Text('Mobile Number or Email'),
+            Text('Mobile Number'),
             Text('*', style: TextStyle(color: Colors.red))
           ],
         ),
@@ -46,11 +47,15 @@ class SignInView extends StatelessWidget {
             Expanded(
                 flex: 9,
                 child: TextField(
+                  keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-                      errorText: signInViewModel.phoneNumberError,
-                      hintText: 'Mobile Number or Email'),
-                  controller: TextEditingController(
-                      text: signInViewModel.phoneNumber),
+                    errorText: signInViewModel.phoneNumberError,
+                    hintText: 'Mobile Number',
+                    hintStyle: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
                   onChanged: onPhoneNumber,
                 ))
           ],
@@ -58,35 +63,26 @@ class SignInView extends StatelessWidget {
         const SizedBox(
           height: 25,
         ),
-        Row(
-          children: const [
-            Text('Password'),
-            Text('*', style: TextStyle(color: Colors.red))
-          ],
-        ),
-        //TODO use TextFieldWithTitle widget
-        TextField(
-          obscureText: signInViewModel.isShowingPassword,
-          decoration: InputDecoration(
-              errorText: signInViewModel.passwordError,
-              hintText: 'Password',
-              suffixIcon: TextButton(
-                  onPressed: () {
-                    onShowHidePassword(!signInViewModel.isShowingPassword);
-                  },
-                  child: Text(
-                      signInViewModel.isShowingPassword ? 'Hide' : 'Show'))),
+        TextFieldWithTitle(
+          title: "Password",
+          fieldIsOptional: false,
+          obscureText: !signInViewModel.isShowingPassword,
+          errorMessage: signInViewModel.passwordError,
+          hintText: "Password",
           onChanged: onPassword,
           onSubmitted: (_) {
             onLogin();
           },
+          suffixIcon: TextButton(
+              onPressed: () {
+                onShowHidePassword(!signInViewModel.isShowingPassword);
+              },
+              child: Text(signInViewModel.isShowingPassword ? 'Hide' : 'Show')),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            TextButton(
-                onPressed: onForgotPassword,
-                child: const Text('Forgot password?'))
+            TextButton(onPressed: onForgotPassword, child: const Text('Forgot password?'))
           ],
         ),
         Padding(

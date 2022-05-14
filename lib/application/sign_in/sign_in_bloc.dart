@@ -12,11 +12,11 @@ part 'sign_in_state.dart';
 
 part 'sign_in_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc() : super(SignInState.initial()) {
     on<SignInEvent>((SignInEvent event, emit) {
-      event.handle(state);
+      emit(event.handle(state));
     });
   }
 
