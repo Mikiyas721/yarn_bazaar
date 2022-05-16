@@ -42,15 +42,4 @@ class UserViewModel extends ViewModel with FormatterMixin {
   String get initials {
     return getInitials(companyName);
   }
-
-  //TODO remove after controllers have been setup
-  factory UserViewModel.defaults() {
-    return UserViewModel(
-      companyName: 'Sarjan cotex PVT Ltd',
-      location: 'Surat, India',
-      numberOfYarnProducts: 2,
-      lastUpdated: '2 days ago',
-      sellerType: 'Trader',
-    );
-  }
 }

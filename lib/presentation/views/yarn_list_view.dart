@@ -11,7 +11,7 @@ class YarnListView extends StatelessWidget {
   final VoidCallback onReload;
   final Function (YarnViewModel priceViewModel) onWatchlist;
   final Function (YarnViewModel priceViewModel) onCompare;
-  final Function (YarnViewModel priceViewModel) onDetail;
+  final Function (int index) onDetail;
   final Function (YarnViewModel priceViewModel) onShare;
   final Function (int index, bool wasExpanded) onHeaderTap;
 
@@ -28,42 +28,40 @@ class YarnListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: MyExpansionPanelList<YarnViewModel>(
-          model: pricesViewModel,
-          itemBuilder:
-              (BuildContext context, YarnViewModel priceViewModel, int index) {
-            return YarnView._(
-              priceViewModel: priceViewModel,
-              onWatchlist: () {
-                onWatchlist(priceViewModel);
-              },
-              onCompare: () {
-                onCompare(priceViewModel);
-              },
-              onDetail: () {
-                onDetail(priceViewModel);
-              },
-              onShare: () {
-                onShare(priceViewModel);
-              },
-              onHeaderTap: (bool wasExpanded) {
-                onHeaderTap(index, wasExpanded);
-              },
-              expanded: index == pricesViewModel.expandedIndex,
-            );
-          },
-          errorView: Center(
-              child: EmptyErrorView.defaultError(
-                onRetry: onReload,
-              )),
-          loadingView: const Center(child: MyLoadingView()),
-          emptyView: Center(
-            child: EmptyErrorView.defaultEmpty(
-              onReload: onReload,
-            ),
-          )),
-    );
+    return MyExpansionPanelList<YarnViewModel>(
+        model: pricesViewModel,
+        itemBuilder:
+            (BuildContext context, YarnViewModel priceViewModel, int index) {
+          return YarnView._(
+            priceViewModel: priceViewModel,
+            onWatchlist: () {
+              onWatchlist(priceViewModel);
+            },
+            onCompare: () {
+              onCompare(priceViewModel);
+            },
+            onDetail: () {
+              onDetail(index);
+            },
+            onShare: () {
+              onShare(priceViewModel);
+            },
+            onHeaderTap: (bool wasExpanded) {
+              onHeaderTap(index, wasExpanded);
+            },
+            expanded: index == pricesViewModel.expandedIndex,
+          );
+        },
+        errorView: Center(
+            child: EmptyErrorView.defaultError(
+              onRetry: onReload,
+            )),
+        loadingView: const Center(child: MyLoadingView()),
+        emptyView: Center(
+          child: EmptyErrorView.defaultEmpty(
+            onReload: onReload,
+          ),
+        ));
   }
 }
 

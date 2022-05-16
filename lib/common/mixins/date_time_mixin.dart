@@ -123,6 +123,10 @@ mixin DateTimeMixin {
     return '${getDayOfWeekShort(dateTime.weekday)}, ${mapToShortMonth(dateTime.month)} ${dateTime.day}, ${dateTime.year}';
   }
 
+  String getShortDateWithOutDayOfWeekString(DateTime dateTime) {
+    return '${dateTime.day} ${mapToShortMonth(dateTime.month)} ${dateTime.year}';
+  }
+
   String getLongDateString(DateTime dateTime) =>
       '${getDayOfWeekLong(dateTime.weekday)}, ${mapToLongMonth(dateTime.month)} ${dateTime.day}, ${dateTime.year}';
 

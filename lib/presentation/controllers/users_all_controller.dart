@@ -63,7 +63,7 @@ class AllUsersController extends BlocViewModelController<FetchAllUsersBloc, Fetc
   onWatchlist(UserViewModel viewModel) {}
 
   onDetail(UserViewModel viewModel) {
-    Navigator.pushNamed(context, '/directoryDetailPage', arguments: viewModel);
+    Navigator.pushNamed(context, '/userDetailPage', arguments: viewModel);
   }
 
   onShare(UserViewModel viewModel) {}

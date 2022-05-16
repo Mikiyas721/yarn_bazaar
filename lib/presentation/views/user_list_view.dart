@@ -31,8 +31,8 @@ class UserListView extends StatelessWidget {
           model: userViewModel,
           itemBuilder: (BuildContext context,
               UserViewModel directoryViewModel, int index) {
-            return DirectoryView._(
-              directoryViewModel: directoryViewModel,
+            return UserView._(
+              userViewModel: directoryViewModel,
               onWatchlist: () {
                 onWatchlist(directoryViewModel);
               },
@@ -62,16 +62,16 @@ class UserListView extends StatelessWidget {
   }
 }
 
-class DirectoryView extends ExpansionPanel {
-  final UserViewModel directoryViewModel;
+class UserView extends ExpansionPanel {
+  final UserViewModel userViewModel;
   final VoidCallback onWatchlist;
   final VoidCallback onShare;
   final VoidCallback onDetail;
   final bool expanded;
   final Function (bool wasExpanded) onHeaderTap;
 
-  DirectoryView._({
-    required this.directoryViewModel,
+  UserView._({
+    required this.userViewModel,
     required this.onWatchlist,
     required this.onShare,
     required this.onDetail,
@@ -95,10 +95,10 @@ class DirectoryView extends ExpansionPanel {
                       CircleAvatar(
                         radius: 24,
                         child: Text(
-                          directoryViewModel.initials,
+                          userViewModel.initials,
                           style: const TextStyle(color: Colors.white),
                         ),
-                        backgroundColor: directoryViewModel.sellerType == "Mill"
+                        backgroundColor: userViewModel.sellerType == "Mill"
                             ? Colors.blue
                             : Colors.green,
                       ),
@@ -107,14 +107,14 @@ class DirectoryView extends ExpansionPanel {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            directoryViewModel.companyName,
+                            userViewModel.companyName,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Row(
                             children: [
                               IconPrefixedText(
                                 icon: Icons.location_on_outlined,
-                                label: directoryViewModel.location,
+                                label: userViewModel.location,
                                 color: Colors.black87,
                               )
                             ],
@@ -139,11 +139,11 @@ class DirectoryView extends ExpansionPanel {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            '${directoryViewModel.numberOfYarnProducts} Yarn Products'),
+                            '${userViewModel.numberOfYarnProducts} Yarn Products'),
                         IconPrefixedText(
                           icon: Icons.access_time,
                           label:
-                              'Price last updated ${directoryViewModel.lastUpdated}',
+                              'Price last updated ${userViewModel.lastUpdated}',
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           color: Colors.grey,
@@ -159,9 +159,9 @@ class DirectoryView extends ExpansionPanel {
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
                         Text(
-                          directoryViewModel.sellerType,
+                          userViewModel.sellerType,
                           style: TextStyle(
-                              color: directoryViewModel.sellerType == "Mill"
+                              color: userViewModel.sellerType == "Mill"
                                   ? Colors.blue
                                   : Colors.green),
                         )

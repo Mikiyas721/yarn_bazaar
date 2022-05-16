@@ -2,6 +2,7 @@ import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
 import 'package:yarn_bazaar/domain/value_objects/yarn_categories.dart';
 import 'package:yarn_bazaar/domain/value_objects/yarn_requirement_intention.dart';
 
+/**Primitive types to Enum*/
 extension EnumItemIndexExtension on num{
   UserType get getUserType{
     if(this==0) return UserType.yarn_manufacturer;
@@ -34,12 +35,33 @@ extension EnumItemIndexExtension on num{
   }
 }
 
+extension StringExtensions on String{
+  UserType getUserType(){
+    if (this=="Yarn Manufacturer") return UserType.yarn_manufacturer;
+    else if (this=="Yarn Trader") return UserType.yarn_trader;
+    else if (this=="Fabric Manufacturer") return UserType.fabric_manufacturer;
+    else if (this=="Yarn Broker") return UserType.yarn_broker;
+    else if (this=="Other") return UserType.other;
+    else throw Exception("Unknown UserType string");
+  }
+}
+
+/**Enum to Primitive types*/
 extension UserTypeExtension on UserType{
   String getString(){
     if (this==UserType.yarn_manufacturer) return "Yarn Manufacturer";
     else if (this==UserType.yarn_trader) return "Yarn Trader";
-    else if (this==UserType.fabric_manufacturer) return "Yarn Manufacturer";
+    else if (this==UserType.fabric_manufacturer) return "Fabric Manufacturer";
     else if (this==UserType.yarn_broker) return "Yarn Broker";
+    else if (this==UserType.other) return "Other";
+    else throw Exception("Unknown User Type");
+  }
+
+  String getShortString(){
+    if (this==UserType.yarn_manufacturer) return "Mill";
+    else if (this==UserType.yarn_trader) return "Trader";
+    else if (this==UserType.fabric_manufacturer) return "Mill";
+    else if (this==UserType.yarn_broker) return "Broker";
     else if (this==UserType.other) return "Other";
     else throw Exception("Unknown User Type");
   }
@@ -63,6 +85,16 @@ extension YarnCategoriesExtensions on YarnCategories{
   }
 }
 
+extension YarnRequirementIntentionExtension on YarnRequirementIntention{
+  String getString(){
+    if (this==YarnRequirementIntention.PriceInquiry) return "Price Inquiry";
+    else if (this==YarnRequirementIntention.Purchase) return "Purchase";
+    else if (this==YarnRequirementIntention.None) return "None";
+    else throw Exception("Unknown Yarn Intention");
+  }
+}
+
+/**Others*/
 extension ListExtenstion on List<bool>{
   List<String> getYarnCategories(){
     List<String> list = [];
@@ -73,11 +105,3 @@ extension ListExtenstion on List<bool>{
   }
 }
 
-extension YarnRequirementIntentionExtension on YarnRequirementIntention{
-  String getString(){
-    if (this==YarnRequirementIntention.PriceInquiry) return "Price Inquiry";
-    else if (this==YarnRequirementIntention.Purchase) return "Purchase";
-    else if (this==YarnRequirementIntention.None) return "None";
-    else throw Exception("Unknown Yarn Intention");
-  }
-}

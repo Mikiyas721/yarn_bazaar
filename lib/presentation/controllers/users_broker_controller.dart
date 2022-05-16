@@ -67,7 +67,7 @@ class BrokerUsersController extends BlocViewModelController<FetchBrokerUsersBloc
   onWatchlist(UserViewModel viewModel) {}
 
   onDetail(UserViewModel viewModel) {
-    Navigator.pushNamed(context, '/directoryDetailPage', arguments: viewModel);
+    Navigator.pushNamed(context, '/userDetailPage', arguments: viewModel);
   }
 
   onShare(UserViewModel viewModel) {}

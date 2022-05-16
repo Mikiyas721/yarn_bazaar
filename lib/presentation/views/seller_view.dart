@@ -4,14 +4,14 @@ import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class SellerView extends StatelessWidget {
-  final UserViewModel directoryViewModel;
+  final UserViewModel userViewModel;
   final VoidCallback onWatchlist;
   final VoidCallback onShare;
   final VoidCallback onDetail;
 
   const SellerView({
     Key? key,
-    required this.directoryViewModel,
+    required this.userViewModel,
     required this.onWatchlist,
     required this.onShare,
     required this.onDetail,
@@ -32,10 +32,10 @@ class SellerView extends StatelessWidget {
                 CircleAvatar(
                   radius: 24,
                   child: Text(
-                    directoryViewModel.initials,
+                    userViewModel.initials,
                     style: const TextStyle(color: Colors.white),
                   ),
-                  backgroundColor: directoryViewModel.sellerType == "Mill"
+                  backgroundColor: userViewModel.sellerType == "Mill"
                       ? Colors.blue
                       : Colors.green,
                 ),
@@ -44,14 +44,14 @@ class SellerView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      directoryViewModel.companyName,
+                      userViewModel.companyName,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
                         IconPrefixedText(
                           icon: Icons.location_on_outlined,
-                          label: directoryViewModel.location,
+                          label: userViewModel.location,
                           color: Colors.black87,
                         )
                       ],
@@ -66,10 +66,10 @@ class SellerView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                    '${directoryViewModel.numberOfYarnProducts} Yarn Products'),
+                    '${userViewModel.numberOfYarnProducts} Yarn Products'),
                 IconPrefixedText(
                   icon: Icons.access_time,
-                  label: 'Price last updated ${directoryViewModel.lastUpdated}',
+                  label: 'Price last updated ${userViewModel.lastUpdated}',
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
                   color: Colors.grey,
@@ -85,9 +85,9 @@ class SellerView extends StatelessWidget {
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 Text(
-                  directoryViewModel.sellerType,
+                  userViewModel.sellerType,
                   style: TextStyle(
-                      color: directoryViewModel.sellerType == "Mill"
+                      color: userViewModel.sellerType == "Mill"
                           ? Colors.blue
                           : Colors.green),
                 )

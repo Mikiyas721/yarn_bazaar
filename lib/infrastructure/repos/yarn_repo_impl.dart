@@ -57,7 +57,7 @@ class YarnRepoImpl extends IYarnRepo {
         "include": {
           "relation": "user",
           "scope": {
-            "include": ["businessDetail", "bankDetail"]
+            "include": ["businessDetail", "bankDetail"] //TODO add yarns with scope
           }
         }
       }
@@ -90,6 +90,26 @@ class YarnRepoImpl extends IYarnRepo {
             () => left(yarnDtoMappingSimpleFailure),
             (a) => right(a),
           ),
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<Yarn>>> fetchSimilarYarns(String userId, String yarnType) async {
+    final result = await _yarnCrudDataSource.find(options: {
+      "filter": {
+        "where": {
+          "and": [
+            {
+              "userId": {"ne": userId}
+            },
+            {"yarnType": yarnType}
+          ]
+        }
+      }
+    });
+    return result.fold(
+      (l) => left(l),
+      (r) => right(IdDto.toDomainList<Yarn, YarnDto>(r)!),
     );
   }
 }

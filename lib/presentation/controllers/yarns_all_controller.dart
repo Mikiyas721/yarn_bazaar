@@ -71,8 +71,8 @@ class AllYarnsController extends BlocViewModelController<FetchAllYarnsBloc, Fetc
 
   onShare(YarnViewModel viewModel) {}
 
-  onDetail(YarnViewModel viewModel) {
-    Navigator.pushNamed(context, '/priceListDetailPage', arguments: viewModel);
+  onDetail(int index) {
+    Navigator.pushNamed(context, '/yarnDetailPage', arguments: currentState.yarns[index]);
   }
 
   Future<void> onRefresh() async {
