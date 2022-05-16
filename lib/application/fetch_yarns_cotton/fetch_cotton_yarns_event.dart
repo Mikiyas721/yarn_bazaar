@@ -8,29 +8,43 @@ class FetchCottonYarnsDataChangedEvent extends FetchCottonYarnsEvent {
   FetchCottonYarnsDataChangedEvent(this.yarns);
 
   @override
-  FetchCottonYarnsState handle(FetchCottonYarnsState currentState)  {
+  FetchCottonYarnsState handle(FetchCottonYarnsState currentState) {
     return currentState.copyWith(yarns: yarns);
   }
 }
 
-class FetchCottonYarnsIsLoadingChangedEvent extends FetchCottonYarnsEvent {
-  final bool isLoading;
-
-  FetchCottonYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchCottonYarnsStartedLoadingEvent extends FetchCottonYarnsEvent {
   @override
-  FetchCottonYarnsState handle(FetchCottonYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+  FetchCottonYarnsState handle(FetchCottonYarnsState currentState) {
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchCottonYarnsStoppedLoadingEvent extends FetchCottonYarnsEvent {
+  @override
+  FetchCottonYarnsState handle(FetchCottonYarnsState currentState) {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchCottonYarnsLoadFailureEvent extends FetchCottonYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchCottonYarnsLoadFailureEvent(this.errorMessage);
+  FetchCottonYarnsLoadFailureEvent(this.failure);
 
   @override
-  FetchCottonYarnsState handle(FetchCottonYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+  FetchCottonYarnsState handle(FetchCottonYarnsState currentState) {
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchCottonYarnsExpandedIndexChangedEvent extends FetchCottonYarnsEvent{
+  final int newIndex;
+
+  FetchCottonYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchCottonYarnsState handle(FetchCottonYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }

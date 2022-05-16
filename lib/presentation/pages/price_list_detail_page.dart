@@ -68,7 +68,7 @@ class PriceListDetailPage extends StatelessWidget {
                             children: [
                               Container(
                                 child: Text(
-                                  priceViewModel.yarnQuality.split(' ')[0],
+                                  priceViewModel.count,
                                   style: const TextStyle(color: Colors.white),
                                 ),
                                 color: priceViewModel.sellerType == "Mill"
@@ -78,7 +78,7 @@ class PriceListDetailPage extends StatelessWidget {
                               ),
                               8.hSpace,
                               Text(
-                                priceViewModel.yarnQuality.split(' ')[1],
+                                priceViewModel.yarnType,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold),
                               )

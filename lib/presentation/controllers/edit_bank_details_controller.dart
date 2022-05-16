@@ -7,7 +7,7 @@ import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_bank_details.dart'
 import 'package:yarn_bazaar/domain/use_cases/update_user_bank_details.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
-import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/edit_bank_detail_view_model.dart';
 import 'package:yarn_bazaar/application/edit_bank_details/edit_bank_details_bloc.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
@@ -32,7 +32,7 @@ class EditBankDetailsController extends BlocViewModelController<
   EditBankDetailViewModel mapStateToViewModel(EditBankDetailsState s) {
     return EditBankDetailViewModel(
       isLoadingSaved: s.isLoadingSaved,
-      error: s.failure.fold(() => null, (a) => a.message),
+      error: s.loadingSavedFailure.fold(() => null, (a) => a.message),
       accountName: s.accountName,
       accountNameError:
           s.hasSubmitted ? s.accountNumber.fold((l) => l.message, (r) => null) : null,

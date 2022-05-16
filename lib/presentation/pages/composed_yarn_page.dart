@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
 import 'package:yarn_bazaar/presentation/controllers/composed_yarn_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
-import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
+import 'package:yarn_bazaar/presentation/models/composed_yarn_view_model.dart';
+import 'package:yarn_bazaar/presentation/views/composed_yarn_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
@@ -16,10 +17,11 @@ class ComposedYarnPage extends StatelessWidget {
 
     return argument == null
         ? Scaffold(body: Center(child: Text("Yarn missing")))
-        : ControllerProvider<ComposedYarnController>(
+        : ViewModelBuilder.withController<ComposedYarnViewModel, ComposedYarnController>(
             create: () => ComposedYarnController(context, argument),
             onInit: (controller) => controller.fillTextFields(),
-            builder: (BuildContext context, ComposedYarnController composedYarnController) {
+            builder: (BuildContext context, ComposedYarnController composedYarnController,
+                viewModel) {
               return Scaffold(
                 appBar: AppBar(
                   leading: const PopButton(),
@@ -40,7 +42,15 @@ class ComposedYarnPage extends StatelessWidget {
                                     const EdgeInsets.only(left: 15, right: 15, bottom: 25),
                                 child: Column(
                                   children: [
-                                    10.vSpace,
+                                    15.vSpace,
+                                    TextFieldWithTitle(
+                                      title: 'Yarn Quality',
+                                      controller: composedYarnController
+                                          .yarnQualityTextEditingController,
+                                      fieldIsOptional: false,
+                                      readOnly: true,
+                                      enabled: false,
+                                    ),
                                     TextFieldWithTitle(
                                       title: 'Quality Details',
                                       controller: composedYarnController
@@ -121,16 +131,9 @@ class ComposedYarnPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: MyActionButton(
-                        label: 'POST YARN REQUIREMENT',
-                        onSubmit: () {
-                          composedYarnController.onPostYarn();
-                        },
-                      ),
+                    ComposedYarnView(
+                      composedYarnViewModel: viewModel!,
+                      onPostYarn: composedYarnController.onPostYarn,
                     )
                   ],
                 ),

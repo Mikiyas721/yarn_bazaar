@@ -16,6 +16,8 @@ abstract class UserCrudDatasource extends CrudDataSource<UserDto, RestResponseFa
   Future<Either<Failure, AppUser>> signIn(Credentials credentials);
 
   Future<Either<Failure, AppUser>> addUser(AppUser user);
+
+  Future<Either<Failure, bool>> checkPhoneNumber(String phoneNumber);
 }
 
 @LazySingleton(as: UserCrudDatasource)
@@ -53,11 +55,20 @@ class UserLoopbackDatasource extends LoopbackRestCrudDataSource<UserDto>
 
     return result.either.fold((l) => left(l), (r) {
       final result = AppUserDto.fromJson(r.value);
-      print("-----------------------------------------------------------------------------------------");
-      print(result.toJson());
       return result
           .toDomain()
           .fold(() => left(SimpleFailure("Unable to map to Domain")), (a) => right(a));
     });
   }
+
+  @override
+  Future<Either<Failure, bool>> checkPhoneNumber(String phoneNumber) async{
+    final phoneNumberExistsResponse = await restDataSource.post(RestRequest(
+      url: '$path/checkPhoneNUmber'
+    ));
+
+    return phoneNumberExistsResponse.either.fold((l) => left(l), (r) => right(r.value));
+  }
+
+
 }

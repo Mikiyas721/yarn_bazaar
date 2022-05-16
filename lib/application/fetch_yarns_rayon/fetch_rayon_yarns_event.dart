@@ -13,24 +13,38 @@ class FetchRayonYarnsDataChangedEvent extends FetchRayonYarnsEvent {
   }
 }
 
-class FetchRayonYarnsIsLoadingChangedEvent extends FetchRayonYarnsEvent {
-  final bool isLoading;
-
-  FetchRayonYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchRayonYarnsStartedLoadingEvent extends FetchRayonYarnsEvent {
   @override
   FetchRayonYarnsState handle(FetchRayonYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchRayonYarnsStoppedLoadingEvent extends FetchRayonYarnsEvent {
+  @override
+  FetchRayonYarnsState handle(FetchRayonYarnsState currentState)  {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchRayonYarnsLoadFailureEvent extends FetchRayonYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchRayonYarnsLoadFailureEvent(this.errorMessage);
+  FetchRayonYarnsLoadFailureEvent(this.failure);
 
   @override
   FetchRayonYarnsState handle(FetchRayonYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchRayonYarnsExpandedIndexChangedEvent extends FetchRayonYarnsEvent{
+  final int newIndex;
+
+  FetchRayonYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchRayonYarnsState handle(FetchRayonYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }

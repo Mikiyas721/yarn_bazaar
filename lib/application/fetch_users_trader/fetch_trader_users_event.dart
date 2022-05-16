@@ -13,24 +13,39 @@ class FetchTraderUsersDataChangedEvent extends FetchTraderUsersEvent {
   }
 }
 
-class FetchTraderUsersIsLoadingChangedEvent extends FetchTraderUsersEvent {
-  final bool isLoading;
-
-  FetchTraderUsersIsLoadingChangedEvent(this.isLoading);
-
+class FetchTraderUsersStartedLoadingEvent extends FetchTraderUsersEvent {
   @override
   FetchTraderUsersState handle(FetchTraderUsersState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchTraderUsersStoppedLoadingEvent extends FetchTraderUsersEvent {
+  @override
+  FetchTraderUsersState handle(FetchTraderUsersState currentState)  {
+    return currentState.copyWith(isLoading: true);
   }
 }
 
 class FetchTraderUsersLoadFailureEvent extends FetchTraderUsersEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchTraderUsersLoadFailureEvent(this.errorMessage);
+  FetchTraderUsersLoadFailureEvent(this.failure);
 
   @override
   FetchTraderUsersState handle(FetchTraderUsersState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
   }
+}
+
+class FetchTraderUsersExpandedIndexChangedEvent extends FetchTraderUsersEvent{
+  final int newIndex;
+
+  FetchTraderUsersExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchTraderUsersState handle(FetchTraderUsersState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
+  }
+
 }

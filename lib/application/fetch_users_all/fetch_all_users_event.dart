@@ -13,24 +13,39 @@ class FetchAllUsersDataChangedEvent extends FetchAllUsersEvent {
   }
 }
 
-class FetchAllUsersIsLoadingChangedEvent extends FetchAllUsersEvent {
-  final bool isLoading;
-
-  FetchAllUsersIsLoadingChangedEvent(this.isLoading);
-
+class FetchAllUsersStartedLoadingEvent extends FetchAllUsersEvent {
   @override
   FetchAllUsersState handle(FetchAllUsersState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchAllUsersStoppedLoadingEvent extends FetchAllUsersEvent {
+  @override
+  FetchAllUsersState handle(FetchAllUsersState currentState)  {
+    return currentState.copyWith(isLoading: true);
   }
 }
 
 class FetchAllUsersLoadFailureEvent extends FetchAllUsersEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchAllUsersLoadFailureEvent(this.errorMessage);
+  FetchAllUsersLoadFailureEvent(this.failure);
 
   @override
   FetchAllUsersState handle(FetchAllUsersState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
   }
+}
+
+class FetchAllUsersExpandedIndexChangedEvent extends FetchAllUsersEvent{
+  final int newIndex;
+
+  FetchAllUsersExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchAllUsersState handle(FetchAllUsersState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
+  }
+
 }

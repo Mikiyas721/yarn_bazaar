@@ -13,24 +13,38 @@ class FetchViscoseYarnsDataChangedEvent extends FetchViscoseYarnsEvent {
   }
 }
 
-class FetchViscoseYarnsIsLoadingChangedEvent extends FetchViscoseYarnsEvent {
-  final bool isLoading;
-
-  FetchViscoseYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchViscoseYarnsStartedLoadingEvent extends FetchViscoseYarnsEvent {
   @override
   FetchViscoseYarnsState handle(FetchViscoseYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchViscoseYarnsStoppedLoadingEvent extends FetchViscoseYarnsEvent {
+  @override
+  FetchViscoseYarnsState handle(FetchViscoseYarnsState currentState)  {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchViscoseYarnsLoadFailureEvent extends FetchViscoseYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchViscoseYarnsLoadFailureEvent(this.errorMessage);
+  FetchViscoseYarnsLoadFailureEvent(this.failure);
 
   @override
   FetchViscoseYarnsState handle(FetchViscoseYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchViscoseYarnsExpandedIndexChangedEvent extends FetchViscoseYarnsEvent{
+  final int newIndex;
+
+  FetchViscoseYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchViscoseYarnsState handle(FetchViscoseYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }

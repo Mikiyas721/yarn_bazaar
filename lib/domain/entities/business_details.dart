@@ -10,11 +10,12 @@ class BusinessDetail extends Entity {
   final List<String> categories;
   final String? address;
   final String? completeAddress;
-  final GSTNumber gstNo;
-  final TANNumber tanNo;
+  final GSTNumber? gstNo;
+  final TANNumber? tanNo;
   final String? gstDocumentUrl;
-  final PANNumber panNo;
+  final PANNumber? panNo;
   final String? panCardUrl;
+  final String userId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -30,6 +31,7 @@ class BusinessDetail extends Entity {
     this.gstDocumentUrl,
     required this.panNo,
     this.panCardUrl,
+    required this.userId,
     this.createdAt,
     this.updatedAt,
   }) : super(id);
@@ -46,6 +48,7 @@ class BusinessDetail extends Entity {
     String? gstDocumentUrl,
     String? panNo,
     String? panCardUrl,
+    String? userId,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -54,13 +57,7 @@ class BusinessDetail extends Entity {
       companyName,
       accountType,
       categories,
-      address,
-      completeAddress,
-      gstNo,
-      tanNo,
-      gstDocumentUrl,
-      panNo,
-      panCardUrl,
+      userId,
       createdAt,
       updatedAt,
     ].any((element) => element == null)) none();
@@ -69,9 +66,8 @@ class BusinessDetail extends Entity {
     final tanNumberObject = TANNumber.create(tanNo!);
     final panNumberObject = PANNumber.create(panNo!);
 
-    if (gstNumberObject.isLeft() ||
-        tanNumberObject.isLeft() ||
-        panNumberObject.isLeft()) return none();
+    if (gstNumberObject.isLeft() || tanNumberObject.isLeft() || panNumberObject.isLeft())
+      return none();
 
     return some(BusinessDetail._(
       id: id,
@@ -80,14 +76,12 @@ class BusinessDetail extends Entity {
       categories: categories!,
       address: address,
       completeAddress: completeAddress,
-      gstNo: gstNumberObject
-          .getOrElse(() => throw Exception('GST Number exception')),
+      gstNo: gstNumberObject.fold((l) => null, (r) => r),
       gstDocumentUrl: gstDocumentUrl!,
-      tanNo: tanNumberObject
-          .getOrElse(() => throw Exception('TAN Number exception')),
-      panNo: panNumberObject
-          .getOrElse(() => throw Exception('PAN Number exception')),
-      panCardUrl: panCardUrl!,
+      tanNo: tanNumberObject.fold((l) => null, (r) => r),
+      panNo: panNumberObject.fold((l) => null, (r) => r),
+      panCardUrl: panCardUrl,
+      userId: userId!,
       createdAt: createdAt!,
       updatedAt: updatedAt!,
     ));
@@ -105,21 +99,22 @@ class BusinessDetail extends Entity {
     String? gstDocumentUrl,
     String? panNo,
     String? panCardUrl,
+    String? userId,
   }) {
     if ([
       id,
       companyName,
       accountType,
       categories,
+      userId,
     ].any((element) => element == null)) none();
 
     final gstNumberObject = GSTNumber.create(gstNo!);
     final tanNumberObject = TANNumber.create(tanNo!);
     final panNumberObject = PANNumber.create(panNo!);
 
-    if (gstNumberObject.isLeft() ||
-        tanNumberObject.isLeft() ||
-        panNumberObject.isLeft()) return none();
+    if (gstNumberObject.isLeft() || tanNumberObject.isLeft() || panNumberObject.isLeft())
+      return none();
 
     return some(BusinessDetail._(
       companyName: companyName!,
@@ -127,14 +122,12 @@ class BusinessDetail extends Entity {
       categories: categories!,
       address: address,
       completeAddress: completeAddress,
-      gstNo: gstNumberObject
-          .getOrElse(() => throw Exception('GST Number exception')),
+      gstNo: gstNumberObject.fold((l) => null, (r)=>r),
       gstDocumentUrl: gstDocumentUrl!,
-      tanNo: tanNumberObject
-          .getOrElse(() => throw Exception('TAN Number exception')),
-      panNo: panNumberObject
-          .getOrElse(() => throw Exception('PAN Number exception')),
+      tanNo: tanNumberObject.fold((l) => null, (r)=>r),
+      panNo: panNumberObject.fold((l) => null, (r)=>r),
       panCardUrl: panCardUrl!,
+      userId: userId!,
     ));
   }
 }

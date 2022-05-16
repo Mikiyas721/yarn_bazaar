@@ -1,6 +1,6 @@
 enum YarnCategories {
   Cotton,
-  Texturise,
+  Texturize,
   PSF,
   PC,
   PV,

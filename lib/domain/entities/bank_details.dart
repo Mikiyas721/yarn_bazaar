@@ -13,6 +13,7 @@ class BankDetail extends Entity {
   final String? bankCity;
   final String? addressProofUrl;
   final String? cancelledChequeUrl;
+  final String userId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -27,6 +28,7 @@ class BankDetail extends Entity {
     this.bankCity,
     this.addressProofUrl,
     this.cancelledChequeUrl,
+    required this.userId,
     this.createdAt,
     this.updatedAt,
   }) : super(id);
@@ -42,20 +44,14 @@ class BankDetail extends Entity {
     String? bankCity,
     String? addressProofUrl,
     String? cancelledChequeUrl,
+    String? userId,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
     if ([
       id,
       accountName,
-      accountNumber,
-      iFSCCode,
-      bankName,
-      bankBranch,
-      bankState,
-      bankCity,
-      addressProofUrl,
-      cancelledChequeUrl,
+      userId,
       createdAt,
       updatedAt
     ].any((element) => element == null)) return none();
@@ -78,6 +74,7 @@ class BankDetail extends Entity {
       bankCity: bankCity,
       addressProofUrl: addressProofUrl,
       cancelledChequeUrl: cancelledChequeUrl,
+      userId: userId!,
       createdAt: createdAt,
       updatedAt: updatedAt,
     ));
@@ -94,7 +91,9 @@ class BankDetail extends Entity {
     String? bankCity,
     String? addressProofUrl,
     String? cancelledChequeUrl,
+    String? userId,
   }) {
+    if(userId==null) return none();
     final accountNumberObject = AccountNumber.create(accountNumber);
     final ifscCodeObject = IFSCCode.create(iFSCCode);
 
@@ -110,6 +109,7 @@ class BankDetail extends Entity {
       bankBranch: bankBranch,
       bankState: bankState,
       bankCity: bankCity,
+      userId: userId,
       addressProofUrl: addressProofUrl,
       cancelledChequeUrl: cancelledChequeUrl,
     ));

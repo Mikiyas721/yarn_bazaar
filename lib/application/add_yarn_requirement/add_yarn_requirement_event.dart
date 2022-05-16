@@ -13,10 +13,10 @@ class AddYarnRequirementIntentionChangedEvent extends AddYarnRequirementEvent {
   }
 }
 
-class AddYarnRequirementYarnQualityDetailChangedEvent extends AddYarnRequirementEvent {
+class AddYarnRequirementYarnQualityChangedEvent extends AddYarnRequirementEvent {
   final String yarnQuality;
 
-  AddYarnRequirementYarnQualityDetailChangedEvent(this.yarnQuality);
+  AddYarnRequirementYarnQualityChangedEvent(this.yarnQuality);
 
   @override
   AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
@@ -120,17 +120,6 @@ class AddYarnRequirementAdditionalCommentChangedEvent extends AddYarnRequirement
   @override
   AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
     return currentState.copyWith(additionalComment: additionalComment);
-  }
-}
-
-class AddYarnRequirementWantToTestReportChangedEvent extends AddYarnRequirementEvent {
-  final bool wantToTestReport;
-
-  AddYarnRequirementWantToTestReportChangedEvent(this.wantToTestReport);
-
-  @override
-  AddYarnRequirementState handle(AddYarnRequirementState currentState)  {
-    return currentState.copyWith(wantToTestReport: wantToTestReport);
   }
 }
 

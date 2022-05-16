@@ -6,27 +6,29 @@ import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
-class DirectoriesView extends StatelessWidget {
-  final UsersViewModel directoriesViewModel;
+class UserListView extends StatelessWidget {
+  final UsersViewModel userViewModel;
   final VoidCallback onReload;
   final Function(UserViewModel directoryViewModel) onWatchlist;
   final Function(UserViewModel directoryViewModel) onDetail;
   final Function(UserViewModel directoryViewModel) onShare;
+  final Function (int index, bool wasExpanded) onHeaderTap;
 
-  const DirectoriesView({
+  const UserListView({
     Key? key,
-    required this.directoriesViewModel,
+    required this.userViewModel,
     required this.onReload,
     required this.onWatchlist,
     required this.onDetail,
     required this.onShare,
+    required this.onHeaderTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: MyExpansionPanelList<UserViewModel>(
-          model: directoriesViewModel,
+          model: userViewModel,
           itemBuilder: (BuildContext context,
               UserViewModel directoryViewModel, int index) {
             return DirectoryView._(
@@ -40,7 +42,10 @@ class DirectoriesView extends StatelessWidget {
               onShare: () {
                 onShare(directoryViewModel);
               },
-              expanded: index == 1,
+              expanded: index == userViewModel.expandedIndex,
+              onHeaderTap: (bool wasExpanded){
+                onHeaderTap(index, wasExpanded);
+              }
             );
           },
           errorView: Center(
@@ -63,6 +68,7 @@ class DirectoryView extends ExpansionPanel {
   final VoidCallback onShare;
   final VoidCallback onDetail;
   final bool expanded;
+  final Function (bool wasExpanded) onHeaderTap;
 
   DirectoryView._({
     required this.directoryViewModel,
@@ -70,47 +76,53 @@ class DirectoryView extends ExpansionPanel {
     required this.onShare,
     required this.onDetail,
     required this.expanded,
+    required this.onHeaderTap,
   }) : super(
             canTapOnHeader: true,
             hasIcon: false,
             isExpanded: expanded,
             headerBuilder: (BuildContext context, bool isShowing) {
-              return Padding(
-                padding: expanded
-                    ? const EdgeInsets.symmetric(horizontal: 15)
-                    : const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 24,
-                      child: Text(
-                        directoryViewModel.initials,
-                        style: const TextStyle(color: Colors.white),
+              return InkWell(
+                onTap: (){
+                  onHeaderTap(expanded);
+                },
+                child: Padding(
+                  padding: expanded
+                      ? const EdgeInsets.symmetric(horizontal: 15)
+                      : const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 24,
+                        child: Text(
+                          directoryViewModel.initials,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: directoryViewModel.sellerType == "Mill"
+                            ? Colors.blue
+                            : Colors.green,
                       ),
-                      backgroundColor: directoryViewModel.sellerType == "Mill"
-                          ? Colors.blue
-                          : Colors.green,
-                    ),
-                    15.hSpace,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          directoryViewModel.companyName,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Row(
-                          children: [
-                            IconPrefixedText(
-                              icon: Icons.location_on_outlined,
-                              label: directoryViewModel.location,
-                              color: Colors.black87,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                      15.hSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            directoryViewModel.companyName,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Row(
+                            children: [
+                              IconPrefixedText(
+                                icon: Icons.location_on_outlined,
+                                label: directoryViewModel.location,
+                                color: Colors.black87,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

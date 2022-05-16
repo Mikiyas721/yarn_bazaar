@@ -13,24 +13,38 @@ class FetchTexturizeYarnsDataChangedEvent extends FetchTexturizeYarnsEvent {
   }
 }
 
-class FetchTexturizeYarnsIsLoadingChangedEvent extends FetchTexturizeYarnsEvent {
-  final bool isLoading;
-
-  FetchTexturizeYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchTexturizeYarnsStartedLoadingEvent extends FetchTexturizeYarnsEvent {
   @override
   FetchTexturizeYarnsState handle(FetchTexturizeYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchTexturizeYarnsStoppedLoadingEvent extends FetchTexturizeYarnsEvent {
+  @override
+  FetchTexturizeYarnsState handle(FetchTexturizeYarnsState currentState)  {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchTexturizeYarnsLoadFailureEvent extends FetchTexturizeYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchTexturizeYarnsLoadFailureEvent(this.errorMessage);
+  FetchTexturizeYarnsLoadFailureEvent(this.failure);
 
   @override
   FetchTexturizeYarnsState handle(FetchTexturizeYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchTexturizeYarnsExpandedIndexChangedEvent extends FetchTexturizeYarnsEvent{
+  final int newIndex;
+
+  FetchTexturizeYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchTexturizeYarnsState handle(FetchTexturizeYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }

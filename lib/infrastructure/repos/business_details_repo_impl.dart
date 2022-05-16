@@ -5,7 +5,7 @@ import 'package:yarn_bazaar/common/id_dto.dart';
 import 'package:yarn_bazaar/domain/entities/business_details.dart';
 import 'package:yarn_bazaar/domain/ports/business_details_repo.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/business_details_datasource.dart';
-import 'package:yarn_bazaar/infrastructure/dtos/business_details_dto.dart';
+import 'package:yarn_bazaar/infrastructure/dtos/business_detail_dto.dart';
 
 @LazySingleton(as: IBusinessDetailsRepo)
 class BusinessDetailsRepoImpl extends IBusinessDetailsRepo {
@@ -25,7 +25,7 @@ class BusinessDetailsRepoImpl extends IBusinessDetailsRepo {
     });
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<BusinessDetail, BusinessDetailsDto>(r).first),
+      (r) => right(IdDto.toDomainList<BusinessDetail, BusinessDetailDto>(r)!.first),
     );
   }
 
@@ -33,7 +33,7 @@ class BusinessDetailsRepoImpl extends IBusinessDetailsRepo {
   Future<Either<Failure, BusinessDetail>> updateUserBusinessDetails(
       BusinessDetail newBusinessDetails) async {
     final result = await _businessDetailsCrudDatasource
-        .update(BusinessDetailsDto.fromDomain(newBusinessDetails));
+        .update(BusinessDetailDto.fromDomain(newBusinessDetails));
     return result.fold(
       (l) => left(l),
       (r) => r

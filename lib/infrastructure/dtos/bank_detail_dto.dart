@@ -3,10 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:yarn_bazaar/common/id_dto.dart';
 import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 
-part 'bank_details_dto.g.dart';
+part 'bank_detail_dto.g.dart';
 
 @JsonSerializable()
-class BankDetailsDto extends IdDto implements TimeStampedDto {
+class BankDetailDto extends IdDto implements TimeStampedDto {
   @override
   @JsonKey(includeIfNull: false)
   final String? id;
@@ -19,6 +19,7 @@ class BankDetailsDto extends IdDto implements TimeStampedDto {
   final String? bankCity;
   final String? addressProofUrl;
   final String? cancelledChequeUrl;
+  final String userId;
   @override
   @JsonKey(includeIfNull: false)
   final DateTime? createdAt;
@@ -26,7 +27,7 @@ class BankDetailsDto extends IdDto implements TimeStampedDto {
   @JsonKey(includeIfNull: false)
   final DateTime? updatedAt;
 
-  const BankDetailsDto({
+  const BankDetailDto({
     required this.id,
     this.accountName,
     this.accountNumber,
@@ -37,14 +38,14 @@ class BankDetailsDto extends IdDto implements TimeStampedDto {
     this.bankCity,
     this.addressProofUrl,
     this.cancelledChequeUrl,
+    required this.userId,
     required this.createdAt,
     required this.updatedAt,
   });
 
-  factory BankDetailsDto.fromJson(Map<String, dynamic> map) =>
-      _$BankDetailsDtoFromJson(map);
+  factory BankDetailDto.fromJson(Map<String, dynamic> map) => _$BankDetailDtoFromJson(map);
 
-  Map<String, dynamic> toJson() => _$BankDetailsDtoToJson(this);
+  Map<String, dynamic> toJson() => _$BankDetailDtoToJson(this);
 
   @override
   Option<BankDetail> toDomain() {
@@ -59,13 +60,14 @@ class BankDetailsDto extends IdDto implements TimeStampedDto {
       bankCity: bankCity,
       addressProofUrl: addressProofUrl,
       cancelledChequeUrl: cancelledChequeUrl,
+      userId: userId,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
   }
 
-  static BankDetailsDto fromDomain(BankDetail bankDetails) {
-    return BankDetailsDto(
+  static BankDetailDto fromDomain(BankDetail bankDetails) {
+    return BankDetailDto(
       id: bankDetails.id,
       accountName: bankDetails.accountName,
       accountNumber: bankDetails.accountNumber.value,
@@ -76,6 +78,7 @@ class BankDetailsDto extends IdDto implements TimeStampedDto {
       bankCity: bankDetails.bankCity,
       addressProofUrl: bankDetails.addressProofUrl,
       cancelledChequeUrl: bankDetails.cancelledChequeUrl,
+      userId: bankDetails.userId,
       createdAt: bankDetails.createdAt,
       updatedAt: bankDetails.updatedAt,
     );

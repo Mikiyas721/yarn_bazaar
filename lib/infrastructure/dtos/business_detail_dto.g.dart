@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'business_details_dto.dart';
+part of 'business_detail_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BusinessDetailsDto _$BusinessDetailsDtoFromJson(Map<String, dynamic> json) =>
-    BusinessDetailsDto(
+BusinessDetailDto _$BusinessDetailDtoFromJson(Map<String, dynamic> json) =>
+    BusinessDetailDto(
       id: json['id'] as String?,
       companyName: json['companyName'] as String,
       accountType: json['accountType'] as String,
@@ -21,6 +21,7 @@ BusinessDetailsDto _$BusinessDetailsDtoFromJson(Map<String, dynamic> json) =>
       gstDocumentUrl: json['gstDocumentUrl'] as String?,
       panNo: json['panNo'] as String?,
       panCardUrl: json['panCardUrl'] as String?,
+      userId: json['userId'] as String,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -29,7 +30,7 @@ BusinessDetailsDto _$BusinessDetailsDtoFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$BusinessDetailsDtoToJson(BusinessDetailsDto instance) {
+Map<String, dynamic> _$BusinessDetailDtoToJson(BusinessDetailDto instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -49,6 +50,7 @@ Map<String, dynamic> _$BusinessDetailsDtoToJson(BusinessDetailsDto instance) {
   val['gstDocumentUrl'] = instance.gstDocumentUrl;
   val['panNo'] = instance.panNo;
   val['panCardUrl'] = instance.panCardUrl;
+  val['userId'] = instance.userId;
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
   return val;

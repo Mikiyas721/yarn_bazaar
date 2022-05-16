@@ -31,7 +31,7 @@ class EditBasicProfilePage extends StatelessWidget {
               onEmail: controller.onEmail,
               onWebsite: controller.onWebsite,
               onSave: controller.onSave,
-              onReload: controller.loadSaved(),
+              onReload: controller.loadSaved,
               firstNameTextEditingController:controller.firstNameTextEditingController,
               lastNameTextEditingController:controller.lastNameTextEditingController,
               inBusinessSinceTextEditingController:controller.inBusinessSinceTextEditingController,

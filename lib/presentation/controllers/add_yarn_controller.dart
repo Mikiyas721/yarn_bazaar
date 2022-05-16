@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
-import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/application/add_yarn_requirement/add_yarn_requirement_bloc.dart';
 import 'package:yarn_bazaar/presentation/models/add_yarn_requirement_view_model.dart';
 import 'package:yarn_bazaar/common/enum_extensions.dart';
@@ -16,6 +16,13 @@ class AddYarnController extends BlocViewModelController<
     AddYarnRequirementViewModel> with ShortMessageMixin {
   AddYarnController(BuildContext context)
       : super(context, getIt.get<AddYarnRequirementBloc>(), true);
+
+
+  final yarnQualityTextEditingController = TextEditingController();
+  final colourTextEditingController = TextEditingController();
+  final deliveryPeriodTextEditingController = TextEditingController();
+  final inquiryClosesWithinTextEditingController = TextEditingController();
+  final sendRequirementToTextEditingController = TextEditingController();
 
   @override
   AddYarnRequirementViewModel mapStateToViewModel(AddYarnRequirementState s) {
@@ -35,11 +42,10 @@ class AddYarnController extends BlocViewModelController<
       paymentTerms: s.paymentTerms.fold((l) => null, (r) => r.value),
       paymentTermsError:
           s.hasSubmitted ? s.paymentTerms.fold((l) => l.message, (r) => null) : null,
-      inquiryClosesWithin: DateTime.parse(s.inquiryClosesWithin),
+      inquiryClosesWithin: DateTime.now(),
       sendRequirementTo: s.sendRequirementTo,
       additionalComment: s.additionalComment,
       additionalCommentError: null,
-      wantToTestReport: s.wantToTestReport,
     );
   }
 
@@ -49,8 +55,28 @@ class AddYarnController extends BlocViewModelController<
     bloc.add(AddYarnRequirementIntentionChangedEvent(buttonIndex.getIntention));
   }
 
+  onYarnQualityTap() async {
+    final options = [
+      "30s Fancy Cotton",
+      "21s Cotton Hosiery",
+      "40s Fancy Worsted Wool",
+      "15s Fancy Linen"
+    ];
+    final selectedYarnQuality = await Navigator.pushNamed(context, '/inputSelectionPage',
+        arguments: OptionsWithNavigationModel(
+            title: "Select Yarn Quality",
+            options: options,
+            isMultiSelect: false,
+            selectedOptionIndex: options.indexOf(currentState.yarnQuality)));
+    if (selectedYarnQuality != null) {
+      bloc.add(AddYarnRequirementYarnQualityChangedEvent(selectedYarnQuality as String));
+      yarnQualityTextEditingController.text = selectedYarnQuality;
+    } else
+      toastInformation("Yarn Quality selection discarded");
+  }
+
   onQualityDetail(String quality) {
-    bloc.add(AddYarnRequirementYarnQualityDetailChangedEvent(quality));
+    bloc.add(AddYarnRequirementYarnQualityChangedEvent(quality));
   }
 
   onSelectColorTap() async {
@@ -76,8 +102,9 @@ class AddYarnController extends BlocViewModelController<
             selectedOptionIndex: options.indexOf(currentState.color)));
     if (selectedColor != null) {
       bloc.add(AddYarnRequirementColorChangedEvent(selectedColor as String));
+      colourTextEditingController.text = selectedColor;
     } else
-      toastInformation("Colour Not selected");
+      toastInformation("Colour selection discarded");
   }
 
   onQuantityChanged(String quantity) {
@@ -105,8 +132,9 @@ class AddYarnController extends BlocViewModelController<
             selectedOptionIndex: options.indexOf(currentState.deliveryPeriod)));
     if (deliveryPeriod != null) {
       bloc.add(AddYarnRequirementDeliveryPeriodChangedEvent(deliveryPeriod as String));
+      deliveryPeriodTextEditingController.text = deliveryPeriod;
     } else
-      toastInformation("Delivery Period Not selected");
+      toastInformation("Delivery Period selection discarded");
   }
 
   onPaymentTermsChanged(String paymentTerms) {
@@ -117,27 +145,26 @@ class AddYarnController extends BlocViewModelController<
 
   onSendRequirementTo() async {
     final options = ["All Sellers", "Mills only", "Traders only"];
-    final deliveryPeriod = await Navigator.pushNamed(context, '/inputSelectionPage',
+    final sendRequirementTo = await Navigator.pushNamed(context, '/inputSelectionPage',
         arguments: OptionsWithNavigationModel(
             title: "Send Requirements to",
             options: options,
             isMultiSelect: false,
             selectedOptionIndex: options.indexOf(currentState.sendRequirementTo)));
-    if (deliveryPeriod != null) {
-      bloc.add(AddYarnRequirementDeliveryPeriodChangedEvent(deliveryPeriod as String));
+    if (sendRequirementTo != null) {
+      bloc.add(AddYarnRequirementSendRequirementToChangedEvent(sendRequirementTo as String));
+      sendRequirementToTextEditingController.text = sendRequirementTo;
     } else
-      toastInformation("Send Requirement to not selected");
+      toastInformation("Send Requirement to selection discarded");
   }
 
   onAdditionalCommentsChanged(String additionalComment) {
     bloc.add(AddYarnRequirementAdditionalCommentChangedEvent(additionalComment));
   }
 
-  onWantToTestReport(int radioIndex) {
-    bloc.add(AddYarnRequirementWantToTestReportChangedEvent(radioIndex == 0 ? true : false));
-  }
-
   onPreview() {
+    //TODO more on splitting yarn quality
+    bloc.add(AddYarnRequirementSubmittedEvent());
     final splitYarnQuality = currentState.yarnQuality.split(' ');
     final signedInUser = getIt.get<SplashBloc>().state.appUser;
     signedInUser.fold(() {

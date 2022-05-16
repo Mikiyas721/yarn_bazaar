@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
 import 'package:yarn_bazaar/domain/use_cases/add_yarn_requirement.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
-import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
+import 'package:yarn_bazaar/presentation/models/composed_yarn_view_model.dart';
+import 'package:yarn_bazaar/application/composed_yarn/composed_yarn_bloc.dart';
 
-class ComposedYarnController extends ControllerWithOutBloc with ShortMessageMixin, DateTimeMixin {
+class ComposedYarnController extends BlocViewModelController<
+    ComposedYarnBloc,
+    ComposedYarnEvent,
+    ComposedYarnState,
+    ComposedYarnViewModel> with ShortMessageMixin, DateTimeMixin {
   final Yarn yarn;
   final intentionTextEditingController = TextEditingController();
   final yarnQualityTextEditingController = TextEditingController();
@@ -21,8 +26,15 @@ class ComposedYarnController extends ControllerWithOutBloc with ShortMessageMixi
   final sendRequirementToTextEditingController = TextEditingController();
   final additionalCommentsTextEditingController = TextEditingController();
 
-  ComposedYarnController(BuildContext context, this.yarn) : super(context);
+  ComposedYarnController(BuildContext context, this.yarn)
+      : super(context, getIt.get<ComposedYarnBloc>(), true);
 
+  @override
+  ComposedYarnViewModel mapStateToViewModel(ComposedYarnState s) {
+    return ComposedYarnViewModel(
+      isAdding: s.isAdding,
+    );
+  }
 
   fillTextFields() {
     intentionTextEditingController.text = yarn.intention ?? '';

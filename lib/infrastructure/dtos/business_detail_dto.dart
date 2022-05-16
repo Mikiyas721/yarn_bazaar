@@ -3,10 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:yarn_bazaar/common/id_dto.dart';
 import 'package:yarn_bazaar/domain/entities/business_details.dart';
 
-part 'business_details_dto.g.dart';
+part 'business_detail_dto.g.dart';
 
 @JsonSerializable()
-class BusinessDetailsDto extends IdDto implements TimeStampedDto {
+class BusinessDetailDto extends IdDto implements TimeStampedDto {
   @override
   @JsonKey(includeIfNull: false)
   final String? id;
@@ -20,6 +20,7 @@ class BusinessDetailsDto extends IdDto implements TimeStampedDto {
   final String? gstDocumentUrl;
   final String? panNo;
   final String? panCardUrl;
+  final String userId;
   @override
   @JsonKey(includeIfNull: false)
   final DateTime? createdAt;
@@ -27,7 +28,7 @@ class BusinessDetailsDto extends IdDto implements TimeStampedDto {
   @JsonKey(includeIfNull: false)
   final DateTime? updatedAt;
 
-  const BusinessDetailsDto({
+  const BusinessDetailDto({
     required this.id,
     required this.companyName,
     required this.accountType,
@@ -39,14 +40,15 @@ class BusinessDetailsDto extends IdDto implements TimeStampedDto {
     this.gstDocumentUrl,
     this.panNo,
     this.panCardUrl,
+    required this.userId,
     required this.createdAt,
     required this.updatedAt,
   });
 
-  factory BusinessDetailsDto.fromJson(Map<String, dynamic> map) =>
-      _$BusinessDetailsDtoFromJson(map);
+  factory BusinessDetailDto.fromJson(Map<String, dynamic> map) =>
+      _$BusinessDetailDtoFromJson(map);
 
-  Map<String, dynamic> toJson() => _$BusinessDetailsDtoToJson(this);
+  Map<String, dynamic> toJson() => _$BusinessDetailDtoToJson(this);
 
   @override
   Option<BusinessDetail> toDomain() {
@@ -62,24 +64,26 @@ class BusinessDetailsDto extends IdDto implements TimeStampedDto {
       gstDocumentUrl: gstDocumentUrl,
       panNo: panNo,
       panCardUrl: panCardUrl,
+      userId: userId,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
   }
 
-  static BusinessDetailsDto fromDomain(BusinessDetail businessDetails) {
-    return BusinessDetailsDto(
+  static BusinessDetailDto fromDomain(BusinessDetail businessDetails) {
+    return BusinessDetailDto(
       id: businessDetails.id,
       companyName: businessDetails.companyName,
       accountType: businessDetails.accountType,
       categories: businessDetails.categories,
       address: businessDetails.address,
       completeAddress: businessDetails.completeAddress,
-      gstNo: businessDetails.gstNo.value,
-      tanNo: businessDetails.tanNo.value,
+      gstNo: businessDetails.gstNo?.value,
+      tanNo: businessDetails.tanNo?.value,
       gstDocumentUrl: businessDetails.gstDocumentUrl,
-      panNo: businessDetails.panNo.value,
+      panNo: businessDetails.panNo?.value,
       panCardUrl: businessDetails.panCardUrl,
+      userId: businessDetails.userId,
       createdAt: businessDetails.createdAt,
       updatedAt: businessDetails.updatedAt,
     );

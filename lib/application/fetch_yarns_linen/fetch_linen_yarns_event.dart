@@ -13,25 +13,39 @@ class FetchLinenYarnsDataChangedEvent extends FetchLinenYarnsEvent {
   }
 }
 
-class FetchLinenYarnsIsLoadingChangedEvent extends FetchLinenYarnsEvent {
-  final bool isLoading;
-
-  FetchLinenYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchLinenYarnsStartedLoadingEvent extends FetchLinenYarnsEvent {
   @override
   FetchLinenYarnsState handle(FetchLinenYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchLinenYarnsStoppedLoadingEvent extends FetchLinenYarnsEvent {
+  @override
+  FetchLinenYarnsState handle(FetchLinenYarnsState currentState)  {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchLinenYarnsLoadFailureEvent extends FetchLinenYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchLinenYarnsLoadFailureEvent(this.errorMessage);
+  FetchLinenYarnsLoadFailureEvent(this.failure);
 
   @override
   FetchLinenYarnsState handle(FetchLinenYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchLinenYarnsExpandedIndexChangedEvent extends FetchLinenYarnsEvent{
+  final int newIndex;
+
+  FetchLinenYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchLinenYarnsState handle(FetchLinenYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }
 

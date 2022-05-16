@@ -13,24 +13,38 @@ class FetchPsfYarnsDataChangedEvent extends FetchPsfYarnsEvent {
   }
 }
 
-class FetchPsfYarnsIsLoadingChangedEvent extends FetchPsfYarnsEvent {
-  final bool isLoading;
-
-  FetchPsfYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchPsfYarnsStartedLoadingEvent extends FetchPsfYarnsEvent {
   @override
   FetchPsfYarnsState handle(FetchPsfYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchPsfYarnsStoppedLoadingEvent extends FetchPsfYarnsEvent {
+  @override
+  FetchPsfYarnsState handle(FetchPsfYarnsState currentState)  {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchPsfYarnsLoadFailureEvent extends FetchPsfYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchPsfYarnsLoadFailureEvent(this.errorMessage);
+  FetchPsfYarnsLoadFailureEvent(this.failure);
 
   @override
   FetchPsfYarnsState handle(FetchPsfYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchPsfYarnsExpandedIndexChangedEvent extends FetchPsfYarnsEvent{
+  final int newIndex;
+
+  FetchPsfYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchPsfYarnsState handle(FetchPsfYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }

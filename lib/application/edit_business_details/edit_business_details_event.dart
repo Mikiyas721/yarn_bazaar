@@ -16,6 +16,17 @@ class EditBusinessDetailsStoppedLoadingSavedEvent extends EditBusinessDetailsEve
   }
 }
 
+class EditBusinessDetailsSavedBusinessDetailEvent extends EditBusinessDetailsEvent {
+  final Option<BusinessDetail> loadedBusinessDetail;
+
+  EditBusinessDetailsSavedBusinessDetailEvent(this.loadedBusinessDetail);
+
+  @override
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(loadedBusinessDetail: loadedBusinessDetail);
+  }
+}
+
 class EditBusinessDetailsFailureChangedEvent extends EditBusinessDetailsEvent {
   final Option<Failure> failure;
 
@@ -23,7 +34,7 @@ class EditBusinessDetailsFailureChangedEvent extends EditBusinessDetailsEvent {
 
   @override
   EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
-    return currentState.copyWith(failure: failure);
+    return currentState.copyWith(loadingSavedFailure: failure);
   }
 }
 

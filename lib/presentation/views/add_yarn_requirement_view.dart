@@ -9,6 +9,7 @@ import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
   final AddYarnRequirementViewModel yarnRequirementViewModel;
   final Function(int buttonIndex) onInquiryOrPurchase;
+  final VoidCallback onYarnQualityTap;
   final Function(String qualityDetail) onQualityDetail;
   final VoidCallback onSelectColorTap;
   final Function(String qualityDetail) onQuantityChanged;
@@ -18,12 +19,17 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
   final VoidCallback onInquiryClosesWithIn;
   final VoidCallback onSendRequirementTo;
   final Function(String qualityDetail) onAdditionalCommentsChanged;
-  final Function(int radioIndex) onWantToTestReport;
+  final TextEditingController? yarnQualityTextEditingController;
+  final TextEditingController? colourTextEditingController;
+  final TextEditingController? deliveryPeriodTextEditingController;
+  final TextEditingController? inquiryClosesWithinTextEditingController;
+  final TextEditingController? sendRequirementToTextEditingController;
 
   const AddYarnRequirementView({
     Key? key,
     required this.yarnRequirementViewModel,
     required this.onInquiryOrPurchase,
+    required this.onYarnQualityTap,
     required this.onQualityDetail,
     required this.onSelectColorTap,
     required this.onQuantityChanged,
@@ -33,7 +39,11 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
     required this.onInquiryClosesWithIn,
     required this.onSendRequirementTo,
     required this.onAdditionalCommentsChanged,
-    required this.onWantToTestReport,
+    this.yarnQualityTextEditingController,
+    this.colourTextEditingController,
+    this.deliveryPeriodTextEditingController,
+    this.inquiryClosesWithinTextEditingController,
+    this.sendRequirementToTextEditingController,
   }) : super(key: key);
 
   @override
@@ -53,8 +63,8 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   elevates: true,
                   isSelected: yarnRequirementViewModel.intention ==
                       YarnRequirementIntention.PriceInquiry,
-                  onClick: (bool isElevated) {
-                    if (!isElevated) onInquiryOrPurchase(0);
+                  onClick: (bool isSelected) {
+                    if (isSelected) onInquiryOrPurchase(0);
                   },
                 ),
               ),
@@ -67,8 +77,8 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   elevates: true,
                   isSelected:
                       yarnRequirementViewModel.intention == YarnRequirementIntention.Purchase,
-                  onClick: (bool isElevated) {
-                    if (!isElevated) onInquiryOrPurchase(1);
+                  onClick: (bool isSelected) {
+                    if (isSelected) onInquiryOrPurchase(1);
                   },
                 ),
               )
@@ -80,6 +90,15 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
               child: Column(
                 children: [
                   TextFieldWithTitle(
+                    title: 'Yarn Quality',
+                    controller: yarnQualityTextEditingController,
+                    fieldIsOptional: false,
+                    readOnly: true,
+                    hintText: '30s cotton',
+                    onTap: onYarnQualityTap,
+                    suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                  ),
+                  TextFieldWithTitle(
                     title: 'Quality Details',
                     errorMessage: yarnRequirementViewModel.qualityDetailsError,
                     fieldIsOptional: true,
@@ -88,6 +107,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Colour',
+                    controller: colourTextEditingController,
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: 'Select Colour',
@@ -111,6 +131,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Delivery Period',
+                    controller: deliveryPeriodTextEditingController,
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: 'ex - ready or within 1 week',
@@ -126,6 +147,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Inquiry Closes Within',
+                    controller: inquiryClosesWithinTextEditingController,
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: '03:00:00',
@@ -134,6 +156,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Send Requirement to',
+                    controller: sendRequirementToTextEditingController,
                     fieldIsOptional: false,
                     readOnly: true,
                     hintText: 'All Sellers',
@@ -147,59 +170,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                     hintText: 'ex - I want lowest price',
                     onChanged: onAdditionalCommentsChanged,
                   ),
-                  15.vSpace,
-                  Row(children: [
-                    Text(
-                      'I Want Test Report',
-                      style: TextStyle(color: context.primaryColor),
-                    ),
-                    const Text(
-                      '*',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ]),
-                  Row(
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Radio(
-                              activeColor: context.primaryColor,
-                              value: yarnRequirementViewModel.wantToTestReport,
-                              groupValue: yarnRequirementViewModel.wantToTestReport,
-                              onChanged: (bool? isSelected) {
-                                onWantToTestReport(0);
-                              }),
-                          Text(
-                            'Yes',
-                            style: TextStyle(
-                                color: yarnRequirementViewModel.wantToTestReport
-                                    ? Colors.black
-                                    : context.primaryColor),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Radio(
-                              activeColor: context.primaryColor,
-                              value: !yarnRequirementViewModel.wantToTestReport,
-                              groupValue: yarnRequirementViewModel.wantToTestReport,
-                              onChanged: (bool? isSelected) {
-                                onWantToTestReport(1);
-                              }),
-                          Text(
-                            'No',
-                            style: TextStyle(
-                                color: yarnRequirementViewModel.wantToTestReport
-                                    ? Colors.black
-                                    : context.primaryColor),
-                          )
-                        ],
-                      )
-                    ],
-                  )
+                  50.vSpace,
                 ],
               ),
             ),

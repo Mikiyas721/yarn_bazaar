@@ -7,6 +7,7 @@ class EmptyErrorView extends StatelessWidget {
   final String? title;
   final String? description;
   final String? actionLabel;
+  final bool actionButtonIsFilled;
   final VoidCallback onReload;
 
   const EmptyErrorView({
@@ -15,6 +16,7 @@ class EmptyErrorView extends StatelessWidget {
     this.title,
     this.description,
     this.actionLabel,
+    this.actionButtonIsFilled = false,
     required this.onReload,
   }) : super(key: key);
 
@@ -23,6 +25,7 @@ class EmptyErrorView extends StatelessWidget {
     String? title,
     String? description,
     String? actionLabel,
+    bool actionButtonIsFilled = false,
     required VoidCallback onReload,
   }) {
     return EmptyErrorView(
@@ -30,6 +33,7 @@ class EmptyErrorView extends StatelessWidget {
       title: title ?? 'No Data',
       description: description ?? 'You have no data in this section',
       actionLabel: actionLabel ?? 'Reload',
+      actionButtonIsFilled: actionButtonIsFilled,
       onReload: onReload,
     );
   }
@@ -39,6 +43,7 @@ class EmptyErrorView extends StatelessWidget {
     String? title,
     String? description,
     String? actionLabel,
+    bool actionButtonIsFilled = false,
     required VoidCallback onRetry,
   }) {
     return EmptyErrorView(
@@ -46,12 +51,14 @@ class EmptyErrorView extends StatelessWidget {
       title: title ?? 'Error',
       description: description ?? 'An error occurred while loading',
       actionLabel: actionLabel ?? 'Retry',
+      actionButtonIsFilled: actionButtonIsFilled,
       onReload: onRetry,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -65,9 +72,10 @@ class EmptyErrorView extends StatelessWidget {
         Text(
           title!,
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
+            color: actionButtonIsFilled?Colors.white:Colors.black
           ),
         ),
         if (description != null) 12.vSpace,
@@ -76,18 +84,23 @@ class EmptyErrorView extends StatelessWidget {
             description!,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.grey.shade600,
+              color: actionButtonIsFilled?Colors.white:Colors.grey.shade600,
             ),
           ),
         24.vSpace,
         if (actionLabel != null)
           OutlinedButton(
-              onPressed: onReload,
-              child: Text(
-                actionLabel!,
-              ),
-              style: OutlinedButton.styleFrom(
-                  side: BorderSide(width: 0.7, color: context.primaryColor))),
+            onPressed: onReload,
+            child: Text(
+              actionLabel!,
+              style: actionButtonIsFilled!?TextStyle(color: Colors.white):null,
+            ),
+            style: OutlinedButton.styleFrom(
+              side: BorderSide(width: 0.7, color: context.primaryColor),
+              backgroundColor: actionButtonIsFilled!?context.primaryColor:null,
+              minimumSize: Size(size.width*0.3, 40)
+            ),
+          ),
       ],
     );
   }

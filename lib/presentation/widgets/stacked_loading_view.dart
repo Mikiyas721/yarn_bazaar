@@ -26,13 +26,14 @@ class MyStackedLoadingView extends StatelessWidget {
             bottom: 0,
             top: 0,
             child: Container(
-              color: Color(0x44FFFFFF),
+              color: Colors.black38,
               child: isLoading
-                  ? MyLoadingView()
+                  ? Center(child: MyLoadingView())
                   : EmptyErrorView.defaultError(
                       title: title,
                       description: error,
                       onRetry: onReload,
+                      actionButtonIsFilled: true,
                     ),
             ))
         : SizedBox(width: 0, height: 0);

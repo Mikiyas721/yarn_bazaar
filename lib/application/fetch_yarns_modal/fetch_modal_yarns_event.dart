@@ -13,24 +13,38 @@ class FetchModalYarnsDataChangedEvent extends FetchModalYarnsEvent {
   }
 }
 
-class FetchModalYarnsIsLoadingChangedEvent extends FetchModalYarnsEvent {
-  final bool isLoading;
-
-  FetchModalYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchModalYarnsStartedLoadingEvent extends FetchModalYarnsEvent {
   @override
   FetchModalYarnsState handle(FetchModalYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchModalYarnsStoppedLoadingEvent extends FetchModalYarnsEvent {
+  @override
+  FetchModalYarnsState handle(FetchModalYarnsState currentState)  {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchModalYarnsLoadFailureEvent extends FetchModalYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchModalYarnsLoadFailureEvent(this.errorMessage);
+  FetchModalYarnsLoadFailureEvent(this.failure);
 
   @override
   FetchModalYarnsState handle(FetchModalYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchModalYarnsExpandedIndexChangedEvent extends FetchModalYarnsEvent{
+  final int newIndex;
+
+  FetchModalYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchModalYarnsState handle(FetchModalYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }

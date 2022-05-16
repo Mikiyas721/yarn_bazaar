@@ -13,24 +13,38 @@ class FetchWorstedWoolYarnsDataChangedEvent extends FetchWorstedWoolYarnsEvent {
   }
 }
 
-class FetchWorstedWoolYarnsIsLoadingChangedEvent extends FetchWorstedWoolYarnsEvent {
-  final bool isLoading;
-
-  FetchWorstedWoolYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchWorstedWoolYarnsStartedLoadingEvent extends FetchWorstedWoolYarnsEvent {
   @override
   FetchWorstedWoolYarnsState handle(FetchWorstedWoolYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchWorstedWoolYarnsStoppedLoadingEvent extends FetchWorstedWoolYarnsEvent {
+  @override
+  FetchWorstedWoolYarnsState handle(FetchWorstedWoolYarnsState currentState)  {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchWorstedWoolYarnsLoadFailureEvent extends FetchWorstedWoolYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchWorstedWoolYarnsLoadFailureEvent(this.errorMessage);
+  FetchWorstedWoolYarnsLoadFailureEvent(this.failure);
 
   @override
   FetchWorstedWoolYarnsState handle(FetchWorstedWoolYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchWorstedWoolYarnsExpandedIndexChangedEvent extends FetchWorstedWoolYarnsEvent{
+  final int newIndex;
+
+  FetchWorstedWoolYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchWorstedWoolYarnsState handle(FetchWorstedWoolYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }

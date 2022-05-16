@@ -18,7 +18,6 @@ class AddYarnRequirementViewModel extends ViewModel {
   final String? sendRequirementTo;
   final String? additionalComment;
   final String? additionalCommentError;
-  final bool wantToTestReport;
 
   AddYarnRequirementViewModel({
     required this.intention,
@@ -37,7 +36,6 @@ class AddYarnRequirementViewModel extends ViewModel {
     required this.sendRequirementTo,
     required this.additionalComment,
     required this.additionalCommentError,
-    required this.wantToTestReport,
   });
 
   @override
@@ -58,6 +56,5 @@ class AddYarnRequirementViewModel extends ViewModel {
         sendRequirementTo,
         additionalComment,
         additionalCommentError,
-        wantToTestReport,
       ];
 }

@@ -21,7 +21,7 @@ class TextFieldWithTitle extends StatelessWidget {
   const TextFieldWithTitle({
     Key? key,
     required this.title,
-    this.usesPrimaryColor = false,
+    this.usesPrimaryColor = true,
     this.controller,
     this.hintText,
     this.labelText,
@@ -70,7 +70,7 @@ class TextFieldWithTitle extends StatelessWidget {
                 errorText: errorMessage,
                 suffixIcon: suffixIcon,
                 hintStyle: const TextStyle(fontSize: 12, color: Colors.grey)),
-            enabled: onTap == null ? enabled : false,
+            enabled: enabled,
             onTap: onTap,
             onChanged: onChanged,
             onSubmitted: onSubmitted,

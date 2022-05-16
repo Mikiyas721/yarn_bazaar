@@ -4,7 +4,8 @@ part of 'edit_business_details_bloc.dart';
 abstract class EditBusinessDetailsState extends BlocState with _$EditBusinessDetailsState {
   const factory EditBusinessDetailsState({
     required bool isLoadingSaved,
-    required Option<Failure> failure,
+    required Option<BusinessDetail> loadedBusinessDetail,
+    required Option<Failure> loadingSavedFailure,
     required Either<CompanyNameFailure, CompanyName> companyName,
     required String accountType,
     required List<String> categories,
@@ -19,7 +20,8 @@ abstract class EditBusinessDetailsState extends BlocState with _$EditBusinessDet
 
   factory EditBusinessDetailsState.initial() => EditBusinessDetailsState(
         isLoadingSaved: true,
-        failure: none(),
+        loadedBusinessDetail: none(),
+        loadingSavedFailure: none(),
         companyName: CompanyName.create(''),
         accountType: '',
         categories: [],

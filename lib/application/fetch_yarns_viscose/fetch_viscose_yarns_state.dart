@@ -6,12 +6,14 @@ abstract class FetchViscoseYarnsState extends BlocState with _$FetchViscoseYarns
     required List<Yarn> yarns,
     required bool isLoading,
     required Option<Failure> error,
+    required int expandedIndex,
   }) = _FetchViscoseYarnsState;
 
   factory FetchViscoseYarnsState.initial() => FetchViscoseYarnsState(
     yarns: const [],
     isLoading: false,
     error: none(),
+    expandedIndex: -1,
   );
 }
 

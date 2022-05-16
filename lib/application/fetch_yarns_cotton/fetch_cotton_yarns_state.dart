@@ -6,12 +6,14 @@ abstract class FetchCottonYarnsState extends BlocState with _$FetchCottonYarnsSt
     required List<Yarn> yarns,
     required bool isLoading,
     required Option<Failure> error,
+    required int expandedIndex,
   }) = _FetchCottonYarnsState;
 
   factory FetchCottonYarnsState.initial() => FetchCottonYarnsState(
     yarns: const [],
     isLoading: false,
     error: none(),
+    expandedIndex: -1,
   );
 }
 

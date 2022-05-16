@@ -19,6 +19,7 @@ mixin _$FetchBrokerUsersState {
   List<User> get users => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Failure> get error => throw _privateConstructorUsedError;
+  int get expandedIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FetchBrokerUsersStateCopyWith<FetchBrokerUsersState> get copyWith =>
@@ -30,7 +31,11 @@ abstract class $FetchBrokerUsersStateCopyWith<$Res> {
   factory $FetchBrokerUsersStateCopyWith(FetchBrokerUsersState value,
           $Res Function(FetchBrokerUsersState) then) =
       _$FetchBrokerUsersStateCopyWithImpl<$Res>;
-  $Res call({List<User> users, bool isLoading, Option<Failure> error});
+  $Res call(
+      {List<User> users,
+      bool isLoading,
+      Option<Failure> error,
+      int expandedIndex});
 }
 
 /// @nodoc
@@ -47,6 +52,7 @@ class _$FetchBrokerUsersStateCopyWithImpl<$Res>
     Object? users = freezed,
     Object? isLoading = freezed,
     Object? error = freezed,
+    Object? expandedIndex = freezed,
   }) {
     return _then(_value.copyWith(
       users: users == freezed
@@ -61,6 +67,10 @@ class _$FetchBrokerUsersStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
+      expandedIndex: expandedIndex == freezed
+          ? _value.expandedIndex
+          : expandedIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -72,7 +82,11 @@ abstract class _$$_FetchBrokerUsersStateCopyWith<$Res>
           $Res Function(_$_FetchBrokerUsersState) then) =
       __$$_FetchBrokerUsersStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<User> users, bool isLoading, Option<Failure> error});
+  $Res call(
+      {List<User> users,
+      bool isLoading,
+      Option<Failure> error,
+      int expandedIndex});
 }
 
 /// @nodoc
@@ -92,6 +106,7 @@ class __$$_FetchBrokerUsersStateCopyWithImpl<$Res>
     Object? users = freezed,
     Object? isLoading = freezed,
     Object? error = freezed,
+    Object? expandedIndex = freezed,
   }) {
     return _then(_$_FetchBrokerUsersState(
       users: users == freezed
@@ -106,6 +121,10 @@ class __$$_FetchBrokerUsersStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
+      expandedIndex: expandedIndex == freezed
+          ? _value.expandedIndex
+          : expandedIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -116,7 +135,8 @@ class _$_FetchBrokerUsersState implements _FetchBrokerUsersState {
   const _$_FetchBrokerUsersState(
       {required final List<User> users,
       required this.isLoading,
-      required this.error})
+      required this.error,
+      required this.expandedIndex})
       : _users = users;
 
   final List<User> _users;
@@ -130,10 +150,12 @@ class _$_FetchBrokerUsersState implements _FetchBrokerUsersState {
   final bool isLoading;
   @override
   final Option<Failure> error;
+  @override
+  final int expandedIndex;
 
   @override
   String toString() {
-    return 'FetchBrokerUsersState(users: $users, isLoading: $isLoading, error: $error)';
+    return 'FetchBrokerUsersState(users: $users, isLoading: $isLoading, error: $error, expandedIndex: $expandedIndex)';
   }
 
   @override
@@ -143,7 +165,9 @@ class _$_FetchBrokerUsersState implements _FetchBrokerUsersState {
             other is _$_FetchBrokerUsersState &&
             const DeepCollectionEquality().equals(other._users, _users) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality()
+                .equals(other.expandedIndex, expandedIndex));
   }
 
   @override
@@ -151,7 +175,8 @@ class _$_FetchBrokerUsersState implements _FetchBrokerUsersState {
       runtimeType,
       const DeepCollectionEquality().hash(_users),
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(error));
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(expandedIndex));
 
   @JsonKey(ignore: true)
   @override
@@ -164,7 +189,8 @@ abstract class _FetchBrokerUsersState implements FetchBrokerUsersState {
   const factory _FetchBrokerUsersState(
       {required final List<User> users,
       required final bool isLoading,
-      required final Option<Failure> error}) = _$_FetchBrokerUsersState;
+      required final Option<Failure> error,
+      required final int expandedIndex}) = _$_FetchBrokerUsersState;
 
   @override
   List<User> get users => throw _privateConstructorUsedError;
@@ -172,6 +198,8 @@ abstract class _FetchBrokerUsersState implements FetchBrokerUsersState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   Option<Failure> get error => throw _privateConstructorUsedError;
+  @override
+  int get expandedIndex => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_FetchBrokerUsersStateCopyWith<_$_FetchBrokerUsersState> get copyWith =>

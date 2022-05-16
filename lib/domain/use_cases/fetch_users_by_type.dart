@@ -3,6 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/ports/user_repo.dart';
+import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
+import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 @lazySingleton
 class FetchUsersByType {
@@ -11,7 +13,7 @@ class FetchUsersByType {
   const FetchUsersByType(this._iUserRepo);
 
   Future<Either<Failure, List<User>>> execute(
-      String currentUserId, String userType) async {
-    return _iUserRepo.fetchByUserType(currentUserId, userType);
+      String currentUserId, {UserType? userType}) async {
+    return _iUserRepo.fetchByUserType(currentUserId, userType?.getString());
   }
 }

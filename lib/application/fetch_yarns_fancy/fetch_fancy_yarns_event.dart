@@ -13,24 +13,38 @@ class FetchFancyYarnsDataChangedEvent extends FetchFancyYarnsEvent {
   }
 }
 
-class FetchFancyYarnsIsLoadingChangedEvent extends FetchFancyYarnsEvent {
-  final bool isLoading;
-
-  FetchFancyYarnsIsLoadingChangedEvent(this.isLoading);
-
+class FetchFancyYarnsStartedLoadingEvent extends FetchFancyYarnsEvent {
   @override
   FetchFancyYarnsState handle(FetchFancyYarnsState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchFancyYarnsStoppedLoadingEvent extends FetchFancyYarnsEvent {
+  @override
+  FetchFancyYarnsState handle(FetchFancyYarnsState currentState)  {
+    return currentState.copyWith(isLoading: false);
   }
 }
 
 class FetchFancyYarnsLoadFailureEvent extends FetchFancyYarnsEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchFancyYarnsLoadFailureEvent(this.errorMessage);
+  FetchFancyYarnsLoadFailureEvent(this.failure);
 
   @override
   FetchFancyYarnsState handle(FetchFancyYarnsState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
+  }
+}
+
+class FetchFancyYarnsExpandedIndexChangedEvent extends FetchFancyYarnsEvent{
+  final int newIndex;
+
+  FetchFancyYarnsExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchFancyYarnsState handle(FetchFancyYarnsState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
   }
 }

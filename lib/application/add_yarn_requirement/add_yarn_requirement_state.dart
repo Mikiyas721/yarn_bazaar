@@ -14,7 +14,6 @@ abstract class AddYarnRequirementState extends BlocState with _$AddYarnRequireme
     required String inquiryClosesWithin,
     required String sendRequirementTo,
     String? additionalComment,
-    required bool wantToTestReport,
     required bool hasSubmitted,
   }) = _AddYarnRequirementState;
 
@@ -28,7 +27,6 @@ abstract class AddYarnRequirementState extends BlocState with _$AddYarnRequireme
         paymentTerms: PaymentTerms.create(''),
         inquiryClosesWithin: '',
         sendRequirementTo: '',
-        wantToTestReport: false,
         hasSubmitted: false,
       );
 }

@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'bank_details_dto.dart';
+part of 'bank_detail_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BankDetailsDto _$BankDetailsDtoFromJson(Map<String, dynamic> json) =>
-    BankDetailsDto(
+BankDetailDto _$BankDetailDtoFromJson(Map<String, dynamic> json) =>
+    BankDetailDto(
       id: json['id'] as String?,
       accountName: json['accountName'] as String?,
       accountNumber: json['accountNumber'] as String?,
@@ -18,6 +18,7 @@ BankDetailsDto _$BankDetailsDtoFromJson(Map<String, dynamic> json) =>
       bankCity: json['bankCity'] as String?,
       addressProofUrl: json['addressProofUrl'] as String?,
       cancelledChequeUrl: json['cancelledChequeUrl'] as String?,
+      userId: json['userId'] as String,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -26,7 +27,7 @@ BankDetailsDto _$BankDetailsDtoFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$BankDetailsDtoToJson(BankDetailsDto instance) {
+Map<String, dynamic> _$BankDetailDtoToJson(BankDetailDto instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -45,6 +46,7 @@ Map<String, dynamic> _$BankDetailsDtoToJson(BankDetailsDto instance) {
   val['bankCity'] = instance.bankCity;
   val['addressProofUrl'] = instance.addressProofUrl;
   val['cancelledChequeUrl'] = instance.cancelledChequeUrl;
+  val['userId'] = instance.userId;
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
   return val;

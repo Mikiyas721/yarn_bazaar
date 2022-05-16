@@ -48,7 +48,7 @@ extension UserTypeExtension on UserType{
 extension YarnCategoriesExtensions on YarnCategories{
   String getString(){
     if (this==YarnCategories.Cotton) return "Cotton";
-    else if (this==YarnCategories.Texturise) return "Texturise";
+    else if (this==YarnCategories.Texturize) return "Texturise";
     else if (this==YarnCategories.PSF) return "PSF";
     else if (this==YarnCategories.PC) return "PC";
     else if (this==YarnCategories.PV) return "PV";

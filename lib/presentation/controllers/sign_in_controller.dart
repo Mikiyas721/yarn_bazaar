@@ -5,7 +5,7 @@ import 'package:yarn_bazaar/domain/entities/credentials.dart';
 import 'package:yarn_bazaar/domain/use_cases/cache_logged_in_user.dart';
 import 'package:yarn_bazaar/domain/use_cases/sign_in_user.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
-import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/sign_in_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 

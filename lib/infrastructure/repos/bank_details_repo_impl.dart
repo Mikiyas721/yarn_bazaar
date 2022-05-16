@@ -5,7 +5,7 @@ import 'package:yarn_bazaar/common/id_dto.dart';
 import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 import 'package:yarn_bazaar/domain/ports/bank_details_repo.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/bank_details_datasource.dart';
-import 'package:yarn_bazaar/infrastructure/dtos/bank_details_dto.dart';
+import 'package:yarn_bazaar/infrastructure/dtos/bank_detail_dto.dart';
 
 @LazySingleton(as: IBankDetailsRepo)
 class BankDetailsRepoImpl extends IBankDetailsRepo {
@@ -25,14 +25,14 @@ class BankDetailsRepoImpl extends IBankDetailsRepo {
     });
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<BankDetail, BankDetailsDto>(r).first),
+      (r) => right(IdDto.toDomainList<BankDetail, BankDetailDto>(r)!.first),
     );
   }
 
   @override
   Future<Either<Failure, BankDetail>> updateUserBankDetails(BankDetail newBankDetails) async {
     final result =
-        await _bankDetailsCrudDatasource.update(BankDetailsDto.fromDomain(newBankDetails));
+        await _bankDetailsCrudDatasource.update(BankDetailDto.fromDomain(newBankDetails));
     return result.fold(
       (l) => left(l),
       (r) => r.toDomain().fold(() => left(bankDtoMappingSimpleFailure), (a) => right(a)),

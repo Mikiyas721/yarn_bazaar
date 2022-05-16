@@ -30,7 +30,6 @@ mixin _$AddYarnRequirementState {
   String get inquiryClosesWithin => throw _privateConstructorUsedError;
   String get sendRequirementTo => throw _privateConstructorUsedError;
   String? get additionalComment => throw _privateConstructorUsedError;
-  bool get wantToTestReport => throw _privateConstructorUsedError;
   bool get hasSubmitted => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -55,7 +54,6 @@ abstract class $AddYarnRequirementStateCopyWith<$Res> {
       String inquiryClosesWithin,
       String sendRequirementTo,
       String? additionalComment,
-      bool wantToTestReport,
       bool hasSubmitted});
 }
 
@@ -81,7 +79,6 @@ class _$AddYarnRequirementStateCopyWithImpl<$Res>
     Object? inquiryClosesWithin = freezed,
     Object? sendRequirementTo = freezed,
     Object? additionalComment = freezed,
-    Object? wantToTestReport = freezed,
     Object? hasSubmitted = freezed,
   }) {
     return _then(_value.copyWith(
@@ -129,10 +126,6 @@ class _$AddYarnRequirementStateCopyWithImpl<$Res>
           ? _value.additionalComment
           : additionalComment // ignore: cast_nullable_to_non_nullable
               as String?,
-      wantToTestReport: wantToTestReport == freezed
-          ? _value.wantToTestReport
-          : wantToTestReport // ignore: cast_nullable_to_non_nullable
-              as bool,
       hasSubmitted: hasSubmitted == freezed
           ? _value.hasSubmitted
           : hasSubmitted // ignore: cast_nullable_to_non_nullable
@@ -160,7 +153,6 @@ abstract class _$$_AddYarnRequirementStateCopyWith<$Res>
       String inquiryClosesWithin,
       String sendRequirementTo,
       String? additionalComment,
-      bool wantToTestReport,
       bool hasSubmitted});
 }
 
@@ -189,7 +181,6 @@ class __$$_AddYarnRequirementStateCopyWithImpl<$Res>
     Object? inquiryClosesWithin = freezed,
     Object? sendRequirementTo = freezed,
     Object? additionalComment = freezed,
-    Object? wantToTestReport = freezed,
     Object? hasSubmitted = freezed,
   }) {
     return _then(_$_AddYarnRequirementState(
@@ -237,10 +228,6 @@ class __$$_AddYarnRequirementStateCopyWithImpl<$Res>
           ? _value.additionalComment
           : additionalComment // ignore: cast_nullable_to_non_nullable
               as String?,
-      wantToTestReport: wantToTestReport == freezed
-          ? _value.wantToTestReport
-          : wantToTestReport // ignore: cast_nullable_to_non_nullable
-              as bool,
       hasSubmitted: hasSubmitted == freezed
           ? _value.hasSubmitted
           : hasSubmitted // ignore: cast_nullable_to_non_nullable
@@ -264,7 +251,6 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
       required this.inquiryClosesWithin,
       required this.sendRequirementTo,
       this.additionalComment,
-      required this.wantToTestReport,
       required this.hasSubmitted});
 
   @override
@@ -290,13 +276,11 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
   @override
   final String? additionalComment;
   @override
-  final bool wantToTestReport;
-  @override
   final bool hasSubmitted;
 
   @override
   String toString() {
-    return 'AddYarnRequirementState(intention: $intention, yarnQuality: $yarnQuality, qualityDetails: $qualityDetails, color: $color, quantityInKgs: $quantityInKgs, deliveryArea: $deliveryArea, deliveryPeriod: $deliveryPeriod, paymentTerms: $paymentTerms, inquiryClosesWithin: $inquiryClosesWithin, sendRequirementTo: $sendRequirementTo, additionalComment: $additionalComment, wantToTestReport: $wantToTestReport, hasSubmitted: $hasSubmitted)';
+    return 'AddYarnRequirementState(intention: $intention, yarnQuality: $yarnQuality, qualityDetails: $qualityDetails, color: $color, quantityInKgs: $quantityInKgs, deliveryArea: $deliveryArea, deliveryPeriod: $deliveryPeriod, paymentTerms: $paymentTerms, inquiryClosesWithin: $inquiryClosesWithin, sendRequirementTo: $sendRequirementTo, additionalComment: $additionalComment, hasSubmitted: $hasSubmitted)';
   }
 
   @override
@@ -325,8 +309,6 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
             const DeepCollectionEquality()
                 .equals(other.additionalComment, additionalComment) &&
             const DeepCollectionEquality()
-                .equals(other.wantToTestReport, wantToTestReport) &&
-            const DeepCollectionEquality()
                 .equals(other.hasSubmitted, hasSubmitted));
   }
 
@@ -344,7 +326,6 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
       const DeepCollectionEquality().hash(inquiryClosesWithin),
       const DeepCollectionEquality().hash(sendRequirementTo),
       const DeepCollectionEquality().hash(additionalComment),
-      const DeepCollectionEquality().hash(wantToTestReport),
       const DeepCollectionEquality().hash(hasSubmitted));
 
   @JsonKey(ignore: true)
@@ -368,7 +349,6 @@ abstract class _AddYarnRequirementState implements AddYarnRequirementState {
       required final String inquiryClosesWithin,
       required final String sendRequirementTo,
       final String? additionalComment,
-      required final bool wantToTestReport,
       required final bool hasSubmitted}) = _$_AddYarnRequirementState;
 
   @override
@@ -396,8 +376,6 @@ abstract class _AddYarnRequirementState implements AddYarnRequirementState {
   String get sendRequirementTo => throw _privateConstructorUsedError;
   @override
   String? get additionalComment => throw _privateConstructorUsedError;
-  @override
-  bool get wantToTestReport => throw _privateConstructorUsedError;
   @override
   bool get hasSubmitted => throw _privateConstructorUsedError;
   @override

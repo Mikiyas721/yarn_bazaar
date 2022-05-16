@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/input_selection_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
@@ -19,7 +18,8 @@ class InputSelectionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final emptyCircle = Container(
-        height: 0,
+        margin: EdgeInsets.only(right: 1),
+        height: 20,
         width: 20,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
@@ -28,7 +28,7 @@ class InputSelectionView extends StatelessWidget {
     final selectedIndicator = Icon(
       Icons.check_circle,
       color: context.primaryColor,
-      size: 20,
+      size: 24,
     );
     return inputSelectionViewModel.errorMessage != null
         ? Center(child: Text(inputSelectionViewModel.errorMessage!))

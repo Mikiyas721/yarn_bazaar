@@ -7,11 +7,12 @@ abstract class IdDto<T> extends Equatable {
 
   const IdDto();
 
-  static List<T> toDomainList<T extends Entity, E extends IdDto>(List<E> dto) {
+  static List<T>? toDomainList<T extends Entity, E extends IdDto>(List<E>? dto) {
+    if (dto == null) return null;
     List<T> list = [];
-    for(var element in dto){
+    for (var element in dto) {
       T domain = element.toDomain().getOrElse(() => null);
-      if(domain!=null) list.add(domain);
+      list.add(domain);
     }
     return list;
   }
@@ -24,5 +25,6 @@ abstract class IdDto<T> extends Equatable {
 
 abstract class TimeStampedDto {
   DateTime? get createdAt;
+
   DateTime? get updatedAt;
 }

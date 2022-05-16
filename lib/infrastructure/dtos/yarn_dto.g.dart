@@ -21,7 +21,10 @@ YarnDto _$YarnDtoFromJson(Map<String, dynamic> json) => YarnDto(
       closesWithin: json['closesWithin'] as String,
       sendTo: json['sendTo'] as String,
       additionalComment: json['additionalComment'] as String?,
-      userId: json['userId'] as String?,
+      userId: json['userId'] as String,
+      user: json['user'] == null
+          ? null
+          : UserDto.fromJson(json['user'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -53,7 +56,8 @@ Map<String, dynamic> _$YarnDtoToJson(YarnDto instance) {
   val['closesWithin'] = instance.closesWithin;
   val['sendTo'] = instance.sendTo;
   val['additionalComment'] = instance.additionalComment;
-  writeNotNull('userId', instance.userId);
+  val['userId'] = instance.userId;
+  val['user'] = instance.user;
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
   return val;

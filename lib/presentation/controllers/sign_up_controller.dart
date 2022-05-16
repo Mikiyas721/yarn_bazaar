@@ -13,7 +13,7 @@ import 'package:yarn_bazaar/domain/value_objects/yarn_categories.dart';
 import 'package:yarn_bazaar/infrastructure/repos/firebase_repo_impl.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
-import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/sign_up_view_model.dart';
 import 'package:yarn_bazaar/common/enum_extensions.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';

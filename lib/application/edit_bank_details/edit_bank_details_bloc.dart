@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/bloc/bloc_helpers.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 import 'package:yarn_bazaar/domain/value_objects/account_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/ifsc_code.dart';
 

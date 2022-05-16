@@ -17,14 +17,23 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
       email: json['email'] as String?,
       website: json['website'] as String?,
       password: json['password'] as String,
-      businessDetailId: json['businessDetailId'] as String,
-      bankDetailId: json['bankDetailId'] as String,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
+      businessDetailDto: json['businessDetailDto'] == null
+          ? null
+          : BusinessDetailDto.fromJson(
+              json['businessDetailDto'] as Map<String, dynamic>),
+      bankDetailDto: json['bankDetailDto'] == null
+          ? null
+          : BankDetailDto.fromJson(
+              json['bankDetailDto'] as Map<String, dynamic>),
+      yarns: (json['yarns'] as List<dynamic>?)
+          ?.map((e) => YarnDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$UserDtoToJson(UserDto instance) {
@@ -46,9 +55,10 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) {
   val['email'] = instance.email;
   val['website'] = instance.website;
   val['password'] = instance.password;
-  val['businessDetailId'] = instance.businessDetailId;
-  val['bankDetailId'] = instance.bankDetailId;
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
+  val['businessDetailDto'] = instance.businessDetailDto;
+  val['bankDetailDto'] = instance.bankDetailDto;
+  val['yarns'] = instance.yarns;
   return val;
 }

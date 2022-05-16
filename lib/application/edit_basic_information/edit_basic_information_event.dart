@@ -16,6 +16,17 @@ class EditBasicInformationStoppedLoadingSavedEvent extends EditBasicInformationE
   }
 }
 
+class EditBasicInformationSavedUserChangedEvent extends EditBasicInformationEvent {
+  final Option<User> loadedUser;
+
+  EditBasicInformationSavedUserChangedEvent(this.loadedUser);
+
+  @override
+  EditBasicInformationState handle(EditBasicInformationState currentState)  {
+    return currentState.copyWith(loadedUser: loadedUser);
+  }
+}
+
 class EditBasicInformationFailureChangedEvent extends EditBasicInformationEvent {
   final Option<Failure> failure;
 
@@ -23,7 +34,7 @@ class EditBasicInformationFailureChangedEvent extends EditBasicInformationEvent 
 
   @override
   EditBasicInformationState handle(EditBasicInformationState currentState)  {
-    return currentState.copyWith(failure: failure);
+    return currentState.copyWith(loadingSavedFailure: failure);
   }
 }
 

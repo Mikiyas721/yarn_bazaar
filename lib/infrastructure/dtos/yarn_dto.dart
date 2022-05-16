@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yarn_bazaar/common/id_dto.dart';
+import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
+import 'package:yarn_bazaar/infrastructure/dtos/user_dto.dart';
 
 part 'yarn_dto.g.dart';
 
@@ -24,7 +26,8 @@ class YarnDto extends IdDto implements TimeStampedDto {
   final String sendTo;
   final String? additionalComment;
   @JsonKey(includeIfNull: false)
-  final String? userId;
+  final String userId;
+  final UserDto? user;
   @override
   @JsonKey(includeIfNull: false)
   final DateTime? createdAt;
@@ -38,7 +41,7 @@ class YarnDto extends IdDto implements TimeStampedDto {
     required this.count,
     required this.yarnType,
     required this.purpose,
-    required this.qualityDetail,
+    this.qualityDetail,
     required this.colour,
     required this.quantity,
     required this.deliveryArea,
@@ -46,8 +49,9 @@ class YarnDto extends IdDto implements TimeStampedDto {
     required this.paymentTerms,
     required this.closesWithin,
     required this.sendTo,
-    required this.additionalComment,
+    this.additionalComment,
     required this.userId,
+    this.user,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -62,8 +66,8 @@ class YarnDto extends IdDto implements TimeStampedDto {
       id: id,
       intention: intention,
       count: count,
-      yarnType:yarnType,
-      purpose:purpose,
+      yarnType: yarnType,
+      purpose: purpose,
       qualityDetails: qualityDetail,
       colour: colour,
       quantityInKgs: quantity.toString(),
@@ -73,9 +77,10 @@ class YarnDto extends IdDto implements TimeStampedDto {
       inquiryClosesWithIn: closesWithin,
       sendRequirementTo: sendTo,
       additionalComments: additionalComment,
+      userId: userId,
+      user: user?.toDomain().fold(() => null, (a) => a),
       createdAt: createdAt,
       updatedAt: updatedAt,
-      userId: userId,
     );
   }
 
@@ -96,6 +101,7 @@ class YarnDto extends IdDto implements TimeStampedDto {
       sendTo: yarn.sendRequirementTo,
       additionalComment: yarn.additionalComments,
       userId: yarn.userId,
+      user: yarn.user == null ? null : UserDto.fromDomain(yarn.user!),
       createdAt: yarn.createdAt,
       updatedAt: yarn.updatedAt,
     );

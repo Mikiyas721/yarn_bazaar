@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/bloc/bloc_helpers.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/value_objects/email.dart';
 import 'package:yarn_bazaar/domain/value_objects/name.dart';
 import 'package:yarn_bazaar/domain/value_objects/phone_number.dart';

@@ -8,7 +8,7 @@ import 'package:yarn_bazaar/domain/use_cases/update_user_business_details.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/application/edit_business_details/edit_business_details_bloc.dart';
-import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/edit_business_detail_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/models/options_with_navigation_model.dart';
@@ -33,7 +33,7 @@ class EditBusinessDetailsController extends BlocViewModelController<
   EditBusinessDetailViewModel mapStateToViewModel(EditBusinessDetailsState s) {
     return EditBusinessDetailViewModel(
       isLoadingSaved: s.isLoadingSaved,
-      error: s.failure.fold(() => null, (a) => a.message),
+      error: s.loadingSavedFailure.fold(() => null, (a) => a.message),
       companyName: s.companyName.fold((l) => null, (r) => r.value),
       companyNameError:
           s.hasSubmitted ? s.companyName.fold((l) => l.message, (r) => null) : null,
@@ -72,9 +72,9 @@ class EditBusinessDetailsController extends BlocViewModelController<
         accountTypeTextEditingController.text = r.accountType;
         addressTextEditingController.text = r.address ?? '';
         completeAddressTextEditingController.text = r.completeAddress ?? "";
-        gstNoTextEditingController.text = r.gstNo.value ?? '';
-        tanNoTextEditingController.text = r.tanNo.value ?? '';
-        panNoTextEditingController.text = r.panNo.value ?? '';
+        gstNoTextEditingController.text = r.gstNo?.value ?? '';
+        tanNoTextEditingController.text = r.tanNo?.value ?? '';
+        panNoTextEditingController.text = r.panNo?.value ?? '';
       });
     });
   }

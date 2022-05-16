@@ -43,7 +43,7 @@ class UserRepoImpl extends IUserRepo {
     final result = await _userCrudDatasource.find();
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<User, UserDto>(r)),
+      (r) => right(IdDto.toDomainList<User, UserDto>(r)!),
     );
   }
 
@@ -58,7 +58,7 @@ class UserRepoImpl extends IUserRepo {
 
   @override
   Future<Either<Failure, List<User>>> fetchByUserType(
-      String currentUserId, String userType) async {
+      String currentUserId, String? userType) async {
     final result = await _userCrudDatasource.find(options: {
       "filter": {
         "where": {
@@ -69,11 +69,16 @@ class UserRepoImpl extends IUserRepo {
             {"userType": userType}
           ]
         }
-      }
+      },
+      "include": [
+        {"relation": "businessDetail"},
+        {"relation": "bankDetail"},
+        {"relation": "yarn"}
+      ]
     });
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<User, UserDto>(r)),
+      (r) => right(IdDto.toDomainList<User, UserDto>(r)!),
     );
   }
 
@@ -114,22 +119,6 @@ class UserRepoImpl extends IUserRepo {
   }
 
   Future<Either<Failure, bool>> checkPhoneNumberExists(String phoneNumber) async {
-    //TODO better to have remote method on server
-    final result = await _userCrudDatasource.findOne(options: {
-      "filter": {
-        "where": {
-          "phoneNumber": {"eq": phoneNumber}
-        }
-      }
-    });
-    return result.fold(
-      (l) {
-        if (l.message.contains('404'))
-          return right(false);
-        else
-          return left(l);
-      },
-      (r) => right(true),
-    );
+    return _userCrudDatasource.checkPhoneNumber(phoneNumber);
   }
 }

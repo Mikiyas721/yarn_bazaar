@@ -34,6 +34,7 @@ class AddYarnRequirementPage extends StatelessWidget {
                     child: AddYarnRequirementView(
                       yarnRequirementViewModel: addYarnRequirementViewModel!,
                       onInquiryOrPurchase: controller.onInquiryOrPurchase,
+                      onYarnQualityTap: controller.onYarnQualityTap,
                       onQualityDetail: controller.onQualityDetail,
                       onSelectColorTap: controller.onSelectColorTap,
                       onQuantityChanged: controller.onQuantityChanged,
@@ -43,7 +44,15 @@ class AddYarnRequirementPage extends StatelessWidget {
                       onInquiryClosesWithIn: controller.onInquiryClosesWithIn,
                       onSendRequirementTo: controller.onSendRequirementTo,
                       onAdditionalCommentsChanged: controller.onAdditionalCommentsChanged,
-                      onWantToTestReport: controller.onWantToTestReport,
+                      yarnQualityTextEditingController:
+                          controller.yarnQualityTextEditingController,
+                      colourTextEditingController: controller.colourTextEditingController,
+                      deliveryPeriodTextEditingController:
+                          controller.deliveryPeriodTextEditingController,
+                      inquiryClosesWithinTextEditingController:
+                          controller.inquiryClosesWithinTextEditingController,
+                      sendRequirementToTextEditingController:
+                          controller.sendRequirementToTextEditingController,
                     ),
                   ),
                 ),

@@ -47,7 +47,7 @@ class ShortMessageMixin {
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.green,
       textColor: Colors.white,
-      fontSize: 16.0,
+      fontSize: 16.0
     );
   }
 

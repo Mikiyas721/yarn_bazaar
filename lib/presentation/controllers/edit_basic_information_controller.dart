@@ -7,7 +7,7 @@ import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_basic_information.
 import 'package:yarn_bazaar/domain/use_cases/update_user_basic_info.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
-import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/edit_basic_profile_view_model.dart';
 import 'package:yarn_bazaar/application/edit_basic_information/edit_basic_information_bloc.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
@@ -34,7 +34,7 @@ class EditBasicInformationController extends BlocViewModelController<
   EditBasicProfileViewModel mapStateToViewModel(EditBasicInformationState s) {
     return EditBasicProfileViewModel(
       isLoadingSaved: s.isLoadingSaved,
-      error: s.failure.fold(() => null, (a) => a.message),
+      error: s.loadingSavedFailure.fold(() => null, (a) => a.message),
       firstName: s.firstName.fold((l) => null, (r) => r.value),
       firstNameError: s.hasSubmitted ? s.firstName.fold((l) => l.message, (r) => null) : null,
       lastName: s.lastName.fold((l) => null, (r) => r.value),
@@ -171,17 +171,15 @@ class EditBasicInformationController extends BlocViewModelController<
     }, (a) {
       final user = User.createFromInput(
         id: a.id,
-        imageUrl: '',
-        firstName: bloc.state.firstName.fold((l) => null, (r) => r.value),
-        lastName: bloc.state.lastName.fold((l) => null, (r) => r.value),
-        phoneNumber: bloc.state.primaryNumber.fold((l) => null, (r) => r.value),
-        country: bloc.state.country,
-        city: bloc.state.city,
-        email: bloc.state.email.fold((l) => null, (r) => r.value),
-        website: bloc.state.website.fold((l) => null, (r) => r.value),
-        password: '',
-        businessDetailId: a.businessDetailId,
-        bankDetailId: a.bankDetailId,
+        imageUrl: currentState.loadedUser.fold(() => null, (a) => a.imageUrl),
+        firstName: currentState.firstName.fold((l) => null, (r) => r.value),
+        lastName: currentState.lastName.fold((l) => null, (r) => r.value),
+        phoneNumber: currentState.primaryNumber.fold((l) => null, (r) => r.value),
+        country: currentState.country,
+        city: currentState.city,
+        email: currentState.email.fold((l) => null, (r) => r.value),
+        website: currentState.website.fold((l) => null, (r) => r.value),
+        password: currentState.loadedUser.fold(() => null, (a) => a.password.value),
       );
       user.fold(() {
         bloc.add(EditBasicInformationStoppedSavingEvent());

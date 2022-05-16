@@ -17,7 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$EditBusinessDetailsState {
   bool get isLoadingSaved => throw _privateConstructorUsedError;
-  Option<Failure> get failure => throw _privateConstructorUsedError;
+  Option<BusinessDetail> get loadedBusinessDetail =>
+      throw _privateConstructorUsedError;
+  Option<Failure> get loadingSavedFailure => throw _privateConstructorUsedError;
   Either<CompanyNameFailure, CompanyName> get companyName =>
       throw _privateConstructorUsedError;
   String get accountType => throw _privateConstructorUsedError;
@@ -45,7 +47,8 @@ abstract class $EditBusinessDetailsStateCopyWith<$Res> {
       _$EditBusinessDetailsStateCopyWithImpl<$Res>;
   $Res call(
       {bool isLoadingSaved,
-      Option<Failure> failure,
+      Option<BusinessDetail> loadedBusinessDetail,
+      Option<Failure> loadingSavedFailure,
       Either<CompanyNameFailure, CompanyName> companyName,
       String accountType,
       List<String> categories,
@@ -70,7 +73,8 @@ class _$EditBusinessDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoadingSaved = freezed,
-    Object? failure = freezed,
+    Object? loadedBusinessDetail = freezed,
+    Object? loadingSavedFailure = freezed,
     Object? companyName = freezed,
     Object? accountType = freezed,
     Object? categories = freezed,
@@ -87,9 +91,13 @@ class _$EditBusinessDetailsStateCopyWithImpl<$Res>
           ? _value.isLoadingSaved
           : isLoadingSaved // ignore: cast_nullable_to_non_nullable
               as bool,
-      failure: failure == freezed
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
+      loadedBusinessDetail: loadedBusinessDetail == freezed
+          ? _value.loadedBusinessDetail
+          : loadedBusinessDetail // ignore: cast_nullable_to_non_nullable
+              as Option<BusinessDetail>,
+      loadingSavedFailure: loadingSavedFailure == freezed
+          ? _value.loadingSavedFailure
+          : loadingSavedFailure // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
       companyName: companyName == freezed
           ? _value.companyName
@@ -145,7 +153,8 @@ abstract class _$$_EditBusinessDetailsStateCopyWith<$Res>
   @override
   $Res call(
       {bool isLoadingSaved,
-      Option<Failure> failure,
+      Option<BusinessDetail> loadedBusinessDetail,
+      Option<Failure> loadingSavedFailure,
       Either<CompanyNameFailure, CompanyName> companyName,
       String accountType,
       List<String> categories,
@@ -173,7 +182,8 @@ class __$$_EditBusinessDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoadingSaved = freezed,
-    Object? failure = freezed,
+    Object? loadedBusinessDetail = freezed,
+    Object? loadingSavedFailure = freezed,
     Object? companyName = freezed,
     Object? accountType = freezed,
     Object? categories = freezed,
@@ -190,9 +200,13 @@ class __$$_EditBusinessDetailsStateCopyWithImpl<$Res>
           ? _value.isLoadingSaved
           : isLoadingSaved // ignore: cast_nullable_to_non_nullable
               as bool,
-      failure: failure == freezed
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
+      loadedBusinessDetail: loadedBusinessDetail == freezed
+          ? _value.loadedBusinessDetail
+          : loadedBusinessDetail // ignore: cast_nullable_to_non_nullable
+              as Option<BusinessDetail>,
+      loadingSavedFailure: loadingSavedFailure == freezed
+          ? _value.loadingSavedFailure
+          : loadingSavedFailure // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
       companyName: companyName == freezed
           ? _value.companyName
@@ -243,7 +257,8 @@ class __$$_EditBusinessDetailsStateCopyWithImpl<$Res>
 class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
   const _$_EditBusinessDetailsState(
       {required this.isLoadingSaved,
-      required this.failure,
+      required this.loadedBusinessDetail,
+      required this.loadingSavedFailure,
       required this.companyName,
       required this.accountType,
       required final List<String> categories,
@@ -259,7 +274,9 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
   @override
   final bool isLoadingSaved;
   @override
-  final Option<Failure> failure;
+  final Option<BusinessDetail> loadedBusinessDetail;
+  @override
+  final Option<Failure> loadingSavedFailure;
   @override
   final Either<CompanyNameFailure, CompanyName> companyName;
   @override
@@ -288,7 +305,7 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
 
   @override
   String toString() {
-    return 'EditBusinessDetailsState(isLoadingSaved: $isLoadingSaved, failure: $failure, companyName: $companyName, accountType: $accountType, categories: $categories, address: $address, completeAddress: $completeAddress, gstNo: $gstNo, tanNo: $tanNo, panNo: $panNo, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
+    return 'EditBusinessDetailsState(isLoadingSaved: $isLoadingSaved, loadedBusinessDetail: $loadedBusinessDetail, loadingSavedFailure: $loadingSavedFailure, companyName: $companyName, accountType: $accountType, categories: $categories, address: $address, completeAddress: $completeAddress, gstNo: $gstNo, tanNo: $tanNo, panNo: $panNo, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
   }
 
   @override
@@ -298,7 +315,10 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
             other is _$_EditBusinessDetailsState &&
             const DeepCollectionEquality()
                 .equals(other.isLoadingSaved, isLoadingSaved) &&
-            const DeepCollectionEquality().equals(other.failure, failure) &&
+            const DeepCollectionEquality()
+                .equals(other.loadedBusinessDetail, loadedBusinessDetail) &&
+            const DeepCollectionEquality()
+                .equals(other.loadingSavedFailure, loadingSavedFailure) &&
             const DeepCollectionEquality()
                 .equals(other.companyName, companyName) &&
             const DeepCollectionEquality()
@@ -320,7 +340,8 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isLoadingSaved),
-      const DeepCollectionEquality().hash(failure),
+      const DeepCollectionEquality().hash(loadedBusinessDetail),
+      const DeepCollectionEquality().hash(loadingSavedFailure),
       const DeepCollectionEquality().hash(companyName),
       const DeepCollectionEquality().hash(accountType),
       const DeepCollectionEquality().hash(_categories),
@@ -342,7 +363,8 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
 abstract class _EditBusinessDetailsState implements EditBusinessDetailsState {
   const factory _EditBusinessDetailsState(
       {required final bool isLoadingSaved,
-      required final Option<Failure> failure,
+      required final Option<BusinessDetail> loadedBusinessDetail,
+      required final Option<Failure> loadingSavedFailure,
       required final Either<CompanyNameFailure, CompanyName> companyName,
       required final String accountType,
       required final List<String> categories,
@@ -357,7 +379,10 @@ abstract class _EditBusinessDetailsState implements EditBusinessDetailsState {
   @override
   bool get isLoadingSaved => throw _privateConstructorUsedError;
   @override
-  Option<Failure> get failure => throw _privateConstructorUsedError;
+  Option<BusinessDetail> get loadedBusinessDetail =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<Failure> get loadingSavedFailure => throw _privateConstructorUsedError;
   @override
   Either<CompanyNameFailure, CompanyName> get companyName =>
       throw _privateConstructorUsedError;

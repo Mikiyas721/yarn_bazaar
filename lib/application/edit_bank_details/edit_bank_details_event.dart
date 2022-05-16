@@ -16,6 +16,17 @@ class EditBankDetailsStoppedLoadingPreviousEvent extends EditBankDetailsEvent {
   }
 }
 
+class EditBankDetailsSavedBankDetailChangedEvent extends EditBankDetailsEvent {
+  final Option<BankDetail> loadedBankDetail;
+
+  EditBankDetailsSavedBankDetailChangedEvent(this.loadedBankDetail);
+
+  @override
+  EditBankDetailsState handle(EditBankDetailsState currentState)  {
+    return currentState.copyWith(loadedBankDetails: loadedBankDetail);
+  }
+}
+
 class EditBankDetailsFailureChangedEvent extends EditBankDetailsEvent {
   final Option<Failure> failure;
 
@@ -23,7 +34,7 @@ class EditBankDetailsFailureChangedEvent extends EditBankDetailsEvent {
 
   @override
   EditBankDetailsState handle(EditBankDetailsState currentState)  {
-    return currentState.copyWith(failure: failure);
+    return currentState.copyWith(loadingSavedFailure: failure);
   }
 }
 

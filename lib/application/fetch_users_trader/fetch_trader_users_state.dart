@@ -6,12 +6,13 @@ abstract class FetchTraderUsersState extends BlocState with _$FetchTraderUsersSt
     required List<User> users,
     required bool isLoading,
     required Option<Failure> error,
+    required int expandedIndex,
   }) = _FetchTraderUsersState;
 
   factory FetchTraderUsersState.initial() => FetchTraderUsersState(
-    users: const [],
-    isLoading: false,
-    error: none(),
-  );
+        users: const [],
+        isLoading: false,
+        error: none(),
+        expandedIndex: -1,
+      );
 }
-

@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$EditBasicInformationState {
   bool get isLoadingSaved => throw _privateConstructorUsedError;
-  Option<Failure> get failure => throw _privateConstructorUsedError;
+  Option<User> get loadedUser => throw _privateConstructorUsedError;
+  Option<Failure> get loadingSavedFailure => throw _privateConstructorUsedError;
   Either<NameFailure, Name> get firstName => throw _privateConstructorUsedError;
   Either<NameFailure, Name> get lastName => throw _privateConstructorUsedError;
   Either<YearFailure, Year> get inBusinessSince =>
@@ -44,7 +45,8 @@ abstract class $EditBasicInformationStateCopyWith<$Res> {
       _$EditBasicInformationStateCopyWithImpl<$Res>;
   $Res call(
       {bool isLoadingSaved,
-      Option<Failure> failure,
+      Option<User> loadedUser,
+      Option<Failure> loadingSavedFailure,
       Either<NameFailure, Name> firstName,
       Either<NameFailure, Name> lastName,
       Either<YearFailure, Year> inBusinessSince,
@@ -69,7 +71,8 @@ class _$EditBasicInformationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoadingSaved = freezed,
-    Object? failure = freezed,
+    Object? loadedUser = freezed,
+    Object? loadingSavedFailure = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? inBusinessSince = freezed,
@@ -86,9 +89,13 @@ class _$EditBasicInformationStateCopyWithImpl<$Res>
           ? _value.isLoadingSaved
           : isLoadingSaved // ignore: cast_nullable_to_non_nullable
               as bool,
-      failure: failure == freezed
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
+      loadedUser: loadedUser == freezed
+          ? _value.loadedUser
+          : loadedUser // ignore: cast_nullable_to_non_nullable
+              as Option<User>,
+      loadingSavedFailure: loadingSavedFailure == freezed
+          ? _value.loadingSavedFailure
+          : loadingSavedFailure // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
       firstName: firstName == freezed
           ? _value.firstName
@@ -144,7 +151,8 @@ abstract class _$$_EditBasicInformationStateCopyWith<$Res>
   @override
   $Res call(
       {bool isLoadingSaved,
-      Option<Failure> failure,
+      Option<User> loadedUser,
+      Option<Failure> loadingSavedFailure,
       Either<NameFailure, Name> firstName,
       Either<NameFailure, Name> lastName,
       Either<YearFailure, Year> inBusinessSince,
@@ -173,7 +181,8 @@ class __$$_EditBasicInformationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoadingSaved = freezed,
-    Object? failure = freezed,
+    Object? loadedUser = freezed,
+    Object? loadingSavedFailure = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? inBusinessSince = freezed,
@@ -190,9 +199,13 @@ class __$$_EditBasicInformationStateCopyWithImpl<$Res>
           ? _value.isLoadingSaved
           : isLoadingSaved // ignore: cast_nullable_to_non_nullable
               as bool,
-      failure: failure == freezed
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
+      loadedUser: loadedUser == freezed
+          ? _value.loadedUser
+          : loadedUser // ignore: cast_nullable_to_non_nullable
+              as Option<User>,
+      loadingSavedFailure: loadingSavedFailure == freezed
+          ? _value.loadingSavedFailure
+          : loadingSavedFailure // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
       firstName: firstName == freezed
           ? _value.firstName
@@ -243,7 +256,8 @@ class __$$_EditBasicInformationStateCopyWithImpl<$Res>
 class _$_EditBasicInformationState implements _EditBasicInformationState {
   const _$_EditBasicInformationState(
       {required this.isLoadingSaved,
-      required this.failure,
+      required this.loadedUser,
+      required this.loadingSavedFailure,
       required this.firstName,
       required this.lastName,
       required this.inBusinessSince,
@@ -258,7 +272,9 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
   @override
   final bool isLoadingSaved;
   @override
-  final Option<Failure> failure;
+  final Option<User> loadedUser;
+  @override
+  final Option<Failure> loadingSavedFailure;
   @override
   final Either<NameFailure, Name> firstName;
   @override
@@ -282,7 +298,7 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
 
   @override
   String toString() {
-    return 'EditBasicInformationState(isLoadingSaved: $isLoadingSaved, failure: $failure, firstName: $firstName, lastName: $lastName, inBusinessSince: $inBusinessSince, primaryNumber: $primaryNumber, country: $country, city: $city, email: $email, website: $website, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
+    return 'EditBasicInformationState(isLoadingSaved: $isLoadingSaved, loadedUser: $loadedUser, loadingSavedFailure: $loadingSavedFailure, firstName: $firstName, lastName: $lastName, inBusinessSince: $inBusinessSince, primaryNumber: $primaryNumber, country: $country, city: $city, email: $email, website: $website, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
   }
 
   @override
@@ -292,7 +308,10 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
             other is _$_EditBasicInformationState &&
             const DeepCollectionEquality()
                 .equals(other.isLoadingSaved, isLoadingSaved) &&
-            const DeepCollectionEquality().equals(other.failure, failure) &&
+            const DeepCollectionEquality()
+                .equals(other.loadedUser, loadedUser) &&
+            const DeepCollectionEquality()
+                .equals(other.loadingSavedFailure, loadingSavedFailure) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality()
@@ -312,7 +331,8 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isLoadingSaved),
-      const DeepCollectionEquality().hash(failure),
+      const DeepCollectionEquality().hash(loadedUser),
+      const DeepCollectionEquality().hash(loadingSavedFailure),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(inBusinessSince),
@@ -334,7 +354,8 @@ class _$_EditBasicInformationState implements _EditBasicInformationState {
 abstract class _EditBasicInformationState implements EditBasicInformationState {
   const factory _EditBasicInformationState(
       {required final bool isLoadingSaved,
-      required final Option<Failure> failure,
+      required final Option<User> loadedUser,
+      required final Option<Failure> loadingSavedFailure,
       required final Either<NameFailure, Name> firstName,
       required final Either<NameFailure, Name> lastName,
       required final Either<YearFailure, Year> inBusinessSince,
@@ -349,7 +370,9 @@ abstract class _EditBasicInformationState implements EditBasicInformationState {
   @override
   bool get isLoadingSaved => throw _privateConstructorUsedError;
   @override
-  Option<Failure> get failure => throw _privateConstructorUsedError;
+  Option<User> get loadedUser => throw _privateConstructorUsedError;
+  @override
+  Option<Failure> get loadingSavedFailure => throw _privateConstructorUsedError;
   @override
   Either<NameFailure, Name> get firstName => throw _privateConstructorUsedError;
   @override

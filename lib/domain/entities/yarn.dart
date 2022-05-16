@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/value_objects/delivery_area.dart';
 import 'package:yarn_bazaar/domain/value_objects/payment_terms.dart';
 import 'package:yarn_bazaar/domain/value_objects/quantity.dart';
@@ -23,7 +24,8 @@ class Yarn extends Entity {
   final String? additionalComments;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final String? userId;
+  final String userId;
+  final User? user;
 
   Yarn._({
     String? id,
@@ -42,7 +44,8 @@ class Yarn extends Entity {
     this.additionalComments,
     this.createdAt,
     this.updatedAt,
-    this.userId,
+    required this.userId,
+    this.user,
   }) : super(id);
 
   static Option<Yarn> create({
@@ -63,6 +66,7 @@ class Yarn extends Entity {
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
+    User? user,
   }) {
     if ([
       id,
@@ -97,6 +101,7 @@ class Yarn extends Entity {
       count: count!,
       yarnType: yarnType!,
       purpose: purpose!,
+      qualityDetails: qualityDetails,
       colour: colour!,
       quantityInKgs: quantityObject.getOrElse(() => throw Exception('Yarn Quantity Error')),
       deliveryArea: deliveryAreaObject.getOrElse(() => throw Exception('Delivery Area Error')),
@@ -107,7 +112,8 @@ class Yarn extends Entity {
       additionalComments: additionalComments,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      userId: userId,
+      userId: userId!,
+      user: user
     ));
   }
 
@@ -165,7 +171,7 @@ class Yarn extends Entity {
       inquiryClosesWithIn: inquiryClosesWithIn!,
       sendRequirementTo: sendRequirementTo!,
       additionalComments: additionalComments,
-      userId: userId
+      userId: userId!
     ));
   }
 }

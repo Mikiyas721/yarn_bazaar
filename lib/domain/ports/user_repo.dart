@@ -8,7 +8,7 @@ abstract class IUserRepo{
   Future<Either<Failure, User>> create(User user);
   Future<Either<Failure, User>> updateUser(User user);
   Future<Either<Failure,List<User>>> fetchAll(String currentUserId);
-  Future<Either<Failure,List<User>>> fetchByUserType(String currentUserId, String userType);
+  Future<Either<Failure,List<User>>> fetchByUserType(String currentUserId, String? userType);
   Future<Either<Failure,User>> fetchById(String id);
   Future<bool> cacheLoggedInUser(AppUser user);
   Future<Option<AppUser>> getCurrentLoggedInUser();

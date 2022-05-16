@@ -4,7 +4,7 @@ import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_basic_information.
 import 'package:yarn_bazaar/domain/use_cases/update_user_basic_info.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
-import 'package:yarn_bazaar/presentation/controllers/shared/toast_mixin.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/edit_password_view_model.dart';
 import 'package:yarn_bazaar/application/edit_password/edit_password_bloc.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
@@ -84,10 +84,9 @@ class EditPasswordController extends BlocViewModelController<EditPasswordBloc,
               password: currentState.newPassword.fold((l) => null, (r) => r.value),
               createdAt: r.createdAt,
               updatedAt: r.updatedAt,
-              businessDetailsId: r.businessDetailId,
-              bankDetailsId: r.bankDetailId,
               businessDetail: r.businessDetail,
-              bankDetail: r.bankDetails,
+              bankDetail: r.bankDetail,
+              yarns: r.yarns,
             );
 
             userToSave.fold(() {

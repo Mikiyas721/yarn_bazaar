@@ -19,6 +19,7 @@ mixin _$FetchLinenYarnsState {
   List<Yarn> get yarns => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Failure> get error => throw _privateConstructorUsedError;
+  int get expandedIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FetchLinenYarnsStateCopyWith<FetchLinenYarnsState> get copyWith =>
@@ -30,7 +31,11 @@ abstract class $FetchLinenYarnsStateCopyWith<$Res> {
   factory $FetchLinenYarnsStateCopyWith(FetchLinenYarnsState value,
           $Res Function(FetchLinenYarnsState) then) =
       _$FetchLinenYarnsStateCopyWithImpl<$Res>;
-  $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
+  $Res call(
+      {List<Yarn> yarns,
+      bool isLoading,
+      Option<Failure> error,
+      int expandedIndex});
 }
 
 /// @nodoc
@@ -47,6 +52,7 @@ class _$FetchLinenYarnsStateCopyWithImpl<$Res>
     Object? yarns = freezed,
     Object? isLoading = freezed,
     Object? error = freezed,
+    Object? expandedIndex = freezed,
   }) {
     return _then(_value.copyWith(
       yarns: yarns == freezed
@@ -61,6 +67,10 @@ class _$FetchLinenYarnsStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
+      expandedIndex: expandedIndex == freezed
+          ? _value.expandedIndex
+          : expandedIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -72,7 +82,11 @@ abstract class _$$_FetchLinenYarnsStateCopyWith<$Res>
           $Res Function(_$_FetchLinenYarnsState) then) =
       __$$_FetchLinenYarnsStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
+  $Res call(
+      {List<Yarn> yarns,
+      bool isLoading,
+      Option<Failure> error,
+      int expandedIndex});
 }
 
 /// @nodoc
@@ -91,6 +105,7 @@ class __$$_FetchLinenYarnsStateCopyWithImpl<$Res>
     Object? yarns = freezed,
     Object? isLoading = freezed,
     Object? error = freezed,
+    Object? expandedIndex = freezed,
   }) {
     return _then(_$_FetchLinenYarnsState(
       yarns: yarns == freezed
@@ -105,6 +120,10 @@ class __$$_FetchLinenYarnsStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
+      expandedIndex: expandedIndex == freezed
+          ? _value.expandedIndex
+          : expandedIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -115,7 +134,8 @@ class _$_FetchLinenYarnsState implements _FetchLinenYarnsState {
   const _$_FetchLinenYarnsState(
       {required final List<Yarn> yarns,
       required this.isLoading,
-      required this.error})
+      required this.error,
+      required this.expandedIndex})
       : _yarns = yarns;
 
   final List<Yarn> _yarns;
@@ -129,10 +149,12 @@ class _$_FetchLinenYarnsState implements _FetchLinenYarnsState {
   final bool isLoading;
   @override
   final Option<Failure> error;
+  @override
+  final int expandedIndex;
 
   @override
   String toString() {
-    return 'FetchLinenYarnsState(yarns: $yarns, isLoading: $isLoading, error: $error)';
+    return 'FetchLinenYarnsState(yarns: $yarns, isLoading: $isLoading, error: $error, expandedIndex: $expandedIndex)';
   }
 
   @override
@@ -142,7 +164,9 @@ class _$_FetchLinenYarnsState implements _FetchLinenYarnsState {
             other is _$_FetchLinenYarnsState &&
             const DeepCollectionEquality().equals(other._yarns, _yarns) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality()
+                .equals(other.expandedIndex, expandedIndex));
   }
 
   @override
@@ -150,7 +174,8 @@ class _$_FetchLinenYarnsState implements _FetchLinenYarnsState {
       runtimeType,
       const DeepCollectionEquality().hash(_yarns),
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(error));
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(expandedIndex));
 
   @JsonKey(ignore: true)
   @override
@@ -163,7 +188,8 @@ abstract class _FetchLinenYarnsState implements FetchLinenYarnsState {
   const factory _FetchLinenYarnsState(
       {required final List<Yarn> yarns,
       required final bool isLoading,
-      required final Option<Failure> error}) = _$_FetchLinenYarnsState;
+      required final Option<Failure> error,
+      required final int expandedIndex}) = _$_FetchLinenYarnsState;
 
   @override
   List<Yarn> get yarns => throw _privateConstructorUsedError;
@@ -171,6 +197,8 @@ abstract class _FetchLinenYarnsState implements FetchLinenYarnsState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   Option<Failure> get error => throw _privateConstructorUsedError;
+  @override
+  int get expandedIndex => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_FetchLinenYarnsStateCopyWith<_$_FetchLinenYarnsState> get copyWith =>

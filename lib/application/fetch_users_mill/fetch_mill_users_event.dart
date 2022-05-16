@@ -13,24 +13,39 @@ class FetchMillUsersDataChangedEvent extends FetchMillUsersEvent {
   }
 }
 
-class FetchMillUsersIsLoadingChangedEvent extends FetchMillUsersEvent {
-  final bool isLoading;
-
-  FetchMillUsersIsLoadingChangedEvent(this.isLoading);
-
+class FetchMillUsersStartedLoadingEvent extends FetchMillUsersEvent {
   @override
   FetchMillUsersState handle(FetchMillUsersState currentState)  {
-    return currentState.copyWith(isLoading: isLoading);
+    return currentState.copyWith(isLoading: true);
+  }
+}
+
+class FetchMillUsersStoppedLoadingEvent extends FetchMillUsersEvent {
+  @override
+  FetchMillUsersState handle(FetchMillUsersState currentState)  {
+    return currentState.copyWith(isLoading: true);
   }
 }
 
 class FetchMillUsersLoadFailureEvent extends FetchMillUsersEvent {
-  final String errorMessage;
+  final Option<Failure> failure;
 
-  FetchMillUsersLoadFailureEvent(this.errorMessage);
+  FetchMillUsersLoadFailureEvent(this.failure);
 
   @override
   FetchMillUsersState handle(FetchMillUsersState currentState)  {
-    return currentState.copyWith(error: SimpleFailure.withOption(errorMessage));
+    return currentState.copyWith(error: failure);
   }
+}
+
+class FetchMillUsersExpandedIndexChangedEvent extends FetchMillUsersEvent{
+  final int newIndex;
+
+  FetchMillUsersExpandedIndexChangedEvent(this.newIndex);
+
+  @override
+  FetchMillUsersState handle(FetchMillUsersState currentState) {
+    return currentState.copyWith(expandedIndex: newIndex);
+  }
+
 }

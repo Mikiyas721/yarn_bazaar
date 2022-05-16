@@ -6,12 +6,14 @@ abstract class FetchRayonYarnsState extends BlocState with _$FetchRayonYarnsStat
     required List<Yarn> yarns,
     required bool isLoading,
     required Option<Failure> error,
+    required int expandedIndex,
   }) = _FetchRayonYarnsState;
 
   factory FetchRayonYarnsState.initial() => FetchRayonYarnsState(
     yarns: const [],
     isLoading: false,
     error: none(),
+    expandedIndex: -1,
   );
 }
 

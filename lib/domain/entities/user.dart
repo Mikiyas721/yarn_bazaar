@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 import 'package:yarn_bazaar/domain/entities/business_details.dart';
 import 'package:yarn_bazaar/common/entity.dart';
+import 'package:yarn_bazaar/domain/entities/yarn.dart';
 import 'package:yarn_bazaar/domain/value_objects/email.dart';
 import 'package:yarn_bazaar/domain/value_objects/name.dart';
 import 'package:yarn_bazaar/domain/value_objects/password.dart';
@@ -20,10 +21,9 @@ class User extends Entity {
   final Password password;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final String businessDetailId;
-  final String bankDetailId;
   final BusinessDetail? businessDetail;
-  final BankDetail? bankDetails;
+  final BankDetail? bankDetail;
+  final List<Yarn>? yarns;
 
   User._({
     String? id,
@@ -38,10 +38,9 @@ class User extends Entity {
     required this.password,
     this.createdAt,
     this.updatedAt,
-    required this.businessDetailId,
-    required this.bankDetailId,
     this.businessDetail,
-    this.bankDetails,
+    this.bankDetail,
+    this.yarns,
   }) : super(id);
 
   static Option<User> create({
@@ -57,10 +56,9 @@ class User extends Entity {
     String? password,
     DateTime? createdAt,
     DateTime? updatedAt,
-    String? businessDetailsId,
-    String? bankDetailsId,
     BusinessDetail? businessDetail,
     BankDetail? bankDetail,
+    List<Yarn>? yarns,
   }) {
     if ([
       id,
@@ -69,41 +67,36 @@ class User extends Entity {
       password,
       createdAt,
       updatedAt,
-      businessDetailsId,
-      bankDetailsId,
     ].any((element) => element == null)) return none();
 
     final firstNameObject = Name.create(firstName!);
-    final lastNameObject = Name.create(lastName!);
     final phoneNumberObject = PhoneNumber.create(phoneNumber!);
-    final emailObject = Email.create(email!);
-    final websiteObject = WebsiteUrl.create(website!);
     final passwordObject = Password.create(password!);
+    final emailObject = Email.create(email);
+    final websiteObject = WebsiteUrl.create(website);
 
     if (firstNameObject.isLeft() ||
         phoneNumberObject.isLeft() ||
+        passwordObject.isLeft() ||
         emailObject.isLeft() ||
-        websiteObject.isLeft() ||
-        passwordObject.isLeft()) return none();
+        websiteObject.isLeft()) return none();
 
     return some(User._(
-      id: id,
-      imageUrl: imageUrl,
-      firstName: firstNameObject.getOrElse(() => throw Exception('First name Error')),
-      lastName: lastNameObject.fold((l) => null, (r) => r),
-      phoneNumber: phoneNumberObject.getOrElse(() => throw Exception('Phone number Error')),
-      country: country,
-      city: city,
-      email: emailObject.getOrElse(() => throw Exception('Email Error')),
-      website: websiteObject.getOrElse(() => throw Exception('Website Error')),
-      password: passwordObject.getOrElse(() => throw Exception('Password Error')),
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-      businessDetailId: businessDetailsId!,
-      bankDetailId: bankDetailsId!,
-      businessDetail: businessDetail,
-      bankDetails: bankDetail,
-    ));
+        id: id,
+        imageUrl: imageUrl,
+        firstName: firstNameObject.getOrElse(() => throw Exception('First name Error')),
+        lastName: lastName == null ? null : Name.create(lastName).fold((l) => null, (r) => r),
+        phoneNumber: phoneNumberObject.getOrElse(() => throw Exception('Phone number Error')),
+        country: country,
+        city: city,
+        email: emailObject.fold((l) => null, (r) => r),
+        website: websiteObject.fold((l) => null, (r) => r),
+        password: passwordObject.getOrElse(() => throw Exception('Password Error')),
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        businessDetail: businessDetail,
+        bankDetail: bankDetail,
+        yarns: yarns));
   }
 
   static Option<User> createFromInput({
@@ -117,24 +110,21 @@ class User extends Entity {
     String? email,
     String? website,
     String? password,
-    String? businessDetailId,
-    String? bankDetailId,
-    BusinessDetail? businessDetails,
-    BankDetail? bankDetails,
+    BusinessDetail? businessDetail,
+    BankDetail? bankDetail,
+    List<Yarn>? yarns,
   }) {
     if ([
       firstName,
       phoneNumber,
       password,
-      businessDetailId,
-      bankDetailId,
     ].any((element) => element == null)) return none();
 
     final firstNameObject = Name.create(firstName!);
     final lastNameObject = Name.create(lastName!);
     final phoneNumberObject = PhoneNumber.create(phoneNumber!);
-    final emailObject = Email.create(email!);
-    final websiteObject = WebsiteUrl.create(website!);
+    final emailObject = Email.create(email);
+    final websiteObject = WebsiteUrl.create(website);
     final passwordObject = Password.create(password!);
 
     if (firstNameObject.isLeft() ||
@@ -144,19 +134,17 @@ class User extends Entity {
         passwordObject.isLeft()) return none();
 
     return some(User._(
-      imageUrl: imageUrl,
-      firstName: firstNameObject.getOrElse(() => throw Exception('First name Error')),
-      lastName: lastNameObject.fold((l) => null, (r) => r),
-      phoneNumber: phoneNumberObject.getOrElse(() => throw Exception('Phone number Error')),
-      country: country,
-      city: city,
-      email: emailObject.getOrElse(() => throw Exception('Email Error')),
-      website: websiteObject.getOrElse(() => throw Exception('Website Error')),
-      password: passwordObject.getOrElse(() => throw Exception('Password Error')),
-      businessDetailId: businessDetailId!,
-      bankDetailId: bankDetailId!,
-      businessDetail: businessDetails,
-      bankDetails: bankDetails,
-    ));
+        imageUrl: imageUrl,
+        firstName: firstNameObject.getOrElse(() => throw Exception('First name Error')),
+        lastName: lastNameObject.fold((l) => null, (r) => r),
+        phoneNumber: phoneNumberObject.getOrElse(() => throw Exception('Phone number Error')),
+        country: country,
+        city: city,
+        email: emailObject.fold((l) => null, (r) => r),
+        website: websiteObject.fold((l) => null, (r) => r),
+        password: passwordObject.getOrElse(() => throw Exception('Password Error')),
+        businessDetail: businessDetail,
+        bankDetail: bankDetail,
+        yarns: yarns));
   }
 }

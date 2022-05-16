@@ -33,7 +33,7 @@ class EditBusinessDetailPage extends StatelessWidget {
                 onPANNo: controller.onPANNo,
                 onPANCardDocument: controller.onPANCardDocument,
                 onSave: controller.onSave,
-                onReload: controller.loadSaved(),
+                onReload: controller.loadSaved,
                 companyNameTextEditingController: controller.companyNameTextEditingController,
                 accountTypeTextEditingController: controller.accountTypeTextEditingController,
                 addressTextEditingController: controller.addressTextEditingController,

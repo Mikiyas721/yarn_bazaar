@@ -31,7 +31,7 @@ class EditBankDetailsPage extends StatelessWidget {
                 onAttachAddress: controller.onAttachAddress,
                 onAttachCheque: controller.onAttachCheque,
                 onSave: controller.onSave,
-                onReload: controller.loadSavedBankDetails(),
+                onReload: controller.loadSavedBankDetails,
                 accountNameController: controller.accountNameController,
                 accountNumberController: controller.accountNumberController,
                 iFSCCodeController: controller.iFSCCodeController,

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/controllers/all_users_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/users_all_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/bottom_navigation_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/drawer_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
+import 'package:yarn_bazaar/presentation/controllers/users_broker_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/users_mill_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/users_trader_controller.dart';
 import 'package:yarn_bazaar/presentation/models/bottom_navigation_bar_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/bottom_navigation_bar_view.dart';
-import 'package:yarn_bazaar/presentation/views/directory_view.dart';
+import 'package:yarn_bazaar/presentation/views/user_list_view.dart';
 import 'package:yarn_bazaar/presentation/views/drawer_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/search_field.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
@@ -57,73 +60,80 @@ class DirectoryPage extends StatelessWidget {
             children: [
               ViewModelBuilder.withController<UsersViewModel, AllUsersController>(
                   create: () => AllUsersController(context),
+                  onInit: (controller)=>controller.loadAllUsers(),
                   builder: (context, controller, usersViewModel) {
                     return RefreshIndicator(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                        child: DirectoriesView(
-                          directoriesViewModel: usersViewModel!,
+                        child: UserListView(
+                          userViewModel: usersViewModel!,
                           onReload: controller.onReload,
                           onWatchlist: controller.onWatchlist,
                           onDetail: controller.onDetail,
                           onShare: controller.onShare,
+                          onHeaderTap: controller.onHeaderTap,
                         ),
                       ),
                       onRefresh: controller.onRefresh,
                     );
                   }),
-              ViewModelBuilder.withController<UsersViewModel, AllUsersController>(
-                  create: () => AllUsersController(context),
+              ViewModelBuilder.withController<UsersViewModel, MillUsersController>(
+                  create: () => MillUsersController(context),
+                  onInit: (controller)=>controller.loadMillUsers(),
                   builder: (context, controller, usersViewModel) {
                     return RefreshIndicator(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                        child: DirectoriesView(
-                          directoriesViewModel: usersViewModel!,
+                        child: UserListView(
+                          userViewModel: usersViewModel!,
                           onReload: controller.onReload,
                           onWatchlist: controller.onWatchlist,
                           onDetail: controller.onDetail,
                           onShare: controller.onShare,
+                          onHeaderTap: controller.onHeaderTap,
                         ),
                       ),
                       onRefresh: controller.onRefresh,
                     );
                   }),
-              ViewModelBuilder.withController<UsersViewModel, AllUsersController>(
-                  create: () => AllUsersController(context),
+              ViewModelBuilder.withController<UsersViewModel, TraderUsersController>(
+                  create: () => TraderUsersController(context),
+                  onInit: (controller)=>controller.loadTraderUsers(),
                   builder: (context, controller, usersViewModel) {
                     return RefreshIndicator(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                        child: DirectoriesView(
-                          directoriesViewModel: usersViewModel!,
+                        child: UserListView(
+                          userViewModel: usersViewModel!,
                           onReload: controller.onReload,
                           onWatchlist: controller.onWatchlist,
                           onDetail: controller.onDetail,
                           onShare: controller.onShare,
+                          onHeaderTap: controller.onHeaderTap,
                         ),
                       ),
                       onRefresh: controller.onRefresh,
                     );
                   }),
-              ViewModelBuilder.withController<UsersViewModel, AllUsersController>(
-                  create: () => AllUsersController(context),
+              ViewModelBuilder.withController<UsersViewModel, BrokerUsersController>(
+                  create: () => BrokerUsersController(context),
+                  onInit: (controller)=>controller.loadBrokerUsers(),
                   builder: (context, controller, usersViewModel) {
                     return RefreshIndicator(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                        child: DirectoriesView(
-                          directoriesViewModel: usersViewModel!,
+                        child: UserListView(
+                          userViewModel: usersViewModel!,
                           onReload: controller.onReload,
                           onWatchlist: controller.onWatchlist,
                           onDetail: controller.onDetail,
                           onShare: controller.onShare,
+                          onHeaderTap: controller.onHeaderTap,
                         ),
                       ),
                       onRefresh: controller.onRefresh,
                     );
                   })
-              //TODO replace with the right controller for each tab
             ],
           ),
           bottomNavigationBar: ViewModelBuilder.withController<BottomNavigationBarViewModel,

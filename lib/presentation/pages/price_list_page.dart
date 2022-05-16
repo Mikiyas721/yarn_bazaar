@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/controllers/all_yarns_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_all_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/bottom_navigation_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/drawer_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_cotton_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_cp_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_fancy_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_linen_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_modal_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_pc_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_psf_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_pv_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_rayon_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_texturize_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_viscose_controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/yarns_worsted_wool_controller.dart';
 import 'package:yarn_bazaar/presentation/models/bottom_navigation_bar_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/drawer_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
@@ -20,7 +32,7 @@ class PriceListPage extends StatelessWidget {
     const tabs = [
       Text('All'),
       Text('Cotton'),
-      Text('Texturise'),
+      Text('Texturize'),
       Text('PSF'),
       Text('PC'),
       Text('PV'),
@@ -67,6 +79,7 @@ class PriceListPage extends StatelessWidget {
           body: TabBarView(children: [
             ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
                 create: () => AllYarnsController(context),
+                onInit: (controller) => controller.loadAllYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -78,13 +91,14 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, CottonYarnsController>(
+                create: () => CottonYarnsController(context),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -96,13 +110,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, TexturizeYarnsController>(
+                create: () => TexturizeYarnsController(context),
+                onInit: (controller) => controller.loadTexturizeYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -114,13 +130,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, PsfYarnsController>(
+                create: () => PsfYarnsController(context),
+                onInit: (controller) => controller.loadPsfYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -132,13 +150,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, PcYarnsController>(
+                create: () => PcYarnsController(context),
+                onInit: (controller) => controller.loadPcYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -150,13 +170,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, PvYarnsController>(
+                create: () => PvYarnsController(context),
+                onInit: (controller) => controller.loadPvYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -168,13 +190,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, ViscoseYarnsController>(
+                create: () => ViscoseYarnsController(context),
+                onInit: (controller) => controller.loadViscoseYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -186,13 +210,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, CPYarnsController>(
+                create: () => CPYarnsController(context),
+                onInit: (controller) => controller.loadCpYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -204,13 +230,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, LinenYarnsController>(
+                create: () => LinenYarnsController(context),
+                onInit: (controller) => controller.loadLinenYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -222,13 +250,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, ModalYarnsController>(
+                create: () => ModalYarnsController(context),
+                onInit: (controller) => controller.loadModalYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -240,13 +270,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, RayonYarnsController>(
+                create: () => RayonYarnsController(context),
+                onInit: (controller) => controller.loadRayonYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -258,13 +290,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, FancyYarnsController>(
+                create: () => FancyYarnsController(context),
+                onInit: (controller) => controller.loadFancyYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -276,13 +310,15 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 }),
-            ViewModelBuilder.withController<YarnsViewModel, AllYarnsController>(
-                create: () => AllYarnsController(context),
+            ViewModelBuilder.withController<YarnsViewModel, WorstedWoolYarnsController>(
+                create: () => WorstedWoolYarnsController(context),
+                onInit: (controller) => controller.loadWorstedWoolYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(
@@ -294,12 +330,12 @@ class PriceListPage extends StatelessWidget {
                         onCompare: controller.onCompare,
                         onDetail: controller.onDetail,
                         onShare: controller.onShare,
+                        onHeaderTap: controller.onHeaderTap,
                       ),
                     ),
                     onRefresh: controller.onRefresh,
                   );
                 })
-            //TODO replace with the right corresponding controllers
           ]),
           bottomNavigationBar: ViewModelBuilder.withController<BottomNavigationBarViewModel,
                   BottomNavigationController>(

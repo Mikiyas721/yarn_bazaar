@@ -19,6 +19,7 @@ mixin _$FetchTexturizeYarnsState {
   List<Yarn> get yarns => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   Option<Failure> get error => throw _privateConstructorUsedError;
+  int get expandedIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FetchTexturizeYarnsStateCopyWith<FetchTexturizeYarnsState> get copyWith =>
@@ -30,7 +31,11 @@ abstract class $FetchTexturizeYarnsStateCopyWith<$Res> {
   factory $FetchTexturizeYarnsStateCopyWith(FetchTexturizeYarnsState value,
           $Res Function(FetchTexturizeYarnsState) then) =
       _$FetchTexturizeYarnsStateCopyWithImpl<$Res>;
-  $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
+  $Res call(
+      {List<Yarn> yarns,
+      bool isLoading,
+      Option<Failure> error,
+      int expandedIndex});
 }
 
 /// @nodoc
@@ -47,6 +52,7 @@ class _$FetchTexturizeYarnsStateCopyWithImpl<$Res>
     Object? yarns = freezed,
     Object? isLoading = freezed,
     Object? error = freezed,
+    Object? expandedIndex = freezed,
   }) {
     return _then(_value.copyWith(
       yarns: yarns == freezed
@@ -61,6 +67,10 @@ class _$FetchTexturizeYarnsStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
+      expandedIndex: expandedIndex == freezed
+          ? _value.expandedIndex
+          : expandedIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -73,7 +83,11 @@ abstract class _$$_FetchTexturizeYarnsStateCopyWith<$Res>
           $Res Function(_$_FetchTexturizeYarnsState) then) =
       __$$_FetchTexturizeYarnsStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Yarn> yarns, bool isLoading, Option<Failure> error});
+  $Res call(
+      {List<Yarn> yarns,
+      bool isLoading,
+      Option<Failure> error,
+      int expandedIndex});
 }
 
 /// @nodoc
@@ -93,6 +107,7 @@ class __$$_FetchTexturizeYarnsStateCopyWithImpl<$Res>
     Object? yarns = freezed,
     Object? isLoading = freezed,
     Object? error = freezed,
+    Object? expandedIndex = freezed,
   }) {
     return _then(_$_FetchTexturizeYarnsState(
       yarns: yarns == freezed
@@ -107,6 +122,10 @@ class __$$_FetchTexturizeYarnsStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Option<Failure>,
+      expandedIndex: expandedIndex == freezed
+          ? _value.expandedIndex
+          : expandedIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -117,7 +136,8 @@ class _$_FetchTexturizeYarnsState implements _FetchTexturizeYarnsState {
   const _$_FetchTexturizeYarnsState(
       {required final List<Yarn> yarns,
       required this.isLoading,
-      required this.error})
+      required this.error,
+      required this.expandedIndex})
       : _yarns = yarns;
 
   final List<Yarn> _yarns;
@@ -131,10 +151,12 @@ class _$_FetchTexturizeYarnsState implements _FetchTexturizeYarnsState {
   final bool isLoading;
   @override
   final Option<Failure> error;
+  @override
+  final int expandedIndex;
 
   @override
   String toString() {
-    return 'FetchTexturizeYarnsState(yarns: $yarns, isLoading: $isLoading, error: $error)';
+    return 'FetchTexturizeYarnsState(yarns: $yarns, isLoading: $isLoading, error: $error, expandedIndex: $expandedIndex)';
   }
 
   @override
@@ -144,7 +166,9 @@ class _$_FetchTexturizeYarnsState implements _FetchTexturizeYarnsState {
             other is _$_FetchTexturizeYarnsState &&
             const DeepCollectionEquality().equals(other._yarns, _yarns) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality()
+                .equals(other.expandedIndex, expandedIndex));
   }
 
   @override
@@ -152,7 +176,8 @@ class _$_FetchTexturizeYarnsState implements _FetchTexturizeYarnsState {
       runtimeType,
       const DeepCollectionEquality().hash(_yarns),
       const DeepCollectionEquality().hash(isLoading),
-      const DeepCollectionEquality().hash(error));
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(expandedIndex));
 
   @JsonKey(ignore: true)
   @override
@@ -165,7 +190,8 @@ abstract class _FetchTexturizeYarnsState implements FetchTexturizeYarnsState {
   const factory _FetchTexturizeYarnsState(
       {required final List<Yarn> yarns,
       required final bool isLoading,
-      required final Option<Failure> error}) = _$_FetchTexturizeYarnsState;
+      required final Option<Failure> error,
+      required final int expandedIndex}) = _$_FetchTexturizeYarnsState;
 
   @override
   List<Yarn> get yarns => throw _privateConstructorUsedError;
@@ -173,6 +199,8 @@ abstract class _FetchTexturizeYarnsState implements FetchTexturizeYarnsState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   Option<Failure> get error => throw _privateConstructorUsedError;
+  @override
+  int get expandedIndex => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_FetchTexturizeYarnsStateCopyWith<_$_FetchTexturizeYarnsState>

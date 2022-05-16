@@ -6,11 +6,13 @@ abstract class FetchCpYarnsState extends BlocState with _$FetchCpYarnsState {
     required List<Yarn> yarns,
     required bool isLoading,
     required Option<Failure> error,
+    required int expandedIndex,
   }) = _FetchCpYarnsState;
 
   factory FetchCpYarnsState.initial() => FetchCpYarnsState(
     yarns: const [],
     isLoading: false,
     error: none(),
+    expandedIndex: -1,
   );
 }

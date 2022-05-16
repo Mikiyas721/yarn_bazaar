@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/edit_password_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_image_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
@@ -30,15 +31,19 @@ class EditPasswordView extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 children: [
+                  20.vSpace,
+                  MyImageView(height: 100),
+                  40.vSpace,
                   TextFieldWithTitle(
                     title: 'Old Password',
                     errorMessage: editPasswordViewModel.oldPasswordError,
                     hintText: 'Old Password',
                     usesPrimaryColor: false,
                     fieldIsOptional: false,
+                    obscureText: !editPasswordViewModel.isShowingOldPassword,
                     onChanged: onOldPassword,
                     suffixIcon: TextButton(
                         onPressed: () {
@@ -56,13 +61,14 @@ class EditPasswordView extends StatelessWidget {
                       hintText: 'New Password',
                       usesPrimaryColor: false,
                       fieldIsOptional: false,
+                      obscureText: !editPasswordViewModel.isShowingNewPassword,
                       onChanged: onNewPassword,
                       suffixIcon: TextButton(
                           onPressed: () {
-                            onShowOldPassword(
-                                !editPasswordViewModel.isShowingOldPassword);
+                            onShowNewPassword(
+                                !editPasswordViewModel.isShowingNewPassword);
                           },
-                          child: editPasswordViewModel.isShowingOldPassword
+                          child: editPasswordViewModel.isShowingNewPassword
                               ? const Text('Hide')
                               : const Text('Show')))
                 ],

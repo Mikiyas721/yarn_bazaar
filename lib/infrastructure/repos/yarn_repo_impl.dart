@@ -33,28 +33,38 @@ class YarnRepoImpl extends IYarnRepo {
     final result = await _yarnCrudDataSource.find();
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<Yarn, YarnDto>(r)),
+      (r) => right(IdDto.toDomainList<Yarn, YarnDto>(r)!),
     );
   }
 
   @override
   Future<Either<Failure, List<Yarn>>> fetchByCategory(
-      String currentUserId, String category) async {
+      String currentUserId, String? category) async {
     final result = await _yarnCrudDataSource.find(options: {
       "filter": {
         "where": {
-          "and": [
+          category == null
+              ? {
+                  "userId": {"ne": currentUserId}
+                }
+              : "and": [
             {
               "userId": {"ne": currentUserId}
             },
             {"yarnType": category}
           ]
+        },
+        "include": {
+          "relation": "user",
+          "scope": {
+            "include": ["businessDetail", "bankDetail"]
+          }
         }
       }
     });
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<Yarn, YarnDto>(r)),
+      (r) => right(IdDto.toDomainList<Yarn, YarnDto>(r)!),
     );
   }
 
@@ -67,7 +77,7 @@ class YarnRepoImpl extends IYarnRepo {
     });
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<Yarn, YarnDto>(r)),
+      (r) => right(IdDto.toDomainList<Yarn, YarnDto>(r)!),
     );
   }
 

@@ -11,11 +11,12 @@ class InvalidEmailFailure extends EmailFailure {
 const emailRegExp = r'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$';
 
 class Email{
-  final String value;
+  final String? value;
 
   Email._(this.value);
 
-  static Either<EmailFailure, Email> create(String email){
+  static Either<EmailFailure, Email> create(String? email){
+    if(email==null) return right(Email._(email));
     final matched = RegExp(emailRegExp).firstMatch(email);
     if (matched == null) return left(InvalidEmailFailure());
     return right(Email._(email));
