@@ -27,7 +27,7 @@ class UserLoopbackDatasource extends LoopbackRestCrudDataSource<UserDto>
       : super(
           '/users',
           restDataSource,
-          (yarn) => yarn.toJson(),
+          (user) => user.toJson(),
           (map) => UserDto.fromJson(map),
         );
 

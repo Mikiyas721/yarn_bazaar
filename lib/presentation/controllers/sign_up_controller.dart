@@ -17,6 +17,9 @@ import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.
 import 'package:yarn_bazaar/presentation/models/sign_up_view_model.dart';
 import 'package:yarn_bazaar/common/enum_extensions.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/home_page.dart';
+import 'package:yarn_bazaar/presentation/pages/privacy_policy_page.dart';
+import 'package:yarn_bazaar/presentation/pages/terms_and_conditions_page.dart';
 
 class SignUpController
     extends BlocViewModelController<SignUpBloc, SignUpEvent, SignUpState, SignUpViewModel>
@@ -103,11 +106,11 @@ class SignUpController
   }
 
   onTermsAndConditions() {
-    Navigator.pushNamed(context, '/termsAndConditionsPage');
+    Navigator.pushNamed(context, TermsAndConditionsPage.route);
   }
 
   onPrivacyPolicy() {
-    Navigator.pushNamed(context, '/privacyPolicyPage');
+    Navigator.pushNamed(context, PrivacyPolicyPage.route);
   }
 
   onGenerateOTP() {
@@ -226,7 +229,7 @@ class SignUpController
         final userWasCached = await getIt.get<CacheLoggedInUser>().execute(r);
         if (!userWasCached) toastInformation("Unable to cache user");
 
-        Navigator.pushNamedAndRemoveUntil(context, '/homePage', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, HomePage.route, (route) => false);
       });
     });
   }

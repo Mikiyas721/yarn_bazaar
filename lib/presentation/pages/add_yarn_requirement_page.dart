@@ -7,6 +7,7 @@ import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class AddYarnRequirementPage extends StatelessWidget {
+  static const route = '/addYarnRequirementPage';
   const AddYarnRequirementPage({Key? key}) : super(key: key);
 
   @override

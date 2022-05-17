@@ -16,6 +16,7 @@ import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 class YarnDetailPage extends StatelessWidget with DateTimeMixin {
+  static const route = '/yarnDetailPage';
   const YarnDetailPage({Key? key}) : super(key: key);
 
   @override

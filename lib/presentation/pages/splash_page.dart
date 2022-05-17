@@ -3,9 +3,8 @@ import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.
 import 'package:yarn_bazaar/presentation/controllers/splash_controller.dart';
 
 class SplashPage extends StatelessWidget {
-  const SplashPage({
-    Key? key,
-  }) : super(key: key);
+  static const route = '/';
+  const SplashPage({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

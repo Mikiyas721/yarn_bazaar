@@ -13,6 +13,7 @@ import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 class UserDetailPage extends StatelessWidget with FormatterMixin {
+  static const route = '/userDetailPage';
   const UserDetailPage({Key? key}) : super(key: key);
 
   @override

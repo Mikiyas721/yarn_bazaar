@@ -12,6 +12,7 @@ import 'package:yarn_bazaar/presentation/models/edit_basic_profile_view_model.da
 import 'package:yarn_bazaar/application/edit_basic_information/edit_basic_information_bloc.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/models/options_with_navigation_model.dart';
+import 'package:yarn_bazaar/presentation/pages/input_selection_page.dart';
 
 class EditBasicInformationController extends BlocViewModelController<
     EditBasicInformationBloc,
@@ -97,7 +98,7 @@ class EditBasicInformationController extends BlocViewModelController<
 
   onCountry() async {
     final countries = ["Australia", "China", "India", "Pakistan"];
-    final country = await Navigator.pushNamed(context, '/inputSelectionPage',
+    final country = await Navigator.pushNamed(context, InputSelectionPage.route,
         arguments: OptionsWithNavigationModel(
           title: "Country",
           options: countries,
@@ -115,7 +116,7 @@ class EditBasicInformationController extends BlocViewModelController<
       toastInformation("Please select country");
     } else {
       final cities = getCityOptions();
-      final city = await Navigator.pushNamed(context, '/inputSelectionPage',
+      final city = await Navigator.pushNamed(context, InputSelectionPage.route,
           arguments: OptionsWithNavigationModel(
               title: "Country",
               options: cities,

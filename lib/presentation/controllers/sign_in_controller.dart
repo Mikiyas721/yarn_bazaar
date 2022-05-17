@@ -8,6 +8,8 @@ import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/sign_in_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/home_page.dart';
+import 'package:yarn_bazaar/presentation/pages/sign_up_page.dart';
 
 import '../../injection.dart';
 
@@ -77,13 +79,13 @@ class SignInController
           bloc.add(SignInVerifyingCredentialsStoppedEvent());
 
           if (userWasCached) {
-            Navigator.pushNamedAndRemoveUntil(context, '/homePage', (route) => false);
+            Navigator.pushNamedAndRemoveUntil(context, HomePage.route, (route) => false);
           } else {
             showErrorSnackBar(
               context,
               'Unable to save logged in user. Proceed without saving?',
               onAction: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/homePage', (route) => false);
+                Navigator.pushNamedAndRemoveUntil(context, HomePage.route, (route) => false);
               },
             );
           }
@@ -93,6 +95,6 @@ class SignInController
   }
 
   onRegister() {
-    Navigator.pushReplacementNamed(context, '/signUpPage');
+    Navigator.pushReplacementNamed(context, SignUpPage.route);
   }
 }

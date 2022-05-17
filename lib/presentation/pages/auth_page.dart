@@ -5,6 +5,7 @@ import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 
 class AuthPage extends StatelessWidget {
+  static const route = '/authPage';
   const AuthPage({Key? key}) : super(key: key);
 
   @override

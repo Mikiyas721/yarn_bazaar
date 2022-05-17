@@ -12,6 +12,7 @@ import 'package:yarn_bazaar/presentation/widgets/search_field.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class HomePage extends StatelessWidget {
+  static const route = '/homePage';
   const HomePage({Key? key}) : super(key: key);
 
   @override

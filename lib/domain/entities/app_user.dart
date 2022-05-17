@@ -6,8 +6,6 @@ import 'package:yarn_bazaar/domain/value_objects/password.dart';
 import 'package:yarn_bazaar/domain/value_objects/phone_number.dart';
 
 class AppUser extends Entity {
-  @override
-  final String? id;
   final String? imageUrl;
   final Name firstName;
   final Name? lastName;
@@ -20,7 +18,7 @@ class AppUser extends Entity {
   final String? bankDetailId;
 
   AppUser._({
-    this.id,
+    String? id,
     this.imageUrl,
     required this.firstName,
     required this.phoneNumber,

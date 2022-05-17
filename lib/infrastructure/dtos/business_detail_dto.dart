@@ -41,8 +41,8 @@ class BusinessDetailDto extends IdDto implements TimeStampedDto {
     this.panNo,
     this.panCardUrl,
     required this.userId,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory BusinessDetailDto.fromJson(Map<String, dynamic> map) =>

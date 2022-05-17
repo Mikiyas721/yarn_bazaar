@@ -15,6 +15,6 @@ class SimpleFailure implements Failure {
   }
 }
 
-Option<T> getOption<T>(T object) {
+Option<T> getOption<T>(T? object) {
   return object == null ? none() : some(object);
 }

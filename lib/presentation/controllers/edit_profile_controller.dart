@@ -3,6 +3,10 @@ import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/models/edit_profile_view_model.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_bank_details_page.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_basic_profile_page.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_business_details_page.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_password_page.dart';
 
 class EditProfileController
     extends BlocViewModelController<SplashBloc, SplashEvent, SplashState, EditProfileViewModel> {
@@ -21,18 +25,18 @@ class EditProfileController
   }
 
   onBasicProfile() {
-    Navigator.pushNamed(context, '/editBasicProfilePage');
+    Navigator.pushNamed(context, EditBasicProfilePage.route);
   }
 
   onBusinessDetails() {
-    Navigator.pushNamed(context, '/editBusinessDetailsPage');
+    Navigator.pushNamed(context, EditBusinessDetailPage.route);
   }
 
   onBankDetails() {
-    Navigator.pushNamed(context, '/editBankDetailsPage');
+    Navigator.pushNamed(context, EditBankDetailsPage.route);
   }
 
   onChangePassword() {
-    Navigator.pushNamed(context, '/editPasswordPage');
+    Navigator.pushNamed(context, EditPasswordPage.route);
   }
 }

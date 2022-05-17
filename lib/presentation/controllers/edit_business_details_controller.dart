@@ -12,6 +12,7 @@ import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.
 import 'package:yarn_bazaar/presentation/models/edit_business_detail_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/models/options_with_navigation_model.dart';
+import 'package:yarn_bazaar/presentation/pages/input_selection_page.dart';
 
 class EditBusinessDetailsController extends BlocViewModelController<
     EditBusinessDetailsBloc,
@@ -100,7 +101,7 @@ class EditBusinessDetailsController extends BlocViewModelController<
       "Fancy",
       "WorstedWool",
     ];
-    final categories = await Navigator.pushNamed(context, '/inputSelectionPage',
+    final categories = await Navigator.pushNamed(context, InputSelectionPage.route,
         arguments: OptionsWithNavigationModel(
             title: "Edit Category",
             options: options,

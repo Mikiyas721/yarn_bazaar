@@ -6,6 +6,7 @@ import 'package:yarn_bazaar/presentation/views/sign_up_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class SignUpPage extends StatelessWidget {
+  static const route = '/signUpPage';
   const SignUpPage({Key? key}) : super(key: key);
 
   @override

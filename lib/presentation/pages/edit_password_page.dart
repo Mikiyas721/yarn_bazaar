@@ -6,6 +6,7 @@ import 'package:yarn_bazaar/presentation/views/edit_password_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class EditPasswordPage extends StatelessWidget {
+  static const route = '/editPasswordPage';
   const EditPasswordPage({Key? key}) : super(key: key);
 
   @override

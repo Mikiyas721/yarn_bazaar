@@ -6,6 +6,7 @@ import 'package:yarn_bazaar/presentation/views/edit_bank_details_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class EditBankDetailsPage extends StatelessWidget {
+  static const route = '/editBankDetailsPage';
   const EditBankDetailsPage({Key? key}) : super(key: key);
 
   @override

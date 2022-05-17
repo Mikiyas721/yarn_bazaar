@@ -8,6 +8,7 @@ import 'package:yarn_bazaar/application/fetch_yarns_viscose/fetch_viscose_yarns_
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
 
 class ViscoseYarnsController extends BlocViewModelController<FetchViscoseYarnsBloc,
     FetchViscoseYarnsEvent, FetchViscoseYarnsState, YarnsViewModel> with ShortMessageMixin {
@@ -74,7 +75,7 @@ class ViscoseYarnsController extends BlocViewModelController<FetchViscoseYarnsBl
   onCompare(YarnViewModel viewModel) {}
 
   onDetail(int index) {
-    Navigator.pushNamed(context, '/yarnDetailPage', arguments: currentState.yarns[index]);
+    Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
   onShare(YarnViewModel viewModel) {}

@@ -6,6 +6,7 @@ import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/application/fetch_similar_yarns/fetch_similar_yarns_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
 
 class FetchSimilarYarnsController extends BlocViewModelController<FetchSimilarYarnsBloc,
     FetchSimilarYarnsEvent, FetchSimilarYarnsState, YarnsViewModel> {
@@ -67,7 +68,7 @@ class FetchSimilarYarnsController extends BlocViewModelController<FetchSimilarYa
   onCompare(YarnViewModel viewModel) {}
 
   onDetail(int index) {
-    Navigator.pushNamed(context, '/yarnDetailPage', arguments: currentState.yarns[index]);
+    Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
   onShare(YarnViewModel viewModel) {}

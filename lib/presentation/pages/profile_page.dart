@@ -13,7 +13,8 @@ import 'package:yarn_bazaar/presentation/widgets/profile_selection_button.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage() : super();
+  static const route = '/profilePage';
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +45,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 actions: [
                   IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/editProfilePage');
-                    },
+                    onPressed: controller.onEditProfile,
                     icon: const Icon(Icons.edit_outlined),
                     color: Colors.white,
                   ),

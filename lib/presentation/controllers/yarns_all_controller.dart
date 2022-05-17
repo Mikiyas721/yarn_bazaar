@@ -7,6 +7,7 @@ import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/application/fetch_yarns_all/fetch_all_yarns_bloc.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
 
 class AllYarnsController extends BlocViewModelController<FetchAllYarnsBloc, FetchAllYarnsEvent,
     FetchAllYarnsState, YarnsViewModel> with ShortMessageMixin {
@@ -72,7 +73,7 @@ class AllYarnsController extends BlocViewModelController<FetchAllYarnsBloc, Fetc
   onShare(YarnViewModel viewModel) {}
 
   onDetail(int index) {
-    Navigator.pushNamed(context, '/yarnDetailPage', arguments: currentState.yarns[index]);
+    Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
   Future<void> onRefresh() async {

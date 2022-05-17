@@ -9,6 +9,7 @@ import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class ComposedYarnPage extends StatelessWidget {
+  static const route = '/composedYarnPage';
   const ComposedYarnPage({Key? key}) : super(key: key);
 
   @override

@@ -7,6 +7,7 @@ import 'package:yarn_bazaar/application/fetch_users_all/fetch_all_users_bloc.dar
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/user_detail_page.dart';
 
 class AllUsersController extends BlocViewModelController<FetchAllUsersBloc, FetchAllUsersEvent,
     FetchAllUsersState, UsersViewModel> with ShortMessageMixin {
@@ -63,7 +64,7 @@ class AllUsersController extends BlocViewModelController<FetchAllUsersBloc, Fetc
   onWatchlist(UserViewModel viewModel) {}
 
   onDetail(UserViewModel viewModel) {
-    Navigator.pushNamed(context, '/userDetailPage', arguments: viewModel);
+    Navigator.pushNamed(context, UserDetailPage.route, arguments: viewModel);
   }
 
   onShare(UserViewModel viewModel) {}

@@ -7,6 +7,7 @@ import 'package:yarn_bazaar/presentation/views/input_selection_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class InputSelectionPage extends StatelessWidget {
+  static const route = '/inputSelectionPage';
   const InputSelectionPage({Key? key}) : super(key: key);
 
   @override

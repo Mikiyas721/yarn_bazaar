@@ -7,6 +7,7 @@ import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/application/fetch_user_yarns/fetch_user_yarns_bloc.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
+import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
 
 class UserYarnsController extends BlocViewModelController<FetchUserYarnsBloc,
     FetchUserYarnsEvent, FetchUserYarnsState, YarnsViewModel> with ShortMessageMixin {
@@ -71,7 +72,7 @@ class UserYarnsController extends BlocViewModelController<FetchUserYarnsBloc,
   onCompare(YarnViewModel viewModel) {}
 
   onDetail(int index) {
-    Navigator.pushNamed(context, '/yarnDetailPage', arguments: currentState.yarns[index]);
+    Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
   onShare(YarnViewModel viewModel) {}

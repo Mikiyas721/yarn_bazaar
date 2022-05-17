@@ -8,6 +8,7 @@ import 'package:yarn_bazaar/presentation/views/edit_profile_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class EditProfilePage extends StatelessWidget {
+  static const route = '/editProfilePage';
   const EditProfilePage({Key? key}) : super(key: key);
 
   @override

@@ -8,6 +8,7 @@ import 'package:yarn_bazaar/application/fetch_yarns_psf/fetch_psf_yarns_bloc.dar
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
 
 class PsfYarnsController extends BlocViewModelController<FetchPsfYarnsBloc, FetchPsfYarnsEvent,
     FetchPsfYarnsState, YarnsViewModel> with ShortMessageMixin {
@@ -74,7 +75,7 @@ class PsfYarnsController extends BlocViewModelController<FetchPsfYarnsBloc, Fetc
   onCompare(YarnViewModel viewModel) {}
 
   onDetail(int index) {
-    Navigator.pushNamed(context, '/yarnDetailPage', arguments: currentState.yarns[index]);
+    Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
   onShare(YarnViewModel viewModel) {}

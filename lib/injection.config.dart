@@ -43,49 +43,54 @@ import 'application/select_option/select_option_bloc.dart' as _i35;
 import 'application/sign_in/sign_in_bloc.dart' as _i37;
 import 'application/sign_up/sign_up_bloc.dart' as _i38;
 import 'application/splash/splash_bloc.dart' as _i39;
-import 'domain/ports/bank_details_repo.dart' as _i47;
-import 'domain/ports/business_details_repo.dart' as _i49;
+import 'application/suggestion/suggestion_bloc.dart' as _i40;
+import 'domain/ports/bank_details_repo.dart' as _i49;
+import 'domain/ports/business_details_repo.dart' as _i51;
 import 'domain/ports/firebase_repo.dart' as _i29;
-import 'domain/ports/user_repo.dart' as _i62;
-import 'domain/ports/yarn_repo.dart' as _i51;
-import 'domain/use_cases/add_new_user.dart' as _i67;
-import 'domain/use_cases/add_yarn_requirement.dart' as _i56;
-import 'domain/use_cases/cache_logged_in_user.dart' as _i68;
-import 'domain/use_cases/check_phone_number.dart' as _i69;
-import 'domain/use_cases/clear_logged_in_user.dart' as _i70;
-import 'domain/use_cases/fetch_saved_user_bank_details.dart' as _i57;
-import 'domain/use_cases/fetch_saved_user_basic_information.dart' as _i71;
-import 'domain/use_cases/fetch_saved_user_business_details.dart' as _i58;
-import 'domain/use_cases/fetch_user_by_id.dart' as _i72;
-import 'domain/use_cases/fetch_user_yarns.dart' as _i59;
-import 'domain/use_cases/fetch_users_by_type.dart' as _i73;
-import 'domain/use_cases/fetch_yarn_by_category.dart' as _i60;
-import 'domain/use_cases/fetch_yarns_of_user.dart' as _i61;
-import 'domain/use_cases/load_logged_in_user.dart' as _i64;
+import 'domain/ports/suggestion_repo.dart' as _i53;
+import 'domain/ports/user_repo.dart' as _i67;
+import 'domain/ports/yarn_repo.dart' as _i55;
+import 'domain/use_cases/add_new_user.dart' as _i72;
+import 'domain/use_cases/add_suggestion.dart' as _i60;
+import 'domain/use_cases/add_yarn_requirement.dart' as _i61;
+import 'domain/use_cases/cache_logged_in_user.dart' as _i73;
+import 'domain/use_cases/check_phone_number.dart' as _i74;
+import 'domain/use_cases/clear_logged_in_user.dart' as _i75;
+import 'domain/use_cases/fetch_saved_user_bank_details.dart' as _i62;
+import 'domain/use_cases/fetch_saved_user_basic_information.dart' as _i76;
+import 'domain/use_cases/fetch_saved_user_business_details.dart' as _i63;
+import 'domain/use_cases/fetch_user_by_id.dart' as _i77;
+import 'domain/use_cases/fetch_user_yarns.dart' as _i64;
+import 'domain/use_cases/fetch_users_by_type.dart' as _i78;
+import 'domain/use_cases/fetch_yarn_by_category.dart' as _i65;
+import 'domain/use_cases/fetch_yarns_of_user.dart' as _i66;
+import 'domain/use_cases/load_logged_in_user.dart' as _i69;
 import 'domain/use_cases/request_firebase_phone_auth_code.dart' as _i32;
-import 'domain/use_cases/sign_in_user.dart' as _i65;
-import 'domain/use_cases/update_user_bank_details.dart' as _i53;
-import 'domain/use_cases/update_user_basic_info.dart' as _i66;
-import 'domain/use_cases/update_user_business_details.dart' as _i54;
-import 'domain/use_cases/verify_firebase_phone_auth_code.dart' as _i41;
-import 'infrastructure/datasources/bank_details_datasource.dart' as _i43;
-import 'infrastructure/datasources/business_details_datasource.dart' as _i44;
+import 'domain/use_cases/sign_in_user.dart' as _i70;
+import 'domain/use_cases/update_user_bank_details.dart' as _i57;
+import 'domain/use_cases/update_user_basic_info.dart' as _i71;
+import 'domain/use_cases/update_user_business_details.dart' as _i58;
+import 'domain/use_cases/verify_firebase_phone_auth_code.dart' as _i43;
+import 'infrastructure/datasources/bank_details_datasource.dart' as _i45;
+import 'infrastructure/datasources/business_details_datasource.dart' as _i46;
 import 'infrastructure/datasources/shared/cache_datasource/cache_datasource.dart'
-    as _i45;
+    as _i47;
 import 'infrastructure/datasources/shared/cache_datasource/shared_preferences_cache_datasource.dart'
-    as _i46;
+    as _i48;
 import 'infrastructure/datasources/shared/dio_rest_datasource.dart' as _i34;
 import 'infrastructure/datasources/shared/rest_datasource/rest_datasource.dart'
     as _i33;
-import 'infrastructure/datasources/user_cache_datasource.dart' as _i55;
-import 'infrastructure/datasources/user_remote_datasource.dart' as _i40;
-import 'infrastructure/datasources/yarn_datasource.dart' as _i42;
-import 'infrastructure/repos/bank_details_repo_impl.dart' as _i48;
-import 'infrastructure/repos/business_details_repo_impl.dart' as _i50;
+import 'infrastructure/datasources/suggestion_datasource.dart' as _i41;
+import 'infrastructure/datasources/user_cache_datasource.dart' as _i59;
+import 'infrastructure/datasources/user_remote_datasource.dart' as _i42;
+import 'infrastructure/datasources/yarn_datasource.dart' as _i44;
+import 'infrastructure/repos/bank_details_repo_impl.dart' as _i50;
+import 'infrastructure/repos/business_details_repo_impl.dart' as _i52;
 import 'infrastructure/repos/firebase_repo_impl.dart' as _i30;
-import 'infrastructure/repos/user_repo_impl.dart' as _i63;
-import 'infrastructure/repos/yarn_repo_impl.dart' as _i52;
-import 'injection.dart' as _i74; // ignore_for_file: unnecessary_lambdas
+import 'infrastructure/repos/suggestion_repo_impl.dart' as _i54;
+import 'infrastructure/repos/user_repo_impl.dart' as _i68;
+import 'infrastructure/repos/yarn_repo_impl.dart' as _i56;
+import 'injection.dart' as _i79; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -140,65 +145,72 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i37.SignInBloc>(() => _i37.SignInBloc());
   gh.lazySingleton<_i38.SignUpBloc>(() => _i38.SignUpBloc());
   gh.lazySingleton<_i39.SplashBloc>(() => _i39.SplashBloc());
-  gh.lazySingleton<_i40.UserCrudDatasource>(
-      () => _i40.UserLoopbackDatasource(get<_i33.RestDataSource>()));
-  gh.lazySingleton<_i41.VerifyFirebasePhoneAuthCode>(
-      () => _i41.VerifyFirebasePhoneAuthCode(get<_i29.IFirebaseRepo>()));
-  gh.lazySingleton<_i42.YarnCrudDataSource>(
-      () => _i42.YarnLoopbackDatasource(get<_i33.RestDataSource>()));
-  gh.lazySingleton<_i43.BankDetailsCrudDatasource>(
-      () => _i43.BankDetailsLoopbackDatasource(get<_i33.RestDataSource>()));
-  gh.lazySingleton<_i44.BusinessDetailsCrudDatasource>(
-      () => _i44.BusinessDetailsLoopbackDatasource(get<_i33.RestDataSource>()));
-  gh.lazySingleton<_i45.CacheDataSource>(() =>
-      _i46.SharedPreferencesCacheDataSource(get<_i36.SharedPreferences>()));
-  gh.lazySingleton<_i47.IBankDetailsRepo>(
-      () => _i48.BankDetailsRepoImpl(get<_i43.BankDetailsCrudDatasource>()));
-  gh.lazySingleton<_i49.IBusinessDetailsRepo>(() =>
-      _i50.BusinessDetailsRepoImpl(get<_i44.BusinessDetailsCrudDatasource>()));
-  gh.lazySingleton<_i51.IYarnRepo>(
-      () => _i52.YarnRepoImpl(get<_i42.YarnCrudDataSource>()));
-  gh.factory<_i53.UpdateUserBankDetails>(
-      () => _i53.UpdateUserBankDetails(get<_i47.IBankDetailsRepo>()));
-  gh.lazySingleton<_i54.UpdateUserBusinessDetails>(
-      () => _i54.UpdateUserBusinessDetails(get<_i49.IBusinessDetailsRepo>()));
-  gh.lazySingleton<_i55.UserCacheDataSource>(
-      () => _i55.UserCacheDataSource(get<_i45.CacheDataSource>()));
-  gh.lazySingleton<_i56.AddYarnRequirement>(
-      () => _i56.AddYarnRequirement(get<_i51.IYarnRepo>()));
-  gh.lazySingleton<_i57.FetchSavedUserBankDetails>(
-      () => _i57.FetchSavedUserBankDetails(get<_i47.IBankDetailsRepo>()));
-  gh.lazySingleton<_i58.FetchSavedUserBusinessDetails>(() =>
-      _i58.FetchSavedUserBusinessDetails(get<_i49.IBusinessDetailsRepo>()));
-  gh.lazySingleton<_i59.FetchUserYarns>(
-      () => _i59.FetchUserYarns(get<_i51.IYarnRepo>()));
-  gh.lazySingleton<_i60.FetchYarnByCategory>(
-      () => _i60.FetchYarnByCategory(get<_i51.IYarnRepo>()));
-  gh.lazySingleton<_i61.FetchYarnsOfUser>(
-      () => _i61.FetchYarnsOfUser(get<_i51.IYarnRepo>()));
-  gh.lazySingleton<_i62.IUserRepo>(() => _i63.UserRepoImpl(
-      get<_i40.UserCrudDatasource>(), get<_i55.UserCacheDataSource>()));
-  gh.lazySingleton<_i64.LoadLoggedInUser>(
-      () => _i64.LoadLoggedInUser(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i65.SignInUser>(
-      () => _i65.SignInUser(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i66.UpdateUserBasicInfo>(
-      () => _i66.UpdateUserBasicInfo(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i67.AddNewUser>(
-      () => _i67.AddNewUser(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i68.CacheLoggedInUser>(
-      () => _i68.CacheLoggedInUser(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i69.CheckPhoneNumber>(
-      () => _i69.CheckPhoneNumber(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i70.ClearLoggedInUser>(
-      () => _i70.ClearLoggedInUser(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i71.FetchSavedUserBasicInformation>(
-      () => _i71.FetchSavedUserBasicInformation(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i72.FetchUsersById>(
-      () => _i72.FetchUsersById(get<_i62.IUserRepo>()));
-  gh.lazySingleton<_i73.FetchUsersByType>(
-      () => _i73.FetchUsersByType(get<_i62.IUserRepo>()));
+  gh.lazySingleton<_i40.SuggestionBloc>(() => _i40.SuggestionBloc());
+  gh.lazySingleton<_i41.SuggestionDatasourceCrudDatasource>(
+      () => _i41.SuggestionLoopbackDatasource(get<_i33.RestDataSource>()));
+  gh.lazySingleton<_i42.UserCrudDatasource>(
+      () => _i42.UserLoopbackDatasource(get<_i33.RestDataSource>()));
+  gh.lazySingleton<_i43.VerifyFirebasePhoneAuthCode>(
+      () => _i43.VerifyFirebasePhoneAuthCode(get<_i29.IFirebaseRepo>()));
+  gh.lazySingleton<_i44.YarnCrudDataSource>(
+      () => _i44.YarnLoopbackDatasource(get<_i33.RestDataSource>()));
+  gh.lazySingleton<_i45.BankDetailsCrudDatasource>(
+      () => _i45.BankDetailsLoopbackDatasource(get<_i33.RestDataSource>()));
+  gh.lazySingleton<_i46.BusinessDetailsCrudDatasource>(
+      () => _i46.BusinessDetailsLoopbackDatasource(get<_i33.RestDataSource>()));
+  gh.lazySingleton<_i47.CacheDataSource>(() =>
+      _i48.SharedPreferencesCacheDataSource(get<_i36.SharedPreferences>()));
+  gh.lazySingleton<_i49.IBankDetailsRepo>(
+      () => _i50.BankDetailsRepoImpl(get<_i45.BankDetailsCrudDatasource>()));
+  gh.lazySingleton<_i51.IBusinessDetailsRepo>(() =>
+      _i52.BusinessDetailsRepoImpl(get<_i46.BusinessDetailsCrudDatasource>()));
+  gh.lazySingleton<_i53.ISuggestionRepo>(() =>
+      _i54.SuggestionRepoImpl(get<_i41.SuggestionDatasourceCrudDatasource>()));
+  gh.lazySingleton<_i55.IYarnRepo>(
+      () => _i56.YarnRepoImpl(get<_i44.YarnCrudDataSource>()));
+  gh.factory<_i57.UpdateUserBankDetails>(
+      () => _i57.UpdateUserBankDetails(get<_i49.IBankDetailsRepo>()));
+  gh.lazySingleton<_i58.UpdateUserBusinessDetails>(
+      () => _i58.UpdateUserBusinessDetails(get<_i51.IBusinessDetailsRepo>()));
+  gh.lazySingleton<_i59.UserCacheDataSource>(
+      () => _i59.UserCacheDataSource(get<_i47.CacheDataSource>()));
+  gh.lazySingleton<_i60.AddSuggestion>(
+      () => _i60.AddSuggestion(get<_i53.ISuggestionRepo>()));
+  gh.lazySingleton<_i61.AddYarnRequirement>(
+      () => _i61.AddYarnRequirement(get<_i55.IYarnRepo>()));
+  gh.lazySingleton<_i62.FetchSavedUserBankDetails>(
+      () => _i62.FetchSavedUserBankDetails(get<_i49.IBankDetailsRepo>()));
+  gh.lazySingleton<_i63.FetchSavedUserBusinessDetails>(() =>
+      _i63.FetchSavedUserBusinessDetails(get<_i51.IBusinessDetailsRepo>()));
+  gh.lazySingleton<_i64.FetchUserYarns>(
+      () => _i64.FetchUserYarns(get<_i55.IYarnRepo>()));
+  gh.lazySingleton<_i65.FetchYarnByCategory>(
+      () => _i65.FetchYarnByCategory(get<_i55.IYarnRepo>()));
+  gh.lazySingleton<_i66.FetchYarnsOfUser>(
+      () => _i66.FetchYarnsOfUser(get<_i55.IYarnRepo>()));
+  gh.lazySingleton<_i67.IUserRepo>(() => _i68.UserRepoImpl(
+      get<_i42.UserCrudDatasource>(), get<_i59.UserCacheDataSource>()));
+  gh.lazySingleton<_i69.LoadLoggedInUser>(
+      () => _i69.LoadLoggedInUser(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i70.SignInUser>(
+      () => _i70.SignInUser(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i71.UpdateUserBasicInfo>(
+      () => _i71.UpdateUserBasicInfo(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i72.AddNewUser>(
+      () => _i72.AddNewUser(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i73.CacheLoggedInUser>(
+      () => _i73.CacheLoggedInUser(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i74.CheckPhoneNumber>(
+      () => _i74.CheckPhoneNumber(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i75.ClearLoggedInUser>(
+      () => _i75.ClearLoggedInUser(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i76.FetchSavedUserBasicInformation>(
+      () => _i76.FetchSavedUserBasicInformation(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i77.FetchUsersById>(
+      () => _i77.FetchUsersById(get<_i67.IUserRepo>()));
+  gh.lazySingleton<_i78.FetchUsersByType>(
+      () => _i78.FetchUsersByType(get<_i67.IUserRepo>()));
   return get;
 }
 
-class _$RegisterModule extends _i74.RegisterModule {}
+class _$RegisterModule extends _i79.RegisterModule {}

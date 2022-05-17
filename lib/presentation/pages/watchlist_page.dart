@@ -9,6 +9,7 @@ import 'package:yarn_bazaar/presentation/views/drawer_view.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class WatchlistPage extends StatelessWidget {
+  static const route = '/watchlistPage';
   const WatchlistPage({Key? key}) : super(key: key);
 
   @override

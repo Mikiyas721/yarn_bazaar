@@ -3,6 +3,11 @@ import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/application/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:yarn_bazaar/presentation/models/bottom_navigation_bar_view_model.dart';
+import 'package:yarn_bazaar/presentation/pages/directory_page.dart';
+import 'package:yarn_bazaar/presentation/pages/home_page.dart';
+import 'package:yarn_bazaar/presentation/pages/price_list_page.dart';
+import 'package:yarn_bazaar/presentation/pages/profile_page.dart';
+import 'package:yarn_bazaar/presentation/pages/watchlist_page.dart';
 
 class BottomNavigationController extends BlocViewModelController<BottomNavigationBloc,
     BottomNavigationEvent, BottomNavigationState, BottomNavigationBarViewModel> {
@@ -20,15 +25,15 @@ class BottomNavigationController extends BlocViewModelController<BottomNavigatio
 
   onNavigate(int index) {
     if (index == 0) {
-      Navigator.pushReplacementNamed(context, '/homePage');
+      Navigator.pushReplacementNamed(context, HomePage.route);
     } else if (index == 1) {
-      Navigator.pushReplacementNamed(context, '/priceListPage');
+      Navigator.pushReplacementNamed(context, PriceListPage.route);
     } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, '/directoryPage');
+      Navigator.pushReplacementNamed(context, DirectoryPage.route);
     } else if (index == 3) {
-      Navigator.pushReplacementNamed(context, '/watchlistPage');
+      Navigator.pushReplacementNamed(context, WatchlistPage.route);
     } else if (index == 4) {
-      Navigator.pushReplacementNamed(context, '/profilePage');
+      Navigator.pushReplacementNamed(context, ProfilePage.route);
     }
   }
 }

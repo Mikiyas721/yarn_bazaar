@@ -1,10 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/injection.dart';
+import 'package:yarn_bazaar/presentation/pages/about_us_page.dart';
 import 'package:yarn_bazaar/presentation/pages/add_yarn_requirement_page.dart';
+import 'package:yarn_bazaar/presentation/pages/apply_for_finance_page.dart';
 import 'package:yarn_bazaar/presentation/pages/auth_page.dart';
 import 'package:yarn_bazaar/presentation/pages/categories_page.dart';
 import 'package:yarn_bazaar/presentation/pages/composed_yarn_page.dart';
+import 'package:yarn_bazaar/presentation/pages/help_and_support_page.dart';
+import 'package:yarn_bazaar/presentation/pages/news_page.dart';
+import 'package:yarn_bazaar/presentation/pages/suggestion_page.dart';
 import 'package:yarn_bazaar/presentation/pages/user_detail_page.dart';
 import 'package:yarn_bazaar/presentation/pages/directory_page.dart';
 import 'package:yarn_bazaar/presentation/pages/edit_bank_details_page.dart';
@@ -55,33 +60,38 @@ class YarnBazaar extends StatelessWidget {
         ),
         colorScheme: Theme.of(context).colorScheme.copyWith(primary: const Color(0xFFFF9F10)),
       ),
-      initialRoute: '/',
+      initialRoute: SplashPage.route,
       routes: routes,
     );
   }
 }
 
 final routes = {
-  '/': (BuildContext context) => const SplashPage(),
-  '/addYarnRequirementPage': (BuildContext context) => const AddYarnRequirementPage(),
-  '/authPage': (BuildContext context) => const AuthPage(),
-  '/categoriesPage': (BuildContext context) => const CategoriesPage(),
-  '/composedYarnPage': (BuildContext context) => const ComposedYarnPage(),
-  '/editBankDetailsPage': (BuildContext context) => const EditBankDetailsPage(),
-  '/editBasicProfilePage': (BuildContext context) => const EditBasicProfilePage(),
-  '/editBusinessDetailsPage': (BuildContext context) => const EditBusinessDetailPage(),
-  '/editPasswordPage': (BuildContext context) => const EditPasswordPage(),
-  '/editProfilePage': (BuildContext context) => const EditProfilePage(),
-  '/directoryPage': (BuildContext context) => const DirectoryPage(),
-  '/homePage': (BuildContext context) => const HomePage(),
-  '/inputSelectionPage': (BuildContext context) => const InputSelectionPage(),
-  '/priceListPage': (BuildContext context) => const PriceListPage(),
-  '/privacyPolicyPage': (BuildContext context) => const PrivacyPolicyPage(),
-  '/profilePage': (BuildContext context) => const ProfilePage(),
-  '/signInPage': (BuildContext context) => const SignInPage(),
-  '/signUpPage': (BuildContext context) => const SignUpPage(),
-  '/termsAndConditionsPage': (BuildContext context) => const TermsAndConditionsPage(),
-  '/userDetailPage': (BuildContext context) => const UserDetailPage(),
-  '/watchlistPage': (BuildContext context) => const WatchlistPage(),
-  '/yarnDetailPage': (BuildContext context) => const YarnDetailPage(),
+  SplashPage.route: (BuildContext context) => const SplashPage(),
+  AboutUsPage.route: (BuildContext context) => const AboutUsPage(),
+  AddYarnRequirementPage.route: (BuildContext context) => const AddYarnRequirementPage(),
+  ApplyForFinancePage.route: (BuildContext context) => const ApplyForFinancePage(),
+  AuthPage.route: (BuildContext context) => const AuthPage(),
+  CategoriesPage.route: (BuildContext context) => const CategoriesPage(),
+  ComposedYarnPage.route: (BuildContext context) => const ComposedYarnPage(),
+  EditBankDetailsPage.route: (BuildContext context) => const EditBankDetailsPage(),
+  EditBasicProfilePage.route: (BuildContext context) => const EditBasicProfilePage(),
+  EditBusinessDetailPage.route: (BuildContext context) => const EditBusinessDetailPage(),
+  EditPasswordPage.route: (BuildContext context) => const EditPasswordPage(),
+  EditProfilePage.route: (BuildContext context) => const EditProfilePage(),
+  DirectoryPage.route: (BuildContext context) => const DirectoryPage(),
+  HelpAndSupportPage.route: (BuildContext context) => const HelpAndSupportPage(),
+  HomePage.route: (BuildContext context) => const HomePage(),
+  InputSelectionPage.route: (BuildContext context) => const InputSelectionPage(),
+  NewsPage.route: (BuildContext context) => const NewsPage(),
+  PriceListPage.route: (BuildContext context) => const PriceListPage(),
+  PrivacyPolicyPage.route: (BuildContext context) => const PrivacyPolicyPage(),
+  ProfilePage.route: (BuildContext context) => const ProfilePage(),
+  SignInPage.route: (BuildContext context) => const SignInPage(),
+  SignUpPage.route: (BuildContext context) => const SignUpPage(),
+  SuggestionPage.route: (BuildContext context)=> const SuggestionPage(),
+  TermsAndConditionsPage.route: (BuildContext context) => const TermsAndConditionsPage(),
+  UserDetailPage.route: (BuildContext context) => const UserDetailPage(),
+  WatchlistPage.route: (BuildContext context) => const WatchlistPage(),
+  YarnDetailPage.route: (BuildContext context) => const YarnDetailPage(),
 };

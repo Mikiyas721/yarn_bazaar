@@ -8,6 +8,8 @@ import 'package:yarn_bazaar/presentation/models/add_yarn_requirement_view_model.
 import 'package:yarn_bazaar/common/enum_extensions.dart';
 import 'package:yarn_bazaar/presentation/models/options_with_navigation_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/composed_yarn_page.dart';
+import 'package:yarn_bazaar/presentation/pages/input_selection_page.dart';
 
 class AddYarnController extends BlocViewModelController<
     AddYarnRequirementBloc,
@@ -16,7 +18,6 @@ class AddYarnController extends BlocViewModelController<
     AddYarnRequirementViewModel> with ShortMessageMixin {
   AddYarnController(BuildContext context)
       : super(context, getIt.get<AddYarnRequirementBloc>(), true);
-
 
   final yarnQualityTextEditingController = TextEditingController();
   final colourTextEditingController = TextEditingController();
@@ -62,7 +63,7 @@ class AddYarnController extends BlocViewModelController<
       "40s Fancy Worsted Wool",
       "15s Fancy Linen"
     ];
-    final selectedYarnQuality = await Navigator.pushNamed(context, '/inputSelectionPage',
+    final selectedYarnQuality = await Navigator.pushNamed(context, InputSelectionPage.route,
         arguments: OptionsWithNavigationModel(
             title: "Select Yarn Quality",
             options: options,
@@ -94,7 +95,7 @@ class AddYarnController extends BlocViewModelController<
       "N.Blue",
       "Maroon"
     ];
-    final selectedColor = await Navigator.pushNamed(context, '/inputSelectionPage',
+    final selectedColor = await Navigator.pushNamed(context, InputSelectionPage.route,
         arguments: OptionsWithNavigationModel(
             title: "Select Colour",
             options: options,
@@ -124,7 +125,7 @@ class AddYarnController extends BlocViewModelController<
       "up to 15 days",
       "15+ days"
     ];
-    final deliveryPeriod = await Navigator.pushNamed(context, '/inputSelectionPage',
+    final deliveryPeriod = await Navigator.pushNamed(context, InputSelectionPage.route,
         arguments: OptionsWithNavigationModel(
             title: "Select Delivery Period",
             options: options,
@@ -145,7 +146,7 @@ class AddYarnController extends BlocViewModelController<
 
   onSendRequirementTo() async {
     final options = ["All Sellers", "Mills only", "Traders only"];
-    final sendRequirementTo = await Navigator.pushNamed(context, '/inputSelectionPage',
+    final sendRequirementTo = await Navigator.pushNamed(context, InputSelectionPage.route,
         arguments: OptionsWithNavigationModel(
             title: "Send Requirements to",
             options: options,
@@ -189,7 +190,7 @@ class AddYarnController extends BlocViewModelController<
       yarnToPost.fold(() {
         toastError("Please enter all required fields");
       }, (a) {
-        Navigator.pushNamed(context, '/composedYarnPage', arguments: a);
+        Navigator.pushNamed(context, ComposedYarnPage.route, arguments: a);
       });
     });
   }

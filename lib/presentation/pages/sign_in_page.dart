@@ -6,6 +6,7 @@ import 'package:yarn_bazaar/presentation/views/sign_in_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 
 class SignInPage extends StatelessWidget {
+  static const route = '/signInPage';
   const SignInPage({Key? key}) : super(key: key);
 
   @override

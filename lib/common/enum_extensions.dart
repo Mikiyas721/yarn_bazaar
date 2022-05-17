@@ -1,3 +1,4 @@
+import 'package:yarn_bazaar/domain/value_objects/suggestion_type.dart';
 import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
 import 'package:yarn_bazaar/domain/value_objects/yarn_categories.dart';
 import 'package:yarn_bazaar/domain/value_objects/yarn_requirement_intention.dart';
@@ -42,6 +43,16 @@ extension StringExtensions on String{
     else if (this=="Fabric Manufacturer") return UserType.fabric_manufacturer;
     else if (this=="Yarn Broker") return UserType.yarn_broker;
     else if (this=="Other") return UserType.other;
+    else throw Exception("Unknown UserType string");
+  }
+
+  SuggestionType getSuggestionType(){
+    if (this=="Mill") return SuggestionType.Mill;
+    else if (this=="Trader") return SuggestionType.Trader;
+    else if (this=="Broker") return SuggestionType.Broker;
+    else if (this=="Yarn") return SuggestionType.Yarn;
+    else if (this=="Feature") return SuggestionType.Feature;
+    else if (this=="General") return SuggestionType.General;
     else throw Exception("Unknown UserType string");
   }
 }
@@ -91,6 +102,18 @@ extension YarnRequirementIntentionExtension on YarnRequirementIntention{
     else if (this==YarnRequirementIntention.Purchase) return "Purchase";
     else if (this==YarnRequirementIntention.None) return "None";
     else throw Exception("Unknown Yarn Intention");
+  }
+}
+
+extension SuggestionTypeExtension on SuggestionType{
+  String getString(){
+    if (this==SuggestionType.Mill) return "Mill";
+    if (this==SuggestionType.Trader) return "Trader";
+    if (this==SuggestionType.Broker) return "Broker";
+    if (this==SuggestionType.Yarn) return "Yarn";
+    if (this==SuggestionType.Feature) return "Feature";
+    if (this==SuggestionType.General) return "General";
+    else throw Exception("Unknown Suggestion Type");
   }
 }
 

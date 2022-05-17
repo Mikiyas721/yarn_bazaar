@@ -3,6 +3,8 @@ import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/models/profile_view_model.dart';
 import 'package:yarn_bazaar/application/profile/profile_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/edit_profile_page.dart';
+import 'package:yarn_bazaar/presentation/pages/suggestion_page.dart';
 
 class ProfileController extends BlocViewModelController<ProfileBloc, ProfileEvent,
     ProfileState, ProfileViewModel> {
@@ -21,6 +23,10 @@ class ProfileController extends BlocViewModelController<ProfileBloc, ProfileEven
     );
   }
 
+  onEditProfile() {
+    Navigator.pushNamed(context, EditProfilePage.route);
+  }
+
   onProfileTypeSelected(bool selectedFirstTab) {
     if (selectedFirstTab && bloc.state.selectedProfileIndex == 1) {
       bloc.add(ProfileBuyerSelectedEvent());
@@ -29,20 +35,39 @@ class ProfileController extends BlocViewModelController<ProfileBloc, ProfileEven
     }
   }
 
-  onBuyerPostYarnRequirement(){}
-  onBuyerYarnRequirements(){}
-  onBuyerMyInquiries(){}
-  onBuyerMyOrders(){}
-  onBuyerMyAddressList(){}
-  onBuyerMyActivityLog(){}
-  onBuyerMembershipDetail(){}
-  onBuyerSuggestion(){}
-  onSellerYarnRequirements(){}
-  onSellerMyInquiries(){}
-  onSellerMyOrders(){}
-  onSellerMyProductListings(){}
-  onSellerMyBrokers(){}
-  onSellerMyActivityLog(){}
-  onSellerProductListingPlan(){}
-  onSellerSuggestion(){}
+  onBuyerPostYarnRequirement() {}
+
+  onBuyerYarnRequirements() {}
+
+  onBuyerMyInquiries() {}
+
+  onBuyerMyOrders() {}
+
+  onBuyerMyAddressList() {}
+
+  onBuyerMyActivityLog() {}
+
+  onBuyerMembershipDetail() {}
+
+  onBuyerSuggestion() {
+    Navigator.pushNamed(context, SuggestionPage.route);
+  }
+
+  onSellerYarnRequirements() {}
+
+  onSellerMyInquiries() {}
+
+  onSellerMyOrders() {}
+
+  onSellerMyProductListings() {}
+
+  onSellerMyBrokers() {}
+
+  onSellerMyActivityLog() {}
+
+  onSellerProductListingPlan() {}
+
+  onSellerSuggestion() {
+    Navigator.pushNamed(context, SuggestionPage.route);
+  }
 }
