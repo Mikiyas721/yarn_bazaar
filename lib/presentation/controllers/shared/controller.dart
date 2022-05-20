@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:yarn_bazaar/common/bloc/bloc_helpers.dart';
 import 'package:yarn_bazaar/common/view_model.dart';
+import 'package:yarn_bazaar/injection.dart';
 
 abstract class Controller {
   final BuildContext context;
@@ -23,12 +24,12 @@ class ControllerWithOutBloc extends Controller{
 abstract class BlocController<B extends Bloc<E, S>, E extends BlocEvent, S extends BlocState>
     implements Controller {
   final Bloc<E, S> bloc;
-  final bool ownsBloc;
+  final bool disposeBloc;
   final BuildContext context;
   late S _currentState;
   late StreamSubscription<S> _sub;
 
-  BlocController(this.context, this.bloc, this.ownsBloc) {
+  BlocController(this.context, this.bloc, this.disposeBloc) {
     _currentState = bloc.state;
     _sub = bloc.stream.listen((newState) {
       onStateChanged(_currentState, newState);
@@ -43,7 +44,7 @@ abstract class BlocController<B extends Bloc<E, S>, E extends BlocEvent, S exten
   @override
   dispose() {
     _sub.cancel();
-    if (ownsBloc) {
+    if (disposeBloc) {
       bloc.close();
     }
   }
@@ -88,11 +89,11 @@ abstract class BlocViewModelController<
   BlocViewModelController(
     BuildContext context,
     B bloc,
-    bool ownsBloc,
+    bool disposeBloc,
   ) : super(
           context,
           bloc,
-          ownsBloc,
+          disposeBloc,
         ) {
     _subject = BehaviorSubject.seeded(mapStateToViewModel(_currentState));
   }
@@ -126,6 +127,9 @@ abstract class BlocViewModelController<
     super.dispose();
     _subject.close();
     subs.forEach((e) => e.cancel());
+    if (disposeBloc) {
+      getIt.resetLazySingleton<B>();
+    }
   }
 }
 

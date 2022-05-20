@@ -22,8 +22,6 @@ class PaymentTerms {
 
   static Either<PaymentTermsFailure, PaymentTerms> create(String paymentTerms) {
     if (paymentTerms.isEmpty) return left(EmptyPaymentTermsFailure());
-    final matched = RegExp(paymentTermsRegExp).firstMatch(paymentTerms);
-    if (matched == null) return left(InvalidPaymentTermsFailure());
     return right(PaymentTerms._(paymentTerms));
   }
 }

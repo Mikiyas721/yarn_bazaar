@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_users_by_type.dart';
 import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
 import 'package:yarn_bazaar/injection.dart';
@@ -11,7 +12,7 @@ import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/pages/user_detail_page.dart';
 
 class MillUsersController extends BlocViewModelController<FetchMillUsersBloc,
-    FetchMillUsersEvent, FetchMillUsersState, UsersViewModel> with ShortMessageMixin {
+    FetchMillUsersEvent, FetchMillUsersState, UsersViewModel> with ShortMessageMixin, DateTimeMixin {
   MillUsersController(BuildContext context)
       : super(context, getIt.get<FetchMillUsersBloc>(), true);
 
@@ -20,11 +21,11 @@ class MillUsersController extends BlocViewModelController<FetchMillUsersBloc,
     return UsersViewModel(
       users: s.users
           .map((e) => UserViewModel(
-                companyName: e.businessDetail!.companyName,
+                companyName: e.businessDetail!.companyName!,
                 location: e.businessDetail?.address??'Unknown',
                 numberOfYarnProducts: e.yarns!.length,
-                lastUpdated: e.updatedAt.toString(),
-                sellerType: e.businessDetail!.accountType,
+                lastUpdated: getShortDateWithOutDayOfWeekString(e.updatedAt!),
+                sellerType: e.businessDetail!.accountType!,
               ))
           .toList(),
       isLoading: s.isLoading,
@@ -69,19 +70,19 @@ class MillUsersController extends BlocViewModelController<FetchMillUsersBloc,
     loadMillUsers();
   }
 
-  onHeaderTap(int index, bool wasExpanded) {
-    wasExpanded
+  onHeaderTap(int index) {
+    currentState.expandedIndex==index
         ? bloc.add(FetchMillUsersExpandedIndexChangedEvent(-1))
         : bloc.add(FetchMillUsersExpandedIndexChangedEvent(index));
   }
 
-  onWatchlist(UserViewModel viewModel) {}
+  onWatchlist(int index) {}
 
-  onDetail(UserViewModel viewModel) {
-    Navigator.pushNamed(context, UserDetailPage.route, arguments: viewModel);
+  onDetail(int index) {
+    Navigator.pushNamed(context, UserDetailPage.route, arguments: currentState.users[index]);
   }
 
-  onShare(UserViewModel viewModel) {}
+  onShare(int index) {}
 
   Future<void> onRefresh() async {
     final splashBloc = getIt.get<SplashBloc>();

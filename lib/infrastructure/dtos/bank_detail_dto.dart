@@ -5,10 +5,9 @@ import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 
 part 'bank_detail_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class BankDetailDto extends IdDto implements TimeStampedDto {
   @override
-  @JsonKey(includeIfNull: false)
   final String? id;
   final String? accountName;
   final String? accountNumber;
@@ -19,12 +18,10 @@ class BankDetailDto extends IdDto implements TimeStampedDto {
   final String? bankCity;
   final String? addressProofUrl;
   final String? cancelledChequeUrl;
-  final String userId;
+  final String? userId;
   @override
-  @JsonKey(includeIfNull: false)
   final DateTime? createdAt;
   @override
-  @JsonKey(includeIfNull: false)
   final DateTime? updatedAt;
 
   const BankDetailDto({
@@ -70,8 +67,8 @@ class BankDetailDto extends IdDto implements TimeStampedDto {
     return BankDetailDto(
       id: bankDetails.id,
       accountName: bankDetails.accountName,
-      accountNumber: bankDetails.accountNumber.value,
-      iFSCCode: bankDetails.iFSCCode.value,
+      accountNumber: bankDetails.accountNumber?.value,
+      iFSCCode: bankDetails.iFSCCode?.value,
       bankName: bankDetails.bankName,
       bankBranch: bankDetails.bankBranch,
       bankState: bankDetails.bankState,

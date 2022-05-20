@@ -5,14 +5,13 @@ import 'package:yarn_bazaar/domain/entities/business_details.dart';
 
 part 'business_detail_dto.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class BusinessDetailDto extends IdDto implements TimeStampedDto {
   @override
-  @JsonKey(includeIfNull: false)
   final String? id;
-  final String companyName;
-  final String accountType;
-  final List<String> categories;
+  final String? companyName;
+  final String? accountType;
+  final List<String>? categories;
   final String? address;
   final String? completeAddress;
   final String? gstNo;
@@ -20,12 +19,10 @@ class BusinessDetailDto extends IdDto implements TimeStampedDto {
   final String? gstDocumentUrl;
   final String? panNo;
   final String? panCardUrl;
-  final String userId;
+  final String? userId;
   @override
-  @JsonKey(includeIfNull: false)
   final DateTime? createdAt;
   @override
-  @JsonKey(includeIfNull: false)
   final DateTime? updatedAt;
 
   const BusinessDetailDto({

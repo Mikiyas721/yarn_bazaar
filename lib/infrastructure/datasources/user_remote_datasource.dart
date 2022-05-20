@@ -64,9 +64,8 @@ class UserLoopbackDatasource extends LoopbackRestCrudDataSource<UserDto>
   @override
   Future<Either<Failure, bool>> checkPhoneNumber(String phoneNumber) async{
     final phoneNumberExistsResponse = await restDataSource.post(RestRequest(
-      url: '$path/checkPhoneNUmber'
+      url: '$path/checkPhoneNumber/$phoneNumber'
     ));
-
     return phoneNumberExistsResponse.either.fold((l) => left(l), (r) => right(r.value));
   }
 

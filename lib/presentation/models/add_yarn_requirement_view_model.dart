@@ -3,58 +3,37 @@ import 'package:yarn_bazaar/domain/value_objects/yarn_requirement_intention.dart
 
 class AddYarnRequirementViewModel extends ViewModel {
   final YarnRequirementIntention intention;
-  final String? yarnQuality;
-  final String? qualityDetails;
-  final String? qualityDetailsError;
-  final String? color;
-  final String? quantityInKgs;
+  final String? yarnQualityError;
+  final String? colorError;
   final String? quantityInKgsError;
-  final String? deliveryArea;
   final String? deliveryAreaError;
-  final String? deliveryPeriod;
-  final String? paymentTerms;
+  final String? deliveryPeriodError;
   final String? paymentTermsError;
-  final DateTime? inquiryClosesWithin;
-  final String? sendRequirementTo;
-  final String? additionalComment;
-  final String? additionalCommentError;
+  final String? inquiryClosesWithinError;
+  final String? sendRequirementToError;
 
   AddYarnRequirementViewModel({
     required this.intention,
-    required this.yarnQuality,
-    required this.qualityDetails,
-    required this.qualityDetailsError,
-    required this.color,
-    required this.quantityInKgs,
+    required this.yarnQualityError,
+    required this.colorError,
     required this.quantityInKgsError,
-    required this.deliveryArea,
     required this.deliveryAreaError,
-    required this.deliveryPeriod,
-    required this.paymentTerms,
+    required this.deliveryPeriodError,
     required this.paymentTermsError,
-    required this.inquiryClosesWithin,
-    required this.sendRequirementTo,
-    required this.additionalComment,
-    required this.additionalCommentError,
+    required this.inquiryClosesWithinError,
+    required this.sendRequirementToError,
   });
 
   @override
   List<Object?> get props => [
         intention,
-        yarnQuality,
-        qualityDetails,
-        qualityDetailsError,
-        color,
-        quantityInKgs,
+        yarnQualityError,
+        colorError,
         quantityInKgsError,
-        deliveryArea,
         deliveryAreaError,
-        deliveryPeriod,
-        paymentTerms,
+        deliveryPeriodError,
         paymentTermsError,
-        inquiryClosesWithin,
-        sendRequirementTo,
-        additionalComment,
-        additionalCommentError,
+        inquiryClosesWithinError,
+        sendRequirementToError,
       ];
 }

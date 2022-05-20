@@ -30,7 +30,7 @@ class SignInPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Image.asset(
-                      'assets/images/yarn.jpg',
+                      'assets/images/yarn.png',
                       width: 250,
                     ),
                     Padding(

@@ -59,26 +59,44 @@ class UserRepoImpl extends IUserRepo {
   @override
   Future<Either<Failure, List<User>>> fetchByUserType(
       String currentUserId, String? userType) async {
-    final result = await _userCrudDatasource.find(options: {
-      "filter": {
-        "where": {
-          "and": [
-            {
-              "id": {"ne": currentUserId}
+    final options = userType == null
+        ? {
+            "filter": {
+              "where": {
+                "id": {"ne": "$currentUserId"}
+              },
+              "include": [
+                {"relation": "bankDetail"},
+                {"relation": "businessDetail"},
+                {"relation": "yarns"}
+              ]
             },
-            {"userType": userType}
-          ]
-        }
-      },
-      "include": [
-        {"relation": "businessDetail"},
-        {"relation": "bankDetail"},
-        {"relation": "yarn"}
-      ]
-    });
+          }
+        : {
+            "filter": {
+              "where": {
+                "and": [
+                  {
+                    "id": {"ne": "$currentUserId"}
+                  },
+                  {"userType": "$userType"}
+                ]
+              },
+              "include": [
+                {"relation": "bankDetail"},
+                {"relation": "businessDetail"},
+                {"relation": "yarns"}
+              ]
+            },
+          };
+    final result = await _userCrudDatasource.find(options: options);
     return result.fold(
       (l) => left(l),
-      (r) => right(IdDto.toDomainList<User, UserDto>(r)!),
+      (r) {
+        final userList = IdDto.toDomainList<User, UserDto>(r);
+        if (userList == null) return left(userDtoMappingSimpleFailure);
+        return right(userList);
+      },
     );
   }
 

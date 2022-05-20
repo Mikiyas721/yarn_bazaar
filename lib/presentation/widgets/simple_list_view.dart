@@ -123,14 +123,16 @@ class MyExpansionPanelList<T> extends StatelessWidget {
         for (int i=0;i<model.data!.length;i++) {
           children.add(itemBuilder(context, model.data![i], i));
         }
-        return ExpansionPanelList(
-          key: key,
-          children: children,
-          animationDuration: animationDuration,
-          expandedHeaderPadding: expandedHeaderPadding,
-          elevation: elevation,
-          dividerColor: dividerColor,
-          expansionCallback: expansionCallback,
+        return SingleChildScrollView(
+          child: ExpansionPanelList(
+            key: key,
+            children: children,
+            animationDuration: animationDuration,
+            expandedHeaderPadding: expandedHeaderPadding,
+            elevation: elevation,
+            dividerColor: dividerColor,
+            expansionCallback: expansionCallback,
+          ),
         );
       },
     );

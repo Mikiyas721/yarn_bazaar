@@ -6,7 +6,9 @@ class IconPrefixedText extends StatelessWidget {
   final String label;
   final TextOverflow? overflow;
   final bool? softWrap;
-  final Color? color;
+  final Color? iconColor;
+  final double iconSize;
+  final TextStyle? textStyle;
 
   const IconPrefixedText({
     Key? key,
@@ -14,7 +16,9 @@ class IconPrefixedText extends StatelessWidget {
     required this.label,
     this.overflow,
     this.softWrap,
-    this.color,
+    this.iconColor,
+    this.iconSize = 18,
+    this.textStyle,
   }) : super(key: key);
 
   @override
@@ -24,18 +28,15 @@ class IconPrefixedText extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: color,
-          size: 18,
+          color: iconColor,
+          size: iconSize,
         ),
         2.hSpace,
         Text(
           label,
           overflow: overflow,
           softWrap: softWrap,
-          style: TextStyle(
-            color: color,
-            fontSize: 12
-          ),
+          style: textStyle,
         ),
       ],
     );

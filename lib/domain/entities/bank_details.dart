@@ -5,15 +5,15 @@ import 'package:yarn_bazaar/domain/value_objects/ifsc_code.dart';
 
 class BankDetail extends Entity {
   final String? accountName;
-  final AccountNumber accountNumber;
-  final IFSCCode iFSCCode;
+  final AccountNumber? accountNumber;
+  final IFSCCode? iFSCCode;
   final String? bankName;
   final String? bankBranch;
   final String? bankState;
   final String? bankCity;
   final String? addressProofUrl;
   final String? cancelledChequeUrl;
-  final String userId;
+  final String? userId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -48,13 +48,8 @@ class BankDetail extends Entity {
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    if ([
-      id,
-      accountName,
-      userId,
-      createdAt,
-      updatedAt
-    ].any((element) => element == null)) return none();
+    if ([id, accountName, userId, createdAt, updatedAt].any((element) => element == null))
+      return none();
 
     final accountNumberObject = AccountNumber.create(accountNumber);
     final ifscCodeObject = IFSCCode.create(iFSCCode);
@@ -64,10 +59,9 @@ class BankDetail extends Entity {
     return some(BankDetail(
       id: id,
       accountName: accountName,
-      accountNumber: accountNumberObject
-          .getOrElse(() => throw Exception('Account number error')),
-      iFSCCode:
-          ifscCodeObject.getOrElse(() => throw Exception('IFSC code error')),
+      accountNumber:
+          accountNumberObject.getOrElse(() => throw Exception('Account number error')),
+      iFSCCode: ifscCodeObject.getOrElse(() => throw Exception('IFSC code error')),
       bankName: bankName,
       bankBranch: bankBranch,
       bankState: bankState,
@@ -93,7 +87,7 @@ class BankDetail extends Entity {
     String? cancelledChequeUrl,
     String? userId,
   }) {
-    if(userId==null) return none();
+    if (userId == null) return none();
     final accountNumberObject = AccountNumber.create(accountNumber);
     final ifscCodeObject = IFSCCode.create(iFSCCode);
 
@@ -101,10 +95,45 @@ class BankDetail extends Entity {
 
     return some(BankDetail(
       accountName: accountName,
-      accountNumber: accountNumberObject
-          .getOrElse(() => throw Exception('Account number error')),
-      iFSCCode:
-          ifscCodeObject.getOrElse(() => throw Exception('IFSC code error')),
+      accountNumber:
+          accountNumberObject.getOrElse(() => throw Exception('Account number error')),
+      iFSCCode: ifscCodeObject.getOrElse(() => throw Exception('IFSC code error')),
+      bankName: bankName,
+      bankBranch: bankBranch,
+      bankState: bankState,
+      bankCity: bankCity,
+      userId: userId,
+      addressProofUrl: addressProofUrl,
+      cancelledChequeUrl: cancelledChequeUrl,
+    ));
+  }
+
+  static Option<BankDetail> createForUpdate({
+    String? id,
+    String? accountName,
+    String? accountNumber,
+    String? iFSCCode,
+    String? bankName,
+    String? bankBranch,
+    String? bankState,
+    String? bankCity,
+    String? addressProofUrl,
+    String? cancelledChequeUrl,
+    String? userId,
+  }) {
+    if (id == null) return none();
+
+    final accountNumberObject =
+        accountNumber == null ? null : AccountNumber.create(accountNumber);
+    final ifscCodeObject = iFSCCode == null ? null : IFSCCode.create(iFSCCode);
+
+    if (accountNumberObject != null && accountNumberObject.isLeft() ||
+        ifscCodeObject != null && ifscCodeObject.isLeft()) return none();
+
+    return some(BankDetail(
+      accountName: accountName,
+      accountNumber: accountNumberObject?.fold((l) => null, (r) => r),
+      iFSCCode: ifscCodeObject?.fold((l) => null, (r) => r),
       bankName: bankName,
       bankBranch: bankBranch,
       bankState: bankState,

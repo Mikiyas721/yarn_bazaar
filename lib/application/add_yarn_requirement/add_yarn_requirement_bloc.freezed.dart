@@ -17,18 +17,18 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AddYarnRequirementState {
   YarnRequirementIntention get intention => throw _privateConstructorUsedError;
-  String get yarnQuality => throw _privateConstructorUsedError;
+  String? get yarnQuality => throw _privateConstructorUsedError;
   String? get qualityDetails => throw _privateConstructorUsedError;
-  String get color => throw _privateConstructorUsedError;
+  String? get color => throw _privateConstructorUsedError;
   Either<QuantityFailure, Quantity> get quantityInKgs =>
       throw _privateConstructorUsedError;
   Either<LocationFailure, Location> get deliveryArea =>
       throw _privateConstructorUsedError;
-  String get deliveryPeriod => throw _privateConstructorUsedError;
+  String? get deliveryPeriod => throw _privateConstructorUsedError;
   Either<PaymentTermsFailure, PaymentTerms> get paymentTerms =>
       throw _privateConstructorUsedError;
-  String get inquiryClosesWithin => throw _privateConstructorUsedError;
-  String get sendRequirementTo => throw _privateConstructorUsedError;
+  int? get inquiryClosesWithin => throw _privateConstructorUsedError;
+  String? get sendRequirementTo => throw _privateConstructorUsedError;
   String? get additionalComment => throw _privateConstructorUsedError;
   bool get hasSubmitted => throw _privateConstructorUsedError;
 
@@ -44,15 +44,15 @@ abstract class $AddYarnRequirementStateCopyWith<$Res> {
       _$AddYarnRequirementStateCopyWithImpl<$Res>;
   $Res call(
       {YarnRequirementIntention intention,
-      String yarnQuality,
+      String? yarnQuality,
       String? qualityDetails,
-      String color,
+      String? color,
       Either<QuantityFailure, Quantity> quantityInKgs,
       Either<LocationFailure, Location> deliveryArea,
-      String deliveryPeriod,
+      String? deliveryPeriod,
       Either<PaymentTermsFailure, PaymentTerms> paymentTerms,
-      String inquiryClosesWithin,
-      String sendRequirementTo,
+      int? inquiryClosesWithin,
+      String? sendRequirementTo,
       String? additionalComment,
       bool hasSubmitted});
 }
@@ -89,7 +89,7 @@ class _$AddYarnRequirementStateCopyWithImpl<$Res>
       yarnQuality: yarnQuality == freezed
           ? _value.yarnQuality
           : yarnQuality // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       qualityDetails: qualityDetails == freezed
           ? _value.qualityDetails
           : qualityDetails // ignore: cast_nullable_to_non_nullable
@@ -97,7 +97,7 @@ class _$AddYarnRequirementStateCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       quantityInKgs: quantityInKgs == freezed
           ? _value.quantityInKgs
           : quantityInKgs // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ class _$AddYarnRequirementStateCopyWithImpl<$Res>
       deliveryPeriod: deliveryPeriod == freezed
           ? _value.deliveryPeriod
           : deliveryPeriod // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       paymentTerms: paymentTerms == freezed
           ? _value.paymentTerms
           : paymentTerms // ignore: cast_nullable_to_non_nullable
@@ -117,11 +117,11 @@ class _$AddYarnRequirementStateCopyWithImpl<$Res>
       inquiryClosesWithin: inquiryClosesWithin == freezed
           ? _value.inquiryClosesWithin
           : inquiryClosesWithin // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       sendRequirementTo: sendRequirementTo == freezed
           ? _value.sendRequirementTo
           : sendRequirementTo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       additionalComment: additionalComment == freezed
           ? _value.additionalComment
           : additionalComment // ignore: cast_nullable_to_non_nullable
@@ -143,15 +143,15 @@ abstract class _$$_AddYarnRequirementStateCopyWith<$Res>
   @override
   $Res call(
       {YarnRequirementIntention intention,
-      String yarnQuality,
+      String? yarnQuality,
       String? qualityDetails,
-      String color,
+      String? color,
       Either<QuantityFailure, Quantity> quantityInKgs,
       Either<LocationFailure, Location> deliveryArea,
-      String deliveryPeriod,
+      String? deliveryPeriod,
       Either<PaymentTermsFailure, PaymentTerms> paymentTerms,
-      String inquiryClosesWithin,
-      String sendRequirementTo,
+      int? inquiryClosesWithin,
+      String? sendRequirementTo,
       String? additionalComment,
       bool hasSubmitted});
 }
@@ -191,7 +191,7 @@ class __$$_AddYarnRequirementStateCopyWithImpl<$Res>
       yarnQuality: yarnQuality == freezed
           ? _value.yarnQuality
           : yarnQuality // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       qualityDetails: qualityDetails == freezed
           ? _value.qualityDetails
           : qualityDetails // ignore: cast_nullable_to_non_nullable
@@ -199,7 +199,7 @@ class __$$_AddYarnRequirementStateCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       quantityInKgs: quantityInKgs == freezed
           ? _value.quantityInKgs
           : quantityInKgs // ignore: cast_nullable_to_non_nullable
@@ -211,7 +211,7 @@ class __$$_AddYarnRequirementStateCopyWithImpl<$Res>
       deliveryPeriod: deliveryPeriod == freezed
           ? _value.deliveryPeriod
           : deliveryPeriod // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       paymentTerms: paymentTerms == freezed
           ? _value.paymentTerms
           : paymentTerms // ignore: cast_nullable_to_non_nullable
@@ -219,11 +219,11 @@ class __$$_AddYarnRequirementStateCopyWithImpl<$Res>
       inquiryClosesWithin: inquiryClosesWithin == freezed
           ? _value.inquiryClosesWithin
           : inquiryClosesWithin // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       sendRequirementTo: sendRequirementTo == freezed
           ? _value.sendRequirementTo
           : sendRequirementTo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       additionalComment: additionalComment == freezed
           ? _value.additionalComment
           : additionalComment // ignore: cast_nullable_to_non_nullable
@@ -256,23 +256,23 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
   @override
   final YarnRequirementIntention intention;
   @override
-  final String yarnQuality;
+  final String? yarnQuality;
   @override
   final String? qualityDetails;
   @override
-  final String color;
+  final String? color;
   @override
   final Either<QuantityFailure, Quantity> quantityInKgs;
   @override
   final Either<LocationFailure, Location> deliveryArea;
   @override
-  final String deliveryPeriod;
+  final String? deliveryPeriod;
   @override
   final Either<PaymentTermsFailure, PaymentTerms> paymentTerms;
   @override
-  final String inquiryClosesWithin;
+  final int? inquiryClosesWithin;
   @override
-  final String sendRequirementTo;
+  final String? sendRequirementTo;
   @override
   final String? additionalComment;
   @override
@@ -339,26 +339,26 @@ class _$_AddYarnRequirementState implements _AddYarnRequirementState {
 abstract class _AddYarnRequirementState implements AddYarnRequirementState {
   const factory _AddYarnRequirementState(
       {required final YarnRequirementIntention intention,
-      required final String yarnQuality,
+      required final String? yarnQuality,
       final String? qualityDetails,
-      required final String color,
+      required final String? color,
       required final Either<QuantityFailure, Quantity> quantityInKgs,
       required final Either<LocationFailure, Location> deliveryArea,
-      required final String deliveryPeriod,
+      required final String? deliveryPeriod,
       required final Either<PaymentTermsFailure, PaymentTerms> paymentTerms,
-      required final String inquiryClosesWithin,
-      required final String sendRequirementTo,
+      required final int? inquiryClosesWithin,
+      required final String? sendRequirementTo,
       final String? additionalComment,
       required final bool hasSubmitted}) = _$_AddYarnRequirementState;
 
   @override
   YarnRequirementIntention get intention => throw _privateConstructorUsedError;
   @override
-  String get yarnQuality => throw _privateConstructorUsedError;
+  String? get yarnQuality => throw _privateConstructorUsedError;
   @override
   String? get qualityDetails => throw _privateConstructorUsedError;
   @override
-  String get color => throw _privateConstructorUsedError;
+  String? get color => throw _privateConstructorUsedError;
   @override
   Either<QuantityFailure, Quantity> get quantityInKgs =>
       throw _privateConstructorUsedError;
@@ -366,14 +366,14 @@ abstract class _AddYarnRequirementState implements AddYarnRequirementState {
   Either<LocationFailure, Location> get deliveryArea =>
       throw _privateConstructorUsedError;
   @override
-  String get deliveryPeriod => throw _privateConstructorUsedError;
+  String? get deliveryPeriod => throw _privateConstructorUsedError;
   @override
   Either<PaymentTermsFailure, PaymentTerms> get paymentTerms =>
       throw _privateConstructorUsedError;
   @override
-  String get inquiryClosesWithin => throw _privateConstructorUsedError;
+  int? get inquiryClosesWithin => throw _privateConstructorUsedError;
   @override
-  String get sendRequirementTo => throw _privateConstructorUsedError;
+  String? get sendRequirementTo => throw _privateConstructorUsedError;
   @override
   String? get additionalComment => throw _privateConstructorUsedError;
   @override

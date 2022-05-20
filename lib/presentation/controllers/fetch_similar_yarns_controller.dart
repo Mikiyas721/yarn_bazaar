@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_similar_yarns.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/application/fetch_similar_yarns/fetch_similar_yarns_bloc.dart';
 import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
+import 'package:yarn_bazaar/common/enum_extensions.dart';
 
-class FetchSimilarYarnsController extends BlocViewModelController<FetchSimilarYarnsBloc,
-    FetchSimilarYarnsEvent, FetchSimilarYarnsState, YarnsViewModel> {
+
+class FetchSimilarYarnsController extends BlocViewModelController<
+    FetchSimilarYarnsBloc,
+    FetchSimilarYarnsEvent,
+    FetchSimilarYarnsState,
+    YarnsViewModel> with ShortMessageMixin, DateTimeMixin {
   final Yarn yarn;
 
   FetchSimilarYarnsController(
@@ -22,15 +29,16 @@ class FetchSimilarYarnsController extends BlocViewModelController<FetchSimilarYa
     return YarnsViewModel(
       yarnList: s.yarns
           .map((e) => YarnViewModel(
+                colour: e.colour,
                 count: e.count,
                 yarnType: e.yarnType,
                 quantityInKgs: e.quantityInKgs.value.toString(),
-                companyName: e.user!.businessDetail!.companyName,
-                companyType: e.quantityInKgs.value.toString(),
+                companyName: e.user!.businessDetail!.companyName!,
+                companyType: e.user!.businessDetail!.accountType!.getUserType().getShortString(),
                 deliveryArea: e.deliveryArea.value.toString(),
-                lastUpdated: e.updatedAt.toString(),
+                lastUpdated: getShortDateWithOutDayOfWeekString(e.updatedAt!),
                 purpose: e.purpose,
-                sellerType: e.user!.businessDetail!.accountType,
+                sellerType: e.user!.businessDetail!.accountType!,
                 deliveryPeriod: e.deliveryPeriod,
               ))
           .toList(),
@@ -57,19 +65,19 @@ class FetchSimilarYarnsController extends BlocViewModelController<FetchSimilarYa
     loadSimilarYarns();
   }
 
-  onHeaderTap(int index, bool wasExpanded) {
-    wasExpanded
-        ? FetchSimilarYarnsExpandedIndexChangedEvent(-1)
-        : FetchSimilarYarnsExpandedIndexChangedEvent(index);
+  onHeaderTap(int index) {
+    currentState.expandedIndex == index
+        ? bloc.add(FetchSimilarYarnsExpandedIndexChangedEvent(-1))
+        : bloc.add(FetchSimilarYarnsExpandedIndexChangedEvent(index));
   }
 
-  onWatchlist(YarnViewModel viewModel) {}
+  onWatchlist(int index) {}
 
-  onCompare(YarnViewModel viewModel) {}
+  onCompare(int index) {}
 
   onDetail(int index) {
     Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
-  onShare(YarnViewModel viewModel) {}
+  onShare(int index) {}
 }

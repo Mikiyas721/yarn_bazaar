@@ -19,7 +19,7 @@ class Yarn extends Entity {
   final Location deliveryArea;
   final String deliveryPeriod;
   final PaymentTerms paymentTerms;
-  final String inquiryClosesWithIn;
+  final int inquiryClosesWithIn;
   final String sendRequirementTo;
   final String? additionalComments;
   final DateTime? createdAt;
@@ -60,7 +60,7 @@ class Yarn extends Entity {
     String? deliveryArea,
     String? deliveryPeriod,
     String? paymentTerms,
-    String? inquiryClosesWithIn,
+    int? inquiryClosesWithIn,
     String? sendRequirementTo,
     String? additionalComments,
     DateTime? createdAt,
@@ -74,7 +74,6 @@ class Yarn extends Entity {
       count,
       yarnType,
       purpose,
-      qualityDetails,
       colour,
       quantityInKgs,
       deliveryArea,
@@ -82,7 +81,6 @@ class Yarn extends Entity {
       paymentTerms,
       inquiryClosesWithIn,
       sendRequirementTo,
-      additionalComments,
       createdAt,
       updatedAt,
       userId
@@ -128,7 +126,7 @@ class Yarn extends Entity {
     String? deliveryArea,
     String? deliveryPeriod,
     String? paymentTerms,
-    String? inquiryClosesWithIn,
+    int? inquiryClosesWithIn,
     String? sendRequirementTo,
     String? additionalComments,
     String? userId,

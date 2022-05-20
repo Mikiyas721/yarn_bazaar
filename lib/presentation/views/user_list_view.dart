@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/widgets/empty_error_view.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_image_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_loading_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/simple_list_view.dart';
 import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
@@ -9,10 +10,10 @@ import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 class UserListView extends StatelessWidget {
   final UsersViewModel userViewModel;
   final VoidCallback onReload;
-  final Function(UserViewModel directoryViewModel) onWatchlist;
-  final Function(UserViewModel directoryViewModel) onDetail;
-  final Function(UserViewModel directoryViewModel) onShare;
-  final Function (int index, bool wasExpanded) onHeaderTap;
+  final Function(int index) onWatchlist;
+  final Function(int index) onDetail;
+  final Function(int index) onShare;
+  final Function(int index) onHeaderTap;
 
   const UserListView({
     Key? key,
@@ -26,39 +27,37 @@ class UserListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: MyExpansionPanelList<UserViewModel>(
-          model: userViewModel,
-          itemBuilder: (BuildContext context,
-              UserViewModel directoryViewModel, int index) {
-            return UserView._(
+    return MyExpansionPanelList<UserViewModel>(
+        model: userViewModel,
+        itemBuilder: (BuildContext context, UserViewModel directoryViewModel, int index) {
+          return UserView._(
               userViewModel: directoryViewModel,
               onWatchlist: () {
-                onWatchlist(directoryViewModel);
+                onWatchlist(index);
               },
               onDetail: () {
-                onDetail(directoryViewModel);
+                onDetail(index);
               },
               onShare: () {
-                onShare(directoryViewModel);
+                onShare(index);
               },
               expanded: index == userViewModel.expandedIndex,
-              onHeaderTap: (bool wasExpanded){
-                onHeaderTap(index, wasExpanded);
-              }
-            );
-          },
-          errorView: Center(
-              child: EmptyErrorView.defaultError(
-            onRetry: onReload,
-          )),
-          loadingView: const Center(child: MyLoadingView()),
-          emptyView: Center(
-            child: EmptyErrorView.defaultEmpty(
-              onReload: onReload,
-            ),
-          )),
-    );
+              onHeaderTap: () {
+                onHeaderTap(index);
+              });
+        },
+        errorView: Center(
+            child: EmptyErrorView.defaultError(
+          onRetry: onReload,
+          description: userViewModel.error,
+        )),
+        loadingView: const Center(child: MyLoadingView()),
+        emptyView: Center(
+          child: EmptyErrorView.defaultEmpty(
+            onReload: onReload,
+            description: "No users found for this section",
+          ),
+        ));
   }
 }
 
@@ -68,7 +67,7 @@ class UserView extends ExpansionPanel {
   final VoidCallback onShare;
   final VoidCallback onDetail;
   final bool expanded;
-  final Function (bool wasExpanded) onHeaderTap;
+  final VoidCallback onHeaderTap;
 
   UserView._({
     required this.userViewModel,
@@ -83,39 +82,29 @@ class UserView extends ExpansionPanel {
             isExpanded: expanded,
             headerBuilder: (BuildContext context, bool isShowing) {
               return InkWell(
-                onTap: (){
-                  onHeaderTap(expanded);
-                },
+                onTap: onHeaderTap,
                 child: Padding(
                   padding: expanded
                       ? const EdgeInsets.symmetric(horizontal: 15)
                       : const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Row(
                     children: [
-                      CircleAvatar(
+                      MyCircleAvatar(
                         radius: 24,
-                        child: Text(
-                          userViewModel.initials,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: userViewModel.sellerType == "Mill"
-                            ? Colors.blue
-                            : Colors.green,
+                        initials: userViewModel.initials,
+                        backgroundColor: userViewModel.sellerType.getAccountTypeColor(),
                       ),
                       15.hSpace,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            userViewModel.companyName,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          Text(userViewModel.companyName, style: context.titleSmall),
                           Row(
                             children: [
                               IconPrefixedText(
                                 icon: Icons.location_on_outlined,
                                 label: userViewModel.location,
-                                color: Colors.black87,
+                                iconColor: Colors.black87,
                               )
                             ],
                           ),
@@ -138,15 +127,13 @@ class UserView extends ExpansionPanel {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                            '${userViewModel.numberOfYarnProducts} Yarn Products'),
+                        Text('${userViewModel.numberOfYarnProducts} Yarn Products'),
                         IconPrefixedText(
                           icon: Icons.access_time,
-                          label:
-                              'Price last updated ${userViewModel.lastUpdated}',
+                          label: 'Price last updated ${userViewModel.lastUpdated}',
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
-                          color: Colors.grey,
+                          iconColor: Colors.grey,
                         )
                       ],
                     ),
@@ -160,10 +147,7 @@ class UserView extends ExpansionPanel {
                         ),
                         Text(
                           userViewModel.sellerType,
-                          style: TextStyle(
-                              color: userViewModel.sellerType == "Mill"
-                                  ? Colors.blue
-                                  : Colors.green),
+                          style: TextStyle(color:userViewModel.sellerType.getAccountTypeColor()),
                         )
                       ],
                     ),

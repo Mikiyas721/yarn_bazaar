@@ -3,6 +3,7 @@ import 'package:yarn_bazaar/common/view_model.dart';
 
 class UsersViewModel extends SimpleListViewModel<UserViewModel> {
   final int expandedIndex;
+
   UsersViewModel({
     required List<UserViewModel> users,
     required bool isLoading,
@@ -13,6 +14,9 @@ class UsersViewModel extends SimpleListViewModel<UserViewModel> {
           error: error,
           isLoading: isLoading,
         );
+
+  @override
+  List get props => [error, data, isLoading, isEmpty, expandedIndex];
 }
 
 class UserViewModel extends ViewModel with FormatterMixin {

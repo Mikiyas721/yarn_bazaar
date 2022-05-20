@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_yarn_by_category.dart';
 import 'package:yarn_bazaar/domain/value_objects/yarn_categories.dart';
 import 'package:yarn_bazaar/injection.dart';
@@ -12,7 +13,7 @@ import 'package:yarn_bazaar/common/enum_extensions.dart';
 import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
 
 class FancyYarnsController extends BlocViewModelController<FetchFancyYarnsBloc,
-    FetchFancyYarnsEvent, FetchFancyYarnsState, YarnsViewModel> with ShortMessageMixin {
+    FetchFancyYarnsEvent, FetchFancyYarnsState, YarnsViewModel> with ShortMessageMixin, DateTimeMixin {
   FancyYarnsController(BuildContext context)
       : super(context, getIt.get<FetchFancyYarnsBloc>(), true);
 
@@ -21,15 +22,16 @@ class FancyYarnsController extends BlocViewModelController<FetchFancyYarnsBloc,
     return YarnsViewModel(
       yarnList: s.yarns
           .map((e) => YarnViewModel(
+                colour: e.colour,
                 count: e.count,
                 yarnType: e.yarnType,
                 quantityInKgs: e.quantityInKgs.value.toString(),
-                companyName: e.user!.businessDetail!.companyName,
-                companyType: e.quantityInKgs.value.toString(),
+                companyName: e.user!.businessDetail!.companyName!!,
+                companyType: e.user!.businessDetail!.accountType!.getUserType().getShortString(),
                 deliveryArea: e.deliveryArea.value.toString(),
-                lastUpdated: e.updatedAt.toString(),
+                lastUpdated: getShortDateWithOutDayOfWeekString(e.updatedAt!),
                 purpose: e.purpose,
-                sellerType: e.user!.businessDetail!.accountType,
+                sellerType: e.user!.businessDetail!.accountType!,
                 deliveryPeriod: e.deliveryPeriod,
               ))
           .toList(),
@@ -65,21 +67,21 @@ class FancyYarnsController extends BlocViewModelController<FetchFancyYarnsBloc,
     loadFancyYarns();
   }
 
-  onHeaderTap(int index, bool wasExpanded) {
-    wasExpanded
-        ? FetchFancyYarnsExpandedIndexChangedEvent(-1)
-        : FetchFancyYarnsExpandedIndexChangedEvent(index);
+  onHeaderTap(int index) {
+    currentState.expandedIndex == index
+        ? bloc.add(FetchFancyYarnsExpandedIndexChangedEvent(-1))
+        : bloc.add(FetchFancyYarnsExpandedIndexChangedEvent(index));
   }
 
-  onWatchlist(YarnViewModel viewModel) {}
+  onWatchlist(int index) {}
 
-  onCompare(YarnViewModel viewModel) {}
+  onCompare(int index) {}
 
   onDetail(int index) {
     Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
-  onShare(YarnViewModel viewModel) {}
+  onShare(int index) {}
 
   Future<void> onRefresh() async {
     final splashBloc = getIt.get<SplashBloc>();

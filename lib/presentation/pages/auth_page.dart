@@ -23,7 +23,7 @@ class AuthPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 40),
                     child: Image.asset(
-                      'assets/images/yarn.jpg',
+                      'assets/images/yarn.png',
                       width: 250,
                     ),
                   ),

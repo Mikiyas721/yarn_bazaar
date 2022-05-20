@@ -5,10 +5,12 @@ import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class ApplyForFinancePage extends StatelessWidget {
   static const route = '/applyForFinancePage';
+
   const ApplyForFinancePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: PopButton(),
@@ -16,27 +18,43 @@ class ApplyForFinancePage extends StatelessWidget {
       ),
       body: Center(
         child: Card(
+          margin: EdgeInsets.symmetric(horizontal: 15),
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("APPLY ONLINE"),
-                15.vSpace,
                 Text(
-                  "Use our yarn finance facility to ensure cash payment for yarn purchases and get cash discount (CD) benefit",
-                  textAlign: TextAlign.center,
+                  "APPLY ONLINE",
+                  style: context.titleMedium,
                 ),
+                15.vSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    "Use our yarn finance facility to ensure cash payment for yarn purchases and get cash discount (CD) benefit",
+                    textAlign: TextAlign.center,
+                    style: context.labelMedium,
+                  ),
+                ),
+                30.vSpace,
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    MyActionButton(
-                      label: 'Request Call Back',
-                      onSubmit: () {},
+                    SizedBox(
+                      width: size.width * 0.4,
+                      child: MyActionButton(
+                        label: 'Request Call Back',
+                        onSubmit: () {},
+                      ),
                     ),
-                    25.hSpace,
-                    MyActionButton(
-                      label: 'Apply',
-                      onSubmit: () {},
+                    15.hSpace,
+                    SizedBox(
+                      width: size.width * 0.4,
+                      child: MyActionButton(
+                        label: 'Apply',
+                        onSubmit: () {},
+                      ),
                     )
                   ],
                 )

@@ -23,7 +23,7 @@ class FetchMillUsersStartedLoadingEvent extends FetchMillUsersEvent {
 class FetchMillUsersStoppedLoadingEvent extends FetchMillUsersEvent {
   @override
   FetchMillUsersState handle(FetchMillUsersState currentState)  {
-    return currentState.copyWith(isLoading: true);
+    return currentState.copyWith(isLoading: false);
   }
 }
 

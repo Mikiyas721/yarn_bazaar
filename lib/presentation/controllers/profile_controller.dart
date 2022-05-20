@@ -3,6 +3,7 @@ import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/models/profile_view_model.dart';
 import 'package:yarn_bazaar/application/profile/profile_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/add_yarn_requirement_page.dart';
 import 'package:yarn_bazaar/presentation/pages/edit_profile_page.dart';
 import 'package:yarn_bazaar/presentation/pages/suggestion_page.dart';
 
@@ -35,7 +36,9 @@ class ProfileController extends BlocViewModelController<ProfileBloc, ProfileEven
     }
   }
 
-  onBuyerPostYarnRequirement() {}
+  onBuyerPostYarnRequirement() {
+    Navigator.pushNamed(context, AddYarnRequirementPage.route);
+  }
 
   onBuyerYarnRequirements() {}
 

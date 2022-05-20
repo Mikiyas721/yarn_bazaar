@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_yarn_by_category.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
@@ -8,9 +9,10 @@ import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/application/fetch_yarns_all/fetch_all_yarns_bloc.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
+import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 class AllYarnsController extends BlocViewModelController<FetchAllYarnsBloc, FetchAllYarnsEvent,
-    FetchAllYarnsState, YarnsViewModel> with ShortMessageMixin {
+    FetchAllYarnsState, YarnsViewModel> with ShortMessageMixin, DateTimeMixin {
   AllYarnsController(BuildContext context)
       : super(context, getIt.get<FetchAllYarnsBloc>(), true);
 
@@ -19,15 +21,16 @@ class AllYarnsController extends BlocViewModelController<FetchAllYarnsBloc, Fetc
     return YarnsViewModel(
       yarnList: s.yarns
           .map((e) => YarnViewModel(
+                colour: e.colour,
                 count: e.count,
                 yarnType: e.yarnType,
                 quantityInKgs: e.quantityInKgs.value.toString(),
-                companyName: e.user!.businessDetail!.companyName,
-                companyType: e.quantityInKgs.value.toString(),
+                companyName: e.user!.businessDetail!.companyName!,
+                companyType: e.user!.businessDetail!.accountType!.getUserType().getShortString(),
                 deliveryArea: e.deliveryArea.value.toString(),
-                lastUpdated: e.updatedAt.toString(),
+                lastUpdated: getShortDateWithOutDayOfWeekString(e.updatedAt!),
                 purpose: e.purpose,
-                sellerType: e.user!.businessDetail!.accountType,
+                sellerType: e.user!.businessDetail!.accountType!,
                 deliveryPeriod: e.deliveryPeriod,
               ))
           .toList(),
@@ -60,17 +63,17 @@ class AllYarnsController extends BlocViewModelController<FetchAllYarnsBloc, Fetc
     loadAllYarns();
   }
 
-  onHeaderTap(int index, bool wasExpanded) {
-    wasExpanded
-        ? FetchAllYarnsExpandedIndexChangedEvent(-1)
-        : FetchAllYarnsExpandedIndexChangedEvent(index);
+  onHeaderTap(int index) {
+    currentState.expandedIndex == index
+        ? bloc.add(FetchAllYarnsExpandedIndexChangedEvent(-1))
+        : bloc.add(FetchAllYarnsExpandedIndexChangedEvent(index));
   }
 
-  onWatchlist(YarnViewModel viewModel) {}
+  onWatchlist(int index) {}
 
-  onCompare(YarnViewModel viewModel) {}
+  onCompare(int index) {}
 
-  onShare(YarnViewModel viewModel) {}
+  onShare(int index) {}
 
   onDetail(int index) {
     Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);

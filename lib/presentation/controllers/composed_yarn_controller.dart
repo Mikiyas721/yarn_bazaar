@@ -37,24 +37,29 @@ class ComposedYarnController extends BlocViewModelController<
   }
 
   fillTextFields() {
-    intentionTextEditingController.text = yarn.intention ?? '';
+    intentionTextEditingController.text = yarn.intention;
     yarnQualityTextEditingController.text = '${yarn.count} ${yarn.yarnType} ${yarn.purpose}';
-    qualityDetailsTextEditingController.text = yarn.qualityDetails ?? "";
-    colourTextEditingController.text = yarn.colour ?? "";
-    quantityInKgsTextEditingController.text = yarn.quantityInKgs.value.toString() ?? "";
-    deliveryAreaTextEditingController.text = yarn.deliveryArea.value ?? "";
-    deliveryPeriodTextEditingController.text = yarn.deliveryPeriod ?? "";
-    paymentTermsTextEditingController.text = yarn.paymentTerms.value ?? "";
-    inquiryClosesWithInTextEditingController.text = yarn.inquiryClosesWithIn ?? "";
-    sendRequirementToTextEditingController.text = yarn.sendRequirementTo ?? "";
-    additionalCommentsTextEditingController.text = yarn.additionalComments ?? "";
+    if (yarn.qualityDetails != null)
+      qualityDetailsTextEditingController.text = yarn.qualityDetails!;
+    colourTextEditingController.text = yarn.colour;
+    quantityInKgsTextEditingController.text = yarn.quantityInKgs.value.toString();
+    deliveryAreaTextEditingController.text = yarn.deliveryArea.value;
+    deliveryPeriodTextEditingController.text = yarn.deliveryPeriod;
+    paymentTermsTextEditingController.text = yarn.paymentTerms.value;
+    inquiryClosesWithInTextEditingController.text = yarn.inquiryClosesWithIn.toString();
+    sendRequirementToTextEditingController.text = yarn.sendRequirementTo;
+    if(yarn.additionalComments!=null)
+      additionalCommentsTextEditingController.text = yarn.additionalComments!;
   }
 
   onPostYarn() async {
+    bloc.add(ComposedYarnStartedAddingEvent());
     final response = await getIt.get<AddYarnRequirement>().execute(yarn);
     response.fold((l) {
+      bloc.add(ComposedYarnStoppedAddingEvent());
       toastError(l.message);
     }, (r) async {
+      bloc.add(ComposedYarnStoppedAddingEvent());
       toastSuccess("Successfully added");
       await delay(seconds: 1);
       Navigator.pop(context);

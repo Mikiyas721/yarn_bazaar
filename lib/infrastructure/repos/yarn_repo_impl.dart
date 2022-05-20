@@ -40,32 +40,46 @@ class YarnRepoImpl extends IYarnRepo {
   @override
   Future<Either<Failure, List<Yarn>>> fetchByCategory(
       String currentUserId, String? category) async {
-    final result = await _yarnCrudDataSource.find(options: {
-      "filter": {
-        "where": {
-          category == null
-              ? {
-                  "userId": {"ne": currentUserId}
+    final options = category == null
+        ? {
+            "filter": {
+              "where": {
+                "userId": {"ne": currentUserId}
+              },
+              "include": {
+                "relation": "user",
+                "scope": {
+                  "include": ["businessDetail", "bankDetail"]
                 }
-              : "and": [
-            {
-              "userId": {"ne": currentUserId}
-            },
-            {"yarnType": category}
-          ]
-        },
-        "include": {
-          "relation": "user",
-          "scope": {
-            "include": ["businessDetail", "bankDetail"] //TODO add yarns with scope
+              }
+            }
           }
-        }
-      }
+        : {
+            "filter": {
+              "where": {
+                "and": [
+                  {
+                    "userId": {"ne": currentUserId}
+                  },
+                  {"yarnType": category}
+                ]
+              },
+              "include": {
+                "relation": "user",
+                "scope": {
+                  "include": ["businessDetail", "bankDetail"]
+                }
+              }
+            }
+          };
+    final result = await _yarnCrudDataSource.find(options: options);
+    return result.fold((l) => left(l), (r) {
+      final idDomain = IdDto.toDomainList<Yarn, YarnDto>(r);
+      if (idDomain == null)
+        return left(yarnDtoMappingSimpleFailure);
+      else
+        return right(idDomain);
     });
-    return result.fold(
-      (l) => left(l),
-      (r) => right(IdDto.toDomainList<Yarn, YarnDto>(r)!),
-    );
   }
 
   @override

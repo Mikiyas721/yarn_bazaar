@@ -70,14 +70,14 @@ class EditBasicInformationController extends BlocViewModelController<
         toastError(l.message);
         bloc.add(EditBasicInformationFailureChangedEvent(getOption(l)));
       }, (r) {
-        firstNameTextEditingController.text = r.firstName.value ?? '';
-        lastNameTextEditingController.text = r.lastName?.value ?? '';
-        inBusinessSinceTextEditingController.text = '';
-        primaryNumberTextEditingController.text = r.phoneNumber.value ?? '';
-        countryTextEditingController.text = r.country ?? '';
-        cityTextEditingController.text = r.city ?? '';
-        emailTextEditingController.text = r.email?.value ?? '';
-        websiteTextEditingController.text = r.website?.value ?? '';
+        firstNameTextEditingController.text = r.firstName!.value!;
+        if(r.lastName?.value!=null) lastNameTextEditingController.text = r.lastName?.value ?? '';
+       /* if(r.firstName.value) inBusinessSinceTextEditingController.text = '';*/
+        primaryNumberTextEditingController.text = r.phoneNumber!.value;
+        if(r.country!=null) countryTextEditingController.text = r.country ?? '';
+        if(r.city!=null) cityTextEditingController.text = r.city ?? '';
+        if(r.email?.value!=null) emailTextEditingController.text = r.email!.value!;
+        if(r.website?.value!=null) websiteTextEditingController.text = r.website!.value!;
       });
     });
   }
@@ -170,7 +170,7 @@ class EditBasicInformationController extends BlocViewModelController<
       bloc.add(EditBasicInformationStoppedSavingEvent());
       toastError("Operation failed: Cached user not found.");
     }, (a) {
-      final user = User.createFromInput(
+      final user = User.createForUpdate(
         id: a.id,
         imageUrl: currentState.loadedUser.fold(() => null, (a) => a.imageUrl),
         firstName: currentState.firstName.fold((l) => null, (r) => r.value),
@@ -180,7 +180,6 @@ class EditBasicInformationController extends BlocViewModelController<
         city: currentState.city,
         email: currentState.email.fold((l) => null, (r) => r.value),
         website: currentState.website.fold((l) => null, (r) => r.value),
-        password: currentState.loadedUser.fold(() => null, (a) => a.password.value),
       );
       user.fold(() {
         bloc.add(EditBasicInformationStoppedSavingEvent());
@@ -192,7 +191,7 @@ class EditBasicInformationController extends BlocViewModelController<
           toastError(l.message);
         }, (r) async {
           toastSuccess("Successfully updated");
-          await delay(seconds: 1);
+          await delay(milliSeconds: 500);
           Navigator.pop(context);
         });
       });

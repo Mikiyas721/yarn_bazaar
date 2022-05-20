@@ -29,7 +29,7 @@ class EmptyErrorView extends StatelessWidget {
     required VoidCallback onReload,
   }) {
     return EmptyErrorView(
-      image: image ?? 'assets/images/empty.png',
+      image: image ?? 'assets/images/empty_indicator.png',
       title: title ?? 'No Data',
       description: description ?? 'You have no data in this section',
       actionLabel: actionLabel ?? 'Reload',
@@ -47,7 +47,7 @@ class EmptyErrorView extends StatelessWidget {
     required VoidCallback onRetry,
   }) {
     return EmptyErrorView(
-      image: image ?? 'assets/images/error.png',
+      image: image ?? 'assets/images/error_indicator.png',
       title: title ?? 'Error',
       description: description ?? 'An error occurred while loading',
       actionLabel: actionLabel ?? 'Retry',
@@ -66,7 +66,7 @@ class EmptyErrorView extends StatelessWidget {
           MyImageView(
             image: image,
             fit: BoxFit.contain,
-            height: 200,
+            height: size.width*0.35,
           ),
         24.vSpace,
         Text(
@@ -93,11 +93,11 @@ class EmptyErrorView extends StatelessWidget {
             onPressed: onReload,
             child: Text(
               actionLabel!,
-              style: actionButtonIsFilled!?TextStyle(color: Colors.white):null,
+              style: actionButtonIsFilled?TextStyle(color: Colors.white):null,
             ),
             style: OutlinedButton.styleFrom(
               side: BorderSide(width: 0.7, color: context.primaryColor),
-              backgroundColor: actionButtonIsFilled!?context.primaryColor:null,
+              backgroundColor: actionButtonIsFilled?context.primaryColor:null,
               minimumSize: Size(size.width*0.3, 40)
             ),
           ),

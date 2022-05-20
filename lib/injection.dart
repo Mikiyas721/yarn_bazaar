@@ -11,7 +11,7 @@ final getIt = GetIt.instance;
   asExtension: false, // default
 )
 
-Future setUpDependencies() => $initGetIt(getIt);
+Future setUpDependencies() async => await $initGetIt(getIt);
 
 @module
 abstract class RegisterModule {

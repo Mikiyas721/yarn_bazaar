@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
-import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
 import 'package:yarn_bazaar/presentation/controllers/fetch_similar_yarns_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
 import 'package:yarn_bazaar/presentation/controllers/yarn_detail_controller.dart';
-import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
+import 'package:yarn_bazaar/presentation/models/seller_view_model.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/seller_view.dart';
 import 'package:yarn_bazaar/presentation/views/yarn_list_view.dart';
@@ -17,6 +16,7 @@ import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 class YarnDetailPage extends StatelessWidget with DateTimeMixin {
   static const route = '/yarnDetailPage';
+
   const YarnDetailPage({Key? key}) : super(key: key);
 
   @override
@@ -84,28 +84,32 @@ class YarnDetailPage extends StatelessWidget with DateTimeMixin {
                                         Container(
                                           child: Text(
                                             yarn.count,
-                                            style: const TextStyle(color: Colors.white),
+                                            style: context.bodyLarge?.copyWith(
+                                              color: yarn.colour.getYarnColorForeground(),
+                                            ),
                                           ),
-                                          color: yarn.user?.businessDetail?.accountType ==
-                                                      UserType.yarn_manufacturer.getString() ||
-                                                  yarn.user?.businessDetail?.accountType ==
-                                                      UserType.fabric_manufacturer.getString()
-                                              ? Colors.blue
-                                              : Colors.green,
+                                          decoration: BoxDecoration(
+                                              color: yarn.colour.getYarnColorBackground(),
+                                              border: Border.all(
+                                                width: 0.1,
+                                                color: context.primaryColor,
+                                              )),
                                           padding: const EdgeInsets.all(8),
                                         ),
                                         8.hSpace,
                                         Text(
                                           yarn.yarnType,
-                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                          style: context.titleMedium,
                                         )
                                       ],
                                     ),
                                     Text(
-                                      '\$${yarn.quantityInKgs}/Kg',
+                                      '\$${yarn.quantityInKgs.value}/Kg',
                                       style: TextStyle(
-                                          color: context.primaryColor,
-                                          fontWeight: FontWeight.bold),
+                                        color: context.primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
                                     )
                                   ],
                                 ),
@@ -114,14 +118,10 @@ class YarnDetailPage extends StatelessWidget with DateTimeMixin {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(yarn.user!.businessDetail!.companyName),
-                                      Text(
-                                        yarn.user!.businessDetail!.accountType
-                                            .getUserType()
-                                            .getShortString(),
-                                        style:
-                                            const TextStyle(color: Colors.grey, fontSize: 12),
-                                      )
+                                      Text(yarn.user!.businessDetail!.companyName!,
+                                          style: context.bodyLarge),
+                                      Text(yarn.user!.businessDetail!.accountType!,
+                                          style: context.labelSmall)
                                     ],
                                   ),
                                 ),
@@ -131,12 +131,12 @@ class YarnDetailPage extends StatelessWidget with DateTimeMixin {
                                     IconPrefixedText(
                                       icon: Icons.location_on_outlined,
                                       label: yarn.user?.businessDetail?.address ?? "Unknown",
-                                      color: Colors.grey,
+                                      iconColor: Colors.grey,
                                     ),
                                     IconPrefixedText(
                                       icon: Icons.access_time_outlined,
                                       label: 'Updated ${getShortDateString(yarn.updatedAt!)}',
-                                      color: Colors.grey,
+                                      iconColor: Colors.grey,
                                     ),
                                   ],
                                 )
@@ -163,10 +163,12 @@ class YarnDetailPage extends StatelessWidget with DateTimeMixin {
                     ),
                   ),
                   body: TabBarView(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                      child: SingleChildScrollView(
-                        child: Column(children: [
+                    SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -194,54 +196,60 @@ class YarnDetailPage extends StatelessWidget with DateTimeMixin {
                           ),
                           10.vSpace,
                           Card(
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Yarn Type"),
-                                    Text(yarn.yarnType)
-                                  ],
-                                ),
-                                Divider(height: 1),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Purpose"),
-                                    Text(yarn.purpose)
-                                  ],
-                                ),
-                                Divider(height: 1),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Count"),
-                                    Text(yarn.count)
-                                  ],
-                                ),
-                                Divider(height: 1),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Delivery Details"),
-                                    Text(yarn.deliveryPeriod)
-                                  ],
-                                ),
-                                Divider(height: 1),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Payment Term"),
-                                    Text(yarn.paymentTerms.value)
-                                  ],
-                                ),
-                                Divider(height: 1),
-                              ],
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Yarn Type", style: context.labelMedium),
+                                      Text(yarn.yarnType, style: context.bodyLarge)
+                                    ],
+                                  ),
+                                  Divider(height: 26),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Purpose", style: context.labelMedium),
+                                      Text(yarn.purpose, style: context.bodyLarge)
+                                    ],
+                                  ),
+                                  Divider(height: 26),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Count", style: context.labelMedium),
+                                      Text(yarn.count, style: context.bodyLarge)
+                                    ],
+                                  ),
+                                  Divider(height: 26),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Delivery Details", style: context.labelMedium),
+                                      Text(yarn.deliveryPeriod, style: context.bodyLarge)
+                                    ],
+                                  ),
+                                  Divider(height: 26),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Payment Term", style: context.labelMedium),
+                                      Text(yarn.paymentTerms.value, style: context.bodyLarge)
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           20.vSpace,
-                          Text("Same Product from other sellers"),
-                          ViewModelBuilder.withController<YarnsViewModel, FetchSimilarYarnsController>(
+                          Text(
+                            "Same Product from other sellers",
+                            style: context.titleSmall,
+                          ),
+                          ViewModelBuilder.withController<YarnsViewModel,
+                                  FetchSimilarYarnsController>(
                               create: () => FetchSimilarYarnsController(context, yarn),
                               builder: (context, controller, yarnViewModel) {
                                 return Padding(
@@ -256,23 +264,28 @@ class YarnDetailPage extends StatelessWidget with DateTimeMixin {
                                     onHeaderTap: controller.onHeaderTap,
                                   ),
                                 );
-                              })
+                              }),
+                              15.vSpace,
                         ]),
                       ),
                     ),
-                    SellerView(
-                      userViewModel: UserViewModel(
-                        companyName: yarn.user!.businessDetail!.companyName,
-                        location: yarn.user!.businessDetail!.address ?? "Unknown",
-                        numberOfYarnProducts: yarn.user!.yarns!.length,
-                        lastUpdated: getShortDateWithOutDayOfWeekString(yarn.updatedAt!),
-                        sellerType: yarn.user!.businessDetail!.accountType
-                            .getUserType()
-                            .getShortString(),
-                      ),
-                      onWatchlist: controller.onWatchlist,
-                      onShare: controller.onShareUser,
-                      onDetail: controller.onDetail,
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SellerView(
+                          sellerViewModel: SellerViewModel(
+                            companyName: yarn.user!.businessDetail!.companyName!,
+                            location: yarn.user!.businessDetail!.address ?? "Unknown",
+                            lastUpdated: getShortDateWithOutDayOfWeekString(yarn.updatedAt!),
+                            sellerType: yarn.user!.businessDetail!.accountType
+                                !.getUserType()
+                                .getShortString(),
+                          ),
+                          onWatchlist: controller.onWatchlist,
+                          onShare: controller.onShareUser,
+                          onDetail: controller.onDetail,
+                        ),
+                      ],
                     ),
                     const SizedBox(
                       height: 1,

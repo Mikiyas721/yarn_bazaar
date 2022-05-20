@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class MyImageView extends StatelessWidget {
   final dynamic image;
@@ -35,23 +36,41 @@ class MyImageView extends StatelessWidget {
 
 class MyCircleAvatar extends StatelessWidget {
   final dynamic image;
+  final String? initials;
+  final Color? backgroundColor;
   final double radius;
   final VoidCallback? onTap;
+  final TextStyle? textStyle;
 
   const MyCircleAvatar({
     Key? key,
     this.image,
+    this.initials,
+    this.backgroundColor,
     this.radius = 28,
     this.onTap,
+    this.textStyle
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    backgroundColor == null ? context.primaryColor : backgroundColor;
     return InkWell(
       onTap: onTap,
       child: CircleAvatar(
-        backgroundImage: _imageProvider(image),
+        backgroundImage: initials==null?_imageProvider(image):null,
         radius: radius,
+        child: initials == null
+            ? null
+            : Text(
+                initials!,
+                style: textStyle??TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400
+                ),
+              ),
+        backgroundColor: backgroundColor,
       ),
     );
   }

@@ -66,19 +66,19 @@ class MyDrawerController
   }
 
   onHome() {
-    Navigator.pushReplacementNamed(context, HomePage.route);
+    Navigator.pushNamed(context, HomePage.route);
   }
 
   onPostYarnRequirement() {
-    Navigator.pushReplacementNamed(context, AddYarnRequirementPage.route);
+    Navigator.pushNamed(context, AddYarnRequirementPage.route);
   }
 
   onApplyForFinance() {
-    Navigator.pushReplacementNamed(context, ApplyForFinancePage.route);
+    Navigator.pushNamed(context, ApplyForFinancePage.route);
   }
 
   onNews() {
-    Navigator.pushReplacementNamed(context, NewsPage.route);
+    Navigator.pushNamed(context, NewsPage.route);
   }
 
   onAdvertiseWithUs() {

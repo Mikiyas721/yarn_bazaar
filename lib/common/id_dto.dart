@@ -11,13 +11,16 @@ abstract class IdDto<T> extends Equatable {
     if (dto == null) return null;
     List<T> list = [];
     for (var element in dto) {
-      T domain = element.toDomain().getOrElse(() => null);
+      T? domain = element.toDomain().fold(() => null,(r)=>r);
+      if(domain==null) return null;
       list.add(domain);
     }
     return list;
   }
 
   Option<T> toDomain();
+
+  Map<String, dynamic> toJson();
 
   @override
   List<Object?> get props => [id];

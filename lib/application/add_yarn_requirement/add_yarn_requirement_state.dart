@@ -4,29 +4,29 @@ part of 'add_yarn_requirement_bloc.dart';
 abstract class AddYarnRequirementState extends BlocState with _$AddYarnRequirementState {
   const factory AddYarnRequirementState({
     required YarnRequirementIntention intention,
-    required String yarnQuality,
+    required String? yarnQuality,
     String? qualityDetails,
-    required String color,
+    required String? color,
     required Either<QuantityFailure, Quantity> quantityInKgs,
     required Either<LocationFailure, Location> deliveryArea,
-    required String deliveryPeriod,
+    required String? deliveryPeriod,
     required Either<PaymentTermsFailure, PaymentTerms> paymentTerms,
-    required String inquiryClosesWithin,
-    required String sendRequirementTo,
+    required int? inquiryClosesWithin,
+    required String? sendRequirementTo,
     String? additionalComment,
     required bool hasSubmitted,
   }) = _AddYarnRequirementState;
 
   factory AddYarnRequirementState.initial() => AddYarnRequirementState(
         intention: YarnRequirementIntention.None,
-        yarnQuality: '',
-        color: '',
+        yarnQuality: null,
+        color: null,
         quantityInKgs: Quantity.create(''),
         deliveryArea: Location.create(''),
-        deliveryPeriod: '',
+        deliveryPeriod: null,
         paymentTerms: PaymentTerms.create(''),
-        inquiryClosesWithin: '',
-        sendRequirementTo: '',
+        inquiryClosesWithin: null,
+        sendRequirementTo: null,
         hasSubmitted: false,
       );
 }

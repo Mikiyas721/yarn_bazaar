@@ -69,13 +69,14 @@ class EditBusinessDetailsController extends BlocViewModelController<
         toastError(l.message);
         bloc.add(EditBusinessDetailsFailureChangedEvent(getOption(l)));
       }, (r) {
-        companyNameTextEditingController.text = r.companyName;
-        accountTypeTextEditingController.text = r.accountType;
-        addressTextEditingController.text = r.address ?? '';
-        completeAddressTextEditingController.text = r.completeAddress ?? "";
-        gstNoTextEditingController.text = r.gstNo?.value ?? '';
-        tanNoTextEditingController.text = r.tanNo?.value ?? '';
-        panNoTextEditingController.text = r.panNo?.value ?? '';
+        companyNameTextEditingController.text = r.companyName!;
+        accountTypeTextEditingController.text = r.accountType!;
+        /*if(r.companyName!=null) addressTextEditingController.text = '';*/
+        if(r.address!=null) addressTextEditingController.text = r.address!;
+        if(r.completeAddress!=null) completeAddressTextEditingController.text = r.completeAddress!;
+        if(r.gstNo?.value!=null) gstNoTextEditingController.text = r.gstNo!.value!;
+        if(r.tanNo?.value!=null) tanNoTextEditingController.text = r.tanNo!.value!;
+        if(r.panNo?.value!=null) panNoTextEditingController.text = r.panNo!.value!;
       });
     });
   }
@@ -175,7 +176,7 @@ class EditBusinessDetailsController extends BlocViewModelController<
           toastError(l.message);
         }, (r) async {
           toastSuccess("Successfully updated");
-          await delay(seconds: 1);
+          await delay(milliSeconds: 500);
           Navigator.pop(context);
         });
       });

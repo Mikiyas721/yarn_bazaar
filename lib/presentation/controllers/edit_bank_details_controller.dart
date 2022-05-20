@@ -69,13 +69,13 @@ class EditBankDetailsController extends BlocViewModelController<
         toastError(l.message);
         bloc.add(EditBankDetailsFailureChangedEvent(getOption(l)));
       }, (r) {
-        accountNameController.text = r.accountName ?? '';
-        accountNumberController.text = r.accountNumber.value ?? '';
-        iFSCCodeController.text = r.iFSCCode.value ?? '';
-        bankNameController.text = r.bankName ?? '';
-        bankBranchController.text = r.bankBranch ?? '';
-        bankStateController.text = r.bankState ?? '';
-        bankCityController.text = r.bankCity ?? '';
+        if(r.accountName!=null) accountNameController.text = r.accountName!;
+        if(r.accountNumber?.value!=null) accountNumberController.text = r.accountNumber!.value!;
+        if(r.iFSCCode?.value!=null) iFSCCodeController.text = r.iFSCCode!.value!;
+        if(r.bankName!=null) bankNameController.text = r.bankName!;
+        if(r.bankBranch!=null) bankBranchController.text = r.bankBranch!;
+        if(r.bankState!=null) bankStateController.text = r.bankState!;
+        if(r.bankCity!=null) bankCityController.text = r.bankCity!;
       });
     });
   }
@@ -120,7 +120,7 @@ class EditBankDetailsController extends BlocViewModelController<
       bloc.add(EditBankDetailsStoppedSavingEvent());
       toastError("Operation failed: Cached user not found.");
     }, (a) {
-      final bankDetails = BankDetail.createFromInput(
+      final bankDetails = BankDetail.createForUpdate(
         id: a.bankDetailId!,
         accountName: bloc.state.accountName,
         accountNumber: bloc.state.accountNumber.fold((l) => null, (r) => r.value),
@@ -144,7 +144,7 @@ class EditBankDetailsController extends BlocViewModelController<
           toastError(l.message);
         }, (r) async {
           toastSuccess("Successfully updated");
-          await delay(seconds: 1);
+          await delay(milliSeconds: 500);
           Navigator.pop(context);
         });
       });

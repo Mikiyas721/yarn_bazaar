@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:yarn_bazaar/common/id_dto.dart';
-import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
 import 'package:yarn_bazaar/infrastructure/dtos/user_dto.dart';
 
@@ -22,7 +21,7 @@ class YarnDto extends IdDto implements TimeStampedDto {
   final String deliveryArea;
   final String deliveryPeriod;
   final String paymentTerms;
-  final String closesWithin;
+  final int closesWithin;
   final String sendTo;
   final String? additionalComment;
   @JsonKey(includeIfNull: false)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_user_yarns.dart';
 import 'package:yarn_bazaar/injection.dart';
@@ -8,9 +9,11 @@ import 'package:yarn_bazaar/application/fetch_user_yarns/fetch_user_yarns_bloc.d
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
+import 'package:yarn_bazaar/common/enum_extensions.dart';
+
 
 class UserYarnsController extends BlocViewModelController<FetchUserYarnsBloc,
-    FetchUserYarnsEvent, FetchUserYarnsState, YarnsViewModel> with ShortMessageMixin {
+    FetchUserYarnsEvent, FetchUserYarnsState, YarnsViewModel> with ShortMessageMixin, DateTimeMixin {
   final String userId;
 
   UserYarnsController(
@@ -23,15 +26,16 @@ class UserYarnsController extends BlocViewModelController<FetchUserYarnsBloc,
     return YarnsViewModel(
       yarnList: s.yarns
           .map((e) => YarnViewModel(
+                colour: e.colour,
                 count: e.count,
                 yarnType: e.yarnType,
                 quantityInKgs: e.quantityInKgs.value.toString(),
-                companyName: e.user!.businessDetail!.companyName,
-                companyType: e.quantityInKgs.value.toString(),
+                companyName: e.user!.businessDetail!.companyName!,
+                companyType: e.user!.businessDetail!.accountType!.getUserType().getShortString(),
                 deliveryArea: e.deliveryArea.value.toString(),
-                lastUpdated: e.updatedAt.toString(),
+                lastUpdated: getShortDateWithOutDayOfWeekString(e.updatedAt!),
                 purpose: e.purpose,
-                sellerType: e.user!.businessDetail!.accountType,
+                sellerType: e.user!.businessDetail!.accountType!,
                 deliveryPeriod: e.deliveryPeriod,
               ))
           .toList(),
@@ -41,8 +45,11 @@ class UserYarnsController extends BlocViewModelController<FetchUserYarnsBloc,
     );
   }
 
-  setUserYarns(List<Yarn> yarns) {
-    bloc.add(FetchUserYarnsDataChangedEvent(yarns));
+  setUserYarns(List<Yarn>? yarns) {
+    if (yarns == null)
+      loadUserYarns();
+    else
+      bloc.add(FetchUserYarnsDataChangedEvent(yarns));
   }
 
   loadUserYarns() async {
@@ -61,21 +68,21 @@ class UserYarnsController extends BlocViewModelController<FetchUserYarnsBloc,
     loadUserYarns();
   }
 
-  onHeaderTap(int index, bool wasExpanded) {
-    wasExpanded
+  onHeaderTap(int index) {
+    currentState.expandedIndex == index
         ? FetchUserYarnsExpandedIndexChangedEvent(-1)
         : FetchUserYarnsExpandedIndexChangedEvent(index);
   }
 
-  onWatchlist(YarnViewModel viewModel) {}
+  onWatchlist(int index) {}
 
-  onCompare(YarnViewModel viewModel) {}
+  onCompare(int index) {}
 
   onDetail(int index) {
     Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
-  onShare(YarnViewModel viewModel) {}
+  onShare(int index) {}
 
   Future<void> onRefresh() async {
     bloc.add(FetchUserYarnsStartedLoadingEvent());

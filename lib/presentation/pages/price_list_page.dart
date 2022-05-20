@@ -100,6 +100,7 @@ class PriceListPage extends StatelessWidget {
                 }),
             ViewModelBuilder.withController<YarnsViewModel, CottonYarnsController>(
                 create: () => CottonYarnsController(context),
+                onInit: (controller)=>controller.loadCottonYarns(),
                 builder: (context, controller, yarnViewModel) {
                   return RefreshIndicator(
                     child: Padding(

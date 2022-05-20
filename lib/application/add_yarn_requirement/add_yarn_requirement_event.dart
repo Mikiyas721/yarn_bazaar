@@ -91,7 +91,7 @@ class AddYarnRequirementPaymentTermsChangedEvent extends AddYarnRequirementEvent
 }
 
 class AddYarnRequirementInquiryClosesWithinChangedEvent extends AddYarnRequirementEvent {
-  final String inquiryClosesWithin;
+  final int? inquiryClosesWithin;
 
   AddYarnRequirementInquiryClosesWithinChangedEvent(this.inquiryClosesWithin);
 

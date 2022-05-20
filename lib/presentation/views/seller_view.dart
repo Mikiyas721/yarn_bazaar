@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
+import 'package:yarn_bazaar/common/mixins/formatter_mixin.dart';
+import 'package:yarn_bazaar/presentation/models/seller_view_model.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_image_view.dart';
 
-class SellerView extends StatelessWidget {
-  final UserViewModel userViewModel;
+class SellerView extends StatelessWidget with FormatterMixin {
+  final SellerViewModel sellerViewModel;
   final VoidCallback onWatchlist;
   final VoidCallback onShare;
   final VoidCallback onDetail;
 
   const SellerView({
     Key? key,
-    required this.userViewModel,
+    required this.sellerViewModel,
     required this.onWatchlist,
     required this.onShare,
     required this.onDetail,
@@ -29,30 +31,24 @@ class SellerView extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 24,
-                  child: Text(
-                    userViewModel.initials,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  backgroundColor: userViewModel.sellerType == "Mill"
-                      ? Colors.blue
-                      : Colors.green,
-                ),
+                MyCircleAvatar(
+                    radius: 24,
+                    initials: getInitials(sellerViewModel.companyName),
+                    backgroundColor: sellerViewModel.sellerType.getAccountTypeColor(),
+                    textStyle: context.bodyLarge?.copyWith(
+                      color: Colors.white,
+                    )),
                 15.hSpace,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      userViewModel.companyName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    Text(sellerViewModel.companyName, style: context.titleSmall),
                     Row(
                       children: [
                         IconPrefixedText(
                           icon: Icons.location_on_outlined,
-                          label: userViewModel.location,
-                          color: Colors.black87,
+                          label: sellerViewModel.location,
+                          iconColor: Colors.black87,
                         )
                       ],
                     ),
@@ -65,14 +61,12 @@ class SellerView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                    '${userViewModel.numberOfYarnProducts} Yarn Products'),
                 IconPrefixedText(
                   icon: Icons.access_time,
-                  label: 'Price last updated ${userViewModel.lastUpdated}',
+                  label: 'Price last updated ${sellerViewModel.lastUpdated}',
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
-                  color: Colors.grey,
+                  iconColor: Colors.grey,
                 )
               ],
             ),
@@ -85,11 +79,10 @@ class SellerView extends StatelessWidget {
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 Text(
-                  userViewModel.sellerType,
+                  sellerViewModel.sellerType,
                   style: TextStyle(
-                      color: userViewModel.sellerType == "Mill"
-                          ? Colors.blue
-                          : Colors.green),
+                    color: sellerViewModel.sellerType.getAccountTypeColor(),
+                  ),
                 )
               ],
             ),

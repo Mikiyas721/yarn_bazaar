@@ -23,7 +23,7 @@ class FetchTraderUsersStartedLoadingEvent extends FetchTraderUsersEvent {
 class FetchTraderUsersStoppedLoadingEvent extends FetchTraderUsersEvent {
   @override
   FetchTraderUsersState handle(FetchTraderUsersState currentState)  {
-    return currentState.copyWith(isLoading: true);
+    return currentState.copyWith(isLoading: false);
   }
 }
 

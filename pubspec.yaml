@@ -61,7 +61,9 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/yarn_logo.jpg"
+  image_path: "assets/yarn_logo.png"
+
+  #flutter pub run flutter_launcher_icons:main
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -83,14 +85,13 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/yarn.jpg
+    - assets/images/yarn.png
     - assets/images/yarn_background.jpg
-    - assets/images/yarn_background_foreground.jpg
     - assets/images/avatar.png
-    - assets/yarn_logo.jpg
+    - assets/yarn_logo.png
 
-    - assets/images/error.png
-    - assets/images/empty.png
+    - assets/images/error_indicator.png
+    - assets/images/empty_indicator.png
 
     - assets/images/carousel/1.jpg
     - assets/images/carousel/2.jpg

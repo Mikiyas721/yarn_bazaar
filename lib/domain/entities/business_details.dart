@@ -5,9 +5,9 @@ import 'package:yarn_bazaar/domain/value_objects/pan_number.dart';
 import 'package:yarn_bazaar/domain/value_objects/tan_number.dart';
 
 class BusinessDetail extends Entity {
-  final String companyName;
-  final String accountType;
-  final List<String> categories;
+  final String? companyName;
+  final String? accountType;
+  final List<String>? categories;
   final String? address;
   final String? completeAddress;
   final GSTNumber? gstNo;
@@ -15,7 +15,7 @@ class BusinessDetail extends Entity {
   final String? gstDocumentUrl;
   final PANNumber? panNo;
   final String? panCardUrl;
-  final String userId;
+  final String? userId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -62,9 +62,9 @@ class BusinessDetail extends Entity {
       updatedAt,
     ].any((element) => element == null)) none();
 
-    final gstNumberObject = GSTNumber.create(gstNo!);
-    final tanNumberObject = TANNumber.create(tanNo!);
-    final panNumberObject = PANNumber.create(panNo!);
+    final gstNumberObject = GSTNumber.create(gstNo);
+    final tanNumberObject = TANNumber.create(tanNo);
+    final panNumberObject = PANNumber.create(panNo);
 
     if (gstNumberObject.isLeft() || tanNumberObject.isLeft() || panNumberObject.isLeft())
       return none();
@@ -77,7 +77,7 @@ class BusinessDetail extends Entity {
       address: address,
       completeAddress: completeAddress,
       gstNo: gstNumberObject.fold((l) => null, (r) => r),
-      gstDocumentUrl: gstDocumentUrl!,
+      gstDocumentUrl: gstDocumentUrl,
       tanNo: tanNumberObject.fold((l) => null, (r) => r),
       panNo: panNumberObject.fold((l) => null, (r) => r),
       panCardUrl: panCardUrl,
@@ -122,10 +122,49 @@ class BusinessDetail extends Entity {
       categories: categories!,
       address: address,
       completeAddress: completeAddress,
-      gstNo: gstNumberObject.fold((l) => null, (r)=>r),
+      gstNo: gstNumberObject.fold((l) => null, (r) => r),
       gstDocumentUrl: gstDocumentUrl!,
-      tanNo: tanNumberObject.fold((l) => null, (r)=>r),
-      panNo: panNumberObject.fold((l) => null, (r)=>r),
+      tanNo: tanNumberObject.fold((l) => null, (r) => r),
+      panNo: panNumberObject.fold((l) => null, (r) => r),
+      panCardUrl: panCardUrl!,
+      userId: userId!,
+    ));
+  }
+
+  static Option<BusinessDetail> createForUpdate({
+    String? id,
+    String? companyName,
+    String? accountType,
+    List<String>? categories,
+    String? address,
+    String? completeAddress,
+    String? gstNo,
+    String? tanNo,
+    String? gstDocumentUrl,
+    String? panNo,
+    String? panCardUrl,
+    String? userId,
+  }) {
+    if (id == null) none();
+
+    final gstNumberObject = gstNo == null ? null : GSTNumber.create(gstNo);
+    final tanNumberObject = tanNo == null ? null : TANNumber.create(tanNo);
+    final panNumberObject = panNo == null ? null : PANNumber.create(panNo);
+
+    if (gstNumberObject != null && gstNumberObject.isLeft() ||
+        tanNumberObject != null && tanNumberObject.isLeft() ||
+        panNumberObject != null && panNumberObject.isLeft()) return none();
+
+    return some(BusinessDetail._(
+      companyName: companyName!,
+      accountType: accountType!,
+      categories: categories!,
+      address: address,
+      completeAddress: completeAddress,
+      gstNo: gstNumberObject?.fold((l) => null, (r) => r),
+      gstDocumentUrl: gstDocumentUrl!,
+      tanNo: tanNumberObject?.fold((l) => null, (r) => r),
+      panNo: panNumberObject?.fold((l) => null, (r) => r),
       panCardUrl: panCardUrl!,
       userId: userId!,
     ));

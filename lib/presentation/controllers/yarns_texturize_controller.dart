@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_yarn_by_category.dart';
 import 'package:yarn_bazaar/domain/value_objects/yarn_categories.dart';
 import 'package:yarn_bazaar/injection.dart';
@@ -9,12 +10,13 @@ import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
+import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 class TexturizeYarnsController extends BlocViewModelController<
     FetchTexturizeYarnsBloc,
     FetchTexturizeYarnsEvent,
     FetchTexturizeYarnsState,
-    YarnsViewModel> with ShortMessageMixin {
+    YarnsViewModel> with ShortMessageMixin, DateTimeMixin {
   TexturizeYarnsController(BuildContext context)
       : super(context, getIt.get<FetchTexturizeYarnsBloc>(), true);
 
@@ -23,15 +25,16 @@ class TexturizeYarnsController extends BlocViewModelController<
     return YarnsViewModel(
       yarnList: s.yarns
           .map((e) => YarnViewModel(
+                colour: e.colour,
                 count: e.count,
                 yarnType: e.yarnType,
                 quantityInKgs: e.quantityInKgs.value.toString(),
-                companyName: e.user!.businessDetail!.companyName,
-                companyType: e.quantityInKgs.value.toString(),
+                companyName: e.user!.businessDetail!.companyName!,
+                companyType: e.user!.businessDetail!.accountType!.getUserType().getShortString(),
                 deliveryArea: e.deliveryArea.value.toString(),
-                lastUpdated: e.updatedAt.toString(),
+                lastUpdated: getShortDateWithOutDayOfWeekString(e.updatedAt!),
                 purpose: e.purpose,
-                sellerType: e.user!.businessDetail!.accountType,
+                sellerType: e.user!.businessDetail!.accountType!,
                 deliveryPeriod: e.deliveryPeriod,
               ))
           .toList(),
@@ -67,21 +70,21 @@ class TexturizeYarnsController extends BlocViewModelController<
     loadTexturizeYarns();
   }
 
-  onHeaderTap(int index, bool wasExpanded) {
-    wasExpanded
-        ? FetchTexturizeYarnsExpandedIndexChangedEvent(-1)
-        : FetchTexturizeYarnsExpandedIndexChangedEvent(index);
+  onHeaderTap(int index) {
+    currentState.expandedIndex == index
+        ? bloc.add(FetchTexturizeYarnsExpandedIndexChangedEvent(-1))
+        : bloc.add(FetchTexturizeYarnsExpandedIndexChangedEvent(index));
   }
 
-  onWatchlist(YarnViewModel viewModel) {}
+  onWatchlist(int index) {}
 
-  onCompare(YarnViewModel viewModel) {}
+  onCompare(int index) {}
 
   onDetail(int index) {
     Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
-  onShare(YarnViewModel viewModel) {}
+  onShare(int index) {}
 
   Future<void> onRefresh() async {
     final splashBloc = getIt.get<SplashBloc>();

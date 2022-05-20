@@ -26,14 +26,14 @@ class SplashPage extends StatelessWidget {
                         bottom: 10,
                       ),
                       child: Image.asset(
-                        'assets/yarn_logo.jpg',
+                        'assets/yarn_logo.png',
                         width: 120,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Image.asset(
-                        'assets/images/yarn.jpg',
+                        'assets/images/yarn.png',
                       ),
                     ),
                   ],

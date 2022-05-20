@@ -12,9 +12,13 @@ class YarnsViewModel extends SimpleListViewModel<YarnViewModel> {
           error: error,
           isLoading: isLoading,
         );
+
+  @override
+  List get props => [error, data, isLoading, isEmpty, expandedIndex];
 }
 
 class YarnViewModel extends ViewModel {
+  final String colour;
   final String count;
   final String yarnType;
   final String quantityInKgs;
@@ -27,6 +31,7 @@ class YarnViewModel extends ViewModel {
   final String deliveryPeriod;
 
   YarnViewModel({
+    required this.colour,
     required this.count,
     required this.yarnType,
     required this.quantityInKgs,
@@ -41,6 +46,7 @@ class YarnViewModel extends ViewModel {
 
   @override
   List<Object?> get props => [
+        colour,
         count,
         yarnType,
         quantityInKgs,

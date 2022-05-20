@@ -16,7 +16,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
   final Function(String qualityDetail) onDeliveryAreaChanged;
   final VoidCallback onDeliveryPeriod;
   final Function(String qualityDetail) onPaymentTermsChanged;
-  final VoidCallback onInquiryClosesWithIn;
+  final Function(String closesInMinutes) onInquiryClosesWithIn;
   final VoidCallback onSendRequirementTo;
   final Function(String qualityDetail) onAdditionalCommentsChanged;
   final TextEditingController? yarnQualityTextEditingController;
@@ -91,6 +91,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                 children: [
                   TextFieldWithTitle(
                     title: 'Yarn Quality',
+                    errorMessage: yarnRequirementViewModel.yarnQualityError,
                     controller: yarnQualityTextEditingController,
                     fieldIsOptional: false,
                     readOnly: true,
@@ -100,13 +101,13 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Quality Details',
-                    errorMessage: yarnRequirementViewModel.qualityDetailsError,
                     fieldIsOptional: true,
                     hintText: 'Enter tech specs. ex - combed, 2600 CSP etc',
                     onChanged: onQualityDetail,
                   ),
                   TextFieldWithTitle(
                     title: 'Colour',
+                    errorMessage: yarnRequirementViewModel.colorError,
                     controller: colourTextEditingController,
                     fieldIsOptional: false,
                     readOnly: true,
@@ -131,6 +132,7 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Delivery Period',
+                    errorMessage: yarnRequirementViewModel.deliveryPeriodError,
                     controller: deliveryPeriodTextEditingController,
                     fieldIsOptional: false,
                     readOnly: true,
@@ -147,15 +149,17 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Inquiry Closes Within',
+                    errorMessage: yarnRequirementViewModel.inquiryClosesWithinError,
                     controller: inquiryClosesWithinTextEditingController,
                     fieldIsOptional: false,
-                    readOnly: true,
-                    hintText: '03:00:00',
-                    onTap: onInquiryClosesWithIn,
+                    hintText: '1440',
+                    onChanged: onInquiryClosesWithIn,
                     suffixIcon: const Icon(Icons.arrow_forward_ios_outlined),
+                    keyboardType: TextInputType.number,
                   ),
                   TextFieldWithTitle(
                     title: 'Send Requirement to',
+                    errorMessage: yarnRequirementViewModel.sendRequirementToError,
                     controller: sendRequirementToTextEditingController,
                     fieldIsOptional: false,
                     readOnly: true,
@@ -165,7 +169,6 @@ class AddYarnRequirementView extends StatelessWidget with DateTimeMixin {
                   ),
                   TextFieldWithTitle(
                     title: 'Additional Comments',
-                    errorMessage: yarnRequirementViewModel.additionalCommentError,
                     fieldIsOptional: true,
                     hintText: 'ex - I want lowest price',
                     onChanged: onAdditionalCommentsChanged,

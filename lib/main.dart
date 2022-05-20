@@ -58,7 +58,24 @@ class YarnBazaar extends StatelessWidget {
           labelColor: const Color(0xFFFF9F10),
           unselectedLabelColor: Colors.grey,
         ),
-        colorScheme: Theme.of(context).colorScheme.copyWith(primary: const Color(0xFFFF9F10)),
+        colorScheme: Theme
+            .of(context)
+            .colorScheme
+            .copyWith(primary: const Color(0xFFFF9F10)),
+        textTheme: TextTheme(
+            titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            titleSmall: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            labelLarge: TextStyle(
+                color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w400),
+            labelMedium:
+            TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w400),
+            labelSmall: TextStyle(
+                color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w400),
+            bodyLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            bodyMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+            bodySmall: TextStyle(fontSize: 10, fontWeight: FontWeight.w200),
+        ),
       ),
       initialRoute: SplashPage.route,
       routes: routes,
@@ -89,7 +106,7 @@ final routes = {
   ProfilePage.route: (BuildContext context) => const ProfilePage(),
   SignInPage.route: (BuildContext context) => const SignInPage(),
   SignUpPage.route: (BuildContext context) => const SignUpPage(),
-  SuggestionPage.route: (BuildContext context)=> const SuggestionPage(),
+  SuggestionPage.route: (BuildContext context) => const SuggestionPage(),
   TermsAndConditionsPage.route: (BuildContext context) => const TermsAndConditionsPage(),
   UserDetailPage.route: (BuildContext context) => const UserDetailPage(),
   WatchlistPage.route: (BuildContext context) => const WatchlistPage(),

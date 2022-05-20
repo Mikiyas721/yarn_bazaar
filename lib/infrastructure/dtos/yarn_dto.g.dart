@@ -18,7 +18,7 @@ YarnDto _$YarnDtoFromJson(Map<String, dynamic> json) => YarnDto(
       deliveryArea: json['deliveryArea'] as String,
       deliveryPeriod: json['deliveryPeriod'] as String,
       paymentTerms: json['paymentTerms'] as String,
-      closesWithin: json['closesWithin'] as String,
+      closesWithin: json['closesWithin'] as int,
       sendTo: json['sendTo'] as String,
       additionalComment: json['additionalComment'] as String?,
       userId: json['userId'] as String,

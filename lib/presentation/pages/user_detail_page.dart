@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/mixins/formatter_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/user.dart';
-import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
 import 'package:yarn_bazaar/presentation/controllers/user_detail_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/user_yarns_controller.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/yarn_list_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/icon_prefixed_text.dart';
+import 'package:yarn_bazaar/presentation/widgets/my_image_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/pop_button.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/common/enum_extensions.dart';
 
 class UserDetailPage extends StatelessWidget with FormatterMixin {
   static const route = '/userDetailPage';
+
   const UserDetailPage({Key? key}) : super(key: key);
 
   @override
@@ -66,26 +67,19 @@ class UserDetailPage extends StatelessWidget with FormatterMixin {
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: Row(
                               children: [
-                                CircleAvatar(
+                                MyCircleAvatar(
                                   radius: 24,
-                                  child: Text(
-                                    getInitials(user.businessDetail?.companyName),
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  backgroundColor: (user.businessDetail?.accountType ==
-                                              UserType.yarn_manufacturer.getString() ||
-                                          user.businessDetail?.accountType ==
-                                              UserType.fabric_manufacturer.getString())
-                                      ? Colors.blue
-                                      : Colors.green,
+                                  initials: getInitials(user.businessDetail?.companyName),
+                                  backgroundColor:
+                                      user.businessDetail?.accountType!.getAccountTypeColor(),
                                 ),
                                 15.hSpace,
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      user.businessDetail!.companyName,
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      user.businessDetail!.companyName!,
+                                      style: context.titleMedium,
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 3),
@@ -94,7 +88,8 @@ class UserDetailPage extends StatelessWidget with FormatterMixin {
                                           IconPrefixedText(
                                             icon: Icons.location_on_outlined,
                                             label: user.businessDetail?.address ?? 'Unknown',
-                                            color: Colors.black87,
+                                            iconColor: Colors.blueGrey,
+                                            textStyle: context.labelMedium,
                                           )
                                         ],
                                       ),
@@ -102,23 +97,17 @@ class UserDetailPage extends StatelessWidget with FormatterMixin {
                                     Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        const Text(
+                                        Text(
                                           'Seller Type: ',
-                                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                                          style: context.labelSmall,
                                         ),
                                         Text(
                                           user.businessDetail!.accountType
-                                              .getUserType()
+                                              !.getUserType()
                                               .getShortString(),
                                           style: TextStyle(
-                                              color: user.businessDetail?.accountType ==
-                                                          UserType.yarn_manufacturer
-                                                              .getString() ||
-                                                      user.businessDetail?.accountType ==
-                                                          UserType.fabric_manufacturer
-                                                              .getString()
-                                                  ? Colors.blue
-                                                  : Colors.green),
+                                              color: user.businessDetail?.accountType
+                                                  !.getAccountTypeColor()),
                                         )
                                       ],
                                     )
@@ -137,15 +126,9 @@ class UserDetailPage extends StatelessWidget with FormatterMixin {
                     bottom: TabBar(
                       labelPadding: const EdgeInsets.only(bottom: 10),
                       tabs: const [
-                        Text(
-                          'Contact Details',
-                          textAlign: TextAlign.center,
-                        ),
+                        Text('Contact Details'),
                         Text('Products'),
-                        Text(
-                          'Associated Brokers',
-                          textAlign: TextAlign.center,
-                        ),
+                        Text('Associated Brokers'),
                       ],
                       indicatorColor: context.primaryColor,
                     ),
@@ -157,62 +140,97 @@ class UserDetailPage extends StatelessWidget with FormatterMixin {
                           child: Column(
                             children: [
                               Card(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text("Notes"),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Seller Type"),
-                                        Text(user.businessDetail!.accountType)
-                                      ],
-                                    ),
-                                    Divider(height: 1),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Yarn Categories"),
-                                        Text(listHorizontally(user.businessDetail!.categories))
-                                      ],
-                                    ),
-                                    Divider(height: 1),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Member Since"),
-                                        Text(user.createdAt!.year.toString())
-                                      ],
-                                    )
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "Notes",
+                                        style: context.titleSmall,
+                                      ),
+                                      20.vSpace,
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Seller Type", style: context.labelMedium),
+                                          Text(user.businessDetail!.accountType!)
+                                        ],
+                                      ),
+                                      Divider(height: 26),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Yarn Categories", style: context.labelMedium),
+                                          Text(
+                                            listHorizontally(user.businessDetail!.categories!),
+                                            maxLines: null,
+                                          )
+                                        ],
+                                      ),
+                                      Divider(height: 26),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Member Since", style: context.labelMedium),
+                                          Text(user.createdAt!.year.toString())
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               10.vSpace,
                               Card(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text("Contact Details"),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.person_outline,
-                                        ),
-                                        15.hSpace,
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text("Contact Person"),
-                                            Text(
-                                                "${user.firstName.value} ${user.lastName?.value ?? ''}"),
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "Contact Details",
+                                        style: context.titleSmall,
+                                      ),
+                                      15.vSpace,
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.person_outline,
+                                            size: 36,
+                                            color: context.primaryColor,
+                                          ),
+                                          15.hSpace,
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text("Contact Person"),
+                                              5.vSpace,
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 5),
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    Text(
+                                                      "${user.firstName!.value} ${user.lastName?.value ?? ''}",
+                                                      style: context.labelMedium,
+                                                    ),
+                                                    1.vSpace,
+                                                    Text(
+                                                      user.phoneNumber!.value,
+                                                      style: context.labelMedium,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               )
                             ],
@@ -220,7 +238,7 @@ class UserDetailPage extends StatelessWidget with FormatterMixin {
                         )),
                     ViewModelBuilder.withController<YarnsViewModel, UserYarnsController>(
                         create: () => UserYarnsController(context, user.id!),
-                        onInit: (controller) => controller.setUserYarns(user.yarns!),
+                        onInit: (controller) => controller.setUserYarns(user.yarns),
                         builder: (context, controller, yarnViewModel) {
                           return RefreshIndicator(
                             child: Padding(

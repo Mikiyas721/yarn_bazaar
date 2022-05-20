@@ -10,6 +10,7 @@ import 'package:yarn_bazaar/presentation/models/options_with_navigation_model.da
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/pages/composed_yarn_page.dart';
 import 'package:yarn_bazaar/presentation/pages/input_selection_page.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class AddYarnController extends BlocViewModelController<
     AddYarnRequirementBloc,
@@ -29,24 +30,23 @@ class AddYarnController extends BlocViewModelController<
   AddYarnRequirementViewModel mapStateToViewModel(AddYarnRequirementState s) {
     return AddYarnRequirementViewModel(
       intention: s.intention,
-      yarnQuality: s.yarnQuality,
-      qualityDetails: s.qualityDetails,
-      qualityDetailsError: null,
-      color: s.color,
-      quantityInKgs: s.quantityInKgs.fold((l) => null, (r) => r.value.toString()),
+      yarnQualityError:
+          s.hasSubmitted && s.yarnQuality == null ? "Yarn Quality is required" : null,
+      colorError: s.hasSubmitted && s.color == null ? "Colour is required" : null,
       quantityInKgsError:
           s.hasSubmitted ? s.quantityInKgs.fold((l) => l.message, (r) => null) : null,
-      deliveryArea: s.deliveryArea.fold((l) => null, (r) => r.value),
       deliveryAreaError:
           s.hasSubmitted ? s.deliveryArea.fold((l) => l.message, (r) => null) : null,
-      deliveryPeriod: s.deliveryPeriod,
-      paymentTerms: s.paymentTerms.fold((l) => null, (r) => r.value),
+      deliveryPeriodError:
+          s.hasSubmitted && s.deliveryPeriod == null ? "Delivery Period is required" : null,
       paymentTermsError:
           s.hasSubmitted ? s.paymentTerms.fold((l) => l.message, (r) => null) : null,
-      inquiryClosesWithin: DateTime.now(),
-      sendRequirementTo: s.sendRequirementTo,
-      additionalComment: s.additionalComment,
-      additionalCommentError: null,
+      inquiryClosesWithinError: s.hasSubmitted && s.inquiryClosesWithin == null
+          ? "Inquiry closing duration is required"
+          : null,
+      sendRequirementToError: s.hasSubmitted && s.deliveryPeriod == null
+          ? "Send requirement to is required"
+          : null,
     );
   }
 
@@ -68,7 +68,7 @@ class AddYarnController extends BlocViewModelController<
             title: "Select Yarn Quality",
             options: options,
             isMultiSelect: false,
-            selectedOptionIndex: options.indexOf(currentState.yarnQuality)));
+            selectedOptionIndex: options.indexOf(currentState.yarnQuality ?? "")));
     if (selectedYarnQuality != null) {
       bloc.add(AddYarnRequirementYarnQualityChangedEvent(selectedYarnQuality as String));
       yarnQualityTextEditingController.text = selectedYarnQuality;
@@ -81,26 +81,12 @@ class AddYarnController extends BlocViewModelController<
   }
 
   onSelectColorTap() async {
-    final options = [
-      "Griege",
-      "White / Bleach White",
-      "Black",
-      "Dop Dyed",
-      "Yarn Dyed",
-      "Red",
-      "Space Dyed",
-      "Melange",
-      "RFD",
-      "R.Blue",
-      "N.Blue",
-      "Maroon"
-    ];
     final selectedColor = await Navigator.pushNamed(context, InputSelectionPage.route,
         arguments: OptionsWithNavigationModel(
             title: "Select Colour",
-            options: options,
+            options: myYarnColors,
             isMultiSelect: false,
-            selectedOptionIndex: options.indexOf(currentState.color)));
+            selectedOptionIndex: myYarnColors.indexOf(currentState.color ?? "")));
     if (selectedColor != null) {
       bloc.add(AddYarnRequirementColorChangedEvent(selectedColor as String));
       colourTextEditingController.text = selectedColor;
@@ -130,7 +116,7 @@ class AddYarnController extends BlocViewModelController<
             title: "Select Delivery Period",
             options: options,
             isMultiSelect: false,
-            selectedOptionIndex: options.indexOf(currentState.deliveryPeriod)));
+            selectedOptionIndex: options.indexOf(currentState.deliveryPeriod ?? "")));
     if (deliveryPeriod != null) {
       bloc.add(AddYarnRequirementDeliveryPeriodChangedEvent(deliveryPeriod as String));
       deliveryPeriodTextEditingController.text = deliveryPeriod;
@@ -142,7 +128,10 @@ class AddYarnController extends BlocViewModelController<
     bloc.add(AddYarnRequirementPaymentTermsChangedEvent(paymentTerms));
   }
 
-  onInquiryClosesWithIn() {}
+  onInquiryClosesWithIn(String inquiryInMinutes) {
+    bloc.add(
+        AddYarnRequirementInquiryClosesWithinChangedEvent(int.tryParse(inquiryInMinutes)));
+  }
 
   onSendRequirementTo() async {
     final options = ["All Sellers", "Mills only", "Traders only"];
@@ -151,7 +140,7 @@ class AddYarnController extends BlocViewModelController<
             title: "Send Requirements to",
             options: options,
             isMultiSelect: false,
-            selectedOptionIndex: options.indexOf(currentState.sendRequirementTo)));
+            selectedOptionIndex: options.indexOf(currentState.sendRequirementTo ?? "")));
     if (sendRequirementTo != null) {
       bloc.add(AddYarnRequirementSendRequirementToChangedEvent(sendRequirementTo as String));
       sendRequirementToTextEditingController.text = sendRequirementTo;
@@ -166,32 +155,37 @@ class AddYarnController extends BlocViewModelController<
   onPreview() {
     //TODO more on splitting yarn quality
     bloc.add(AddYarnRequirementSubmittedEvent());
-    final splitYarnQuality = currentState.yarnQuality.split(' ');
+    final splitYarnQuality = currentState.yarnQuality?.split(' ');
     final signedInUser = getIt.get<SplashBloc>().state.appUser;
     signedInUser.fold(() {
       toastError("Operation failed: Signed user not found");
     }, (a) {
-      final yarnToPost = Yarn.createFromInput(
-        intention: currentState.intention.getString(),
-        count: splitYarnQuality[0],
-        yarnType: splitYarnQuality[1],
-        purpose: splitYarnQuality[2],
-        qualityDetails: currentState.qualityDetails,
-        colour: currentState.color,
-        quantityInKgs: currentState.quantityInKgs.fold((l) => null, (r) => r.value.toString()),
-        deliveryArea: currentState.deliveryArea.fold((l) => null, (r) => r.value),
-        deliveryPeriod: currentState.deliveryPeriod,
-        paymentTerms: currentState.paymentTerms.fold((l) => null, (r) => r.value),
-        inquiryClosesWithIn: currentState.inquiryClosesWithin,
-        sendRequirementTo: currentState.sendRequirementTo,
-        additionalComments: currentState.additionalComment,
-        userId: a.id,
-      );
-      yarnToPost.fold(() {
+      if (splitYarnQuality == null || splitYarnQuality.length < 3) {
         toastError("Please enter all required fields");
-      }, (a) {
-        Navigator.pushNamed(context, ComposedYarnPage.route, arguments: a);
-      });
+      } else {
+        final yarnToPost = Yarn.createFromInput(
+          intention: currentState.intention.getString(),
+          count: splitYarnQuality[0],
+          yarnType: splitYarnQuality[1],
+          purpose: splitYarnQuality[2],
+          qualityDetails: currentState.qualityDetails,
+          colour: currentState.color,
+          quantityInKgs:
+              currentState.quantityInKgs.fold((l) => null, (r) => r.value.toString()),
+          deliveryArea: currentState.deliveryArea.fold((l) => null, (r) => r.value),
+          deliveryPeriod: currentState.deliveryPeriod,
+          paymentTerms: currentState.paymentTerms.fold((l) => null, (r) => r.value),
+          inquiryClosesWithIn: currentState.inquiryClosesWithin,
+          sendRequirementTo: currentState.sendRequirementTo,
+          additionalComments: currentState.additionalComment,
+          userId: a.id,
+        );
+        yarnToPost.fold(() {
+          toastError("Please enter all required fields");
+        }, (a) {
+          Navigator.pushNamed(context, ComposedYarnPage.route, arguments: a);
+        });
+      }
     });
   }
 }

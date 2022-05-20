@@ -11,14 +11,14 @@ import 'package:yarn_bazaar/domain/value_objects/website.dart';
 
 class User extends Entity {
   final String? imageUrl;
-  final Name firstName;
+  final Name? firstName;
   final Name? lastName;
-  final PhoneNumber phoneNumber;
+  final PhoneNumber? phoneNumber;
   final String? country;
   final String? city;
   final Email? email;
   final WebsiteUrl? website;
-  final Password password;
+  final Password? password;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final BusinessDetail? businessDetail;
@@ -121,13 +121,14 @@ class User extends Entity {
     ].any((element) => element == null)) return none();
 
     final firstNameObject = Name.create(firstName!);
-    final lastNameObject = Name.create(lastName!);
+    final lastNameObject = Name.create(lastName);
     final phoneNumberObject = PhoneNumber.create(phoneNumber!);
     final emailObject = Email.create(email);
     final websiteObject = WebsiteUrl.create(website);
     final passwordObject = Password.create(password!);
 
     if (firstNameObject.isLeft() ||
+        lastNameObject.isLeft() ||
         phoneNumberObject.isLeft() ||
         emailObject.isLeft() ||
         websiteObject.isLeft() ||
@@ -146,5 +147,52 @@ class User extends Entity {
         businessDetail: businessDetail,
         bankDetail: bankDetail,
         yarns: yarns));
+  }
+
+  static Option<User> createForUpdate({
+    String? id,
+    String? imageUrl,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    String? country,
+    String? city,
+    String? email,
+    String? website,
+    String? password,
+    BusinessDetail? businessDetail,
+    BankDetail? bankDetail,
+    List<Yarn>? yarns,
+  }) {
+    if (id == null) return none();
+
+    final firstNameObject = Name.create(firstName);
+    final lastNameObject = Name.create(lastName);
+    final phoneNumberObject = phoneNumber == null ? null : PhoneNumber.create(phoneNumber);
+    final emailObject = Email.create(email);
+    final websiteObject = WebsiteUrl.create(website);
+    final passwordObject = password == null ? null : Password.create(password);
+
+    if (firstNameObject.isLeft() ||
+        lastNameObject.isLeft() ||
+        phoneNumberObject != null && phoneNumberObject.isLeft() ||
+        emailObject.isLeft() ||
+        websiteObject.isLeft() ||
+        passwordObject != null && passwordObject.isLeft()) return none();
+
+    return some(User._(
+      imageUrl: imageUrl,
+      firstName: firstNameObject.fold((l) => null, (r) => r),
+      lastName: lastNameObject.fold((l) => null, (r) => r),
+      phoneNumber: phoneNumberObject?.fold((l) => null, (r) => r),
+      country: country,
+      city: city,
+      email: emailObject.fold((l) => null, (r) => r),
+      website: websiteObject.fold((l) => null, (r) => r),
+      password: passwordObject?.fold((l) => null, (r) => r),
+      businessDetail: businessDetail,
+      bankDetail: bankDetail,
+      yarns: yarns,
+    ));
   }
 }

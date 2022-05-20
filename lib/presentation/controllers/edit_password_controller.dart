@@ -1,4 +1,5 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_basic_information.dart';
 import 'package:yarn_bazaar/domain/use_cases/update_user_basic_info.dart';
@@ -10,7 +11,7 @@ import 'package:yarn_bazaar/application/edit_password/edit_password_bloc.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 
 class EditPasswordController extends BlocViewModelController<EditPasswordBloc,
-    EditPasswordEvent, EditPasswordState, EditPasswordViewModel> with ShortMessageMixin {
+    EditPasswordEvent, EditPasswordState, EditPasswordViewModel> with ShortMessageMixin, DateTimeMixin {
   EditPasswordController(BuildContext context)
       : super(context, getIt.get<EditPasswordBloc>(), true);
 
@@ -71,25 +72,12 @@ class EditPasswordController extends BlocViewModelController<EditPasswordBloc,
             bloc.add(EditPasswordStoppedSavingEvent());
             toastError("Operation failed: Old Password does not match");
           } else {
-            final userToSave = User.create(
+            final userToUpdate = User.createForUpdate(
               id: r.id,
-              imageUrl: r.imageUrl,
-              firstName: r.firstName.value,
-              lastName: r.lastName?.value,
-              phoneNumber: r.phoneNumber.value,
-              country: r.country,
-              city: r.city,
-              email: r.email?.value,
-              website: r.website?.value,
               password: currentState.newPassword.fold((l) => null, (r) => r.value),
-              createdAt: r.createdAt,
-              updatedAt: r.updatedAt,
-              businessDetail: r.businessDetail,
-              bankDetail: r.bankDetail,
-              yarns: r.yarns,
             );
 
-            userToSave.fold(() {
+            userToUpdate.fold(() {
               bloc.add(EditPasswordStoppedSavingEvent());
               toastError("Operation failed: Unable to create new data");
             }, (a) async {
@@ -98,8 +86,10 @@ class EditPasswordController extends BlocViewModelController<EditPasswordBloc,
 
               apiResponse.fold((l) {
                 toastError(l.message);
-              }, (r) {
+              }, (r) async{
                 toastSuccess("Successfully updated");
+                await delay(milliSeconds: 500);
+                Navigator.pop(context);
               });
             });
           }

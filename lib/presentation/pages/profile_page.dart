@@ -19,6 +19,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabColors = [context.primaryColor, context.secondaryHeaderColor];
+    final profileController = ProfileController(context);
     return Scaffold(
       drawer: ViewModelBuilder.withController<DrawerViewModel, MyDrawerController>(
           create: () => MyDrawerController(context),
@@ -33,7 +34,7 @@ class ProfilePage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: ViewModelBuilder.withController<ProfileViewModel, ProfileController>(
-            create: () => ProfileController(context),
+            create: () => profileController,
             builder: (context, controller, viewModel) {
               return AppBar(
                 elevation: 0,
@@ -54,7 +55,7 @@ class ProfilePage extends StatelessWidget {
             }),
       ),
       body: ViewModelBuilder.withController<ProfileViewModel, ProfileController>(
-          create: () => ProfileController(context),
+          create: () => profileController,
           builder: (context, controller, viewModel) {
             return ProfileView(
               profileViewModel: viewModel!,
