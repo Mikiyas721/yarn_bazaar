@@ -10,8 +10,7 @@ final getIt = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-
-Future setUpDependencies() async => await $initGetIt(getIt);
+Future setUpDependencies() async => await $initGetIt(getIt, environment: 'development');
 
 @module
 abstract class RegisterModule {

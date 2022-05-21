@@ -8,7 +8,7 @@ import 'package:yarn_bazaar/infrastructure/dtos/suggestion_dto.dart';
 
 @LazySingleton(as: ISuggestionRepo)
 class SuggestionRepoImpl extends ISuggestionRepo {
-  final SuggestionDatasourceCrudDatasource _suggestionDatasourceCrudDatasource;
+  final SuggestionCrudDatasource _suggestionDatasourceCrudDatasource;
   final suggestionDtoMappingSimpleFailure =
       const SimpleFailure('Unable to map suggestion json from API to Domain');
 

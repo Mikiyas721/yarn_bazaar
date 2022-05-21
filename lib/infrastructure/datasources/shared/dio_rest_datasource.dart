@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:yarn_bazaar/config/config.dart';
 import 'rest_datasource/rest_datasource.dart';
 import 'rest_datasource/rest_request.dart';
 import 'rest_datasource/rest_response.dart';
@@ -11,12 +12,12 @@ import 'rest_datasource/rest_response.dart';
 class DioRestDataSource implements RestDataSource {
   final Dio dio;
 
-  DioRestDataSource()
+  DioRestDataSource(Config config)
       : dio = Dio(
           BaseOptions(
             connectTimeout: 10000,
             receiveTimeout: 10000,
-            baseUrl: 'http://192.168.217.69:3000/api',
+            baseUrl: config.apiUrl,
           ),
         ) {
     //TODO add interceptor and replace baseUrl

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_yarn_by_category.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/share_helper.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/application/fetch_yarns_all/fetch_all_yarns_bloc.dart';
@@ -73,7 +75,9 @@ class AllYarnsController extends BlocViewModelController<FetchAllYarnsBloc, Fetc
 
   onCompare(int index) {}
 
-  onShare(int index) {}
+  onShare(int index) {
+    Share.share(ShareHelper().getYarnStringForSharing(currentState.yarns[index]));
+  }
 
   onDetail(int index) {
     Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);

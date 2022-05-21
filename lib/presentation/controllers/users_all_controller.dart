@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_users_by_type.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/application/fetch_users_all/fetch_all_users_bloc.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/share_helper.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
@@ -68,7 +70,9 @@ class AllUsersController extends BlocViewModelController<FetchAllUsersBloc, Fetc
     Navigator.pushNamed(context, UserDetailPage.route, arguments: currentState.users[index]);
   }
 
-  onShare(int index) {}
+  onShare(int index) {
+    Share.share(ShareHelper().getUserStringForSharing(currentState.users[index]));
+  }
 
   Future<void> onRefresh() async {
     final splashBloc = getIt.get<SplashBloc>();

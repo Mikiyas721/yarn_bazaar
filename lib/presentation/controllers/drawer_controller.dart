@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:yarn_bazaar/domain/use_cases/clear_logged_in_user.dart';
+import 'package:yarn_bazaar/domain/use_cases/get_file_download_link.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
@@ -16,6 +18,7 @@ import 'package:yarn_bazaar/presentation/pages/home_page.dart';
 import 'package:yarn_bazaar/presentation/pages/news_page.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawerController
     extends BlocViewModelController<SplashBloc, SplashEvent, SplashState, DrawerViewModel>
@@ -25,7 +28,11 @@ class MyDrawerController
   @override
   DrawerViewModel mapStateToViewModel(SplashState s) {
     return DrawerViewModel(
-      imageUrl: s.appUser.fold(() => '', (a) => a.imageUrl),
+      imageUrl: s.appUser.fold(
+          () => null,
+          (a) => a.imageUrl == null
+              ? null
+              : getIt.get<GetFileDownloadLink>().execute('user', a.imageUrl!)),
       username: s.appUser.fold(() => '', (a) => a.firstName.value ?? '') +
           ' ' +
           s.appUser.fold(() => '', (a) => a.lastName?.value ?? ''),
@@ -98,26 +105,58 @@ class MyDrawerController
               children: [
                 MyActionButton(
                   label: "REQUEST CALL BACK",
-                  onSubmit: () {},
+                  onSubmit: () {
+                    //TODO implement
+                  },
                 ),
                 5.vSpace,
                 MyActionButton(
                   label: "CALL NOW",
-                  onSubmit: () {},
+                  onSubmit: () async {
+                    Uri phoneNumberUri = Uri(scheme: 'tel', path: '9914601110');
+                    bool canCall = await canLaunchUrl(phoneNumberUri);
+                    if (canCall) {
+                      await launchUrl(phoneNumberUri);
+                    } else {
+                      Navigator.pop(context);
+                      toastError("Unable to open dialer");
+                    }
+                  },
                 ),
                 5.vSpace,
                 MyActionButton(
                   label: "WHATSAPP",
-                  onSubmit: () {},
+                  onSubmit: () async {
+                    bool launched = await launchUrl(
+                        Uri(scheme: 'https', path: 'api.whatsapp.com/send?phone=9914601110'),
+                        mode: LaunchMode.externalApplication);
+                    if (!launched) toastError("Unable to open whatsapp");
+                  },
                 ),
                 10.vSpace,
                 Row(
                   children: [
                     Text("Email - "),
-                    InkWell(
-                      child: Text("your email here"),
-                      onTap: () {},
-                    ),
+                    TextButton(
+                      child: Text(
+                        "your email here",
+                        style: TextStyle(color: Colors.lightBlue),
+                      ),
+                      onPressed: () async {
+                        bool launched = await launchUrl(
+                          Uri(
+                              scheme: 'mailto',
+                              path: 'your email here',
+                              queryParameters: {'subject': 'Example'}),
+                        );
+                        if (!launched) toastError("Unable to email");
+                      },
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(0),
+                        minimumSize: const Size(0, 0),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    )
                   ],
                 )
               ],
@@ -128,7 +167,11 @@ class MyDrawerController
   }
 
   onShareApp() {
-    //TODO open OS sharing widget
+    Share.share('''
+  Live Yarn Rates, Information, Availability and Directory !!
+  Download 'The Yarn Bazaar' app.
+  https://www.google.com
+  ''');
   }
 
   onHelpAndSupport() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_users_by_type.dart';
@@ -6,13 +7,17 @@ import 'package:yarn_bazaar/domain/value_objects/user_type.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/application/fetch_users_mill/fetch_mill_users_bloc.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/share_helper.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/users_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
 import 'package:yarn_bazaar/presentation/pages/user_detail_page.dart';
 
-class MillUsersController extends BlocViewModelController<FetchMillUsersBloc,
-    FetchMillUsersEvent, FetchMillUsersState, UsersViewModel> with ShortMessageMixin, DateTimeMixin {
+class MillUsersController extends BlocViewModelController<
+    FetchMillUsersBloc,
+    FetchMillUsersEvent,
+    FetchMillUsersState,
+    UsersViewModel> with ShortMessageMixin, DateTimeMixin {
   MillUsersController(BuildContext context)
       : super(context, getIt.get<FetchMillUsersBloc>(), true);
 
@@ -22,7 +27,7 @@ class MillUsersController extends BlocViewModelController<FetchMillUsersBloc,
       users: s.users
           .map((e) => UserViewModel(
                 companyName: e.businessDetail!.companyName!,
-                location: e.businessDetail?.address??'Unknown',
+                location: e.businessDetail?.address ?? 'Unknown',
                 numberOfYarnProducts: e.yarns!.length,
                 lastUpdated: getShortDateWithOutDayOfWeekString(e.updatedAt!),
                 sellerType: e.businessDetail!.accountType!,
@@ -71,7 +76,7 @@ class MillUsersController extends BlocViewModelController<FetchMillUsersBloc,
   }
 
   onHeaderTap(int index) {
-    currentState.expandedIndex==index
+    currentState.expandedIndex == index
         ? bloc.add(FetchMillUsersExpandedIndexChangedEvent(-1))
         : bloc.add(FetchMillUsersExpandedIndexChangedEvent(index));
   }
@@ -82,7 +87,9 @@ class MillUsersController extends BlocViewModelController<FetchMillUsersBloc,
     Navigator.pushNamed(context, UserDetailPage.route, arguments: currentState.users[index]);
   }
 
-  onShare(int index) {}
+  onShare(int index) {
+    Share.share(ShareHelper().getUserStringForSharing(currentState.users[index]));
+  }
 
   Future<void> onRefresh() async {
     final splashBloc = getIt.get<SplashBloc>();

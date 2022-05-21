@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.4
   carousel_slider: ^4.1.1
   fluttertoast: ^8.0.9
+  share_plus: ^4.0.4
+  url_launcher: ^6.1.2
+  file_picker_cross: ^4.6.0
+
 
   equatable: ^2.0.3
   json_serializable: ^6.2.0

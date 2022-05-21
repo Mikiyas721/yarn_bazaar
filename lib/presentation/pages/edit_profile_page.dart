@@ -31,6 +31,7 @@ class EditProfilePage extends StatelessWidget {
             builder: (context, controller, viewModel) {
               return EditProfileView(
                 buyerProfileViewModel: viewModel!,
+                onEditPicture: controller.onEditProfile,
                 onBasicProfile: controller.onBasicProfile,
                 onBusinessDetails: controller.onBusinessDetails,
                 onBankDetails: controller.onBankDetails,

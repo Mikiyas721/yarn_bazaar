@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/yarn.dart';
@@ -6,6 +7,7 @@ import 'package:yarn_bazaar/domain/use_cases/fetch_user_yarns.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/application/fetch_user_yarns/fetch_user_yarns_bloc.dart';
+import 'package:yarn_bazaar/presentation/controllers/shared/share_helper.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/yarns_view_model.dart';
 import 'package:yarn_bazaar/presentation/pages/yarn_detail_page.dart';
@@ -82,7 +84,9 @@ class UserYarnsController extends BlocViewModelController<FetchUserYarnsBloc,
     Navigator.pushNamed(context, YarnDetailPage.route, arguments: currentState.yarns[index]);
   }
 
-  onShare(int index) {}
+  onShare(int index) {
+    Share.share(ShareHelper().getYarnStringForSharing(currentState.yarns[index]));
+  }
 
   Future<void> onRefresh() async {
     bloc.add(FetchUserYarnsStartedLoadingEvent());

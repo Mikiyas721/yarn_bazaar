@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/domain/use_cases/get_file_download_link.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/models/profile_view_model.dart';
@@ -15,7 +16,11 @@ class ProfileController extends BlocViewModelController<ProfileBloc, ProfileEven
   ProfileViewModel mapStateToViewModel(ProfileState s) {
     return ProfileViewModel(
       selectedProfileIndex: s.selectedProfileIndex,
-      imageUrl: s.appUser.fold(() => '', (a) => a.imageUrl),
+      imageUrl: s.appUser.fold(
+          () => '',
+          (a) => a.imageUrl == null
+              ? null
+              : getIt.get<GetFileDownloadLink>().execute('user', a.imageUrl!)),
       username: s.appUser.fold(() => '', (a) => a.firstName.value ?? '') +
           ' ' +
           s.appUser.fold(() => '', (a) => a.lastName?.value ?? ''),

@@ -6,6 +6,7 @@ import 'package:yarn_bazaar/presentation/widgets/navigate_button.dart';
 
 class EditProfileView extends StatelessWidget {
   final EditProfileViewModel buyerProfileViewModel;
+  final VoidCallback onEditPicture;
   final VoidCallback onBasicProfile;
   final VoidCallback onBusinessDetails;
   final VoidCallback onBankDetails;
@@ -14,6 +15,7 @@ class EditProfileView extends StatelessWidget {
   const EditProfileView({
     Key? key,
     required this.buyerProfileViewModel,
+    required this.onEditPicture,
     required this.onBasicProfile,
     required this.onBusinessDetails,
     required this.onBankDetails,
@@ -25,9 +27,7 @@ class EditProfileView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final percentageWidget = Padding(
       padding: EdgeInsets.only(
-        left: ((size.width * 0.6) *
-                buyerProfileViewModel.profileCompletedInPercent /
-                100) -
+        left: ((size.width * 0.6) * buyerProfileViewModel.profileCompletedInPercent / 100) -
             (buyerProfileViewModel.profileCompletedInPercent > 99 ? 36 : 30),
       ),
       child: Text(
@@ -43,7 +43,22 @@ class EditProfileView extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              MyCircleAvatar(image: buyerProfileViewModel.imageUrl),
+              Stack(
+                children: [
+                  Align(child: MyCircleAvatar(image: buyerProfileViewModel.imageUrl)),
+                  Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        color: Colors.white,
+                        padding: EdgeInsets.all(2),
+                        child: IconButton(
+                          onPressed: onEditPicture,
+                          icon: Icon(Icons.edit),
+                        ),
+                      ))
+                ],
+              ),
               10.vSpace,
               Text(
                 buyerProfileViewModel.username,

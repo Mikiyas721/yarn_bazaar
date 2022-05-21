@@ -5,12 +5,12 @@ import 'package:yarn_bazaar/infrastructure/datasources/shared/rest_datasource/re
 import 'package:yarn_bazaar/infrastructure/datasources/shared/rest_datasource/rest_response.dart';
 import 'package:yarn_bazaar/infrastructure/dtos/suggestion_dto.dart';
 
-abstract class SuggestionDatasourceCrudDatasource
+abstract class SuggestionCrudDatasource
     extends CrudDataSource<SuggestionDto, RestResponseFailure> {}
 
-@LazySingleton(as: SuggestionDatasourceCrudDatasource)
+@LazySingleton(as: SuggestionCrudDatasource)
 class SuggestionLoopbackDatasource extends LoopbackRestCrudDataSource<SuggestionDto>
-    implements SuggestionDatasourceCrudDatasource {
+    implements SuggestionCrudDatasource {
   SuggestionLoopbackDatasource(RestDataSource restDataSource)
       : super(
           '/suggestions',
