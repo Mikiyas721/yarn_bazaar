@@ -32,6 +32,10 @@ mixin _$EditBusinessDetailsState {
       throw _privateConstructorUsedError;
   Either<PANNumberFailure, PANNumber> get panNo =>
       throw _privateConstructorUsedError;
+  Option<FilePickerCross> get gstDocumentSelectedFile =>
+      throw _privateConstructorUsedError;
+  Option<FilePickerCross> get panCardSelectedFile =>
+      throw _privateConstructorUsedError;
   bool get hasSubmitted => throw _privateConstructorUsedError;
   bool get isSaving => throw _privateConstructorUsedError;
 
@@ -57,6 +61,8 @@ abstract class $EditBusinessDetailsStateCopyWith<$Res> {
       Either<GSTNumberFailure, GSTNumber> gstNo,
       Either<TANNumberFailure, TANNumber> tanNo,
       Either<PANNumberFailure, PANNumber> panNo,
+      Option<FilePickerCross> gstDocumentSelectedFile,
+      Option<FilePickerCross> panCardSelectedFile,
       bool hasSubmitted,
       bool isSaving});
 }
@@ -83,6 +89,8 @@ class _$EditBusinessDetailsStateCopyWithImpl<$Res>
     Object? gstNo = freezed,
     Object? tanNo = freezed,
     Object? panNo = freezed,
+    Object? gstDocumentSelectedFile = freezed,
+    Object? panCardSelectedFile = freezed,
     Object? hasSubmitted = freezed,
     Object? isSaving = freezed,
   }) {
@@ -131,6 +139,14 @@ class _$EditBusinessDetailsStateCopyWithImpl<$Res>
           ? _value.panNo
           : panNo // ignore: cast_nullable_to_non_nullable
               as Either<PANNumberFailure, PANNumber>,
+      gstDocumentSelectedFile: gstDocumentSelectedFile == freezed
+          ? _value.gstDocumentSelectedFile
+          : gstDocumentSelectedFile // ignore: cast_nullable_to_non_nullable
+              as Option<FilePickerCross>,
+      panCardSelectedFile: panCardSelectedFile == freezed
+          ? _value.panCardSelectedFile
+          : panCardSelectedFile // ignore: cast_nullable_to_non_nullable
+              as Option<FilePickerCross>,
       hasSubmitted: hasSubmitted == freezed
           ? _value.hasSubmitted
           : hasSubmitted // ignore: cast_nullable_to_non_nullable
@@ -163,6 +179,8 @@ abstract class _$$_EditBusinessDetailsStateCopyWith<$Res>
       Either<GSTNumberFailure, GSTNumber> gstNo,
       Either<TANNumberFailure, TANNumber> tanNo,
       Either<PANNumberFailure, PANNumber> panNo,
+      Option<FilePickerCross> gstDocumentSelectedFile,
+      Option<FilePickerCross> panCardSelectedFile,
       bool hasSubmitted,
       bool isSaving});
 }
@@ -192,6 +210,8 @@ class __$$_EditBusinessDetailsStateCopyWithImpl<$Res>
     Object? gstNo = freezed,
     Object? tanNo = freezed,
     Object? panNo = freezed,
+    Object? gstDocumentSelectedFile = freezed,
+    Object? panCardSelectedFile = freezed,
     Object? hasSubmitted = freezed,
     Object? isSaving = freezed,
   }) {
@@ -240,6 +260,14 @@ class __$$_EditBusinessDetailsStateCopyWithImpl<$Res>
           ? _value.panNo
           : panNo // ignore: cast_nullable_to_non_nullable
               as Either<PANNumberFailure, PANNumber>,
+      gstDocumentSelectedFile: gstDocumentSelectedFile == freezed
+          ? _value.gstDocumentSelectedFile
+          : gstDocumentSelectedFile // ignore: cast_nullable_to_non_nullable
+              as Option<FilePickerCross>,
+      panCardSelectedFile: panCardSelectedFile == freezed
+          ? _value.panCardSelectedFile
+          : panCardSelectedFile // ignore: cast_nullable_to_non_nullable
+              as Option<FilePickerCross>,
       hasSubmitted: hasSubmitted == freezed
           ? _value.hasSubmitted
           : hasSubmitted // ignore: cast_nullable_to_non_nullable
@@ -267,6 +295,8 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
       required this.gstNo,
       required this.tanNo,
       required this.panNo,
+      required this.gstDocumentSelectedFile,
+      required this.panCardSelectedFile,
       required this.hasSubmitted,
       required this.isSaving})
       : _categories = categories;
@@ -299,13 +329,17 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
   @override
   final Either<PANNumberFailure, PANNumber> panNo;
   @override
+  final Option<FilePickerCross> gstDocumentSelectedFile;
+  @override
+  final Option<FilePickerCross> panCardSelectedFile;
+  @override
   final bool hasSubmitted;
   @override
   final bool isSaving;
 
   @override
   String toString() {
-    return 'EditBusinessDetailsState(isLoadingSaved: $isLoadingSaved, loadedBusinessDetail: $loadedBusinessDetail, loadingSavedFailure: $loadingSavedFailure, companyName: $companyName, accountType: $accountType, categories: $categories, address: $address, completeAddress: $completeAddress, gstNo: $gstNo, tanNo: $tanNo, panNo: $panNo, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
+    return 'EditBusinessDetailsState(isLoadingSaved: $isLoadingSaved, loadedBusinessDetail: $loadedBusinessDetail, loadingSavedFailure: $loadingSavedFailure, companyName: $companyName, accountType: $accountType, categories: $categories, address: $address, completeAddress: $completeAddress, gstNo: $gstNo, tanNo: $tanNo, panNo: $panNo, gstDocumentSelectedFile: $gstDocumentSelectedFile, panCardSelectedFile: $panCardSelectedFile, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
   }
 
   @override
@@ -331,6 +365,10 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
             const DeepCollectionEquality().equals(other.gstNo, gstNo) &&
             const DeepCollectionEquality().equals(other.tanNo, tanNo) &&
             const DeepCollectionEquality().equals(other.panNo, panNo) &&
+            const DeepCollectionEquality().equals(
+                other.gstDocumentSelectedFile, gstDocumentSelectedFile) &&
+            const DeepCollectionEquality()
+                .equals(other.panCardSelectedFile, panCardSelectedFile) &&
             const DeepCollectionEquality()
                 .equals(other.hasSubmitted, hasSubmitted) &&
             const DeepCollectionEquality().equals(other.isSaving, isSaving));
@@ -350,6 +388,8 @@ class _$_EditBusinessDetailsState implements _EditBusinessDetailsState {
       const DeepCollectionEquality().hash(gstNo),
       const DeepCollectionEquality().hash(tanNo),
       const DeepCollectionEquality().hash(panNo),
+      const DeepCollectionEquality().hash(gstDocumentSelectedFile),
+      const DeepCollectionEquality().hash(panCardSelectedFile),
       const DeepCollectionEquality().hash(hasSubmitted),
       const DeepCollectionEquality().hash(isSaving));
 
@@ -373,6 +413,8 @@ abstract class _EditBusinessDetailsState implements EditBusinessDetailsState {
       required final Either<GSTNumberFailure, GSTNumber> gstNo,
       required final Either<TANNumberFailure, TANNumber> tanNo,
       required final Either<PANNumberFailure, PANNumber> panNo,
+      required final Option<FilePickerCross> gstDocumentSelectedFile,
+      required final Option<FilePickerCross> panCardSelectedFile,
       required final bool hasSubmitted,
       required final bool isSaving}) = _$_EditBusinessDetailsState;
 
@@ -402,6 +444,12 @@ abstract class _EditBusinessDetailsState implements EditBusinessDetailsState {
       throw _privateConstructorUsedError;
   @override
   Either<PANNumberFailure, PANNumber> get panNo =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<FilePickerCross> get gstDocumentSelectedFile =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<FilePickerCross> get panCardSelectedFile =>
       throw _privateConstructorUsedError;
   @override
   bool get hasSubmitted => throw _privateConstructorUsedError;

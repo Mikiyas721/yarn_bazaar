@@ -18,4 +18,9 @@ class FileRepoImpl extends IFileRepo {
   Future<Either<Failure, dynamic>> uploadFile(String containerName, FormData formData) {
     return _fileCrudDatasource.uploadFile(containerName, formData);
   }
+
+  @override
+  Future<Either<Failure, dynamic>> deleteFile(String containerName, String fileName) {
+    return _fileCrudDatasource.deleteFile(containerName, fileName);
+  }
 }

@@ -29,6 +29,10 @@ mixin _$EditBankDetailsState {
   String? get bankBranch => throw _privateConstructorUsedError;
   String? get bankState => throw _privateConstructorUsedError;
   String? get bankCity => throw _privateConstructorUsedError;
+  Option<FilePickerCross> get addressSelectedFile =>
+      throw _privateConstructorUsedError;
+  Option<FilePickerCross> get chequeSelectedFile =>
+      throw _privateConstructorUsedError;
   bool get hasSubmitted => throw _privateConstructorUsedError;
   bool get isSaving => throw _privateConstructorUsedError;
 
@@ -53,6 +57,8 @@ abstract class $EditBankDetailsStateCopyWith<$Res> {
       String? bankBranch,
       String? bankState,
       String? bankCity,
+      Option<FilePickerCross> addressSelectedFile,
+      Option<FilePickerCross> chequeSelectedFile,
       bool hasSubmitted,
       bool isSaving});
 }
@@ -78,6 +84,8 @@ class _$EditBankDetailsStateCopyWithImpl<$Res>
     Object? bankBranch = freezed,
     Object? bankState = freezed,
     Object? bankCity = freezed,
+    Object? addressSelectedFile = freezed,
+    Object? chequeSelectedFile = freezed,
     Object? hasSubmitted = freezed,
     Object? isSaving = freezed,
   }) {
@@ -122,6 +130,14 @@ class _$EditBankDetailsStateCopyWithImpl<$Res>
           ? _value.bankCity
           : bankCity // ignore: cast_nullable_to_non_nullable
               as String?,
+      addressSelectedFile: addressSelectedFile == freezed
+          ? _value.addressSelectedFile
+          : addressSelectedFile // ignore: cast_nullable_to_non_nullable
+              as Option<FilePickerCross>,
+      chequeSelectedFile: chequeSelectedFile == freezed
+          ? _value.chequeSelectedFile
+          : chequeSelectedFile // ignore: cast_nullable_to_non_nullable
+              as Option<FilePickerCross>,
       hasSubmitted: hasSubmitted == freezed
           ? _value.hasSubmitted
           : hasSubmitted // ignore: cast_nullable_to_non_nullable
@@ -152,6 +168,8 @@ abstract class _$$_EditBankDetailsStateCopyWith<$Res>
       String? bankBranch,
       String? bankState,
       String? bankCity,
+      Option<FilePickerCross> addressSelectedFile,
+      Option<FilePickerCross> chequeSelectedFile,
       bool hasSubmitted,
       bool isSaving});
 }
@@ -179,6 +197,8 @@ class __$$_EditBankDetailsStateCopyWithImpl<$Res>
     Object? bankBranch = freezed,
     Object? bankState = freezed,
     Object? bankCity = freezed,
+    Object? addressSelectedFile = freezed,
+    Object? chequeSelectedFile = freezed,
     Object? hasSubmitted = freezed,
     Object? isSaving = freezed,
   }) {
@@ -223,6 +243,14 @@ class __$$_EditBankDetailsStateCopyWithImpl<$Res>
           ? _value.bankCity
           : bankCity // ignore: cast_nullable_to_non_nullable
               as String?,
+      addressSelectedFile: addressSelectedFile == freezed
+          ? _value.addressSelectedFile
+          : addressSelectedFile // ignore: cast_nullable_to_non_nullable
+              as Option<FilePickerCross>,
+      chequeSelectedFile: chequeSelectedFile == freezed
+          ? _value.chequeSelectedFile
+          : chequeSelectedFile // ignore: cast_nullable_to_non_nullable
+              as Option<FilePickerCross>,
       hasSubmitted: hasSubmitted == freezed
           ? _value.hasSubmitted
           : hasSubmitted // ignore: cast_nullable_to_non_nullable
@@ -249,6 +277,8 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
       this.bankBranch,
       this.bankState,
       this.bankCity,
+      required this.addressSelectedFile,
+      required this.chequeSelectedFile,
       required this.hasSubmitted,
       required this.isSaving});
 
@@ -273,13 +303,17 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
   @override
   final String? bankCity;
   @override
+  final Option<FilePickerCross> addressSelectedFile;
+  @override
+  final Option<FilePickerCross> chequeSelectedFile;
+  @override
   final bool hasSubmitted;
   @override
   final bool isSaving;
 
   @override
   String toString() {
-    return 'EditBankDetailsState(isLoadingSaved: $isLoadingSaved, loadedBankDetails: $loadedBankDetails, loadingSavedFailure: $loadingSavedFailure, accountName: $accountName, accountNumber: $accountNumber, iFSCCode: $iFSCCode, bankName: $bankName, bankBranch: $bankBranch, bankState: $bankState, bankCity: $bankCity, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
+    return 'EditBankDetailsState(isLoadingSaved: $isLoadingSaved, loadedBankDetails: $loadedBankDetails, loadingSavedFailure: $loadingSavedFailure, accountName: $accountName, accountNumber: $accountNumber, iFSCCode: $iFSCCode, bankName: $bankName, bankBranch: $bankBranch, bankState: $bankState, bankCity: $bankCity, addressSelectedFile: $addressSelectedFile, chequeSelectedFile: $chequeSelectedFile, hasSubmitted: $hasSubmitted, isSaving: $isSaving)';
   }
 
   @override
@@ -304,6 +338,10 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
             const DeepCollectionEquality().equals(other.bankState, bankState) &&
             const DeepCollectionEquality().equals(other.bankCity, bankCity) &&
             const DeepCollectionEquality()
+                .equals(other.addressSelectedFile, addressSelectedFile) &&
+            const DeepCollectionEquality()
+                .equals(other.chequeSelectedFile, chequeSelectedFile) &&
+            const DeepCollectionEquality()
                 .equals(other.hasSubmitted, hasSubmitted) &&
             const DeepCollectionEquality().equals(other.isSaving, isSaving));
   }
@@ -321,6 +359,8 @@ class _$_EditBankDetailsState implements _EditBankDetailsState {
       const DeepCollectionEquality().hash(bankBranch),
       const DeepCollectionEquality().hash(bankState),
       const DeepCollectionEquality().hash(bankCity),
+      const DeepCollectionEquality().hash(addressSelectedFile),
+      const DeepCollectionEquality().hash(chequeSelectedFile),
       const DeepCollectionEquality().hash(hasSubmitted),
       const DeepCollectionEquality().hash(isSaving));
 
@@ -343,6 +383,8 @@ abstract class _EditBankDetailsState implements EditBankDetailsState {
       final String? bankBranch,
       final String? bankState,
       final String? bankCity,
+      required final Option<FilePickerCross> addressSelectedFile,
+      required final Option<FilePickerCross> chequeSelectedFile,
       required final bool hasSubmitted,
       required final bool isSaving}) = _$_EditBankDetailsState;
 
@@ -369,6 +411,12 @@ abstract class _EditBankDetailsState implements EditBankDetailsState {
   String? get bankState => throw _privateConstructorUsedError;
   @override
   String? get bankCity => throw _privateConstructorUsedError;
+  @override
+  Option<FilePickerCross> get addressSelectedFile =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<FilePickerCross> get chequeSelectedFile =>
+      throw _privateConstructorUsedError;
   @override
   bool get hasSubmitted => throw _privateConstructorUsedError;
   @override

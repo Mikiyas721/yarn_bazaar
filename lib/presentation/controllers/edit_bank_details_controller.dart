@@ -1,10 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/bank_details.dart';
+import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_bank_details.dart';
 import 'package:yarn_bazaar/domain/use_cases/update_user_bank_details.dart';
+import 'package:yarn_bazaar/domain/use_cases/upload_file.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
@@ -69,13 +73,14 @@ class EditBankDetailsController extends BlocViewModelController<
         toastError(l.message);
         bloc.add(EditBankDetailsFailureChangedEvent(getOption(l)));
       }, (r) {
-        if(r.accountName!=null) accountNameController.text = r.accountName!;
-        if(r.accountNumber?.value!=null) accountNumberController.text = r.accountNumber!.value!;
-        if(r.iFSCCode?.value!=null) iFSCCodeController.text = r.iFSCCode!.value!;
-        if(r.bankName!=null) bankNameController.text = r.bankName!;
-        if(r.bankBranch!=null) bankBranchController.text = r.bankBranch!;
-        if(r.bankState!=null) bankStateController.text = r.bankState!;
-        if(r.bankCity!=null) bankCityController.text = r.bankCity!;
+        if (r.accountName != null) accountNameController.text = r.accountName!;
+        if (r.accountNumber?.value != null)
+          accountNumberController.text = r.accountNumber!.value!;
+        if (r.iFSCCode?.value != null) iFSCCodeController.text = r.iFSCCode!.value!;
+        if (r.bankName != null) bankNameController.text = r.bankName!;
+        if (r.bankBranch != null) bankBranchController.text = r.bankBranch!;
+        if (r.bankState != null) bankStateController.text = r.bankState!;
+        if (r.bankCity != null) bankCityController.text = r.bankCity!;
       });
     });
   }
@@ -108,9 +113,71 @@ class EditBankDetailsController extends BlocViewModelController<
     bloc.add(EditBankDetailsBankCityChangedEvent(bankCity));
   }
 
-  onAttachAddress() {}
+  onAttachAddress() async {
+    try {
+      FilePickerCross selectedFile =
+          await FilePickerCross.importFromStorage(type: FileTypeCross.image);
+      if (selectedFile.path == null || selectedFile.fileName == null) {
+        toastError("Unable to use selected picture");
+      } else {
+        FormData formData = FormData.fromMap({
+          "file":
+              await MultipartFile.fromFile(selectedFile.path!, filename: selectedFile.fileName)
+        });
+        final fileUploadResponse =
+            await getIt.get<UploadFile>().execute(User.ContainerName, formData);
+        fileUploadResponse.fold((l) {
+          toastError(l.message);
+        }, (r) {
+          getIt.get<SplashBloc>().state.appUser.fold(() {
+            toastError("Unable to find cached user");
+          }, (currentSavedAppUser) {
+            BankDetail.createForUpdate(
+              id: currentSavedAppUser.bankDetailId,
+              addressProofUrl: selectedFile.fileName,
+            ).fold(() {
+              toastError("Invalid input(s)");
+            }, (a) async {
+              final profileUpdateResponse = await getIt.get<UpdateUserBankDetail>().execute(a);
+              profileUpdateResponse.fold((l) {
+                toastError(l.message);
+              }, (r) {
+                toastSuccess("Updated Successfully");
+              });
+            });
+          });
+        });
+      }
+    } catch (e) {
+      if (e is NullThrownError) {
+        toastError("Problem with selected file");
+      } else if (e is FileSelectionCanceledError) {
+        toastInformation("File selection cancelled");
+      } else {
+        toastInformation(e.toString());
+      }
+    }
+  }
 
-  onAttachCheque() {}
+  onAttachCheque() async {
+    try {
+      FilePickerCross selectedFile =
+          await FilePickerCross.importFromStorage(type: FileTypeCross.image);
+      if (selectedFile.path == null || selectedFile.fileName == null) {
+        toastError("Unable to use selected picture");
+      } else {
+        bloc.add(EditBankDetailsChequeSelectedFileChangedEvent(getOption(selectedFile)));
+      }
+    } catch (e) {
+      if (e is NullThrownError) {
+        toastError("Problem with selected file");
+      } else if (e is FileSelectionCanceledError) {
+        toastInformation("File selection cancelled");
+      } else {
+        toastInformation(e.toString());
+      }
+    }
+  }
 
   onSave() async {
     bloc.add(EditBankDetailsStartedSavingEvent());
@@ -120,24 +187,52 @@ class EditBankDetailsController extends BlocViewModelController<
       bloc.add(EditBankDetailsStoppedSavingEvent());
       toastError("Operation failed: Cached user not found.");
     }, (a) {
+      String? addressFileName;
+      String? chequeFileName;
+      currentState.addressSelectedFile.fold(() {}, (a) async {
+        FormData formData = FormData.fromMap(
+            {"file": await MultipartFile.fromFile(a.path!, filename: a.fileName)});
+        final fileUploadResponse =
+            await getIt.get<UploadFile>().execute(User.ContainerName, formData);
+
+        fileUploadResponse.fold((l) {
+          toastError(l.message);
+        }, (r) {
+          addressFileName = a.fileName!;
+        });
+      });
+
+      currentState.chequeSelectedFile.fold(() {}, (a) async {
+        FormData formData = FormData.fromMap(
+            {"file": await MultipartFile.fromFile(a.path!, filename: a.fileName)});
+        final fileUploadResponse =
+        await getIt.get<UploadFile>().execute(User.ContainerName, formData);
+
+        fileUploadResponse.fold((l) {
+          toastError(l.message);
+        }, (r) {
+          chequeFileName = a.fileName!;
+        });
+      });
+
       final bankDetails = BankDetail.createForUpdate(
         id: a.bankDetailId!,
-        accountName: bloc.state.accountName,
-        accountNumber: bloc.state.accountNumber.fold((l) => null, (r) => r.value),
-        iFSCCode: bloc.state.iFSCCode.fold((l) => null, (r) => r.value),
-        bankName: bloc.state.bankName,
-        bankBranch: bloc.state.bankBranch,
-        bankState: bloc.state.bankState,
-        bankCity: bloc.state.bankCity,
-        addressProofUrl: null,
-        cancelledChequeUrl: null,
+        accountName: currentState.accountName,
+        accountNumber: currentState.accountNumber.fold((l) => null, (r) => r.value),
+        iFSCCode: currentState.iFSCCode.fold((l) => null, (r) => r.value),
+        bankName: currentState.bankName,
+        bankBranch: currentState.bankBranch,
+        bankState: currentState.bankState,
+        bankCity: currentState.bankCity,
+        addressProofUrl: addressFileName,
+        cancelledChequeUrl: chequeFileName,
       );
 
       bankDetails.fold(() {
         bloc.add(EditBankDetailsStoppedSavingEvent());
         toastError("Operation failed: Invalid input(s)");
       }, (a) async {
-        final apiResponse = await getIt.get<UpdateUserBankDetails>().execute(a);
+        final apiResponse = await getIt.get<UpdateUserBankDetail>().execute(a);
 
         bloc.add(EditBankDetailsStoppedSavingEvent());
         apiResponse.fold((l) {

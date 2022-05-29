@@ -25,6 +25,8 @@ class User extends Entity {
   final BankDetail? bankDetail;
   final List<Yarn>? yarns;
 
+  static const ContainerName = 'user';
+
   User._({
     String? id,
     this.imageUrl,

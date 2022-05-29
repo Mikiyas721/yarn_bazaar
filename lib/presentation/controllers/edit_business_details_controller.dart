@@ -1,10 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
 import 'package:yarn_bazaar/domain/entities/business_details.dart';
+import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_business_details.dart';
 import 'package:yarn_bazaar/domain/use_cases/update_user_business_details.dart';
+import 'package:yarn_bazaar/domain/use_cases/upload_file.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/application/edit_business_details/edit_business_details_bloc.dart';
@@ -138,13 +142,49 @@ class EditBusinessDetailsController extends BlocViewModelController<
     bloc.add(EditBusinessDetailsTANNoChangedEvent(tanNo));
   }
 
-  onGSTDocument() {}
+  onGSTDocument() async{
+    try {
+      FilePickerCross selectedFile =
+          await FilePickerCross.importFromStorage(type: FileTypeCross.image);
+      if (selectedFile.path == null || selectedFile.fileName == null) {
+        toastError("Unable to use selected picture");
+      } else {
+        bloc.add(EditBusinessDetailsGSTDocumentUpdatedEvent(getOption(selectedFile)));
+      }
+    } catch (e) {
+      if (e is NullThrownError) {
+        toastError("Problem with selected file");
+      } else if (e is FileSelectionCanceledError) {
+        toastInformation("File selection cancelled");
+      } else {
+        toastInformation(e.toString());
+      }
+    }
+  }
 
   onPANNo(String panNo) {
     bloc.add(EditBusinessDetailsPANNoChangedEvent(panNo));
   }
 
-  onPANCardDocument() {}
+  onPANCardDocument() async{
+    try {
+      FilePickerCross selectedFile =
+          await FilePickerCross.importFromStorage(type: FileTypeCross.image);
+      if (selectedFile.path == null || selectedFile.fileName == null) {
+        toastError("Unable to use selected picture");
+      } else {
+       bloc.add(EditBusinessDetailsPANCardUpdatedEvent(getOption(selectedFile)));
+      }
+    } catch (e) {
+      if (e is NullThrownError) {
+        toastError("Problem with selected file");
+      } else if (e is FileSelectionCanceledError) {
+        toastInformation("File selection cancelled");
+      } else {
+        toastInformation(e.toString());
+      }
+    }
+  }
 
   onSave() {
     bloc.add(EditBusinessDetailsStartedSavingEvent());
@@ -153,18 +193,46 @@ class EditBusinessDetailsController extends BlocViewModelController<
       bloc.add(EditBusinessDetailsStoppedSavingEvent());
       toastError("Operation failed: Cached user not found.");
     }, (a) {
+      String? gstDocumentFileName;
+      String? panCardFileName;
+      currentState.gstDocumentSelectedFile.fold(() {}, (a) async {
+        FormData formData = FormData.fromMap(
+            {"file": await MultipartFile.fromFile(a.path!, filename: a.fileName)});
+        final fileUploadResponse =
+        await getIt.get<UploadFile>().execute(User.ContainerName, formData);
+
+        fileUploadResponse.fold((l) {
+          toastError(l.message);
+        }, (r) {
+          gstDocumentFileName = a.fileName!;
+        });
+      });
+
+      currentState.panCardSelectedFile.fold(() {}, (a) async {
+        FormData formData = FormData.fromMap(
+            {"file": await MultipartFile.fromFile(a.path!, filename: a.fileName)});
+        final fileUploadResponse =
+        await getIt.get<UploadFile>().execute(User.ContainerName, formData);
+
+        fileUploadResponse.fold((l) {
+          toastError(l.message);
+        }, (r) {
+          panCardFileName = a.fileName!;
+        });
+      });
+
       final businessDetails = BusinessDetail.createFromInput(
         id: a.businessDetailId,
-        companyName: bloc.state.companyName.fold((l) => null, (r) => r.value),
-        accountType: bloc.state.accountType,
-        categories: [],
-        address: bloc.state.address,
-        completeAddress: bloc.state.completeAddress,
-        gstNo: bloc.state.gstNo.fold((l) => null, (r) => r.value),
-        tanNo: bloc.state.tanNo.fold((l) => null, (r) => r.value),
-        gstDocumentUrl: '',
-        panNo: bloc.state.panNo.fold((l) => null, (r) => r.value),
-        panCardUrl: '',
+        companyName: currentState.companyName.fold((l) => null, (r) => r.value),
+        accountType: currentState.accountType,
+        categories: null,
+        address: currentState.address,
+        completeAddress: currentState.completeAddress,
+        gstNo: currentState.gstNo.fold((l) => null, (r) => r.value),
+        tanNo: currentState.tanNo.fold((l) => null, (r) => r.value),
+        gstDocumentUrl: gstDocumentFileName,
+        panNo: currentState.panNo.fold((l) => null, (r) => r.value),
+        panCardUrl: panCardFileName,
       );
       businessDetails.fold(() {
         bloc.add(EditBusinessDetailsStoppedSavingEvent());

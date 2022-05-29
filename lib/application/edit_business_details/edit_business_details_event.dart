@@ -126,6 +126,26 @@ class EditBusinessDetailsPANNoChangedEvent extends EditBusinessDetailsEvent {
   }
 }
 
+class EditBusinessDetailsGSTDocumentUpdatedEvent extends EditBusinessDetailsEvent {
+  final Option<FilePickerCross> gstDocumentSelectedFile;
+
+  EditBusinessDetailsGSTDocumentUpdatedEvent(this.gstDocumentSelectedFile);
+  @override
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(gstDocumentSelectedFile: gstDocumentSelectedFile);
+  }
+}
+
+class EditBusinessDetailsPANCardUpdatedEvent extends EditBusinessDetailsEvent {
+  final Option<FilePickerCross> panCardSelectedFile;
+
+  EditBusinessDetailsPANCardUpdatedEvent(this.panCardSelectedFile);
+  @override
+  EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {
+    return currentState.copyWith(panCardSelectedFile: panCardSelectedFile);
+  }
+}
+
 class EditBusinessDetailsSubmittedEvent extends EditBusinessDetailsEvent {
   @override
   EditBusinessDetailsState handle(EditBusinessDetailsState currentState)  {

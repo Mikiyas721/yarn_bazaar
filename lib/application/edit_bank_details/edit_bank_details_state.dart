@@ -13,17 +13,20 @@ abstract class EditBankDetailsState extends BlocState with _$EditBankDetailsStat
     String? bankBranch,
     String? bankState,
     String? bankCity,
+    required Option<FilePickerCross> addressSelectedFile,
+    required Option<FilePickerCross> chequeSelectedFile,
     required bool hasSubmitted,
     required bool isSaving,
   }) = _EditBankDetailsState;
 
-  factory EditBankDetailsState.initial()=>
-      EditBankDetailsState(
+  factory EditBankDetailsState.initial() => EditBankDetailsState(
         isLoadingSaved: true,
         loadedBankDetails: none(),
         loadingSavedFailure: none(),
         accountNumber: AccountNumber.create(''),
         iFSCCode: IFSCCode.create(''),
+        addressSelectedFile: none(),
+        chequeSelectedFile: none(),
         hasSubmitted: false,
         isSaving: false,
       );

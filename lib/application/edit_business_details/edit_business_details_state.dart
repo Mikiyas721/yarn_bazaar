@@ -14,6 +14,8 @@ abstract class EditBusinessDetailsState extends BlocState with _$EditBusinessDet
     required Either<GSTNumberFailure, GSTNumber> gstNo,
     required Either<TANNumberFailure, TANNumber> tanNo,
     required Either<PANNumberFailure, PANNumber> panNo,
+    required Option<FilePickerCross> gstDocumentSelectedFile,
+    required Option<FilePickerCross> panCardSelectedFile,
     required bool hasSubmitted,
     required bool isSaving,
   }) = _EditBusinessDetailsState;
@@ -28,6 +30,8 @@ abstract class EditBusinessDetailsState extends BlocState with _$EditBusinessDet
         gstNo: GSTNumber.create(''),
         tanNo: TANNumber.create(''),
         panNo: PANNumber.create(''),
+        gstDocumentSelectedFile: none(),
+        panCardSelectedFile: none(),
         hasSubmitted: false,
         isSaving: false,
       );

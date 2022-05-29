@@ -30,7 +30,7 @@ class BankDetailsRepoImpl extends IBankDetailsRepo {
   }
 
   @override
-  Future<Either<Failure, BankDetail>> updateUserBankDetails(BankDetail newBankDetails) async {
+  Future<Either<Failure, BankDetail>> updateUserBankDetail(BankDetail newBankDetails) async {
     final result =
         await _bankDetailsCrudDatasource.update(BankDetailDto.fromDomain(newBankDetails));
     return result.fold(

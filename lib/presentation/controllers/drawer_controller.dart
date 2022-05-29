@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/domain/use_cases/clear_logged_in_user.dart';
 import 'package:yarn_bazaar/domain/use_cases/get_file_download_link.dart';
 import 'package:yarn_bazaar/injection.dart';
@@ -23,7 +24,7 @@ import 'package:url_launcher/url_launcher.dart';
 class MyDrawerController
     extends BlocViewModelController<SplashBloc, SplashEvent, SplashState, DrawerViewModel>
     with ShortMessageMixin {
-  MyDrawerController(BuildContext context) : super(context, getIt.get<SplashBloc>(), true);
+  MyDrawerController(BuildContext context) : super(context, getIt.get<SplashBloc>(), false);
 
   @override
   DrawerViewModel mapStateToViewModel(SplashState s) {
@@ -32,7 +33,7 @@ class MyDrawerController
           () => null,
           (a) => a.imageUrl == null
               ? null
-              : getIt.get<GetFileDownloadLink>().execute('user', a.imageUrl!)),
+              : getIt.get<GetFileDownloadLink>().execute(User.ContainerName, a.imageUrl!)),
       username: s.appUser.fold(() => '', (a) => a.firstName.value ?? '') +
           ' ' +
           s.appUser.fold(() => '', (a) => a.lastName?.value ?? ''),

@@ -13,6 +13,7 @@ abstract class FileCrudDatasource
     extends CrudDataSource<BusinessDetailDto, RestResponseFailure> {
   Future<Either<Failure, dynamic>> uploadFile(String containerName,FormData formData);
   String getDownloadLink(String containerName, String fileName);
+  Future<Either<Failure, dynamic>> deleteFile(String containerName, String fileName);
 }
 
 @LazySingleton(as: FileCrudDatasource)
@@ -39,4 +40,13 @@ class FileLoopbackDatasource extends LoopbackRestCrudDataSource<BusinessDetailDt
     ));
     return response.either.fold((l) => left(l), (r) => right(r));
   }
+
+  @override
+  Future<Either<Failure, dynamic>> deleteFile(String containerName, String fileName) async{
+    final response = await restDataSource.delete(RestRequest(
+      url: '$path/${containerName}/files/${fileName}'
+    ));
+    return response.either.fold((l) => left(l), (r) => right(r));
+  }
+
 }

@@ -5,12 +5,12 @@ import 'package:yarn_bazaar/domain/entities/bank_details.dart';
 import 'package:yarn_bazaar/domain/ports/bank_details_repo.dart';
 
 @injectable
-class UpdateUserBankDetails {
+class UpdateUserBankDetail {
   final IBankDetailsRepo _iBankDetails;
 
-  UpdateUserBankDetails(this._iBankDetails);
+  UpdateUserBankDetail(this._iBankDetails);
 
   Future<Either<Failure, BankDetail>> execute(BankDetail bankDetails) {
-    return _iBankDetails.updateUserBankDetails(bankDetails);
+    return _iBankDetails.updateUserBankDetail(bankDetails);
   }
 }

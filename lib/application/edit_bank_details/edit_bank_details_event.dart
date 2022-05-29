@@ -115,6 +115,26 @@ class EditBankDetailsBankCityChangedEvent extends EditBankDetailsEvent {
   }
 }
 
+class EditBankDetailsAddressSelectedFileChangedEvent extends EditBankDetailsEvent{
+  final Option<FilePickerCross> addressSelectedFile;
+
+  EditBankDetailsAddressSelectedFileChangedEvent(this.addressSelectedFile);
+  @override
+  EditBankDetailsState handle(EditBankDetailsState currentState) {
+    return currentState.copyWith(addressSelectedFile: addressSelectedFile);
+  }
+}
+
+class EditBankDetailsChequeSelectedFileChangedEvent extends EditBankDetailsEvent{
+  final Option<FilePickerCross> chequeSelectedFile;
+
+  EditBankDetailsChequeSelectedFileChangedEvent(this.chequeSelectedFile);
+  @override
+  EditBankDetailsState handle(EditBankDetailsState currentState) {
+    return currentState.copyWith(chequeSelectedFile: chequeSelectedFile);
+  }
+}
+
 class EditBankDetailsSubmittedEvent extends EditBankDetailsEvent {
   @override
   EditBankDetailsState handle(EditBankDetailsState currentState)  {
