@@ -146,15 +146,15 @@ class SignUpController
   }
 
   onVerifyOTP() async {
-    bloc.add(SignUpStartedVerifyingOTPChangedEvent());
+    bloc.add(SignUpStartedVerifyingOTPEvent());
     bloc.state.userEnteredOTP.fold((l) {
       toastError(l.message);
-      bloc.add(SignUpStoppedVerifyingOTPChangedEvent());
+      bloc.add(SignUpStoppedVerifyingOTPEvent());
     }, (r) async {
       final verificationResult =
           await getIt.get<VerifyFirebasePhoneAuthCode>().execute(r.value.toString());
       verificationResult.fold((l) {
-        bloc.add(SignUpStoppedVerifyingOTPChangedEvent());
+        bloc.add(SignUpStoppedVerifyingOTPEvent());
         toastError(l.message);
       }, (r) {
         bloc.add(SignUpActiveIndexChangedEvent(1));

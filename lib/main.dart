@@ -7,8 +7,10 @@ import 'package:yarn_bazaar/presentation/pages/apply_for_finance_page.dart';
 import 'package:yarn_bazaar/presentation/pages/auth_page.dart';
 import 'package:yarn_bazaar/presentation/pages/categories_page.dart';
 import 'package:yarn_bazaar/presentation/pages/composed_yarn_page.dart';
+import 'package:yarn_bazaar/presentation/pages/forgot_password_page.dart';
 import 'package:yarn_bazaar/presentation/pages/help_and_support_page.dart';
 import 'package:yarn_bazaar/presentation/pages/news_page.dart';
+import 'package:yarn_bazaar/presentation/pages/reset_password_page.dart';
 import 'package:yarn_bazaar/presentation/pages/suggestion_page.dart';
 import 'package:yarn_bazaar/presentation/pages/user_detail_page.dart';
 import 'package:yarn_bazaar/presentation/pages/directory_page.dart';
@@ -91,12 +93,13 @@ final routes = {
   AuthPage.route: (BuildContext context) => const AuthPage(),
   CategoriesPage.route: (BuildContext context) => const CategoriesPage(),
   ComposedYarnPage.route: (BuildContext context) => const ComposedYarnPage(),
+  DirectoryPage.route: (BuildContext context) => const DirectoryPage(),
   EditBankDetailsPage.route: (BuildContext context) => const EditBankDetailsPage(),
   EditBasicProfilePage.route: (BuildContext context) => const EditBasicProfilePage(),
   EditBusinessDetailPage.route: (BuildContext context) => const EditBusinessDetailPage(),
   EditPasswordPage.route: (BuildContext context) => const EditPasswordPage(),
   EditProfilePage.route: (BuildContext context) => const EditProfilePage(),
-  DirectoryPage.route: (BuildContext context) => const DirectoryPage(),
+  ForgotPasswordPage.route: (BuildContext context)=> const ForgotPasswordPage(),
   HelpAndSupportPage.route: (BuildContext context) => const HelpAndSupportPage(),
   HomePage.route: (BuildContext context) => const HomePage(),
   InputSelectionPage.route: (BuildContext context) => const InputSelectionPage(),
@@ -104,6 +107,7 @@ final routes = {
   PriceListPage.route: (BuildContext context) => const PriceListPage(),
   PrivacyPolicyPage.route: (BuildContext context) => const PrivacyPolicyPage(),
   ProfilePage.route: (BuildContext context) => const ProfilePage(),
+  ResetPasswordPage.route: (BuildContext context)=> const ResetPasswordPage(),
   SignInPage.route: (BuildContext context) => const SignInPage(),
   SignUpPage.route: (BuildContext context) => const SignUpPage(),
   SuggestionPage.route: (BuildContext context) => const SuggestionPage(),

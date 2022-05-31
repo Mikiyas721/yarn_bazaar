@@ -57,6 +57,19 @@ class UserRepoImpl extends IUserRepo {
   }
 
   @override
+  Future<Either<Failure, User>> fetchByPhoneNumber(String phoneNumber) async {
+    final result = await _userCrudDatasource.findOne(options: {
+      "filter": {
+        "where": {"phoneNumber": phoneNumber}
+      }
+    });
+    return result.fold(
+      (l) => left(l),
+      (r) => r.toDomain().fold(() => left(userDtoMappingSimpleFailure), (a) => right(a)),
+    );
+  }
+
+  @override
   Future<Either<Failure, List<User>>> fetchByUserType(
       String currentUserId, String? userType) async {
     final options = userType == null
@@ -102,8 +115,8 @@ class UserRepoImpl extends IUserRepo {
 
   @override
   Future<Option<AppUser>> getCurrentLoggedInUser() {
-    return _userCacheDataSource.getMap(_userCacheDataSource.userCacheKey).then((value) =>
-        value.flatMap((a) => AppUserDto.fromJson(a as Map<String, dynamic>).toDomain()));
+    return _userCacheDataSource.getMap(_userCacheDataSource.userCacheKey).then(
+        (value) => value.flatMap((a) => AppUserDto.fromJson(a as Map<String, dynamic>).toDomain()));
   }
 
   @override

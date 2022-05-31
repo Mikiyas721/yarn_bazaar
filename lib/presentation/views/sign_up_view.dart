@@ -140,8 +140,6 @@ class SignUpView extends StatelessWidget {
                               decoration: InputDecoration(
                                 errorText: signUpViewModel.phoneNumberError,
                               ),
-                              controller:
-                                  TextEditingController(text: signUpViewModel.phoneNumber),
                             ))
                       ],
                     ),

@@ -63,14 +63,14 @@ class SignUpGeneratedOTPEvent extends SignUpEvent {
   }
 }
 
-class SignUpStartedVerifyingOTPChangedEvent extends SignUpEvent {
+class SignUpStartedVerifyingOTPEvent extends SignUpEvent {
   @override
   SignUpState handle(SignUpState currentState)  {
     return currentState.copyWith(isVerifyingOTP: true);
   }
 }
 
-class SignUpStoppedVerifyingOTPChangedEvent extends SignUpEvent {
+class SignUpStoppedVerifyingOTPEvent extends SignUpEvent {
   @override
   SignUpState handle(SignUpState currentState)  {
     return currentState.copyWith(isVerifyingOTP: false);
