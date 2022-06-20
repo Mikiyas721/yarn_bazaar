@@ -63,8 +63,8 @@ class MillUsersController extends BlocViewModelController<
           bloc.add(FetchMillUsersStoppedLoadingEvent());
           bloc.add(FetchMillUsersLoadFailureEvent(getOption(l)));
         }, (list2) {
-          bloc.add(FetchMillUsersStoppedLoadingEvent());
           list1.addAll(list2);
+          bloc.add(FetchMillUsersStoppedLoadingEvent());
           bloc.add(FetchMillUsersDataChangedEvent(list1));
         });
       });

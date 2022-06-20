@@ -31,7 +31,8 @@ class Name {
   Name._(this.value);
 
   static Either<NameFailure, Name> create(String? name) {
-    if (name == null || name.isEmpty) return left(EmptyNameFailure());
+    if(name==null) return right(Name._(name));
+    if (name.isEmpty) return left(EmptyNameFailure());
     if (name.length < 2) return left(ShortNameFailure());
     if (name.length > 32) return left(LongNameFailure());
     if (!RegExp(regex).hasMatch(name)) return left(InvalidNameFailure());

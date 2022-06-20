@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class MyActionButton extends StatelessWidget {
@@ -25,8 +26,9 @@ class MyActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-          textStyle: const TextStyle(
+          textStyle: GoogleFonts.inter(
             color: Colors.white,
+            fontSize: 16
           ),
           padding: padding,
           elevation: elevation,

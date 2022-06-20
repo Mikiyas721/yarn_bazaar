@@ -26,116 +26,124 @@ class ForgotPasswordView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Text('Forgot your password?'),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: !forgotPasswordViewModel.hasGeneratedOTP
-              ? [
-                  Text(
-                      'Enter your email or mobile number below to receive OTP and reset password'),
-                  Row(
-                    children: [
-                      Expanded(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 12),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              readOnly: true,
-                              enabled: false,
-                              controller: TextEditingController(text: '+91'),
-                            ),
-                          )),
-                      Expanded(
-                        flex: 9,
-                        child: TextField(
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                              errorText:
-                                  forgotPasswordViewModel.phoneNumberError,
-                              hintText: 'Mobile Number'),
-                          onChanged: onPhoneNumber,
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    width: size.width,
-                    child: MyActionButton(
-                      label: 'SEND OTP',
-                      onSubmit: onSendOTP,
+        30.vSpace,
+        Text('Forgot your password?', style: context.titleLarge),
+        20.vSpace,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: !forgotPasswordViewModel.hasGeneratedOTP
+                ? [
+                    Text(
+                      'Enter your mobile number below to receive OTP and reset password',
+                      textAlign: TextAlign.center,
+                      style: context.labelLarge,
                     ),
-                  )
-                ]
-              : [
-                  Row(
-                    children: [
-                      Expanded(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 12),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              readOnly: true,
-                              enabled: false,
-                              controller: TextEditingController(text: '+91'),
-                            ),
-                          )),
-                      Expanded(
+                    10.vSpace,
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 12),
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                readOnly: true,
+                                enabled: false,
+                                controller: TextEditingController(text: '+91'),
+                              ),
+                            )),
+                        Expanded(
                           flex: 9,
                           child: TextField(
-                            readOnly: true,
-                            enabled: false,
+                            keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
-                              errorText:
-                                  forgotPasswordViewModel.phoneNumberError,
-                            ),
-                          ))
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        errorText: forgotPasswordViewModel.oTPError,
-                      ),
-                      onChanged: onOTP,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 10),
-                    child: Text(
-                      'Please type the OTP code sent to \n${forgotPasswordViewModel.phoneNumber}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey.shade500),
-                    ),
-                  ),
-                  SizedBox(
-                    width: size.width,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextButton(
-                          onPressed: onResendOTP,
-                          child: Text(
-                            'Resend OTP',
-                            style: TextStyle(
-                              color: context.primaryColor,
-                            ),
+                                errorText: forgotPasswordViewModel.phoneNumberError,
+                                hintText: 'Mobile Number'),
+                            onChanged: onPhoneNumber,
                           ),
-                          style:
-                          TextButton.styleFrom(minimumSize: const Size(double.infinity, 45)),
-                        ),
-                        10.vSpace,
-                        MyActionButton(
-                          label: 'Verify',
-                          onSubmit: onVerifyOTP,
-                        ),
+                        )
                       ],
                     ),
-                  )
-                ],
+                    30.vSpace,
+                    SizedBox(
+                      width: size.width,
+                      child: MyActionButton(
+                        label: 'SEND OTP',
+                        onSubmit: onSendOTP,
+                        isLoading: forgotPasswordViewModel.isGeneratingOTP,
+                      ),
+                    )
+                  ]
+                : [
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 12),
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                readOnly: true,
+                                enabled: false,
+                                controller: TextEditingController(text: '+91'),
+                              ),
+                            )),
+                        Expanded(
+                            flex: 9,
+                            child: TextField(
+                              readOnly: true,
+                              enabled: false,
+                              decoration: InputDecoration(
+                                errorText: forgotPasswordViewModel.phoneNumberError,
+                              ),
+                            ))
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          errorText: forgotPasswordViewModel.oTPError,
+                        ),
+                        onChanged: onOTP,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, bottom: 10),
+                      child: Text(
+                        'Please type the OTP code sent to \n${forgotPasswordViewModel.phoneNumber}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey.shade500),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton(
+                            onPressed: onResendOTP,
+                            child: Text(
+                              'Resend OTP',
+                              style: TextStyle(
+                                color: context.primaryColor,
+                              ),
+                            ),
+                            style: TextButton.styleFrom(minimumSize: const Size(double.infinity, 45)),
+                          ),
+                          10.vSpace,
+                          MyActionButton(
+                            label: 'Verify',
+                            onSubmit: onVerifyOTP,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+          ),
         )
       ],
     );

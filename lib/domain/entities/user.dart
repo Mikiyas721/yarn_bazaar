@@ -183,6 +183,7 @@ class User extends Entity {
         passwordObject != null && passwordObject.isLeft()) return none();
 
     return some(User._(
+      id: id,
       imageUrl: imageUrl,
       firstName: firstNameObject.fold((l) => null, (r) => r),
       lastName: lastNameObject.fold((l) => null, (r) => r),

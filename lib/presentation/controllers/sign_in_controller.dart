@@ -8,6 +8,7 @@ import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/models/sign_in_view_model.dart';
 import 'package:yarn_bazaar/application/splash/splash_bloc.dart';
+import 'package:yarn_bazaar/presentation/pages/forgot_password_page.dart';
 import 'package:yarn_bazaar/presentation/pages/home_page.dart';
 import 'package:yarn_bazaar/presentation/pages/sign_up_page.dart';
 
@@ -53,7 +54,11 @@ class SignInController
   }
 
   onForgotPassword() {
-    //TODO implement
+    if (!currentState.isVerifyingCredentials) {
+      Navigator.pushNamed(context, ForgotPasswordPage.route);
+    } else {
+      toastInformation("Please wait until process terminates");
+    }
   }
 
   onLogin() {
@@ -74,7 +79,7 @@ class SignInController
           bloc.add(SignInVerifyingCredentialsStoppedEvent());
           toastError(l.message);
         }, (r) async {
-          final userWasCached = await getIt.get<CacheLoggedInUser>().execute(r);
+          final userWasCached = await getIt.get<UpdateCacheLoggedInUser>().execute(r);
           getIt.get<SplashBloc>().add(SplashAppUserChangedEvent(getOption(r)));
           bloc.add(SignInVerifyingCredentialsStoppedEvent());
 

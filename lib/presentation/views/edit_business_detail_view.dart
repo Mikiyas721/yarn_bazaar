@@ -64,7 +64,7 @@ class EditBusinessDetailView extends StatelessWidget {
                 children: [
                   TextFieldWithTitle(
                     title: 'Company Name',
-                    controller: completeAddressTextEditingController,
+                    controller: companyNameTextEditingController,
                     errorMessage: editBusinessDetailViewModel.companyNameError,
                     hintText: 'xyz enterprise',
                     usesPrimaryColor: false,

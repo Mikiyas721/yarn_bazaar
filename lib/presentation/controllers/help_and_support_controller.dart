@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/short_message_mixin.dart';
 import 'package:yarn_bazaar/presentation/pages/privacy_policy_page.dart';
@@ -25,25 +26,52 @@ class HelpAndSupportController extends ControllerWithOutBloc with ShortMessageMi
               children: [
                 MyActionButton(
                   label: "REQUEST CALL BACK",
-                  onSubmit: () {},
+                  onSubmit: () {
+                    //TODO Implement
+                  },
                 ),
                 5.vSpace,
                 MyActionButton(
                   label: "CALL NOW",
-                  onSubmit: () {},
+                  onSubmit: () async {
+                    Uri phoneNumberUri = Uri(scheme: 'tel', path: '9914601110');
+                    bool canCall = await canLaunchUrl(phoneNumberUri);
+                    if (canCall) {
+                      await launchUrl(phoneNumberUri);
+                    } else {
+                      Navigator.pop(context);
+                      toastError("Unable to open dialer");
+                    }
+                  },
                 ),
                 5.vSpace,
                 MyActionButton(
                   label: "WHATSAPP",
-                  onSubmit: () {},
+                  onSubmit: () async {
+                    bool launched = await launchUrl(
+                        Uri(scheme: 'https', path: 'api.whatsapp.com/send?phone=+919914601110'),
+                        mode: LaunchMode.externalApplication);
+                    if (!launched) toastError("Unable to open whatsapp");
+                  },
                 ),
                 10.vSpace,
                 Row(
                   children: [
                     Text("Email - "),
                     InkWell(
-                      child: Text("your email here"),
-                      onTap: () {},
+                      child: Text(
+                        "your email here",
+                        style: context.labelSmall?.copyWith(color: Colors.lightBlue),
+                      ),
+                      onTap: () async{
+                        bool launched = await launchUrl(
+                          Uri(
+                              scheme: 'mailto',
+                              path: 'your email here',
+                              queryParameters: {'subject': 'Example'}),
+                        );
+                        if (!launched) toastError("Unable to email");
+                      },
                     ),
                   ],
                 )

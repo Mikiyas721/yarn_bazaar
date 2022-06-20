@@ -21,6 +21,7 @@ class SearchField extends StatelessWidget {
       prefixIcon: const Icon(Icons.search),
       onSuffixTap: onDiscardText,
       placeholder: 'Search',
+      placeholderStyle: Theme.of(context).inputDecorationTheme.labelStyle,
       onChanged: onChanged,
     );
   }

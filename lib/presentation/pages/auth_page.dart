@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/controllers/auth_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 
 class AuthPage extends StatelessWidget {
@@ -68,7 +69,7 @@ class AuthPage extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text('New User'),
+                        Text('New User', style: context.bodyLarge),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           child: MyActionButton(
@@ -76,7 +77,7 @@ class AuthPage extends StatelessWidget {
                             label: 'REGISTER FREE',
                           ),
                         ),
-                        const Text('Existing User'),
+                        Text('Existing User', style: context.bodyLarge),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5, top: 15),
                           child: MyActionButton(

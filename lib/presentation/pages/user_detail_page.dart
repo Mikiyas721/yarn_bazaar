@@ -31,7 +31,7 @@ class UserDetailPage extends StatelessWidget with FormatterMixin {
                 child: Scaffold(
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
-                    toolbarHeight: size.height * 0.145,
+                    toolbarHeight: size.height * 0.155,
                     flexibleSpace: Padding(
                       padding: EdgeInsets.only(top: size.height * 0.05),
                       child: Column(
@@ -55,7 +55,9 @@ class UserDetailPage extends StatelessWidget with FormatterMixin {
                                     IconButton(
                                       icon: const Icon(Icons.share),
                                       color: Colors.grey,
-                                      onPressed: controller.onShare,
+                                      onPressed: (){
+                                        controller.onShare(user);
+                                      },
                                     ),
                                   ],
                                 )

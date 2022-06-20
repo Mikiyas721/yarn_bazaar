@@ -3,6 +3,7 @@ import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/domain/entities/app_user.dart';
 import 'package:yarn_bazaar/domain/entities/user.dart';
+import 'package:yarn_bazaar/domain/use_cases/cache_logged_in_user.dart';
 import 'package:yarn_bazaar/domain/use_cases/get_file_download_link.dart';
 import 'package:yarn_bazaar/domain/use_cases/update_user_basic_info.dart';
 import 'package:yarn_bazaar/domain/use_cases/upload_file.dart';
@@ -25,9 +26,8 @@ class EditProfileController
   EditProfileViewModel mapStateToViewModel(SplashState s) {
     return EditProfileViewModel(
       imageUrl: s.appUser.fold(
-              () => '',
-              (a) =>
-          a.imageUrl == null
+          () => '',
+          (a) => a.imageUrl == null
               ? null
               : getIt.get<GetFileDownloadLink>().execute(User.ContainerName, a.imageUrl!)),
       username: s.appUser.fold(() => '', (a) => a.firstName.value ?? '') +
@@ -41,31 +41,30 @@ class EditProfileController
   onEditProfilePic() async {
     try {
       FilePickerCross selectedFile =
-      await FilePickerCross.importFromStorage(type: FileTypeCross.image);
+          await FilePickerCross.importFromStorage(type: FileTypeCross.image);
       if (selectedFile.path == null || selectedFile.fileName == null) {
         toastError("Unable to use selected picture");
       } else {
         FormData formData = FormData.fromMap({
-          "file":
-          await MultipartFile.fromFile(selectedFile.path!, filename: selectedFile.fileName)
+          "file": await MultipartFile.fromFile(selectedFile.path!, filename: selectedFile.fileName)
         });
         final fileUploadResponse =
-        await getIt.get<UploadFile>().execute(User.ContainerName, formData);
+            await getIt.get<UploadFile>().execute(User.ContainerName, formData);
         fileUploadResponse.fold((l) {
           toastError(l.message);
         }, (r) {
           currentState.appUser.fold(() {
             toastError("Unable to find cached user");
           }, (currentSavedAppUser) {
-            User.createForUpdate(id: currentSavedAppUser.id, imageUrl: selectedFile.fileName)
-                .fold(() {
+            User.createForUpdate(id: currentSavedAppUser.id, imageUrl: selectedFile.fileName).fold(
+                () {
               toastError("Invalid input(s)");
             }, (a) async {
               final profileUpdateResponse = await getIt.get<UpdateUserBasicInfo>().execute(a);
               profileUpdateResponse.fold((l) {
                 toastError(l.message);
-              }, (r) {
-                bloc.add(SplashAppUserChangedEvent(AppUser.create(
+              }, (r) async {
+                final updatedUserInformation = AppUser.create(
                   id: currentSavedAppUser.id,
                   imageUrl: selectedFile.fileName,
                   firstName: currentSavedAppUser.firstName.value,
@@ -77,8 +76,14 @@ class EditProfileController
                   password: currentSavedAppUser.password?.value,
                   businessDetailId: currentSavedAppUser.businessDetailId,
                   bankDetailId: currentSavedAppUser.bankDetailId,
-                )));
-                toastSuccess("Updated Successfully");
+                );
+                updatedUserInformation.fold(() {
+                  toastError("Unable to update cache");
+                }, (a) async {
+                  await getIt.get<UpdateCacheLoggedInUser>().execute(a);
+                  bloc.add(SplashAppUserChangedEvent(updatedUserInformation));
+                  toastSuccess("Updated Successfully");
+                });
               });
             });
           });

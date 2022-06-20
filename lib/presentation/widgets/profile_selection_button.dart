@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 
 class ProfileSelectionButton extends StatelessWidget {
   final bool firstTabIsSelected;
@@ -32,7 +33,7 @@ class ProfileSelectionButton extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'Buyer',
-                    style: TextStyle(
+                    style: context.bodyLarge?.copyWith(
                         color:
                             firstTabIsSelected ? tabColors[0] : Colors.white),
                   ),
@@ -51,7 +52,7 @@ class ProfileSelectionButton extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'Seller',
-                    style: TextStyle(
+                    style: context.bodyLarge?.copyWith(
                         color:
                             firstTabIsSelected ? Colors.white : tabColors[1]),
                   ),

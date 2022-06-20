@@ -4,8 +4,10 @@ import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
+import 'package:yarn_bazaar/domain/entities/app_user.dart';
 import 'package:yarn_bazaar/domain/entities/business_details.dart';
 import 'package:yarn_bazaar/domain/entities/user.dart';
+import 'package:yarn_bazaar/domain/use_cases/cache_logged_in_user.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_business_details.dart';
 import 'package:yarn_bazaar/domain/use_cases/update_user_business_details.dart';
 import 'package:yarn_bazaar/domain/use_cases/upload_file.dart';
@@ -44,9 +46,9 @@ class EditBusinessDetailsController extends BlocViewModelController<
           s.hasSubmitted ? s.companyName.fold((l) => l.message, (r) => null) : null,
       accountType: s.accountType,
       address: s.address,
-      addressError: '',
+      addressError: s.hasSubmitted?s.address==null?'Address is required':null:null,
       completeAddress: s.completeAddress,
-      completeAddressError: '',
+      completeAddressError: s.hasSubmitted?s.completeAddress==null?'Complete Address is required':null:null,
       gstNo: s.gstNo.fold((l) => null, (r) => r.value),
       gstNoError: s.hasSubmitted ? s.gstNo.fold((l) => l.message, (r) => null) : null,
       tanNo: s.tanNo.fold((l) => null, (r) => r.value),
@@ -243,7 +245,27 @@ class EditBusinessDetailsController extends BlocViewModelController<
         apiResponse.fold((l) {
           toastError(l.message);
         }, (r) async {
-          toastSuccess("Successfully updated");
+          final splashBloc = getIt.get<SplashBloc>();
+          final newAppUser = AppUser.create(
+            id:splashBloc.state.appUser.fold(() => null, (a) => a.id),
+            imageUrl:splashBloc.state.appUser.fold(() => null, (a) => a.imageUrl),
+            firstName:splashBloc.state.appUser.fold(() => null, (a) => a.firstName.value),
+            phoneNumber:splashBloc.state.appUser.fold(() => null, (a) => a.phoneNumber.value),
+            lastName:splashBloc.state.appUser.fold(() => null, (a) => a.lastName?.value),
+            companyName:r.companyName,
+            accountType:r.accountType,
+            categories:r.categories,
+            password:splashBloc.state.appUser.fold(() => null, (a) => a.password?.value),
+            businessDetailId:splashBloc.state.appUser.fold(() => null, (a) => a.businessDetailId),
+            bankDetailId:splashBloc.state.appUser.fold(() => null, (a) => a.bankDetailId),
+          );
+          newAppUser.fold((){
+            toastError("Invalid input(s): Unable to update cache");
+          }, (a)async{
+            splashBloc.add(SplashAppUserChangedEvent(newAppUser));
+            await getIt.get<UpdateCacheLoggedInUser>().execute(a);
+            toastSuccess("Successfully updated");
+          });
           await delay(milliSeconds: 500);
           Navigator.pop(context);
         });

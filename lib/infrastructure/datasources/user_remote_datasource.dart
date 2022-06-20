@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/domain/entities/app_user.dart';
 import 'package:yarn_bazaar/domain/entities/credentials.dart';
+import 'package:yarn_bazaar/domain/entities/user.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/shared/crud_datasource/crud_datasource.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/shared/crud_datasource/rest_crud_datasource.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/shared/rest_datasource/rest_datasource.dart';
@@ -18,6 +19,8 @@ abstract class UserCrudDatasource extends CrudDataSource<UserDto, RestResponseFa
   Future<Either<Failure, AppUser>> addUser(AppUser user);
 
   Future<Either<Failure, bool>> checkPhoneNumber(String phoneNumber);
+
+  Future<Either<Failure, List<User>>> fetchByUserType(String currentUserId, String? userType);
 }
 
 @LazySingleton(as: UserCrudDatasource)
@@ -62,12 +65,18 @@ class UserLoopbackDatasource extends LoopbackRestCrudDataSource<UserDto>
   }
 
   @override
-  Future<Either<Failure, bool>> checkPhoneNumber(String phoneNumber) async{
-    final phoneNumberExistsResponse = await restDataSource.post(RestRequest(
-      url: '$path/checkPhoneNumber/$phoneNumber'
-    ));
+  Future<Either<Failure, bool>> checkPhoneNumber(String phoneNumber) async {
+    final phoneNumberExistsResponse =
+        await restDataSource.post(RestRequest(url: '$path/checkPhoneNumber/$phoneNumber'));
     return phoneNumberExistsResponse.either.fold((l) => left(l), (r) => right(r.value));
   }
 
-
+  @override
+  Future<Either<Failure, List<User>>> fetchByUserType(
+      String currentUserId, String? userType) async {
+    final fetchUsersByTypeResponse = await restDataSource.post(RestRequest(
+        url: '$path/getUsersByAccountType',
+        data: {"userId": currentUserId, "accountType": userType}));
+    return fetchUsersByTypeResponse.either.fold((l) => left(l), (r) => right(r.value));
+  }
 }

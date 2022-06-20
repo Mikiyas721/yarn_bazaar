@@ -16,6 +16,7 @@ class FireBaseRepo extends IFirebaseRepo {
   Future<PhoneAuthResult> requestCode(PhoneNumber phoneNumber) async {
     Completer<PhoneAuthResult> verificationCompleter = Completer();
     firebaseAuthInstance.verifyPhoneNumber(
+        timeout: Duration(seconds: 15),
         phoneNumber: phoneNumber.value,
         codeSent: (String verification, int? forceResend) {
           verificationId = verification;

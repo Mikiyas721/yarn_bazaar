@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/models/sign_in_view_model.dart';
+import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_action_button.dart';
 import 'package:yarn_bazaar/presentation/widgets/text_field_with_title.dart';
 
@@ -26,9 +27,9 @@ class SignInView extends StatelessWidget {
     return Column(
       children: [
         Row(
-          children: const [
-            Text('Mobile Number'),
-            Text('*', style: TextStyle(color: Colors.red))
+          children: [
+            Text('Mobile Number', style: context.bodyMedium?.copyWith(color: context.primaryColor)),
+            Text('*', style: context.bodyMedium?.copyWith(color: Colors.red))
           ],
         ),
         Row(
@@ -51,10 +52,6 @@ class SignInView extends StatelessWidget {
                   decoration: InputDecoration(
                     errorText: signInViewModel.phoneNumberError,
                     hintText: 'Mobile Number',
-                    hintStyle: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                    ),
                   ),
                   onChanged: onPhoneNumber,
                 ))

@@ -2,7 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/common/failure.dart';
 import 'package:yarn_bazaar/common/mixins/date_time_mixin.dart';
+import 'package:yarn_bazaar/domain/entities/app_user.dart';
 import 'package:yarn_bazaar/domain/entities/user.dart';
+import 'package:yarn_bazaar/domain/use_cases/cache_logged_in_user.dart';
 import 'package:yarn_bazaar/domain/use_cases/fetch_saved_user_basic_information.dart';
 import 'package:yarn_bazaar/domain/use_cases/update_user_basic_info.dart';
 import 'package:yarn_bazaar/injection.dart';
@@ -190,7 +192,27 @@ class EditBasicInformationController extends BlocViewModelController<
         apiResponse.fold((l) {
           toastError(l.message);
         }, (r) async {
-          toastSuccess("Successfully updated");
+          final splashBloc = getIt.get<SplashBloc>();
+          final newAppUser = AppUser.create(
+              id:splashBloc.state.appUser.fold(() => null, (a) => a.id),
+              imageUrl:splashBloc.state.appUser.fold(() => null, (a) => a.imageUrl),
+              firstName:r.firstName?.value,
+              phoneNumber:r.phoneNumber?.value,
+              lastName:r.lastName?.value,
+              companyName:splashBloc.state.appUser.fold(() => null, (a) => a.companyName.value),
+              accountType:splashBloc.state.appUser.fold(() => null, (a) => a.accountType),
+              categories:splashBloc.state.appUser.fold(() => null, (a) => a.categories),
+              password:splashBloc.state.appUser.fold(() => null, (a) => a.password?.value),
+              businessDetailId:splashBloc.state.appUser.fold(() => null, (a) => a.businessDetailId),
+              bankDetailId:splashBloc.state.appUser.fold(() => null, (a) => a.bankDetailId),
+          );
+          newAppUser.fold((){
+            toastError("Invalid input(s): Unable to update cache");
+          }, (a)async{
+            splashBloc.add(SplashAppUserChangedEvent(newAppUser));
+            await getIt.get<UpdateCacheLoggedInUser>().execute(a);
+            toastSuccess("Successfully updated");
+          });
           await delay(milliSeconds: 500);
           Navigator.pop(context);
         });

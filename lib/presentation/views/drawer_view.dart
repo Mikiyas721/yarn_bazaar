@@ -22,10 +22,7 @@ class DrawerView extends StatelessWidget {
     final drawerItems = [
       {'icon': Icons.home_outlined, 'label': 'Home'},
       {'icon': Icons.email_outlined, 'label': 'Post Yarn Requirement'},
-      {
-        'icon': Icons.account_balance_wallet_outlined,
-        'label': 'Apply for Finance'
-      },
+      {'icon': Icons.account_balance_wallet_outlined, 'label': 'Apply for Finance'},
       {'icon': Icons.analytics, 'label': 'News'},
       {'icon': Icons.radio_outlined, 'label': 'Advertise with Us'},
       {'icon': Icons.share, 'label': 'Share App'},
@@ -85,8 +82,7 @@ class DrawerView extends StatelessWidget {
                   },
                 );
               },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(
+              separatorBuilder: (BuildContext context, int index) => const Divider(
                 height: 1,
                 indent: 20,
               ),
@@ -98,29 +94,26 @@ class DrawerView extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 30),
-              child: Text(drawerViewModel.workPlace,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  )),
+              child: Text(
+                drawerViewModel.workPlace,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15, bottom: 10),
               child: TextButton.icon(
-                style:
-                    TextButton.styleFrom(backgroundColor: context.primaryColor),
+                style: TextButton.styleFrom(backgroundColor: context.primaryColor),
                 icon: const Icon(Icons.logout, color: Colors.white),
-                label: const Text('Log Out',
-                    style: TextStyle(color: Colors.white)),
+                label: const Text('Log Out', style: TextStyle(color: Colors.white)),
                 onPressed: onLogout,
               ),
             ),
-            const Text(
-              '(Version 2.0)',
-              style: TextStyle(
-                fontSize: 10,
-                color: Colors.grey,
-              ),
+            Text(
+              '(Version 1.0)',
+              style: context.labelSmall,
             )
           ],
         ),

@@ -3,7 +3,6 @@ import 'package:yarn_bazaar/common/failure.dart';
 
 import '../value_with_failure.dart';
 
-
 class RestResponseError {
   final int? statusCode;
   final String? message;
@@ -39,7 +38,9 @@ class ErrorResponseFailure implements RestResponseFailure {
   const ErrorResponseFailure(this.error);
 
   @override
-  String get message => "Error Response: ${error.message}";
+  String get message => error.extra['error']['message'] != null
+      ? "Error Response: ${error.extra['error']['message']}"
+      : "Error Response: ${error.message}";
 }
 
 class OtherFailure implements RestResponseFailure {

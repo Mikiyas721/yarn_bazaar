@@ -47,6 +47,7 @@ class ForgotPasswordController extends BlocViewModelController<ForgotPasswordBlo
 
   onSendOTP() {
     bloc.add(ForgotPasswordSubmittedPhoneNumberEvent());
+    bloc.add(ForgotPasswordStartedGeneratingOTPEvent());
     currentState.phoneNumber.fold((l) {
       toastError(l.message);
     }, (r) async {

@@ -46,13 +46,13 @@ class EditBankDetailsController extends BlocViewModelController<
       ifscCode: s.iFSCCode.fold((l) => null, (r) => r.value),
       ifscCodeError: s.hasSubmitted ? s.iFSCCode.fold((l) => l.message, (r) => null) : null,
       bankName: s.bankName,
-      bankNameError: '',
+      bankNameError: s.hasSubmitted?s.bankName==null?'Bank Name is required':null:null,
       bankBranch: s.bankBranch,
-      bankBranchError: '',
+      bankBranchError: s.hasSubmitted?s.bankBranch==null?'Bank Branch is required':null:null,
       bankState: s.bankState,
-      bankStateError: '',
+      bankStateError: null,
       bankCity: s.bankCity,
-      bankCityError: '',
+      bankCityError: null,
       isSaving: s.isSaving,
     );
   }

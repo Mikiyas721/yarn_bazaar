@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yarn_bazaar/injection.dart';
 import 'package:yarn_bazaar/presentation/pages/about_us_page.dart';
 import 'package:yarn_bazaar/presentation/pages/add_yarn_requirement_page.dart';
@@ -47,37 +48,48 @@ class YarnBazaar extends StatelessWidget {
       title: 'Yarn Bazaar',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColorDark: const Color(0xFFFF5110),
-        primaryColor: const Color(0xFFFF9F10),
-        secondaryHeaderColor: const Color(0xFF3EA0CC),
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.grey),
+          titleTextStyle: GoogleFonts.poppins(fontSize: 22, color: Colors.black),
           centerTitle: true,
-          titleTextStyle: TextStyle(color: Colors.black),
         ),
+        colorScheme: Theme.of(context).colorScheme.copyWith(primary: const Color(0xFFFF9F10)),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+          textStyle: GoogleFonts.sourceSansPro(color: Colors.white, fontSize: 16),
+        )),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: GoogleFonts.sourceSansPro(color: Colors.grey, fontSize: 12),
+          labelStyle: GoogleFonts.montserrat(color: Colors.grey, fontSize: 14),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+          textStyle: GoogleFonts.montserrat(fontSize: 14),
+        )),
+        primaryColor: const Color(0xFFFF9F10),
+        primaryColorDark: const Color(0xFFFF5110),
+        scaffoldBackgroundColor: Colors.white,
+        secondaryHeaderColor: const Color(0xFF3EA0CC),
         tabBarTheme: TabBarTheme(
           labelColor: const Color(0xFFFF9F10),
           unselectedLabelColor: Colors.grey,
         ),
-        colorScheme: Theme
-            .of(context)
-            .colorScheme
-            .copyWith(primary: const Color(0xFFFF9F10)),
         textTheme: TextTheme(
-            titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-            titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-            titleSmall: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-            labelLarge: TextStyle(
-                color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w400),
-            labelMedium:
-            TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w400),
-            labelSmall: TextStyle(
-                color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w400),
-            bodyLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-            bodyMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
-            bodySmall: TextStyle(fontSize: 10, fontWeight: FontWeight.w200),
+          titleLarge: GoogleFonts.poppins(fontSize: 22),
+          titleMedium: GoogleFonts.poppins(fontSize: 18),
+          titleSmall: GoogleFonts.poppins(fontSize: 14),
+          labelLarge: GoogleFonts.sourceSansPro(color: Colors.grey, fontSize: 13),
+          labelMedium: GoogleFonts.sourceSansPro(color: Colors.grey, fontSize: 12),
+          labelSmall: GoogleFonts.sourceSansPro(color: Colors.grey, fontSize: 11),
+          bodyLarge: GoogleFonts.montserrat(fontSize: 16),
+          bodyMedium: GoogleFonts.montserrat(fontSize: 14),
+          bodySmall: GoogleFonts.montserrat(fontSize: 12),
         ),
+        textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+          textStyle: GoogleFonts.montserrat(fontSize: 14),
+        )),
       ),
       initialRoute: SplashPage.route,
       routes: routes,
@@ -99,7 +111,7 @@ final routes = {
   EditBusinessDetailPage.route: (BuildContext context) => const EditBusinessDetailPage(),
   EditPasswordPage.route: (BuildContext context) => const EditPasswordPage(),
   EditProfilePage.route: (BuildContext context) => const EditProfilePage(),
-  ForgotPasswordPage.route: (BuildContext context)=> const ForgotPasswordPage(),
+  ForgotPasswordPage.route: (BuildContext context) => const ForgotPasswordPage(),
   HelpAndSupportPage.route: (BuildContext context) => const HelpAndSupportPage(),
   HomePage.route: (BuildContext context) => const HomePage(),
   InputSelectionPage.route: (BuildContext context) => const InputSelectionPage(),
@@ -107,7 +119,7 @@ final routes = {
   PriceListPage.route: (BuildContext context) => const PriceListPage(),
   PrivacyPolicyPage.route: (BuildContext context) => const PrivacyPolicyPage(),
   ProfilePage.route: (BuildContext context) => const ProfilePage(),
-  ResetPasswordPage.route: (BuildContext context)=> const ResetPasswordPage(),
+  ResetPasswordPage.route: (BuildContext context) => const ResetPasswordPage(),
   SignInPage.route: (BuildContext context) => const SignInPage(),
   SignUpPage.route: (BuildContext context) => const SignUpPage(),
   SuggestionPage.route: (BuildContext context) => const SuggestionPage(),

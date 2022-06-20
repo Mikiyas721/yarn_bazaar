@@ -27,8 +27,7 @@ class ChoiceButton extends StatelessWidget {
                 },
                 child: Text(label),
                 style: ElevatedButton.styleFrom(
-                    minimumSize:
-                        hasMaxWidth ? const Size(double.infinity, 45) : null),
+                    minimumSize: hasMaxWidth ? const Size(double.infinity, 45) : null),
               )
             : OutlinedButton(
                 onPressed: () {
@@ -36,28 +35,30 @@ class ChoiceButton extends StatelessWidget {
                 },
                 child: Text(label),
                 style: OutlinedButton.styleFrom(
-                    minimumSize:
-                        hasMaxWidth ? const Size(double.infinity, 45) : null),
+                    minimumSize: hasMaxWidth ? const Size(double.infinity, 45) : null),
               )
         : OutlinedButton(
             onPressed: () {
               onClick(!isSelected);
             },
             child: isSelected
-                ? Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ? Stack(
                     children: [
-                      const SizedBox(height: 0, width: 20),
-                      Text(
-                        label,
-                        style: TextStyle(color: context.primaryColor),
-                        overflow: TextOverflow.ellipsis,
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          label,
+                          style: TextStyle(color: context.primaryColor),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      Icon(
-                        Icons.check_circle,
-                        color: context.primaryColor,
-                        size: 20,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          Icons.check_circle,
+                          color: context.primaryColor,
+                          size: 20,
+                        ),
                       )
                     ],
                   )

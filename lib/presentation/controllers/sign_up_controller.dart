@@ -226,7 +226,7 @@ class SignUpController
       }, (r) async {
         bloc.add(SignUpStoppedAddingUserChangedEvent());
         getIt.get<SplashBloc>().add(SplashAppUserChangedEvent(getOption(r)));
-        final userWasCached = await getIt.get<CacheLoggedInUser>().execute(r);
+        final userWasCached = await getIt.get<UpdateCacheLoggedInUser>().execute(r);
         if (!userWasCached) toastInformation("Unable to cache user");
 
         Navigator.pushNamedAndRemoveUntil(context, HomePage.route, (route) => false);

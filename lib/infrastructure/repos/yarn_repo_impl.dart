@@ -44,7 +44,7 @@ class YarnRepoImpl extends IYarnRepo {
         ? {
             "filter": {
               "where": {
-                "userId": {"ne": currentUserId}
+                "userId": {"neq": currentUserId}
               },
               "include": {
                 "relation": "user",
@@ -59,7 +59,7 @@ class YarnRepoImpl extends IYarnRepo {
               "where": {
                 "and": [
                   {
-                    "userId": {"ne": currentUserId}
+                    "userId": {"neq": currentUserId}
                   },
                   {"yarnType": category}
                 ]
@@ -114,7 +114,7 @@ class YarnRepoImpl extends IYarnRepo {
         "where": {
           "and": [
             {
-              "userId": {"ne": userId}
+              "userId": {"neq": userId}
             },
             {"yarnType": yarnType}
           ]

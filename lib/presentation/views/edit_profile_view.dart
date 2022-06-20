@@ -43,21 +43,33 @@ class EditProfileView extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Stack(
-                children: [
-                  Align(child: MyCircleAvatar(image: buyerProfileViewModel.imageUrl)),
-                  Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        color: Colors.white,
-                        padding: EdgeInsets.all(2),
-                        child: IconButton(
-                          onPressed: onEditPicture,
-                          icon: Icon(Icons.edit),
-                        ),
-                      ))
-                ],
+              Container(
+                width: 60,
+                height: 70,
+                child: Stack(
+                  children: [
+                    Align(child: MyCircleAvatar(image: buyerProfileViewModel.imageUrl)),
+                    Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          width: 26,
+                          height: 26,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(80),
+                            color: Color(0xFFa9a9a9),
+                            border: Border.all(color: context.primaryColor, width: 2)
+                          ),
+                          child: IconButton(
+                            padding: EdgeInsets.all(0),
+                            onPressed: onEditPicture,
+                            icon: Icon(Icons.edit),
+                            color: Colors.white,
+                            iconSize: 18,
+                          ),
+                        ))
+                  ],
+                ),
               ),
               10.vSpace,
               Text(

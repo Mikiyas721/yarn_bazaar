@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yarn_bazaar/presentation/controllers/edit_profile_controller.dart';
 import 'package:yarn_bazaar/presentation/controllers/shared/controller_provider.dart';
-import 'package:yarn_bazaar/presentation/models/edit_basic_profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/ui_extensions.dart';
 import 'package:yarn_bazaar/presentation/models/edit_profile_view_model.dart';
 import 'package:yarn_bazaar/presentation/views/edit_profile_view.dart';

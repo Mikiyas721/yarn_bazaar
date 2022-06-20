@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:yarn_bazaar/common/failure.dart';
+import 'package:yarn_bazaar/config/config.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/shared/crud_datasource/crud_datasource.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/shared/crud_datasource/rest_crud_datasource.dart';
 import 'package:yarn_bazaar/infrastructure/datasources/shared/rest_datasource/rest_datasource.dart';
@@ -19,7 +20,8 @@ abstract class FileCrudDatasource
 @LazySingleton(as: FileCrudDatasource)
 class FileLoopbackDatasource extends LoopbackRestCrudDataSource<BusinessDetailDto>
     implements FileCrudDatasource {
-  FileLoopbackDatasource(RestDataSource restDataSource)
+  final Config config;
+  FileLoopbackDatasource(RestDataSource restDataSource, this.config)
       : super(
           '/containers',
           restDataSource,
@@ -29,7 +31,7 @@ class FileLoopbackDatasource extends LoopbackRestCrudDataSource<BusinessDetailDt
 
   @override
   String getDownloadLink(String containerName, String fileName) {
-    return '${path}/${containerName}/download/${fileName}';
+    return '${config.apiUrl}${path}/${containerName}/download/${fileName}';
   }
 
   @override

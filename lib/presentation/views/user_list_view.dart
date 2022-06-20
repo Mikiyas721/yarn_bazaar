@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yarn_bazaar/presentation/widgets/empty_error_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_image_view.dart';
 import 'package:yarn_bazaar/presentation/widgets/my_loading_view.dart';
@@ -98,13 +99,14 @@ class UserView extends ExpansionPanel {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(userViewModel.companyName, style: context.titleSmall),
+                          Text(userViewModel.companyName, style: context.titleMedium),
                           Row(
                             children: [
                               IconPrefixedText(
                                 icon: Icons.location_on_outlined,
                                 label: userViewModel.location,
-                                iconColor: Colors.black87,
+                                iconColor: Colors.grey,
+                                textStyle: context.labelMedium,
                               )
                             ],
                           ),
@@ -127,13 +129,19 @@ class UserView extends ExpansionPanel {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('${userViewModel.numberOfYarnProducts} Yarn Products'),
+                        Expanded(
+                          child: Text(
+                            '${userViewModel.numberOfYarnProducts} Yarn Products',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                         IconPrefixedText(
                           icon: Icons.access_time,
                           label: 'Price last updated ${userViewModel.lastUpdated}',
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           iconColor: Colors.grey,
+                          textStyle: GoogleFonts.sourceSansPro(color: Colors.grey, fontSize: 12),
                         )
                       ],
                     ),
@@ -147,7 +155,7 @@ class UserView extends ExpansionPanel {
                         ),
                         Text(
                           userViewModel.sellerType,
-                          style: TextStyle(color:userViewModel.sellerType.getAccountTypeColor()),
+                          style: TextStyle(color: userViewModel.sellerType.getAccountTypeColor()),
                         )
                       ],
                     ),

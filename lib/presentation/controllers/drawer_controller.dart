@@ -129,7 +129,7 @@ class MyDrawerController
                   label: "WHATSAPP",
                   onSubmit: () async {
                     bool launched = await launchUrl(
-                        Uri(scheme: 'https', path: 'api.whatsapp.com/send?phone=9914601110'),
+                        Uri(scheme: 'https', path: 'api.whatsapp.com/send?phone=+919914601110'),
                         mode: LaunchMode.externalApplication);
                     if (!launched) toastError("Unable to open whatsapp");
                   },
@@ -141,7 +141,7 @@ class MyDrawerController
                     TextButton(
                       child: Text(
                         "your email here",
-                        style: TextStyle(color: Colors.lightBlue),
+                        style: context.labelSmall?.copyWith(color: Colors.lightBlue),
                       ),
                       onPressed: () async {
                         bool launched = await launchUrl(
@@ -168,18 +168,15 @@ class MyDrawerController
   }
 
   onShareApp() {
-    Share.share('''
-  Live Yarn Rates, Information, Availability and Directory !!
-  Download 'The Yarn Bazaar' app.
-  https://www.google.com
-  ''');
+    Share.share('Live Yarn Rates, Information, Availability and Directory !!'+
+                '\n\nDownload The Yarn Bazaar app. https://www.google.com');
   }
 
   onHelpAndSupport() {
-    Navigator.pushReplacementNamed(context, HelpAndSupportPage.route);
+    Navigator.pushNamed(context, HelpAndSupportPage.route);
   }
 
   onAboutUs() {
-    Navigator.pushReplacementNamed(context, AboutUsPage.route);
+    Navigator.pushNamed(context, AboutUsPage.route);
   }
 }

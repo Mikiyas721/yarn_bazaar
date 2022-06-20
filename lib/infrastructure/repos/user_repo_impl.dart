@@ -72,45 +72,7 @@ class UserRepoImpl extends IUserRepo {
   @override
   Future<Either<Failure, List<User>>> fetchByUserType(
       String currentUserId, String? userType) async {
-    final options = userType == null
-        ? {
-            "filter": {
-              "where": {
-                "id": {"ne": "$currentUserId"}
-              },
-              "include": [
-                {"relation": "bankDetail"},
-                {"relation": "businessDetail"},
-                {"relation": "yarns"}
-              ]
-            },
-          }
-        : {
-            "filter": {
-              "where": {
-                "and": [
-                  {
-                    "id": {"ne": "$currentUserId"}
-                  },
-                  {"userType": "$userType"}
-                ]
-              },
-              "include": [
-                {"relation": "bankDetail"},
-                {"relation": "businessDetail"},
-                {"relation": "yarns"}
-              ]
-            },
-          };
-    final result = await _userCrudDatasource.find(options: options);
-    return result.fold(
-      (l) => left(l),
-      (r) {
-        final userList = IdDto.toDomainList<User, UserDto>(r);
-        if (userList == null) return left(userDtoMappingSimpleFailure);
-        return right(userList);
-      },
-    );
+    return _userCrudDatasource.fetchByUserType(currentUserId, userType);
   }
 
   @override
